@@ -159,6 +159,12 @@ The method is expected to use different model tiers at different stages.
 - lower-cost or local models may become useful later for running repeated generation, classification, comparison, or drafting passes at larger volume
 - humans remain responsible for framing, curation, evaluation design, and deciding when a lower-cost loop is trustworthy enough to use
 
+Model choice should be guided by three things at once:
+
+- `capability fit` - use the weakest model that can still do the task well enough
+- `process efficiency` - design the loop so expensive capability is used only where it meaningfully improves the result
+- `accessibility` - prefer a workflow that can eventually be run by more people, on cheaper infrastructure, or with local models, rather than one that depends permanently on high-end access
+
 The point is not to scale generation immediately. The point is to first design a cycle that deserves to be scaled.
 
 In practice, this means:
@@ -167,6 +173,8 @@ In practice, this means:
 2. identify what parts of the loop are robust versus brittle
 3. migrate robust sub-tasks to cheaper or local execution only when quality loss is acceptable and visible
 4. keep high-stakes curation and method redesign under stronger human and model supervision
+
+The project is not trying to imitate compute intensity for its own sake. It is trying to discover where capability density is actually necessary and where the process can be made leaner without losing rigor.
 
 ## What success looks like in v1
 

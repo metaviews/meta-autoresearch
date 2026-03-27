@@ -166,11 +166,13 @@ Decide whether the cycle is ready to be repeated more systematically or partiall
 - list of robust steps versus brittle steps
 - quality risks for scaling
 - decision about whether to rerun, deepen, branch, or stop
+- decision about which steps require frontier capability and which can be right-sized to cheaper or local execution
 
 ### Gate to continue
 
 - are the failure modes understood well enough to repeat the loop?
 - would scaling produce more signal or just more noise?
+- does the current design depend on unnecessary model capability or cost?
 
 ## Roles across the loop
 
@@ -187,6 +189,7 @@ Decide whether the cycle is ready to be repeated more systematically or partiall
 - comparison drafting
 - synthesis drafting
 - pressure-testing the shape of the loop itself
+- tasks where failure from weaker models would distort the method more than it would save resources
 
 ### Lower-cost or local model role later
 
@@ -194,6 +197,8 @@ Decide whether the cycle is ready to be repeated more systematically or partiall
 - classification and clustering passes
 - drafting comparative tables or summaries
 - support work once the loop structure is already stable
+
+The target is not only lower inference cost. It is a process where capability is allocated deliberately, so the loop can stay rigorous while becoming more accessible to run.
 
 ## Minimum viable successful loop
 
@@ -222,6 +227,7 @@ At minimum, a good loop should produce:
 - comparison reliably improves curation
 - evaluation decisions become more stable across passes
 - humans can identify which sub-tasks are robust enough to delegate
+- the loop can name which stages truly need frontier capability and which do not
 
 ## Suggested file pattern for one loop
 
@@ -233,3 +239,5 @@ At minimum, a good loop should produce:
 ## Working rule
 
 Do not treat this loop as fixed doctrine. Treat it as the current best version of the cycle. It should be revised whenever practice shows a stage is missing, redundant, or out of order.
+
+That includes revising the loop for efficiency. A better loop is not only one that is more rigorous. It is also one that uses capability more deliberately and remains feasible for broader use.

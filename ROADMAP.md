@@ -84,6 +84,7 @@ Outputs:
 - clear division between high-capability model use for method design and lower-cost model use for larger-scale execution
 - guardrails for scaling without multiplying noise, drift, or false confidence
 - criteria for when a cycle is mature enough to be repeated programmatically or with cheaper models
+- a process design that stays accessible enough to run without permanent dependence on frontier-model budgets
 
 ## Phase 7: prototype decision
 
@@ -102,6 +103,7 @@ Possible next steps:
 - treat source discipline as part of the method, not as cleanup work
 - prune weak scenario families instead of only accumulating new ones
 - preserve the distinction between valuable prompts and well-supported claims
+- optimize for capability fit and process efficiency, not only raw model power
 
 ## Guiding rule
 

@@ -90,6 +90,8 @@ Examples:
 
 Tooling should strengthen rigor, traceability, and source handling. It should not make the project look more certain than the evidence allows.
 
+It should also improve accessibility. The long-term aim is not a workflow that is impressive only when paired with expensive frontier access. It is a workflow whose high-capability components are justified, bounded, and eventually complemented by cheaper or local tooling where quality allows.
+
 ## Near-term recommendation
 
 If the repo adds any tooling soon, the highest-value order is:
@@ -100,3 +102,13 @@ If the repo adds any tooling soon, the highest-value order is:
 4. structured evidence tables
 
 That order keeps the project focused on research quality before automation complexity.
+
+## Model-use design principle
+
+As the project matures, model and tooling choices should follow a `right-sized capability` rule:
+
+- use frontier capability where it shapes the method or prevents major quality loss
+- use cheaper or local tools where tasks are repetitive, well-bounded, or easy to verify
+- redesign the process itself when a step is only expensive because the workflow is poorly structured
+
+The goal is not merely lower cost. The goal is a leaner research process that remains rigorous and broadly runnable.
