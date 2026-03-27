@@ -7,6 +7,7 @@ This directory holds the working corpus for v1.
 - `research/notes/` - source synthesis, open questions, and partial interpretations
 - `research/scenarios/` - structured scenario drafts and recombinations
 - `research/experiments/` - tests of workflow, prompts, evaluation, and curation
+- `research/loops/` - auditable records of one full research cycle
 - `research/syntheses/` - higher-order comparisons across scenarios, notes, and experiments
 
 Use `docs/evaluation-framework.md` when you need to compare scenarios explicitly or make keep/revise/merge/discard decisions.
@@ -20,6 +21,7 @@ Use date-first, lowercase, kebab-case filenames so the corpus stays sortable and
 - notes: `YYYY-MM-DD-topic.md`
 - scenarios: `YYYY-MM-DD-topic.md`
 - experiments: `YYYY-MM-DD-topic.md`
+- loops: `YYYY-MM-DD-topic.md`
 - syntheses: `YYYY-MM-DD-topic.md`
 
 If more than one file shares the same topic on the same day, add a short suffix such as `-v2` or `-compare`.

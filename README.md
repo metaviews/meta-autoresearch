@@ -59,6 +59,7 @@ Climate is therefore the first proving ground, not the permanent identity of the
 - `research/notes/` - working notes, source synthesis, and questions
 - `research/scenarios/` - scenario drafts, variants, and recombinations
 - `research/experiments/` - process experiments and evaluation attempts
+- `research/loops/` - auditable records of full research-cycle runs
 - `research/syntheses/` - comparisons, evaluations, and higher-order judgments across artifacts
 
 ## Working principles

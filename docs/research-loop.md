@@ -238,6 +238,7 @@ At minimum, a good loop should produce:
 - `research/notes/` - evidence notes and case notes
 - `research/scenarios/` - parent branch plus variants
 - `research/experiments/` - explicit method tests of the loop
+- `research/loops/` - audit records of one full run through the loop
 - `research/syntheses/` - branch comparison, evaluation, and cross-branch lessons
 
 ## Working rule

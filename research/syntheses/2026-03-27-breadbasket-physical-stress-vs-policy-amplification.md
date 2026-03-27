@@ -121,3 +121,4 @@ That direct comparison now has its own synthesis in `research/syntheses/2026-03-
   - `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
   - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`
   - `research/syntheses/2026-03-27-whiplash-vs-breadbasket-epistemic-structures.md`
+  - `research/loops/2026-03-27-breadbasket-loop-run.md`
