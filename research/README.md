@@ -1,0 +1,29 @@
+# Research Workspace
+
+This directory holds the working corpus for v1.
+
+## Structure
+
+- `research/notes/` - source synthesis, open questions, and partial interpretations
+- `research/scenarios/` - structured scenario drafts and recombinations
+- `research/experiments/` - tests of workflow, prompts, evaluation, and curation
+
+## Naming convention
+
+Use date-first, lowercase, kebab-case filenames so the corpus stays sortable and easy to scan.
+
+- notes: `YYYY-MM-DD-topic.md`
+- scenarios: `YYYY-MM-DD-topic.md`
+- experiments: `YYYY-MM-DD-topic.md`
+
+If more than one file shares the same topic on the same day, add a short suffix such as `-v2` or `-compare`.
+
+Examples:
+
+- `2026-03-27-climate-baselines-note.md`
+- `2026-03-27-compound-seasonal-whiplash.md`
+- `2026-03-27-climate-scenario-generation-pass.md`
+
+## Working rule
+
+Keep the filename stable and use the document metadata to track status changes. That preserves links and keeps iteration legible.

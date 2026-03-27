@@ -33,9 +33,11 @@ This repository is an early-stage research space. The main goal is not fast cons
 - explain why a change improves the method, framing, or research usefulness
 - preserve the project's distinction between public overview docs and working research materials
 - if adding a new concept, define it in `docs/glossary.md` or use existing terms consistently
+- use date-first, lowercase, kebab-case filenames for research artifacts
 
 ## Working areas
 
+- see `research/README.md` for workspace structure and naming conventions
 - use `research/notes/` for exploratory notes and source synthesis
 - use `research/scenarios/` for scenario drafts and recombinations
 - use `research/experiments/` for process tests and evaluation trials
