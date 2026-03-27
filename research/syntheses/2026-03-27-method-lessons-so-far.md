@@ -135,7 +135,7 @@ What seems necessary before scale:
 - some branches still rely on broad plausibility more than case-level proof
 - the repo has more `keep` and `revise` decisions than true `discard` decisions
 - the method has not yet documented enough failed directions to prove its pruning strength
-- there is still no reusable loop template that fully captures the working pattern now visible in practice
+- the reusable loop template now exists, but it is still young and not yet tested across enough domains or branch types
 
 ## Current conclusion
 
@@ -147,7 +147,7 @@ That is real progress.
 
 ## Next move
 
-Use the current state of the repo to formalize the working loop more explicitly, including:
+Use the current state of the repo to keep refining the working loop more explicitly, including:
 
 1. branch creation
 2. branch grounding
@@ -155,7 +155,7 @@ Use the current state of the repo to formalize the working loop more explicitly,
 4. branch evaluation
 5. cross-branch synthesis
 
-If that loop can be documented cleanly, the project will be much closer to a cycle that can later be repeated with lower-cost models.
+If that loop can be pressure-tested cleanly across more branch types, the project will be much closer to a cycle that can later be repeated with lower-cost models.
 
 ## Links
 
