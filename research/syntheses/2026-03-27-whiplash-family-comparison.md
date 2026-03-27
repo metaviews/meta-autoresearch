@@ -122,3 +122,4 @@ Instead:
 - related syntheses:
   - `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
   - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
+  - `research/syntheses/2026-03-27-whiplash-vs-breadbasket-epistemic-structures.md`

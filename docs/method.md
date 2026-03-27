@@ -75,6 +75,17 @@ The intended progression is:
 
 This means the early repository is not separate from the method. It is the method's training ground.
 
+## Emerging structure types
+
+One goal of v1 is not only to generate useful scenarios, but to identify recurring kinds of epistemic failure.
+
+Two provisional types have already started to emerge:
+
+- `sequence failure` - the risk becomes visible only when conditions are understood as a chain rather than as separate events or seasons
+- `correlation/transmission failure` - the risk becomes visible only when distributed nodes are understood as one coupled system rather than as separate local problems
+
+These are not final categories. They are early candidates for reusable structure types that future branches can test, refine, or overturn.
+
 ## Measurement in v1
 
 The hardest part of applying autoresearch outside machine learning is measurement. In v1, the measurement will often be provisional and partly qualitative, but it still needs to be explicit.
