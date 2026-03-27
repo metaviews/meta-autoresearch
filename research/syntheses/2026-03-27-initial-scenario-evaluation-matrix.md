@@ -43,7 +43,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 - why `revise` instead of `keep`:
   - it is promising and now better bounded, but should gain named case support before getting equal status with the stronger families
 - next step:
-  - test the new Feather River regional variant and then build one additional named comparison case
+  - compare the Feather River and Upper Colorado variants to see whether the family holds across distinct mechanisms
 
 ### Synchronous Breadbasket Stress
 
@@ -89,6 +89,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 - it introduced a real pruning function into the method by downgrading one family from `keep` to `revise`
 - it made the next research move more explicit: deepen the strongest family first rather than treating all families as equally ready
 - it created a more disciplined path for weaker-but-promising families: narrow, ground, and test named regional variants
+- it now gives the whiplash family a first real internal comparison: wet-to-fire versus recovery-to-shortage
 
 ## Links
 
@@ -97,5 +98,6 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 - related scenarios:
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`
   - `research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md`
+  - `research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md`
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`

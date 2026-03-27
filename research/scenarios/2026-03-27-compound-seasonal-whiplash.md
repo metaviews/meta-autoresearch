@@ -117,11 +117,15 @@ Most promising candidate contexts for follow-up variants:
 - related notes:
   - `research/notes/2026-03-27-climate-volatility-evidence-note.md`
   - `research/notes/2026-03-27-feather-river-whiplash-grounding-note.md`
+  - `research/notes/2026-03-27-upper-colorado-whiplash-grounding-note.md`
 - related experiments:
   - `research/experiments/2026-03-27-climate-scenario-generation-pass.md`
   - `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
-- related syntheses: `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
+- related syntheses:
+  - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
+  - `research/syntheses/2026-03-27-whiplash-family-comparison.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md`
+  - `research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md`
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`

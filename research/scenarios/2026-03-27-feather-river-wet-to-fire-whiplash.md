@@ -109,6 +109,8 @@ Taken together, these sources do not prove one simple deterministic chain. They 
   - `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
 - related syntheses:
   - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
+  - `research/syntheses/2026-03-27-whiplash-family-comparison.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`
+  - `research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`
