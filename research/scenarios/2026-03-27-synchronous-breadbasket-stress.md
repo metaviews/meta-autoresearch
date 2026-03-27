@@ -104,11 +104,14 @@ These examples do not prove a single imminent crisis. They do show that the fami
   - `research/notes/2026-03-27-climate-volatility-evidence-note.md`
   - `research/notes/2026-03-27-breadbasket-regional-grounding-note.md`
   - `research/notes/2026-03-27-northern-wheat-shock-grounding-note.md`
+  - `research/notes/2026-03-27-wheat-second-node-comparison-note.md`
 - related experiments: `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
 - related syntheses:
   - `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
+  - `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
   - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
+  - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`

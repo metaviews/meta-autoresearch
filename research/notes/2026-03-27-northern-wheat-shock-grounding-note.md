@@ -65,13 +65,12 @@ Why this matters:
 
 ## Working subcase
 
-The strongest first subcase is:
+The branch now splits into two levels:
 
-- correlated hot-dry wheat stress in Russia plus another major northern wheat region such as China
-- reduced substitutability across major wheat-producing zones
-- transmission through Black Sea export restriction risk, tighter stocks, and import dependence in MENA markets
+- a broad first subcase: correlated hot-dry wheat stress in Russia plus another major northern wheat region
+- a selected comparison variant: Russia plus Europe, because Europe is the clearest substitute export buffer in the current evidence base
 
-China matters here mainly as a production-buffer problem, not as an export transmitter in the same way as Russia.
+China remains a useful future comparison node, but more as a production-buffer case than as the strongest next trade-transmission comparison.
 
 ## What this note supports
 
@@ -109,6 +108,8 @@ Use the 2010 Russia case as a mechanism-revealing analog, not as a direct templa
 - related scenarios:
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
   - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
+  - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
 - related syntheses:
   - `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
+  - `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
   - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
