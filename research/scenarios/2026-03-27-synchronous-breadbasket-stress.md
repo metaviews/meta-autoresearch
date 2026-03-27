@@ -52,6 +52,17 @@ The scenario is not built on the claim that all breadbaskets fail equally. It is
   - more concrete case comparisons linking simultaneous shocks to price transmission and policy response
   - stronger mapping of which crops and trade corridors are most exposed to synchronized stress
 
+## Regional grounding
+
+This family now has initial region-specific support from the current evidence base in the repo:
+
+- Gaupp et al. (2020) analyze major breadbaskets using region-specific agricultural production data and report increasing simultaneous failure risk for wheat, maize, and soybean across the breadbaskets they study.
+- Heino et al. (2023) report that wheat showed the strongest increase in co-occurring hot and dry growing-season conditions, with larger wheat yield reductions in relatively cool regions including Russia and China.
+- The same study reports strong maize sensitivity in major producing areas including North America and China, with large hot-dry yield reductions in East Asia and eastern Europe.
+- For soybean, Heino et al. (2023) identify important exposed regions in North and South America as well as eastern Asia.
+
+These examples do not prove a single imminent crisis. They do show that the family can be grounded in specific crop-region clusters rather than remaining an abstract global systems claim.
+
 ## Provisional evaluation
 
 - plausibility: high; the scenario extends directly from assessed concern about compound extremes and published work on breadbasket correlation
@@ -89,8 +100,11 @@ The scenario is not built on the claim that all breadbaskets fail equally. It is
 
 ## Links
 
-- related notes: `research/notes/2026-03-27-climate-volatility-evidence-note.md`
+- related notes:
+  - `research/notes/2026-03-27-climate-volatility-evidence-note.md`
+  - `research/notes/2026-03-27-breadbasket-regional-grounding-note.md`
 - related experiments: `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
+- related syntheses: `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`

@@ -47,6 +47,7 @@ The emphasis here is on scenario-space exploration rather than prediction. The q
 - `docs/method.md` - operational description of the research loop
 - `docs/research-agenda.md` - active questions and near-term focus
 - `docs/glossary.md` - working definitions for key terms
+- `docs/research-tooling.md` - note on tools that would strengthen the research workflow
 - `ROADMAP.md` - phased development plan for the research program
 - `CONTRIBUTING.md` - norms for writing, sources, uncertainty, and edits
 - `research/notes/` - working notes, source synthesis, and questions
