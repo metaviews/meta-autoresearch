@@ -40,11 +40,11 @@ The initial climate work should stay broad enough to avoid premature narrowing. 
 
 ## Near-term deliverables
 
-- a documented scenario template
-- a documented experiment template
-- a first set of exploratory climate scenarios
-- a first synthesis comparing the value of different scenario types
-- a clearer definition of provisional measurement for v1
+- deepen the current `whiplash` and `breadbasket` branches without losing curation pressure
+- compare branch variants more explicitly at the importer, reserve, and governance layers
+- document what the first cycles reveal about recurring epistemic structure types
+- sharpen the evaluation layer so branch maturity can be judged more consistently
+- decide what counts as a strong enough cycle to be repeated later with cheaper or local models
 
 ## Exclusions for v1
 
@@ -68,3 +68,9 @@ Each substantial round of work should be tested against questions like:
 ## What would count as progress
 
 Progress in v1 would look like a repository that can reliably produce structured climate explorations, compare them honestly, and show how conclusions emerge without pretending to settle more than the process actually supports.
+
+At the current stage, progress also means:
+
+- proving that branch comparison is more informative than isolated scenario polishing
+- distinguishing stronger-evidenced variants from more conceptually generative ones
+- identifying whether the project is discovering reusable epistemic structure types rather than only accumulating climate content

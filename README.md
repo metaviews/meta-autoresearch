@@ -66,7 +66,21 @@ The emphasis here is on scenario-space exploration rather than prediction. The q
 
 ## Current status
 
-This repository is in an early framing phase. The near-term work is to turn a philosophical posture into a research practice with clear outputs, constraints, and evaluation criteria.
+This repository is no longer only in a framing phase. The method, templates, evaluation rubric, and first research branches are now in place.
+
+Current state:
+
+- foundation, method, glossary, roadmap, and contribution docs are established
+- the research workspace now supports notes, scenarios, experiments, and syntheses
+- the first climate branches have been developed beyond abstract framing
+- the project is now in `evidence grounding + evaluation refinement`, with early attention turning toward reusable structure types
+
+## Current research branches
+
+- `whiplash` - sequence failure, transition misreading, and category breakdown under non-stationarity
+- `breadbasket` - correlation, transmission, buffers, trade, and unequal downstream exposure
+
+These branches are not just topical clusters. They are being used to test whether the method can identify recurring epistemic structures that conventional inquiry tends to miss.
 
 ## Start here
 
@@ -76,6 +90,15 @@ If you are new to the project, read these in order:
 2. `docs/foundation.md`
 3. `docs/method.md`
 4. `docs/research-agenda.md`
+5. `docs/evaluation-framework.md`
+
+Then, for the most developed current work:
+
+1. `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
+2. `research/syntheses/2026-03-27-whiplash-family-comparison.md`
+3. `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
+4. `research/syntheses/2026-03-27-whiplash-vs-breadbasket-epistemic-structures.md`
+5. `research/syntheses/2026-03-27-method-lessons-so-far.md`
 
 ## Contributing
 
