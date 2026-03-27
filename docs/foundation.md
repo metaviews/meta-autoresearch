@@ -44,7 +44,11 @@ Public understanding of climate risk still leans heavily on historical continuit
 
 That makes a narrow predictive posture insufficient. What is needed first is disciplined scenario work: the construction of plausible configurations of what could happen, without forcing the system into a single story too early.
 
+This is not only because prediction is difficult. It is because prediction can become a form of target fixation. Once inquiry organizes itself around one named future, the search space often contracts around it. What is lost is not only accuracy. What is lost is structural imagination.
+
 Meta-autoresearch is meant to support that work. AI can help generate, vary, and recombine scenarios. Human judgment remains necessary for curation, pattern recognition, and deciding which threads deserve deeper development.
+
+Climate comes first because it is a severe test case. It is not the final boundary of the method. If the posture proves coherent here, it may travel to other domains where institutions also overfit to familiar targets and inherited frames.
 
 ## What this repository is for
 

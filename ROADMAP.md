@@ -104,6 +104,8 @@ Possible next steps:
 - prune weak scenario families instead of only accumulating new ones
 - preserve the distinction between valuable prompts and well-supported claims
 - optimize for capability fit and process efficiency, not only raw model power
+- treat climate as a proving ground for the method, not as its permanent boundary
+- resist prediction-centered design when it narrows the search space prematurely
 
 ## Guiding rule
 

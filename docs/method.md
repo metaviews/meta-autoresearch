@@ -13,6 +13,7 @@ Meta-autoresearch is a method for exploring complex questions without rushing to
 - `emergent structure` - allow patterns, categories, and stronger hypotheses to arise from iteration
 - `explicit curation` - record where human judgment enters and what it chooses to keep, combine, or discard
 - `traceable reasoning` - preserve assumptions, sources, uncertainty, and changes in framing
+- `anti-target fixation` - do not let a singular prediction target or expected answer prematurely narrow the inquiry
 
 ## The unit of work
 
@@ -30,6 +31,20 @@ The supporting units are:
 - `note` - a working thought, source synthesis, or question
 - `experiment` - a test of process, prompt structure, evaluation, or curation workflow
 - `synthesis` - a higher-order document that compares or combines multiple scenarios or notes
+
+The method is designed to be domain-general where appropriate. Climate volatility is the current proving ground, not the limit of what meta-autoresearch is for.
+
+## Against prediction fixation
+
+This project is not anti-forecast in every context. It is anti-default-prediction as the organizing posture of inquiry.
+
+The reason is methodological:
+
+- prediction can invite false precision before the system is understood well enough
+- singular targets can collapse the search space too early
+- institutions often optimize around the forecast they can name, not the range of structures they should be prepared for
+
+Meta-autoresearch therefore prefers scenario-space exploration, structural comparison, and explicit curation before any move toward narrow forecasting claims.
 
 ## Human and AI roles
 
@@ -87,6 +102,8 @@ Two provisional types have already started to emerge:
 - `correlation/transmission failure` - the risk becomes visible only when distributed nodes are understood as one coupled system rather than as separate local problems
 
 These are not final categories. They are early candidates for reusable structure types that future branches can test, refine, or overturn.
+
+The long-term aim is for those structure types to travel beyond climate where the fit is real and the method remains honest.
 
 ## Measurement in v1
 

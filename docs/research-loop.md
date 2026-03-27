@@ -6,6 +6,8 @@ This document formalizes the working loop that has started to emerge in practice
 
 It is not the final version of the method. It is the first reusable description of the cycle that currently seems to produce the best results in the repository.
 
+The loop is written in a domain-general way on purpose. Climate is the current proving ground, but the cycle is meant to be usable in other domains where scenario exploration is more honest than premature prediction.
+
 ## The loop at a glance
 
 1. frame the inquiry
@@ -35,6 +37,7 @@ Define what is being explored, why it matters, and what kind of output the cycle
 
 - is the question clear enough to generate against?
 - are the boundaries tight enough to prevent immediate vagueness?
+- has the inquiry been framed in a way that avoids premature prediction or target fixation?
 
 ## Stage 2: Assemble the starting evidence base
 
@@ -69,6 +72,7 @@ Produce multiple scenario directions that differ in mechanism, not only in wordi
 
 - are the branches meaningfully distinct?
 - did generation expand the search space instead of multiplying stylistic variants?
+- did the cycle resist collapsing too early around one expected outcome?
 
 ## Stage 4: Ground the most promising branch
 

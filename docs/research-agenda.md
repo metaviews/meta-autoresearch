@@ -6,6 +6,8 @@ The first research agenda is climate volatility broadly understood.
 
 The goal is not to predict a single future state. The goal is to test whether meta-autoresearch can support a more useful exploration of scenario space in a domain where historical continuity is weakening and premature closure remains common.
 
+Climate is the first proving ground because it is methodologically demanding, not because the project is meant to remain climate-only. The broader question is whether this approach can become a usable research posture in other domains where target fixation and premature closure are primary failure modes.
+
 ## Primary questions
 
 ### 1. Can the method be operationalized without collapsing into vagueness?
@@ -19,6 +21,8 @@ Machine learning has validation loss. This project does not. One of the central 
 ### 3. Can scenario-space exploration improve climate thinking?
 
 The working hypothesis is that scenario generation, recombination, and curation may reveal risks, interactions, and preparedness questions that linear prediction framing tends to miss.
+
+Relatedly, the project is testing whether resisting prediction-first framing helps inquiry stay open longer and notice structures that conventional forecast-centered work tends to underweight.
 
 ### 4. What is the right division of labor between human judgment and AI generation?
 
