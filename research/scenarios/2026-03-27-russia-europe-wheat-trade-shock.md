@@ -82,8 +82,8 @@ These sources support a focused variant in which simultaneous Russia-Europe stre
   - it sharpens the transmission mechanism without inflating claims
   - it makes the preparedness implications more operational than the generic variant alone
 - what should be refined next:
-  - compare this variant directly against a Russia-China production-buffer variant
-  - add reserve and procurement implications for specific import-dependent regions
+  - compare this variant directly against the Russia-China production-buffer variant
+  - add reserve and procurement implications for specific import-dependent regions using the MENA exposure note
   - test how much policy coordination would have to improve to offset the dual-node shock
 - what might cause this scenario to be revised or merged:
   - if Europe proves more useful as part of a broader wheat-trade family synthesis than as a stand-alone scenario
@@ -107,11 +107,14 @@ These sources support a focused variant in which simultaneous Russia-Europe stre
 - related notes:
   - `research/notes/2026-03-27-northern-wheat-shock-grounding-note.md`
   - `research/notes/2026-03-27-wheat-second-node-comparison-note.md`
+  - `research/notes/2026-03-27-mena-wheat-importer-exposure-note.md`
 - related experiments:
   - `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
 - related syntheses:
   - `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
   - `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
+  - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
   - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
+  - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`

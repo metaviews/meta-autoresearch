@@ -25,7 +25,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 | Scenario | Evidence strength | Internal coherence | Relevance | Preparedness value | Novelty / search-space value | Actionability | Status-quo challenge | Imaginative power | Curation | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `research/scenarios/2026-03-27-compound-seasonal-whiplash.md` | 3 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | `revise` | Revised into a more bounded wet-to-hot-dry transition scenario; stronger than before, but it still needs named cases before it should move back to `keep`. |
-| `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md` | 4 | 5 | 5 | 5 | 4 | 5 | 5 | 4 | `keep` | Best-supported family so far; strongly challenges region-by-region food-risk framing and has obvious next grounding steps. |
+| `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md` | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 4 | `keep` | Still the strongest family overall; it now has focused wheat variants, a trade-buffer vs production-buffer comparison, and a clearer downstream importer-exposure layer. |
 | `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md` | 3 | 5 | 5 | 5 | 4 | 4 | 5 | 4 | `keep` | Strong infrastructure logic; it directly challenges inherited design-baseline assumptions and remains highly decision-relevant, though it still needs case-specific evidence. |
 
 ## Notes by scenario
@@ -48,17 +48,17 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 ### Synchronous Breadbasket Stress
 
 - strongest contribution:
-  - best current link between literature, climate mechanism, and preparedness relevance
+  - best current link between literature, climate mechanism, trade and policy amplification, and preparedness relevance
 - main weakness:
-  - downstream transmission into prices, reserves, and policy still needs more targeted support
+  - the downstream layer is stronger now, but still needs tighter reserve and importer-case comparison beyond the current MENA note set
 - status-quo challenge:
   - directly challenges localized, region-by-region food-risk framing by foregrounding correlation and system transmission
 - imaginative power:
   - broadens the inquiry meaningfully, though it stays closer to current literature than the seasonal-whiplash scenario
 - why `keep`:
-  - the family is already coherent, evidence-backed, and easy to deepen without collapsing into prediction
+  - the family is coherent, evidence-backed, and now mature enough to hold internal sub-branch comparison without collapsing into prediction
 - next step:
-  - create crop-region variants and map the strongest transmission pathways that deserve study
+  - compare how the Russia-Europe and Russia-China wheat variants differ at the importer and reserve level, then decide whether wheat remains the best lead crop
 
 ### Hydrologic Whiplash and Design Failure
 
@@ -78,7 +78,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 ## Provisional conclusions
 
 - the current set is not redundant; the three scenarios occupy genuinely different mechanism families
-- `synchronous breadbasket stress` is the strongest current candidate for immediate deepening
+- `synchronous breadbasket stress` remains the strongest current candidate and now has the most developed internal structure in the repo
 - `hydrologic whiplash and design failure` should remain active as a second-priority family
 - `compound seasonal whiplash` should stay in play, but under a `revise` gate until it is better grounded
 
@@ -90,6 +90,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 - it made the next research move more explicit: deepen the strongest family first rather than treating all families as equally ready
 - it created a more disciplined path for weaker-but-promising families: narrow, ground, and test named regional variants
 - it now gives the whiplash family a first real internal comparison: wet-to-fire versus recovery-to-shortage
+- it now gives the breadbasket family a parallel internal comparison: trade-buffer versus production-buffer stress
 
 ## Links
 
@@ -100,4 +101,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
   - `research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md`
   - `research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md`
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
+  - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
+  - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
+  - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`

@@ -107,3 +107,4 @@ That deepening has now started through a wheat-focused transmission variant: `re
   - `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
 - related syntheses:
   - `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
+  - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`

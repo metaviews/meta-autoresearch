@@ -82,7 +82,7 @@ These sources do not prove that the next major wheat shock will unfold exactly t
   - it builds directly on the strongest climate evidence already in the repo
   - it offers a good bridge from physical climate stress to actual preparedness questions
 - what should be refined next:
-  - compare the selected Russia-Europe trade-buffer variant against a later Russia-China production-buffer variant
+  - compare the Russia-Europe trade-buffer variant against the Russia-China production-buffer variant directly
   - add more explicit reserve and procurement implications
   - test an alternate version where export coordination succeeds instead of failing
 - what might cause this scenario to be revised or merged:
@@ -108,13 +108,17 @@ These sources do not prove that the next major wheat shock will unfold exactly t
   - `research/notes/2026-03-27-breadbasket-regional-grounding-note.md`
   - `research/notes/2026-03-27-northern-wheat-shock-grounding-note.md`
   - `research/notes/2026-03-27-wheat-second-node-comparison-note.md`
+  - `research/notes/2026-03-27-russia-china-wheat-buffer-note.md`
+  - `research/notes/2026-03-27-mena-wheat-importer-exposure-note.md`
 - related experiments:
   - `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
 - related syntheses:
   - `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
   - `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
+  - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`
   - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
+  - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`

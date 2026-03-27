@@ -69,6 +69,12 @@ This adds the core interaction: physical wheat stress plus export restriction ri
 
 This sharpens the question further by asking what happens when both the main transmission node and one of its major substitute export buffers are weakened together.
 
+### Second comparison variant
+
+- `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
+
+This tests a different mechanism: not loss of a substitute exporter, but stress on a very large production, stock, and demand-balancing system that may tighten the global market indirectly.
+
 ## Working judgment
 
 At this stage, the branch should explicitly treat `physical stress` and `policy amplification` as separate but linked evaluation categories.
@@ -84,6 +90,7 @@ Why:
 - future notes should specify whether a claim is about crop stress, trade structure, price transmission, or policy response
 - future scenario variants should avoid implying that price spikes are mechanically proportional to yield loss
 - comparisons should ask not only "which crop-region pair is most exposed?" but also "which policy responses make exposure worse or better?"
+- downstream notes should distinguish import dependence, reserve depth, FX access, and household vulnerability instead of treating importer exposure as one variable
 
 ## Main conclusion
 
@@ -93,7 +100,9 @@ That is the point where it most clearly serves the broader project: it uncovers 
 
 ## Next move
 
-Use the Russia-Europe wheat variant to test a more explicit importer and reserve lens, and only then build the next comparison against a production-buffer case such as Russia-China.
+The branch now has both sides of that comparison in place: a Russia-Europe trade-buffer variant and a Russia-China production-buffer variant. The next move is to connect those upstream patterns more explicitly to importer and reserve exposure, especially in MENA cases.
+
+That direct comparison now has its own synthesis in `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`.
 
 ## Links
 
@@ -101,9 +110,13 @@ Use the Russia-Europe wheat variant to test a more explicit importer and reserve
   - `research/notes/2026-03-27-breadbasket-regional-grounding-note.md`
   - `research/notes/2026-03-27-northern-wheat-shock-grounding-note.md`
   - `research/notes/2026-03-27-wheat-second-node-comparison-note.md`
+  - `research/notes/2026-03-27-russia-china-wheat-buffer-note.md`
+  - `research/notes/2026-03-27-mena-wheat-importer-exposure-note.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
   - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
+  - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
 - related syntheses:
   - `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
+  - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`
