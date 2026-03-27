@@ -154,6 +154,8 @@ Typical pattern:
 
 Every comparison pass should try to identify at least one weaker direction to revise, merge, or discard. If every artifact is always kept, curation is probably too soft.
 
+When a discard or merge is methodologically informative, record it explicitly in `research/discards/` so pruning remains visible and auditable.
+
 ## Evaluation output format
 
 When applying this framework, each matrix should record:
