@@ -9,6 +9,8 @@ This directory holds the working corpus for v1.
 - `research/experiments/` - tests of workflow, prompts, evaluation, and curation
 - `research/syntheses/` - higher-order comparisons across scenarios, notes, and experiments
 
+Use `docs/evaluation-framework.md` when you need to compare scenarios explicitly or make keep/revise/merge/discard decisions.
+
 ## Naming convention
 
 Use date-first, lowercase, kebab-case filenames so the corpus stays sortable and easy to scan.

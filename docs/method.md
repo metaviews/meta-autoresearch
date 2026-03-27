@@ -61,6 +61,20 @@ The point is not to remove human judgment. The point is to make judgment visible
 6. Record what changed and why.
 7. Reassess the measurement only if there is a documented reason.
 
+## Iteration logic
+
+The project is not trying to get the perfect cycle right on the first pass. It is trying to iteratively design a cycle that becomes reliable enough to repeat at larger scale.
+
+The intended progression is:
+
+1. prototype the workflow carefully
+2. observe where the cycle produces signal, drift, or rhetorical noise
+3. revise the workflow and repeat
+4. keep only the parts that survive repeated contact with evidence and curation
+5. scale the cycle only when its failure modes are better understood
+
+This means the early repository is not separate from the method. It is the method's training ground.
+
 ## Measurement in v1
 
 The hardest part of applying autoresearch outside machine learning is measurement. In v1, the measurement will often be provisional and partly qualitative, but it still needs to be explicit.
@@ -73,8 +87,44 @@ Initial evaluation criteria for scenarios should include:
 - usefulness for preparedness or decision-making
 - novelty relative to default narratives
 - ability to reveal overlooked interactions or second-order effects
+- ability to challenge status-quo assumptions that may reflect institutional bias
+- imaginative range that expands what can be seriously considered without abandoning discipline
 
 Not every criterion will matter equally in every experiment. What matters is that the criteria are declared before iterative selection begins.
+
+## Evidence versus scenario value
+
+This project should distinguish between two different judgments:
+
+- `evidence strength` - how strongly the available sources support the claims inside a scenario
+- `scenario value` - how useful the scenario is for exploration, preparedness, or exposing hidden assumptions
+
+A scenario can be highly useful as a research prompt while still being weakly evidenced. A scenario can also be well evidenced but not especially valuable. These should not be collapsed into one score.
+
+## Curation gates
+
+Each meaningful scenario pass should end with an explicit curation decision:
+
+- `keep` - worth developing further in roughly its current form
+- `revise` - promising, but too vague, weakly grounded, or overextended
+- `merge` - better treated as part of another scenario family
+- `discard` - not useful enough to justify further attention
+
+The reason for the decision should be recorded. If a synthesis or comparison pass never discards anything, the method is probably not curating hard enough.
+
+## Source discipline
+
+Research artifacts should distinguish among source types rather than treating all inputs as equivalent.
+
+Useful working categories include:
+
+- `assessed report`
+- `peer-reviewed paper`
+- `journalistic reporting`
+- `researcher-provided canonical document`
+- `working interpretation`
+
+This classification helps prevent eloquent summaries from appearing stronger than their actual evidence base.
 
 ## Research loop discipline
 
@@ -88,6 +138,23 @@ To keep the process honest, each scenario or experiment should try to preserve:
 
 This creates an audit trail for emergence. Without that trail, the method risks becoming aesthetic intuition disguised as process.
 
+## Human and model scaling strategy
+
+The method is expected to use different model tiers at different stages.
+
+- high-capability models are useful early for designing workflows, pressure-testing concepts, and exploring the shape of the cycle itself
+- lower-cost or local models may become useful later for running repeated generation, classification, comparison, or drafting passes at larger volume
+- humans remain responsible for framing, curation, evaluation design, and deciding when a lower-cost loop is trustworthy enough to use
+
+The point is not to scale generation immediately. The point is to first design a cycle that deserves to be scaled.
+
+In practice, this means:
+
+1. use stronger models to prototype the loop
+2. identify what parts of the loop are robust versus brittle
+3. migrate robust sub-tasks to cheaper or local execution only when quality loss is acceptable and visible
+4. keep high-stakes curation and method redesign under stronger human and model supervision
+
 ## What success looks like in v1
 
 Success in this phase does not mean proving the method universally.
@@ -98,6 +165,7 @@ It means demonstrating that the repository can:
 - make human curation legible rather than hidden
 - hold open multiple lines of inquiry without drifting into vagueness
 - develop a sharper operational definition of measurement over time
+- reveal which parts of the cycle can eventually be repeated at scale and which parts resist automation
 
 ## Known risks
 
@@ -106,5 +174,7 @@ It means demonstrating that the repository can:
 - treating eloquence as evidence
 - mistaking novelty for insight
 - blurring the boundary between exploration and conclusion
+- scaling weak cycles too early
+- handing cheap models tasks that still require stronger judgment
 
 These risks are not side issues. They are central design constraints.

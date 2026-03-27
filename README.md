@@ -48,11 +48,13 @@ The emphasis here is on scenario-space exploration rather than prediction. The q
 - `docs/research-agenda.md` - active questions and near-term focus
 - `docs/glossary.md` - working definitions for key terms
 - `docs/research-tooling.md` - note on tools that would strengthen the research workflow
+- `docs/evaluation-framework.md` - reusable rubric for comparing scenarios and making curation decisions
 - `ROADMAP.md` - phased development plan for the research program
 - `CONTRIBUTING.md` - norms for writing, sources, uncertainty, and edits
 - `research/notes/` - working notes, source synthesis, and questions
 - `research/scenarios/` - scenario drafts, variants, and recombinations
 - `research/experiments/` - process experiments and evaluation attempts
+- `research/syntheses/` - comparisons, evaluations, and higher-order judgments across artifacts
 
 ## Working principles
 
