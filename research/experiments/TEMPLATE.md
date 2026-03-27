@@ -9,6 +9,7 @@ Use this template for tests of the method, workflow, prompts, evaluation criteri
 - author:
 - status: draft | active | completed | archived
 - experiment type:
+- loop stage(s) tested:
 
 ## Objective
 
@@ -40,6 +41,8 @@ Before running the main experiment, record how the starting evidence base was as
 ## Procedure
 
 Describe the steps taken in enough detail that the experiment can be repeated.
+
+If relevant, note where this experiment sits inside `docs/research-loop.md`.
 
 Suggested baseline flow:
 

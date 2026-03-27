@@ -61,6 +61,8 @@ The point is not to remove human judgment. The point is to make judgment visible
 6. Record what changed and why.
 7. Reassess the measurement only if there is a documented reason.
 
+For the current staged version of this workflow as it has emerged in practice, see `docs/research-loop.md`.
+
 ## Iteration logic
 
 The project is not trying to get the perfect cycle right on the first pass. It is trying to iteratively design a cycle that becomes reliable enough to repeat at larger scale.

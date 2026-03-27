@@ -11,6 +11,8 @@ This directory holds the working corpus for v1.
 
 Use `docs/evaluation-framework.md` when you need to compare scenarios explicitly or make keep/revise/merge/discard decisions.
 
+Use `docs/research-loop.md` as the current reference for how notes, scenarios, experiments, and syntheses fit together inside one repeatable cycle.
+
 ## Naming convention
 
 Use date-first, lowercase, kebab-case filenames so the corpus stays sortable and easy to scan.

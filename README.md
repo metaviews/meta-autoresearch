@@ -45,6 +45,7 @@ The emphasis here is on scenario-space exploration rather than prediction. The q
 - `README.md` - project overview and repo entry point
 - `docs/foundation.md` - canonical long-form framing of the concept
 - `docs/method.md` - operational description of the research loop
+- `docs/research-loop.md` - first formal staged version of the loop now emerging in practice
 - `docs/research-agenda.md` - active questions and near-term focus
 - `docs/glossary.md` - working definitions for key terms
 - `docs/research-tooling.md` - note on tools that would strengthen the research workflow
@@ -89,8 +90,9 @@ If you are new to the project, read these in order:
 1. `README.md`
 2. `docs/foundation.md`
 3. `docs/method.md`
-4. `docs/research-agenda.md`
-5. `docs/evaluation-framework.md`
+4. `docs/research-loop.md`
+5. `docs/research-agenda.md`
+6. `docs/evaluation-framework.md`
 
 Then, for the most developed current work:
 
