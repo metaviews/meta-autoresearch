@@ -24,7 +24,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 
 | Scenario | Evidence strength | Internal coherence | Relevance | Preparedness value | Novelty / search-space value | Actionability | Status-quo challenge | Imaginative power | Curation | Notes |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `research/scenarios/2026-03-27-compound-seasonal-whiplash.md` | 3 | 4 | 4 | 4 | 4 | 3 | 4 | 4 | `revise` | Strong mechanism and good preparedness logic; it challenges linear seasonal thinking and has good imaginative range, but still needs case grounding and clearer regional variants. |
+| `research/scenarios/2026-03-27-compound-seasonal-whiplash.md` | 3 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | `revise` | Revised into a more bounded wet-to-hot-dry transition scenario; stronger than before, but it still needs named cases before it should move back to `keep`. |
 | `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md` | 4 | 5 | 5 | 5 | 4 | 5 | 5 | 4 | `keep` | Best-supported family so far; strongly challenges region-by-region food-risk framing and has obvious next grounding steps. |
 | `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md` | 3 | 5 | 5 | 5 | 4 | 4 | 5 | 4 | `keep` | Strong infrastructure logic; it directly challenges inherited design-baseline assumptions and remains highly decision-relevant, though it still needs case-specific evidence. |
 
@@ -35,15 +35,15 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 - strongest contribution:
   - highlights sequence blindness and institutional lag rather than single-event thinking
 - main weakness:
-  - still broad enough that it risks becoming a catch-all volatility narrative
+  - still lacks named case grounding even after narrowing the mechanism
 - status-quo challenge:
   - productively challenges the institutional habit of treating hazards as separate seasonal boxes
 - imaginative power:
-  - expands the inquiry toward sequence logic and transition failure, but still needs more grounded variants
+  - expands the inquiry toward sequence logic and transition failure while staying more bounded than the earlier draft
 - why `revise` instead of `keep`:
-  - it is promising, but should be narrowed into grounded variants before getting equal status with the stronger families
+  - it is promising and now better bounded, but should gain named case support before getting equal status with the stronger families
 - next step:
-  - build one or two region-specific variants using concrete case material
+  - test the new Feather River regional variant and then build one additional named comparison case
 
 ### Synchronous Breadbasket Stress
 
@@ -88,6 +88,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 - it made status-quo challenge and imaginative range explicit parts of evaluation rather than implicit preferences
 - it introduced a real pruning function into the method by downgrading one family from `keep` to `revise`
 - it made the next research move more explicit: deepen the strongest family first rather than treating all families as equally ready
+- it created a more disciplined path for weaker-but-promising families: narrow, ground, and test named regional variants
 
 ## Links
 
@@ -95,5 +96,6 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 - related synthesis: `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`
+  - `research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md`
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`
