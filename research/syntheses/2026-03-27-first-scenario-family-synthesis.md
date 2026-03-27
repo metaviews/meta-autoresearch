@@ -88,13 +88,17 @@ This does not make it the most important family overall. It makes it the best cu
 
 Deepen the breadbasket family with region-specific grounding and use that work as a test of whether scenario refinement improves without collapsing into overclaim.
 
+That deepening has now started through a wheat-focused transmission variant: `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`.
+
 ## Links
 
 - related notes:
   - `research/notes/2026-03-27-climate-volatility-evidence-note.md`
   - `research/notes/2026-03-27-breadbasket-regional-grounding-note.md`
+  - `research/notes/2026-03-27-northern-wheat-shock-grounding-note.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`
+  - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`
 - related experiments:

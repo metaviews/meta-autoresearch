@@ -78,7 +78,7 @@ These examples do not prove a single imminent crisis. They do show that the fami
   - it links climate volatility to geopolitical and market behavior without requiring overstated physical claims
   - it is well matched to available literature for follow-up grounding
 - what should be refined next:
-  - identify the most illustrative crop and region combinations
+  - compare wheat-focused variants against other crop and region combinations
   - test alternate versions where trade coordination succeeds versus fails
   - add preparedness implications for reserves, importers, and humanitarian planning
 - what might cause this scenario to be discarded or merged:
@@ -103,8 +103,12 @@ These examples do not prove a single imminent crisis. They do show that the fami
 - related notes:
   - `research/notes/2026-03-27-climate-volatility-evidence-note.md`
   - `research/notes/2026-03-27-breadbasket-regional-grounding-note.md`
+  - `research/notes/2026-03-27-northern-wheat-shock-grounding-note.md`
 - related experiments: `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
-- related syntheses: `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
+- related syntheses:
+  - `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
+  - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
 - related scenarios:
+  - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`
