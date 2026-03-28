@@ -26,7 +26,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `research/scenarios/2026-03-27-compound-seasonal-whiplash.md` | 3 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | `revise` | Revised into a more bounded wet-to-hot-dry transition scenario; stronger than before, but it still needs named cases before it should move back to `keep`. |
 | `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md` | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 4 | `keep` | Still the strongest family overall; it now has focused wheat variants, a trade-buffer vs production-buffer comparison, and a clearer downstream importer-exposure layer. |
-| `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md` | 3 | 5 | 5 | 5 | 4 | 4 | 5 | 4 | `keep` | Strong infrastructure logic; it directly challenges inherited design-baseline assumptions and remains highly decision-relevant, though it still needs case-specific evidence. |
+| `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md` | 4 | 5 | 5 | 5 | 4 | 5 | 5 | 4 | `keep` | Now grounded by a South East Queensland variant; still less mature than breadbasket, but meaningfully stronger and more actionable than the original abstract branch. |
 
 ## Notes by scenario
 
@@ -65,21 +65,21 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 - strongest contribution:
   - turns non-stationarity into a concrete standards and infrastructure problem
 - main weakness:
-  - still somewhat abstract without basin- or city-level grounding
+  - still has only one named case and lacks internal comparison structure
 - status-quo challenge:
   - sharply challenges the assumption that legacy design standards remain adequate under shifted distributions
 - imaginative power:
   - extends the inquiry beyond hazard talk into rule-curve and standards failure, while staying grounded enough for preparedness work
 - why `keep`:
-  - the mechanism is strong and highly decision-relevant even before detailed case work
+  - the mechanism is strong, now has one grounded case, and is ready for a second-case comparison pass
 - next step:
-  - identify one basin or metro-scale case where wet-dry sequence stress exposed design or rule failure
+  - compare the South East Queensland case against a second basin or city type to see whether the branch holds across different institutional forms
 
 ## Provisional conclusions
 
 - the current set is not redundant; the three scenarios occupy genuinely different mechanism families
 - `synchronous breadbasket stress` remains the strongest current candidate and now has the most developed internal structure in the repo
-- `hydrologic whiplash and design failure` should remain active as a second-priority family
+- `hydrologic whiplash and design failure` is now more grounded and should remain active as the next branch to mature after breadbasket
 - `compound seasonal whiplash` should stay in play, but under a `revise` gate until it is better grounded
 
 ## What this matrix changed
@@ -91,6 +91,7 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
 - it created a more disciplined path for weaker-but-promising families: narrow, ground, and test named regional variants
 - it now gives the whiplash family a first real internal comparison: wet-to-fire versus recovery-to-shortage
 - it now gives the breadbasket family a parallel internal comparison: trade-buffer versus production-buffer stress
+- it now gives the hydrologic branch its first named-case grounding, making it ready for a true comparison pass rather than remaining only conceptual
 
 ## Links
 
@@ -105,3 +106,4 @@ Apply the v1 evaluation framework to the current climate scenario set so the pro
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
   - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
   - `research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md`
+  - `research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md`

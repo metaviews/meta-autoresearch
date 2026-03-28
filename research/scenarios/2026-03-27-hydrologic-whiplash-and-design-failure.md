@@ -67,7 +67,7 @@ What makes the scenario important is that each step can look manageable in isola
   - it is distinct from food-system and seasonal-lag scenarios while still belonging to the same volatility family
   - it can support future note-taking around standards, return periods, and reservoir operations
 - what should be refined next:
-  - identify one or two real basins or cities as grounded variants
+  - compare the South East Queensland variant against a second basin or city type
   - add examples of which operating assumptions break first
   - compare public-sector and utility-sector preparedness implications
 - what might cause this scenario to be discarded or merged:
@@ -89,8 +89,14 @@ What makes the scenario important is that each step can look manageable in isola
 
 ## Links
 
-- related notes: `research/notes/2026-03-27-climate-volatility-evidence-note.md`
+- related notes:
+  - `research/notes/2026-03-27-climate-volatility-evidence-note.md`
+  - `research/notes/2026-03-27-seq-hydrologic-whiplash-grounding-note.md`
 - related experiments: `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
+- related syntheses:
+  - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
+  - `research/loops/2026-03-27-hydrologic-loop-run.md`
 - related scenarios:
+  - `research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md`
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
