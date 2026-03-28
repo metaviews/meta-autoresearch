@@ -13,7 +13,8 @@
   ],
   "key_notes": [
     "research/notes/2026-03-27-feather-river-whiplash-grounding-note.md",
-    "research/notes/2026-03-27-upper-colorado-whiplash-grounding-note.md"
+    "research/notes/2026-03-27-upper-colorado-whiplash-grounding-note.md",
+    "research/notes/2026-03-28-upper-colorado-whiplash-chronology-note.md"
   ],
   "key_syntheses": [
     "research/syntheses/2026-03-27-whiplash-family-comparison.md",
@@ -32,6 +33,6 @@
     "What additional chronology or operator-facing evidence is needed to bring whiplash closer to Level 4?",
     "Should hydrologic stay related to whiplash only through sequence logic, or remain more clearly distinct?"
   ],
-  "next_recommended_pass": "grounding",
-  "last_updated": "2026-03-27"
+  "next_recommended_pass": "maturity",
+  "last_updated": "2026-03-28"
 }

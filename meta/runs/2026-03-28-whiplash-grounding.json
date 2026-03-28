@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-03-28-whiplash-grounding",
+  "date": "2026-03-28",
+  "branch_slug": "whiplash",
+  "run_type": "grounding",
+  "question": "What tighter chronology or operator-facing evidence can harden the Upper Colorado recovery-to-shortage whiplash variant without collapsing it into the hydrologic branch?",
+  "stages_targeted": [
+    2,
+    4
+  ],
+  "expected_outputs": [
+    {
+      "kind": "grounding_note",
+      "description": "At least one new or updated grounding note"
+    },
+    {
+      "kind": "scenario_update",
+      "description": "At least one grounded scenario update or named case variant"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "grounding_note",
+      "path": "research/notes/2026-03-28-upper-colorado-whiplash-chronology-note.md"
+    },
+    {
+      "kind": "scenario_update",
+      "path": "research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Used the grounding pass to harden the Upper Colorado whiplash variant with a clearer relief-to-constraint chronology and operator-facing runoff-conversion evidence.",
+  "next_step": "grounding"
+}

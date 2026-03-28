@@ -32,17 +32,19 @@ This scenario is the second named regional variant of the revised whiplash famil
 
 ## Scenario logic
 
-After severe drought conditions, a strong winter snowpack and visible drought improvement create a regional sense of reprieve. Water managers, media narratives, and political actors begin to speak in recovery terms. The system does gain real short-term relief, but the interpretation outruns the conversion.
+After severe drought conditions, a strong winter snowpack and visible drought improvement create a regional sense of reprieve. In 2023, Drought.gov briefing materials openly described record-setting snowpack, major drought improvement, and April-July Lake Powell inflow forecasts at `177%` of average. Water managers, media narratives, and political actors begin to speak in recovery terms. The system does gain real short-term relief, but the interpretation outruns the conversion.
 
-As the season progresses, runoff underperforms what snowpack alone seemed to promise. Antecedent dry soils, post-April heat, and wider aridity reduce the amount of water that actually reaches streams and reservoirs. The optimistic planning frame begins to crack. Reservoir anxiety returns, hydropower and shortage concerns reappear, and interstate governance remains tight because the basin was never restored as fully as the relief narrative implied.
+As the season progresses, runoff underperforms what snowpack alone seemed to promise, or reservoir and governance stress remain much tighter than the relief narrative suggests. Drought.gov's own Colorado River reporting states that "April 1 numbers do not tell the whole story" because antecedent soil moisture and post-April weather strongly affect water supply. The 2021 Upper Basin forecast materials show that even with snow-water equivalent around `75-80%` in several sub-basins, runoff forecasts at some key points fell to only `30-62%` of average because soils were exceptionally dry. Even in the much wetter 2023 relief year, official reporting still stressed that one wet year would not refill Powell and Mead, which remained only `37%` and `31%` full. The optimistic planning frame begins to crack. Reservoir anxiety returns, hydropower and shortage concerns reappear, and interstate governance remains tight because the basin was never restored as fully as the relief narrative implied.
 
 The preparedness failure lies in the sequence: snowpack recovery, interpretive overcorrection, then renewed shortage stress. Institutions that still think in terms of drought versus recovery, rather than in terms of fragile conversion under non-stationary conditions, are more likely to misread the basin.
 
 ## Grounding
 
 - Drought.gov reported record-setting snowpack and major drought improvement across the Southwest in 2023.
+- Drought.gov's April 2023 briefing also attached explicit relief-coded inflow expectations to that recovery frame, including Lake Powell inflow at `177%` of average for April-July.
 - Drought.gov also reports that Colorado River water supply can come in far below what snowpack alone would suggest because antecedent soil moisture and post-April weather strongly affect runoff.
 - Colorado River contingency materials emphasize that reservoir levels remain tied to hydropower risk and compact compliance, even after temporary relief.
+- Drought.gov's June 2023 western snow-drought summary makes the tension explicit: major drought relief and above-normal runoff were real, but one wet year was still far from enough to refill Powell and Mead.
 - NOAA-linked drought reporting shows that heat and human-caused warming intensify aridity and snowpack loss, making recovery more fragile.
 
 These sources support a disciplined scenario in which relief is real but incomplete, and where the main whiplash comes from the failure of apparent recovery to become durable operating security.
@@ -53,13 +55,14 @@ These sources support a disciplined scenario in which relief is real but incompl
   - rapid swing from severe drought framing to partial relief framing
   - runoff forecast error relative to snowpack expectations
   - persistent reservoir and compact stress even during improved conditions
+  - strong official recovery language coexisting with explicit warnings that structural stress remained
 - evidence classes consulted:
   - Drought.gov briefings and basin explainers
+  - Colorado Basin River Forecast Center forecast materials
   - NOAA-linked drought reporting
   - broader climate-aridity framing from the repo's existing evidence base
 - missing evidence:
-  - tighter case chronology for one specific year or cluster of years
-  - more basin-specific planning or operator language showing interpretive overconfidence
+  - more basin-specific planning or operator language showing how recovery expectations were communicated internally
   - stronger direct evidence linking recovery narratives to specific preparedness failures
 
 ## Provisional evaluation
@@ -81,8 +84,8 @@ These sources support a disciplined scenario in which relief is real but incompl
   - it is strongly legible as a planning problem rather than only a descriptive climate story
   - it creates a useful comparison between fire-prone whiplash and reservoir-governance whiplash
 - what should be refined next:
-  - identify a specific seasonal window or operating year to anchor the basin story
-  - add direct operator or policy language around snowpack expectations and runoff disappointment
+  - tighten one year or year-cluster further with operator or planning language around recovery expectations
+  - compare `real but insufficient recovery` against `snowpack-runoff divergence` as two related sub-mechanisms inside the case
   - compare Upper Basin interpretation with downstream reservoir politics
 - what might cause this scenario to be revised or merged:
   - if the mechanism works better as a subtype of hydrologic whiplash rather than the broader seasonal family
@@ -106,6 +109,7 @@ These sources support a disciplined scenario in which relief is real but incompl
 - related notes:
   - `research/notes/2026-03-27-climate-volatility-evidence-note.md`
   - `research/notes/2026-03-27-upper-colorado-whiplash-grounding-note.md`
+  - `research/notes/2026-03-28-upper-colorado-whiplash-chronology-note.md`
 - related experiments:
   - `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
 - related syntheses:
