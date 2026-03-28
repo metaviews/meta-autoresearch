@@ -114,7 +114,7 @@ By that standard:
 
 - `sequence failure` is real enough to use
 - `correlation/transmission failure` is real enough to use
-- `design/rule conflict under volatility` is now strong enough to name provisionally, but still needs more pressure-testing than the other two
+- `design/rule conflict under volatility` is now strong enough to use as an emerging structure type, though it should still be revised if later branches show the distinction is weaker than it currently appears
 
 ## Current branch alignment
 
@@ -131,7 +131,7 @@ By that standard:
 ### Hydrologic
 
 - strongest current candidate: design/rule conflict under volatility
-- current need: decide whether the branch truly warrants a distinct structure label or remains better nested under sequence failure
+- current need: deepen the branch without collapsing it back into a generic subtype, so the new structure remains pressure-tested rather than merely declared
 
 ## Method implication
 

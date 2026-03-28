@@ -77,24 +77,17 @@ What is still unresolved:
 
 ## Branch maturity judgment
 
-Using `docs/branch-maturity.md`, the hydrologic branch now looks like `Level 3: comparative`.
+Using `docs/branch-maturity.md`, the hydrologic branch now looks like `Level 4: method-shaping`.
 
 Why:
 
 - it has clear framing and a distinct mechanism
-- it now has two meaningful named variants with different institutional forms
+- it has two meaningful named variants with different institutional forms
 - it has a real internal comparison synthesis
-- it has a loop-run record and stronger grounding than before
+- it has a loop-run record, stronger chronology, and explicit discard pressure
+- it has now materially changed the method by helping stabilize `design/rule conflict under volatility` as a third emerging structure type
 
-Why it is not yet `Level 4: method-shaping`:
-
-- its structure-type status is still provisional rather than fully settled
-- its chronology and operator-facing evidence are thinner than the strongest branch work
-- it has not yet changed the method as decisively as the breadbasket branch has
-
-The practical implication is that hydrologic is no longer merely exploratory or singly grounded. It is ready for deeper pressure-testing, but not yet fully established as a method-shaping branch.
-
-After the latest chronology and operator-evidence tightening in both SEQ and Upper Colorado, this branch now sits at the upper end of `Level 3`. It is approaching `Level 4`, but the promotion case still depends on whether the project decides the branch has truly stabilized `design/rule conflict under volatility` as a distinct structure type rather than a useful subtype.
+This does not mean the branch is finished. It means it now does more than populate the repo with good examples. It changes how the method names and evaluates hidden failure structures.
 
 ## Preparedness implications
 
