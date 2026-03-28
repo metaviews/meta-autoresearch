@@ -34,7 +34,9 @@ This is the second named hydrologic variant and the strongest contrast to South 
 
 The Upper Colorado system is built to allocate, store, and deliver water across a large engineered basin under explicit legal commitments. For long periods, that architecture appears durable because its central tensions remain manageable inside the rule set. As hydrologic stress intensifies, the problem becomes less about one drought year and more about whether the storage-and-allocation framework still has enough slack.
 
-Reservoir levels approach critical thresholds, delivery obligations remain in force, and shortage planning layers accumulate. New contingency plans, coordinated releases, and post-2026 redesign processes appear not because the system failed once, but because the old confidence that existing rules were sufficient no longer holds. In that sense, the hydrologic whiplash is institutional: a regime built for storage stability and regulated delivery is pushed into repeated rule revision under changing inflow and storage realities.
+Reservoir levels approach critical thresholds, delivery obligations remain in force, and shortage planning layers accumulate. New contingency plans, coordinated releases, and post-2026 redesign processes appear not because the system failed once, but because the old confidence that existing rules were sufficient no longer holds. Reclamation's own materials make this visible as a threshold ladder and emergency chronology: the Upper Basin DCP protects Lake Powell as it approaches `3,525 feet`, a `35-foot` buffer above Glen Canyon's minimum power pool of `3,490 feet`; drought response operations begin in `July 2021`; the first Lower Basin shortage declaration arrives in `January 2022`; additional water moves from Flaming Gorge in `May 2022`; and near-term SEIS actions are used to help keep Powell above `3,500 feet` before the current operating regime expires.
+
+In that sense, the hydrologic whiplash is institutional: a regime built for storage stability and regulated delivery is pushed into repeated rule revision under changing inflow and storage realities.
 
 The preparedness failure is not simply that there is less water. It is that a highly consequential rule system must keep adapting in a context where hydrologic assumptions, operating thresholds, and political expectations no longer fit together as cleanly as they once did.
 
@@ -44,6 +46,7 @@ The preparedness failure is not simply that there is less water. It is that a hi
 - Reclamation identifies the basin as a major water source for tens of millions of people and a heavily agricultural system
 - the 2019 Drought Contingency Plans and the 2022 shortage declaration show that new operational layers have already been required
 - the post-2026 operating process shows the basin is entering another explicit redesign phase
+- Reclamation's public threshold and action chronology shows rule stress at specific operating elevations and through repeated emergency adjustments between 2021 and 2026
 
 These sources do not show a single abrupt flood-to-drought sequence like SEQ. They do show hydrologic design stress expressed through compact obligations, reservoir thresholds, and operating-rule revision.
 
@@ -53,13 +56,14 @@ These sources do not show a single abrupt flood-to-drought sequence like SEQ. Th
   - repeated stress around Lake Powell and Lake Mead elevations
   - active shortage planning and coordinated release mechanisms
   - formal redesign of major operating guidelines
+  - threshold-governed emergency operations centered on `3,525 feet`, `3,500 feet`, and minimum power-pool concerns
 - evidence classes consulted:
   - Compact text
   - Bureau of Reclamation operating and planning pages
   - existing repo materials on Upper Colorado recovery-to-shortage whiplash
 - missing evidence:
-  - tighter evidence on how operators or basin actors describe design assumptions under stress
-  - stronger chronology tying hydrologic conditions to specific rule redesign decisions
+  - tighter evidence on how operators or basin actors describe design assumptions under stress in their own words
+  - stronger chronology tying hydrologic conditions to specific rule redesign decisions beyond the existing threshold sequence
   - more direct comparison evidence between flood-oriented and shortage-oriented rule tensions in the basin
 
 ## Provisional evaluation

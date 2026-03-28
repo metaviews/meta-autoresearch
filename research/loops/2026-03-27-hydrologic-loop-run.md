@@ -41,6 +41,7 @@ Document the first substantial hydrologic branch pass from abstract stress-test 
 - evidence strengths:
   - strong public documentation of South East Queensland's drought-security framing, water grid, and flood-era operating context
   - clear dual-purpose reservoir logic in Wivenhoe
+  - clearer Upper Colorado threshold and redesign chronology than before
 - evidence gaps:
   - tighter chronology is still needed
   - the branch still has fewer downstream consequences mapped than breadbasket
@@ -133,7 +134,7 @@ Document the first substantial hydrologic branch pass from abstract stress-test 
   - converting abstract infrastructure language into a planning-system case
 - brittle steps in this run:
   - limited discard documentation specific to this branch
-  - still weak on event-to-rule chronology
+  - still weaker on event-to-rule chronology than on structural comparison
   - still lacks a stronger downstream preparedness layer
 - where stronger models were genuinely needed:
   - reframing the branch from abstraction into an evaluable case narrative
@@ -174,6 +175,7 @@ Document the first substantial hydrologic branch pass from abstract stress-test 
   - public infrastructure and operating documentation can be enough to make a branch meaningfully more evaluable
 - what changed in the method:
   - the loop now has a stronger example of how to move from infrastructure abstraction to a concrete regional system case
+  - explicit threshold ladders and redesign chronology materially harden branches that might otherwise remain too conceptual
 - what should be done differently next time:
   - add chronology and operator-facing evidence faster once two contrasting cases are in place
 
@@ -182,7 +184,7 @@ Document the first substantial hydrologic branch pass from abstract stress-test 
 - immediate next step:
   - decide whether the branch now supports a distinct structure label or should remain nested under sequence failure
 - longer follow-up:
-  - deepen one of the two cases with tighter chronology and operator-facing evidence
+  - deepen one of the two cases with tighter chronology and operator-facing evidence, though Upper Colorado is now materially stronger on this front than before
 - scaling relevance:
   - this branch is not ready for repeated delegation yet, but the grounding process itself is now clearer and more reproducible
 

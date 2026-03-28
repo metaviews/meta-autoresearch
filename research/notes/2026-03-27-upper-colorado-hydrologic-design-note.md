@@ -54,11 +54,30 @@ Why this matters:
 - the case is live, not historical only
 - it supports the branch as a design-and-rule volatility problem rather than a one-time drought story
 
+### 5. The stress is now legible through threshold-governed emergency chronology
+
+Reclamation's DCP materials state that the Upper Basin DCP uses releases from Aspinall, Flaming Gorge, and Navajo when Lake Powell is projected to approach elevation `3,525 feet`, a `35-foot` buffer above Glen Canyon's minimum power pool of `3,490 feet`. Reclamation also records a visible emergency chronology: drought response operations beginning in `July 2021`, the first Lower Basin shortage declaration in `January 2022`, additional `500,000 acre-feet` moving from Flaming Gorge in `May 2022`, and near-term SEIS actions used to help keep Powell above `3,500 feet` before `2027`.
+
+Why this matters:
+
+- the branch is not only about abstract compact stress; it is about threshold-governed operational stress
+- the chronology makes the case more legible as a live planning burden rather than only a conceptual one
+
+### 6. The redesign burden itself is part of the stress signal
+
+Reclamation's post-2026 materials state that alternatives development began in `2022`, involved `100+ meetings`, and drew on `500+` submitted operational strategies.
+
+Why this matters:
+
+- hydrologic volatility is now showing up as planning-system load, not only reservoir decline
+- the branch can point to redesign effort itself as evidence of rule mismatch under stress
+
 ## What this note supports
 
 - a second named hydrologic variant centered on compact law, reservoir thresholds, and shortage-rule redesign
 - direct comparison between an urban water-grid case and a basin allocation/storage regime
 - treating hydrologic volatility as institutional rule stress, not only physical hydrology
+- treating threshold ladders and repeated redesign as evidence of operational strain rather than background governance detail
 
 ## What this note does not support
 
@@ -82,6 +101,8 @@ The strongest framing is that hydrologic variability exposed tensions in a syste
 2. Bureau of Reclamation, Colorado River Basin overview. `https://www.usbr.gov/ColoradoRiverBasin/`
 3. Bureau of Reclamation, Drought Contingency Plans. `https://www.usbr.gov/ColoradoRiverBasin/dcp/index.html`
 4. Bureau of Reclamation, Post-2026 operations. `https://www.usbr.gov/ColoradoRiverBasin/post2026/index.html`
+5. Bureau of Reclamation, SEIS for near-term operations. `https://www.usbr.gov/ColoradoRiverBasin/interimguidelines/seis/index.html`
+6. Bureau of Reclamation, Post-2026 alternatives. `https://www.usbr.gov/ColoradoRiverBasin/post2026/alternatives/index.html`
 
 ## Links
 
