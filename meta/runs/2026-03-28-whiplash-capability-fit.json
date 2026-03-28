@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-03-28-whiplash-capability-fit",
+  "date": "2026-03-28",
+  "branch_slug": "whiplash",
+  "run_type": "capability-fit",
+  "question": "Can branch-state recovery and run scaffolding be handled by the local CLI layer without meaningful loss of judgment quality, keeping stronger model effort focused on framing and synthesis?",
+  "stages_targeted": [
+    9
+  ],
+  "expected_outputs": [
+    {
+      "kind": "experiment",
+      "description": "A capability-fit experiment artifact"
+    },
+    {
+      "kind": "synthesis",
+      "description": "A short synthesis on quality, delegation, or loss"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "experiment",
+      "path": "research/experiments/2026-03-28-cli-capability-fit-pass.md"
+    },
+    {
+      "kind": "synthesis",
+      "path": "research/syntheses/2026-03-28-cli-capability-fit-findings.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Tested the first CLI layer on real branch-state recovery, run scaffolding, run inspection, and run completion using the whiplash branch as the working case.",
+  "next_step": "comparison"
+}
