@@ -42,6 +42,7 @@ Document the first substantial hydrologic branch pass from abstract stress-test 
   - strong public documentation of South East Queensland's drought-security framing, water grid, and flood-era operating context
   - clear dual-purpose reservoir logic in Wivenhoe
   - clearer Upper Colorado threshold and redesign chronology than before
+  - much tighter SEQ chronology from drought-era portfolio buildout to 2010-11 flood operations
 - evidence gaps:
   - tighter chronology is still needed
   - the branch still has fewer downstream consequences mapped than breadbasket
@@ -176,6 +177,7 @@ Document the first substantial hydrologic branch pass from abstract stress-test 
 - what changed in the method:
   - the loop now has a stronger example of how to move from infrastructure abstraction to a concrete regional system case
   - explicit threshold ladders and redesign chronology materially harden branches that might otherwise remain too conceptual
+  - constrained multi-objective operating rules are now clearer as evidence of design conflict, not just implementation detail
 - what should be done differently next time:
   - add chronology and operator-facing evidence faster once two contrasting cases are in place
 

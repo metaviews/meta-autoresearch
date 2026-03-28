@@ -34,11 +34,11 @@ The parent hydrologic branch is strong conceptually but under-grounded. South Ea
 
 South East Queensland spends years oriented toward water security under drought pressure. The response is not passive: the region builds a more diversified and networked system, including grid interconnection, desalination, recycled-water capacity, and trigger-based drought planning. In one sense, this is a resilience success.
 
-Then the hydroclimate shifts hard. Wet conditions and extreme rainfall arrive at a scale that changes the operating problem. The system is no longer mainly concerned with how to keep enough water in storage, but with how to manage flood-space, inflows, downstream risk, and a dual-purpose reservoir under extreme conditions. The infrastructure is not simply overwhelmed by weather. It is stressed because its operating logic now has to move between two different planning worlds.
+Then the hydroclimate shifts hard. Seqwater's own planning materials tie the water-grid buildout to the Millennium Drought (`2001-2009`), while the Bureau of Meteorology records 2010 as Queensland's wettest year on record, with the wettest spring and wettest December on record before the January 2011 flood sequence. Wet conditions and extreme rainfall arrive at a scale that changes the operating problem. The system is no longer mainly concerned with how to keep enough water in storage, but with how to manage flood-space, inflows, downstream risk, and a dual-purpose reservoir under extreme conditions. The infrastructure is not simply overwhelmed by weather. It is stressed because its operating logic now has to move between two different planning worlds.
 
 The hydrologic whiplash lies in that transition. A region designed around scarcity management and portfolio reliability must rapidly operate as a flood-mitigation system under one of the wettest periods in state history. The public story can treat these as separate eras. The operational system cannot. The same institutions, assets, and rules have to absorb both.
 
-The preparedness failure is therefore not that South East Queensland lacked infrastructure. It is that even a diversified infrastructure system can remain brittle when volatility exposes tensions among design assumptions, regional imbalance, trigger-based planning, and dual-purpose operating rules.
+The preparedness failure is therefore not that South East Queensland lacked infrastructure. It is that even a diversified infrastructure system can remain brittle when volatility exposes tensions among design assumptions, regional imbalance, trigger-based planning, and dual-purpose operating rules. Seqwater's own materials sharpen this further: flood operations must balance dam safety, downstream flooding, environmental impacts, transport/property disruption, and restoring full drinking-water supply, while forecast-only prereleases below full supply level are constrained and about half of the Brisbane catchment lies below the dams, limiting what operators can control.
 
 ## Grounding
 
@@ -47,6 +47,7 @@ The preparedness failure is therefore not that South East Queensland lacked infr
 - The SEQ Water Grid exists partly because rainfall can be patchy and storage conditions uneven across the region.
 - Queensland's 2010 and early 2011 wet period was extreme enough to produce one of the state's most significant flood sequences.
 - Wivenhoe Dam is explicitly managed for both water supply and flood mitigation, making the case ideal for a design-and-rule conflict analysis.
+- Seqwater's drought and flood planning materials now make the chronology and constraints clearer: drought-era portfolio buildout, 2009 desal activation, 2010 climatic reversal, and explicit multi-objective flood-operations rules.
 
 These sources do not prove a singular design failure. They do support this as a strong first case for the hydrologic branch because the region visibly moves between scarcity logic and flood logic inside one integrated system.
 
@@ -56,13 +57,13 @@ These sources do not prove a singular design failure. They do support this as a 
   - public framing of South East Queensland as a climate-of-extremes region
   - drought-triggered portfolio design and networked water transfers
   - severe flood-period operational pressure in the same broader system
+  - documented multi-objective rule constraints around flood operations and water-supply restoration
 - evidence classes consulted:
   - Bureau of Meteorology climate summaries
-  - Seqwater system and operating pages
+  - Seqwater system, drought-plan, and operating-manual materials
   - public planning-review documentation
 - missing evidence:
-  - tighter chronology tying drought-era design choices to flood-era operating tensions
-  - more direct public or operator language on how the transition stressed decision-making
+  - more direct public or operator language on how the transition stressed decision-making beyond current planning documents
   - a clearer comparison with another hydrologic case that is less urban-grid oriented
 
 ## Provisional evaluation
@@ -84,7 +85,7 @@ These sources do not prove a singular design failure. They do support this as a 
   - it turns abstract design-failure language into a concrete metro-scale system logic
   - it creates a pathway for future comparison with less networked basins or more agricultural systems
 - what should be refined next:
-  - add a tighter chronology linking drought-era redesign with flood-era operational stress
+  - add more explicit operator or post-event language around how the constraints were experienced in practice
   - identify which assets or rules were most sequence-sensitive: grid transfers, trigger levels, flood manual, desalination posture, or storage targets
   - compare this case with a less urban and less networked basin
 - what might cause this scenario to be revised or merged:

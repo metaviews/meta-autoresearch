@@ -94,6 +94,8 @@ Why it is not yet `Level 4: method-shaping`:
 
 The practical implication is that hydrologic is no longer merely exploratory or singly grounded. It is ready for deeper pressure-testing, but not yet fully established as a method-shaping branch.
 
+After the latest chronology and operator-evidence tightening in both SEQ and Upper Colorado, this branch now sits at the upper end of `Level 3`. It is approaching `Level 4`, but the promotion case still depends on whether the project decides the branch has truly stabilized `design/rule conflict under volatility` as a distinct structure type rather than a useful subtype.
+
 ## Preparedness implications
 
 - SEQ suggests stress-testing integrated urban water portfolios and dual-purpose flood/water-supply operations

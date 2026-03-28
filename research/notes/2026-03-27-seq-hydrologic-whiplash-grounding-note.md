@@ -54,11 +54,30 @@ Why this matters:
 - the case directly links hydrologic extremes to live operating-rule tradeoffs
 - the branch can be grounded in how the same system is asked to solve both storage security and flood-space management
 
+### 5. The chronology is now much tighter than a generic drought/flood story
+
+Seqwater's drought plan states that the SEQ Water Grid was built in response to the Millennium Drought (`2001-2009`) and that the Gold Coast Desalination Plant first came online in `2009`. The Bureau of Meteorology reports that 2010 marked a dramatic reversal of dry conditions, with Queensland recording its wettest year on record, the wettest spring on record, and the wettest December on record before the January 2011 flood sequence.
+
+Why this matters:
+
+- the branch can now point to a concrete drought-portfolio-buildout to wet-period reversal sequence
+- the case becomes more legible as hydrologic whiplash rather than just a flood event with drought background
+
+### 6. The operating tension is explicitly documented as multi-objective and constrained
+
+Seqwater's operating materials state that Wivenhoe and Somerset are dual-purpose dams and that flood operations must balance dam safety, water supply security, downstream flooding, environmental impacts, and transport/property disruption. The manual also does not allow prerelease below full supply level based only on rainfall forecasts, and Seqwater publicly notes that about half of the Brisbane River catchment lies below Somerset and Wivenhoe, limiting what the dams can mitigate.
+
+Why this matters:
+
+- this makes the case much stronger as a rule-conflict and operating-constraint case rather than a simple blame story
+- the branch can point to documented institutional limits, not only inferred ones
+
 ## What this note supports
 
 - creating a first named hydrologic variant rooted in South East Queensland
 - treating the hydrologic branch as a portfolio, grid, and operating-rules problem rather than only a basin-hydrology problem
 - comparing drought-security design with flood-mitigation stress inside one system
+- treating constrained multi-objective operations as a core part of hydrologic volatility rather than as background detail
 
 ## What this note does not support
 
@@ -84,6 +103,11 @@ The strongest formulation is that South East Queensland is a documented case whe
 4. Seqwater, Water security. `https://www.seqwater.com.au/water-security`
 5. Seqwater, Wivenhoe Dam. `https://www.seqwater.com.au/dams/wivenhoe`
 6. South East Queensland water supply strategy review, 2007. `http://hdl.handle.net/10453/35041`
+7. Seqwater, Drought preparedness plan. `https://www.seqwater.com.au/document/2408`
+8. Seqwater, Flood Operations Manual materials. `https://www.seqwater.com.au/document/2473`
+9. Seqwater, Dams overview. `https://www.seqwater.com.au/dams`
+10. Bureau of Meteorology, Australia Annual Climate Summary 2010. `https://www.bom.gov.au/climate/current/annual/aus/2010/`
+11. Bureau of Meteorology, Queensland December 2010 summary. `https://www.bom.gov.au/climate/current/month/qld/archive/201012.summary.shtml`
 
 ## Links
 
