@@ -19,7 +19,8 @@
   ],
   "key_syntheses": [
     "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md",
-    "research/syntheses/2026-03-28-wealth-concentration-internal-comparison.md"
+    "research/syntheses/2026-03-28-wealth-concentration-internal-comparison.md",
+    "research/syntheses/2026-03-28-wealth-concentration-resolution-comparison.md"
   ],
   "loop_runs": [],
   "discard_records": [],
@@ -27,8 +28,8 @@
   "most_generative_variant": "research/scenarios/2026-03-28-private-credit-resilience-squeeze.md",
   "weakest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "open_questions": [
-    "Does the branch now have enough internal contrast to resolve toward one dominant structure type, or is the hybrid still the most honest description?",
-    "Which downstream sectoral or borrower-type case would best make the transmission branch more concrete without losing boundedness?"
+    "Which downstream sectoral or borrower-type case would best make the transmission branch more concrete without losing boundedness?",
+    "After one more transmission-focused case, does the branch still remain hybrid, or does one structure type clearly dominate?"
   ],
   "next_recommended_pass": "comparison",
   "last_updated": "2026-03-28"
