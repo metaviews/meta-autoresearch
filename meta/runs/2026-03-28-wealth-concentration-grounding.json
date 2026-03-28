@@ -1,0 +1,34 @@
+{
+  "run_id": "2026-03-28-wealth-concentration-grounding",
+  "date": "2026-03-28",
+  "branch_slug": "wealth-concentration",
+  "run_type": "grounding",
+  "question": "How can increasing wealth concentration be framed as a complex systems problem whose hidden structure is not captured by surface-level inequality narratives?",
+  "stages_targeted": [
+    2,
+    4
+  ],
+  "expected_outputs": [
+    {
+      "kind": "grounding_note",
+      "description": "At least one new or updated grounding note"
+    },
+    {
+      "kind": "scenario_update",
+      "description": "At least one grounded scenario update or named case variant"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "grounding_note",
+      "path": "research/notes/2026-03-28-wealth-concentration-grounding-note.md"
+    },
+    {
+      "kind": "scenario_update",
+      "path": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Created the first non-climate proving-ground branch note and parent scenario, framing wealth concentration as a self-reinforcing balance-sheet system rather than a static inequality snapshot.",
+  "next_step": "grounding"
+}
