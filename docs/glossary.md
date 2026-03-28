@@ -59,3 +59,15 @@ A bounded test of method, prompt design, evaluation criteria, curation logic, or
 ## Synthesis
 
 A document that compares, combines, or abstracts across multiple notes, scenarios, or experiments in order to produce a higher-level view.
+
+## Sequence failure
+
+An epistemic structure in which the relevant risk only becomes visible when conditions are understood as a chain rather than as separate events, hazards, or phases.
+
+## Correlation/transmission failure
+
+An epistemic structure in which the relevant risk only becomes visible when distributed nodes are understood as one coupled system rather than as separate local problems.
+
+## Design/rule conflict under volatility
+
+An epistemic structure in which the relevant risk becomes visible when inherited rules, operating thresholds, allocation frameworks, or infrastructure purposes no longer fit the system dynamics they are expected to govern.

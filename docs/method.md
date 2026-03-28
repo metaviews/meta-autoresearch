@@ -96,12 +96,15 @@ This means the early repository is not separate from the method. It is the metho
 
 One goal of v1 is not only to generate useful scenarios, but to identify recurring kinds of epistemic failure.
 
-Two provisional types have already started to emerge:
+Three provisional types have already started to emerge:
 
 - `sequence failure` - the risk becomes visible only when conditions are understood as a chain rather than as separate events or seasons
 - `correlation/transmission failure` - the risk becomes visible only when distributed nodes are understood as one coupled system rather than as separate local problems
+- `design/rule conflict under volatility` - the risk becomes visible when inherited operating rules, allocation frameworks, thresholds, or infrastructure purposes no longer fit the system dynamics they were built to manage
 
 These are not final categories. They are early candidates for reusable structure types that future branches can test, refine, or overturn.
+
+The third type matters because emergence does not only happen in events or scenarios. It can also happen in the mismatch between formal system design and current reality. In those cases, the research process is not mainly surfacing a new outcome. It is surfacing a hidden conflict between rule architecture and changed conditions.
 
 The long-term aim is for those structure types to travel beyond climate where the fit is real and the method remains honest.
 
