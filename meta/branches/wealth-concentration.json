@@ -9,11 +9,13 @@
   "parent_artifact": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "active_variants": [
     "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
-    "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md"
+    "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
+    "research/scenarios/2026-03-28-private-credit-resilience-squeeze.md"
   ],
   "key_notes": [
     "research/notes/2026-03-28-wealth-concentration-grounding-note.md",
-    "research/notes/2026-03-28-us-asset-regime-mismatch-note.md"
+    "research/notes/2026-03-28-us-asset-regime-mismatch-note.md",
+    "research/notes/2026-03-28-wealth-transmission-channels-note.md"
   ],
   "key_syntheses": [
     "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md",
@@ -22,12 +24,12 @@
   "loop_runs": [],
   "discard_records": [],
   "strongest_variant": "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
-  "most_generative_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
+  "most_generative_variant": "research/scenarios/2026-03-28-private-credit-resilience-squeeze.md",
   "weakest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "open_questions": [
-    "What is the strongest contrasting transmission-focused case to set against the US asset-regime mismatch branch?",
-    "Does wealth concentration resolve toward one dominant structure type with more grounding, or remain a meaningful hybrid?"
+    "Does the branch now have enough internal contrast to resolve toward one dominant structure type, or is the hybrid still the most honest description?",
+    "Which downstream sectoral or borrower-type case would best make the transmission branch more concrete without losing boundedness?"
   ],
-  "next_recommended_pass": "grounding",
+  "next_recommended_pass": "comparison",
   "last_updated": "2026-03-28"
 }
