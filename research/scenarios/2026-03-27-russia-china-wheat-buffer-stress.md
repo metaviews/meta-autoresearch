@@ -112,6 +112,7 @@ These sources support a disciplined scenario in which China matters less as a su
   - `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
   - `research/syntheses/2026-03-27-first-scenario-family-synthesis.md`
   - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`
+  - `research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`

@@ -20,6 +20,7 @@
   "key_syntheses": [
     "research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md",
     "research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md",
+    "research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md",
     "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md"
   ],
   "loop_runs": [
@@ -32,9 +33,9 @@
   "most_generative_variant": "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
   "weakest_variant": "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
   "open_questions": [
-    "How should importer and reserve exposure be compared across the current wheat variants?",
-    "Does wheat remain the best lead crop for the branch, or should another crop family be tested next?"
+    "Which importer archetypes should drive the next downstream preparedness variants: Egypt, Yemen, or another case?",
+    "Does wheat remain the best lead crop for the branch, or should another crop family be tested after importer-focused downstream work?"
   ],
-  "next_recommended_pass": "comparison",
-  "last_updated": "2026-03-27"
+  "next_recommended_pass": "variant",
+  "last_updated": "2026-03-28"
 }
