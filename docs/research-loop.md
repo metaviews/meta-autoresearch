@@ -198,6 +198,8 @@ Decide whether the cycle is ready to be repeated more systematically or partiall
 - pressure-testing the shape of the loop itself
 - tasks where failure from weaker models would distort the method more than it would save resources
 
+This category may include different frontier or premium models over time rather than one fixed provider or interface.
+
 ### Lower-cost or local model role later
 
 - repeated bounded generation
@@ -205,9 +207,13 @@ Decide whether the cycle is ready to be repeated more systematically or partiall
 - drafting comparative tables or summaries
 - support work once the loop structure is already stable
 
+This category may also include diverse model types rather than one fallback system: local models, cheaper hosted models, domain-specific tools, or simpler non-LLM processing when the task is well structured.
+
 The target is not only lower inference cost. It is a process where capability is allocated deliberately, so the loop can stay rigorous while becoming more accessible to run.
 
 Some coordination work around the loop can also be delegated to lightweight local tooling before any model delegation is attempted. That includes state tracking, run scaffolding, and hygiene checks.
+
+As the ecosystem changes, the loop should be able to reassign work without changing its epistemic standards. The method should be portable across model stacks, not silently coupled to one family of tools.
 
 ## Minimum viable successful loop
 

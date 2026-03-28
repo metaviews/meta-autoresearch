@@ -187,6 +187,8 @@ Model choice should be guided by three things at once:
 - `process efficiency` - design the loop so expensive capability is used only where it meaningfully improves the result
 - `accessibility` - prefer a workflow that can eventually be run by more people, on cheaper infrastructure, or with local models, rather than one that depends permanently on high-end access
 
+The broader aim is not simply to move from one expensive model to one cheaper model. It is to develop a method that can allocate work across a diverse model ecosystem with different strengths, weaknesses, interfaces, and costs.
+
 The point is not to scale generation immediately. The point is to first design a cycle that deserves to be scaled.
 
 In practice, this means:
@@ -197,6 +199,8 @@ In practice, this means:
 4. keep high-stakes curation and method redesign under stronger human and model supervision
 
 The project is not trying to imitate compute intensity for its own sake. It is trying to discover where capability density is actually necessary and where the process can be made leaner without losing rigor.
+
+That means model allocation is itself part of the method. Over time, the project should become better at deciding which tasks belong to frontier models, which to local models, which to task-specific tools, and which should remain primarily human.
 
 ## What success looks like in v1
 

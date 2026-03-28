@@ -127,6 +127,8 @@ As the project matures, model and tooling choices should follow a `right-sized c
 - use cheaper or local tools where tasks are repetitive, well-bounded, or easy to verify
 - redesign the process itself when a step is only expensive because the workflow is poorly structured
 
+This should be read broadly. The available AI ecosystem is diverse and expanding, so the method should learn to allocate work across many possible tool types rather than treat model choice as a binary frontier-versus-cheap question.
+
 The goal is not merely lower cost. The goal is a leaner research process that remains rigorous and broadly runnable.
 
 The first CLI layer should therefore automate method overhead rather than research judgment.

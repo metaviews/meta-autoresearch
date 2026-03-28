@@ -136,6 +136,10 @@ def branch_warnings(branch: dict[str, Any], paths: RepoPaths) -> list[str]:
         warnings.append("Level 3+ branch should have at least one loop run")
     if maturity >= 4 and not branch.get("discard_records"):
         warnings.append("Level 4 branch should show at least one discard record")
+    if maturity >= 4 and not branch.get("key_syntheses"):
+        warnings.append("Level 4 branch should have key_syntheses recorded")
+    if maturity >= 4 and not branch.get("next_recommended_pass"):
+        warnings.append("Level 4 branch should have next_recommended_pass set")
     for field in ["active_variants", "key_notes", "key_syntheses", "loop_runs", "discard_records"]:
         for rel in branch.get(field, []):
             if not check_file_exists(paths.root, rel):
@@ -146,7 +150,18 @@ def branch_warnings(branch: dict[str, Any], paths: RepoPaths) -> list[str]:
     weakest = branch.get("weakest_variant")
     if weakest and weakest != branch.get("parent_artifact") and weakest not in branch.get("active_variants", []):
         warnings.append("weakest_variant is neither the parent artifact nor an active variant")
+    if maturity >= 4:
+        for field in ["strongest_variant", "most_generative_variant", "weakest_variant"]:
+            if not branch.get(field):
+                warnings.append(f"Level 4 branch missing {field}")
     return warnings
+
+
+def branch_manifests(paths: RepoPaths) -> list[tuple[dict[str, Any], Path]]:
+    manifests: list[tuple[dict[str, Any], Path]] = []
+    for path in sorted(paths.branches.glob("*.json")):
+        manifests.append((load_json(path), path))
+    return manifests
 
 
 def command_branch_status(args: argparse.Namespace) -> int:
@@ -230,6 +245,15 @@ def command_branch_dossier(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_branch_list(args: argparse.Namespace) -> int:
+    paths = repo_paths()
+    manifests = branch_manifests(paths)
+    for branch, _ in manifests:
+        line = f"{branch.get('slug','')} | L{branch.get('maturity_level','')} | {branch.get('structure_type','')} | next={branch.get('next_recommended_pass','')}"
+        print(line)
+    return 0
+
+
 def next_run_id(paths: RepoPaths, branch_slug: str, run_type: str) -> str:
     prefix = f"{date.today().isoformat()}-{branch_slug}-{run_type}"
     existing = sorted(paths.runs.glob(f"{prefix}*.json"))
@@ -274,6 +298,13 @@ def load_run(run_id: str) -> tuple[dict[str, Any], Path, RepoPaths]:
     if not path.exists():
         raise SystemExit(f"Unknown run '{run_id}'. Expected manifest at {relpath(paths.root, path)}")
     return load_json(path), path, paths
+
+
+def run_manifests(paths: RepoPaths) -> list[tuple[dict[str, Any], Path]]:
+    manifests: list[tuple[dict[str, Any], Path]] = []
+    for path in sorted(paths.runs.glob("*.json")):
+        manifests.append((load_json(path), path))
+    return manifests
 
 
 def run_check_result(run: dict[str, Any], paths: RepoPaths) -> tuple[list[str], list[str]]:
@@ -372,6 +403,19 @@ def command_run_show(args: argparse.Namespace) -> int:
     return 0
 
 
+def command_run_list(args: argparse.Namespace) -> int:
+    paths = repo_paths()
+    manifests = run_manifests(paths)
+    for run, _ in manifests:
+        if args.branch and run.get("branch_slug") != args.branch:
+            continue
+        if args.status and run.get("completion_status") != args.status:
+            continue
+        line = f"{run.get('run_id','')} | {run.get('branch_slug','')} | {run.get('run_type','')} | {run.get('completion_status','')}"
+        print(line)
+    return 0
+
+
 def command_run_update(args: argparse.Namespace) -> int:
     run, path, paths = load_run(args.run_id)
     updated = False
@@ -449,6 +493,9 @@ def build_parser() -> argparse.ArgumentParser:
     branch_dossier.add_argument("slug")
     branch_dossier.set_defaults(func=command_branch_dossier)
 
+    branch_list = branch_sub.add_parser("list", help="List known branches")
+    branch_list.set_defaults(func=command_branch_list)
+
     run = subparsers.add_parser("run", help="Run manifest commands")
     run_sub = run.add_subparsers(dest="run_command", required=True)
 
@@ -465,6 +512,11 @@ def build_parser() -> argparse.ArgumentParser:
     run_show = run_sub.add_parser("show", help="Show a run manifest with validation summary")
     run_show.add_argument("run_id")
     run_show.set_defaults(func=command_run_show)
+
+    run_list = run_sub.add_parser("list", help="List known run manifests")
+    run_list.add_argument("--branch")
+    run_list.add_argument("--status")
+    run_list.set_defaults(func=command_run_list)
 
     run_update = run_sub.add_parser("update", help="Update a run manifest")
     run_update.add_argument("run_id")

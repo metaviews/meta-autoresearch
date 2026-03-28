@@ -51,6 +51,7 @@ This first layer is not:
 - `state becomes legible` - branch and run status should be recoverable in one step
 - `small surface area` - solve the most repetitive coordination problems first
 - `right-sized capability` - do not add more software complexity than the method currently justifies
+- `allocation-aware design` - build the process so work can later be assigned across diverse model and tool types rather than locked to one system
 
 ## First layer scope
 
@@ -104,6 +105,7 @@ Make it easier to identify which bounded sub-tasks might later move to cheaper o
 Expected result:
 
 - explicit separation between judgment-heavy and support-heavy steps
+- clearer future routing across multiple model classes, not just one expensive model and one cheap fallback
 
 ## Proposed technical shape
 
@@ -184,6 +186,10 @@ Checks whether a run produced the expected artifacts.
 
 Shows a run manifest in a more readable form, including current outputs, notes, and validation summary.
 
+### `run list`
+
+Lists known run manifests, optionally filtered by branch or status.
+
 ### `run update`
 
 Updates a run manifest with created outputs, notes, status, or next-step changes.
@@ -195,6 +201,10 @@ Marks a run complete once its required outputs are present, or explicitly record
 ### `branch status`
 
 Shows current branch state in a concise, human-readable form.
+
+### `branch list`
+
+Lists known branches with current maturity, structure type, and next recommended pass.
 
 ### `branch check`
 
@@ -220,6 +230,7 @@ Examples:
 - more complete passes
 - more consistent branch comparison
 - clearer visibility into what deserves scale and what only deserves attention
+- a better foundation for model allocation across a broad and changing AI ecosystem
 
 ## What success looks like
 
@@ -250,22 +261,26 @@ Implemented:
 - branch manifests in `meta/branches/`
 - run scaffolding in `meta/runs/`
 - `branch status`
+- `branch list`
 - `branch check`
 - `branch dossier`
 - `run new`
 - `run check`
 - `run show`
+- `run list`
 - `run update`
 - `run complete`
 
 Current invocation style:
 
 - `python -m meta_autoresearch_cli branch status <slug>`
+- `python -m meta_autoresearch_cli branch list`
 - `python -m meta_autoresearch_cli branch check <slug>`
 - `python -m meta_autoresearch_cli branch dossier <slug>`
 - `python -m meta_autoresearch_cli run new <branch> --type <pass-type>`
 - `python -m meta_autoresearch_cli run check <run-id>`
 - `python -m meta_autoresearch_cli run show <run-id>`
+- `python -m meta_autoresearch_cli run list [--branch <slug>] [--status <state>]`
 - `python -m meta_autoresearch_cli run update <run-id> --add-output <kind> <path>`
 - `python -m meta_autoresearch_cli run complete <run-id>`
 

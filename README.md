@@ -88,6 +88,7 @@ Current state:
 - the project is now in `evidence grounding + evaluation refinement`, with early attention turning toward reusable structure types
 - the next phase is `method infrastructure`: modest tooling to increase work per pass without turning the project into a product
 - the first CLI layer now exists for branch state, run scaffolding, branch checks, and dossier generation
+- model allocation is now treated as an explicit design concern: the method should learn how to distribute work across a diverse and evolving AI ecosystem rather than assume one model tier fits every task
 
 ## Current research branches
 
@@ -125,8 +126,10 @@ Examples:
 
 - `python -m meta_autoresearch_cli branch status breadbasket`
 - `python -m meta_autoresearch_cli branch check hydrologic`
+- `python -m meta_autoresearch_cli branch list`
 - `python -m meta_autoresearch_cli branch dossier whiplash`
 - `python -m meta_autoresearch_cli run new hydrologic --type maturity`
+- `python -m meta_autoresearch_cli run list --branch whiplash`
 - `python -m meta_autoresearch_cli run show <run-id>`
 - `python -m meta_autoresearch_cli run update <run-id> --add-output maturity_update research/syntheses/example.md`
 - `python -m meta_autoresearch_cli run complete <run-id>`

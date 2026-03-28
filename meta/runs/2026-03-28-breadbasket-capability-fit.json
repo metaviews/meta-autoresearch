@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-03-28-breadbasket-capability-fit",
+  "date": "2026-03-28",
+  "branch_slug": "breadbasket",
+  "run_type": "capability-fit",
+  "question": "Can local CLI dossier generation plus branch/run listing prepare the next breadbasket comparison pass without meaningful loss of methodological clarity, keeping stronger judgment for comparison and synthesis decisions?",
+  "stages_targeted": [
+    9
+  ],
+  "expected_outputs": [
+    {
+      "kind": "experiment",
+      "description": "A capability-fit experiment artifact"
+    },
+    {
+      "kind": "synthesis",
+      "description": "A short synthesis on quality, delegation, or loss"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "experiment",
+      "path": "research/experiments/2026-03-28-dossier-comparison-capability-fit-pass.md"
+    },
+    {
+      "kind": "synthesis",
+      "path": "research/syntheses/2026-03-28-dossier-comparison-capability-fit-findings.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Tested whether branch list, run list, and dossier generation can safely support comparison-prep work before stronger judgment begins.",
+  "next_step": "comparison"
+}

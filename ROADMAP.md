@@ -99,6 +99,7 @@ Outputs:
 - guardrails for scaling without multiplying noise, drift, or false confidence
 - criteria for when a cycle is mature enough to be repeated programmatically or with cheaper models
 - a process design that stays accessible enough to run without permanent dependence on frontier-model budgets
+- explicit model-allocation rules that can route work across multiple model and tool types as the ecosystem evolves
 
 The first CLI layer planned in `docs/method-infrastructure.md` is the intended bridge into this phase.
 
