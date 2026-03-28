@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "meta-autoresearch-cli"
+version = "0.1.0"
+description = "Method infrastructure CLI for the meta-autoresearch repository"
+requires-python = ">=3.10"
+
+[project.scripts]
+meta = "meta_autoresearch_cli.cli:main"

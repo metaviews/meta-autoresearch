@@ -58,6 +58,8 @@ Climate is therefore the first proving ground, not the permanent identity of the
 - `docs/method-infrastructure.md` - plan for the first CLI layer that reduces method overhead without automating judgment
 - `ROADMAP.md` - phased development plan for the research program
 - `CONTRIBUTING.md` - norms for writing, sources, uncertainty, and edits
+- `pyproject.toml` - Python packaging entry point for the method infrastructure CLI
+- `meta/` - structured branch and run state for the CLI layer
 - `research/notes/` - working notes, source synthesis, and questions
 - `research/scenarios/` - scenario drafts, variants, and recombinations
 - `research/experiments/` - process experiments and evaluation attempts
@@ -85,6 +87,7 @@ Current state:
 - the first climate branches have been developed beyond abstract framing
 - the project is now in `evidence grounding + evaluation refinement`, with early attention turning toward reusable structure types
 - the next phase is `method infrastructure`: modest tooling to increase work per pass without turning the project into a product
+- the first CLI layer now exists for branch state, run scaffolding, branch checks, and dossier generation
 
 ## Current research branches
 
@@ -113,6 +116,21 @@ Then, for the most developed current work:
 3. `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
 4. `research/syntheses/2026-03-27-whiplash-vs-breadbasket-epistemic-structures.md`
 5. `research/syntheses/2026-03-27-method-lessons-so-far.md`
+
+## CLI
+
+The first method-infrastructure CLI layer is intentionally small. It supports branch state, run manifests, checks, and dossier generation.
+
+Examples:
+
+- `python -m meta_autoresearch_cli branch status breadbasket`
+- `python -m meta_autoresearch_cli branch check hydrologic`
+- `python -m meta_autoresearch_cli branch dossier whiplash`
+- `python -m meta_autoresearch_cli run new hydrologic --type maturity`
+- `python -m meta_autoresearch_cli run update <run-id> --add-output maturity_update research/syntheses/example.md`
+- `python -m meta_autoresearch_cli run complete <run-id>`
+
+See `docs/method-infrastructure.md` for the design intent and scope.
 
 ## Contributing
 

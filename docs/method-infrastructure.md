@@ -180,6 +180,14 @@ Creates a new run manifest for a branch and pass type.
 
 Checks whether a run produced the expected artifacts.
 
+### `run update`
+
+Updates a run manifest with created outputs, notes, status, or next-step changes.
+
+### `run complete`
+
+Marks a run complete once its required outputs are present, or explicitly records completion with gaps when forced.
+
 ### `branch status`
 
 Shows current branch state in a concise, human-readable form.
@@ -228,6 +236,34 @@ The first infrastructure layer is successful if it can:
 5. implement `branch status`
 6. implement `run check`
 7. implement `branch dossier`
+
+## Initial implementation status
+
+The first slice of this layer is now present in the repository.
+
+Implemented:
+
+- branch manifests in `meta/branches/`
+- run scaffolding in `meta/runs/`
+- `branch status`
+- `branch check`
+- `branch dossier`
+- `run new`
+- `run check`
+- `run update`
+- `run complete`
+
+Current invocation style:
+
+- `python -m meta_autoresearch_cli branch status <slug>`
+- `python -m meta_autoresearch_cli branch check <slug>`
+- `python -m meta_autoresearch_cli branch dossier <slug>`
+- `python -m meta_autoresearch_cli run new <branch> --type <pass-type>`
+- `python -m meta_autoresearch_cli run check <run-id>`
+- `python -m meta_autoresearch_cli run update <run-id> --add-output <kind> <path>`
+- `python -m meta_autoresearch_cli run complete <run-id>`
+
+This should still be treated as a support layer, not a final interface.
 
 ## Working rule
 

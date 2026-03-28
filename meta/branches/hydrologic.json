@@ -1,0 +1,38 @@
+{
+  "slug": "hydrologic",
+  "title": "Hydrologic",
+  "domain": "climate volatility",
+  "structure_type": "design/rule conflict under volatility",
+  "maturity_level": 4,
+  "maturity_note": "method-shaping",
+  "status": "active",
+  "parent_artifact": "research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md",
+  "active_variants": [
+    "research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md",
+    "research/scenarios/2026-03-27-upper-colorado-compact-and-storage-whiplash.md"
+  ],
+  "key_notes": [
+    "research/notes/2026-03-27-seq-hydrologic-whiplash-grounding-note.md",
+    "research/notes/2026-03-27-upper-colorado-hydrologic-design-note.md"
+  ],
+  "key_syntheses": [
+    "research/syntheses/2026-03-27-hydrologic-branch-comparison.md",
+    "research/syntheses/2026-03-27-emerging-structure-types-comparison.md",
+    "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md"
+  ],
+  "loop_runs": [
+    "research/loops/2026-03-27-hydrologic-loop-run.md"
+  ],
+  "discard_records": [
+    "research/discards/2026-03-27-hydrologic-implicit-discards.md"
+  ],
+  "strongest_variant": "research/scenarios/2026-03-27-upper-colorado-compact-and-storage-whiplash.md",
+  "most_generative_variant": "research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md",
+  "weakest_variant": "research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md",
+  "open_questions": [
+    "How should the branch distinguish sequence failure from design/rule conflict when both are present?",
+    "What downstream preparedness consequences should be added so the branch is less infrastructure-internal?"
+  ],
+  "next_recommended_pass": "maturity",
+  "last_updated": "2026-03-27"
+}

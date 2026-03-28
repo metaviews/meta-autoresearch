@@ -1,0 +1,37 @@
+{
+  "slug": "whiplash",
+  "title": "Whiplash",
+  "domain": "climate volatility",
+  "structure_type": "sequence failure",
+  "maturity_level": 3,
+  "maturity_note": "comparative, near method-shaping",
+  "status": "active",
+  "parent_artifact": "research/scenarios/2026-03-27-compound-seasonal-whiplash.md",
+  "active_variants": [
+    "research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md",
+    "research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md"
+  ],
+  "key_notes": [
+    "research/notes/2026-03-27-feather-river-whiplash-grounding-note.md",
+    "research/notes/2026-03-27-upper-colorado-whiplash-grounding-note.md"
+  ],
+  "key_syntheses": [
+    "research/syntheses/2026-03-27-whiplash-family-comparison.md",
+    "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md"
+  ],
+  "loop_runs": [
+    "research/loops/2026-03-27-whiplash-loop-run.md"
+  ],
+  "discard_records": [
+    "research/discards/2026-03-27-early-climate-discards.md"
+  ],
+  "strongest_variant": "research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md",
+  "most_generative_variant": "research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md",
+  "weakest_variant": "research/scenarios/2026-03-27-compound-seasonal-whiplash.md",
+  "open_questions": [
+    "What additional chronology or operator-facing evidence is needed to bring whiplash closer to Level 4?",
+    "Should hydrologic stay related to whiplash only through sequence logic, or remain more clearly distinct?"
+  ],
+  "next_recommended_pass": "grounding",
+  "last_updated": "2026-03-27"
+}

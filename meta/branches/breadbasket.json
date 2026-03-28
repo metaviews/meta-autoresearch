@@ -1,0 +1,40 @@
+{
+  "slug": "breadbasket",
+  "title": "Breadbasket",
+  "domain": "climate volatility",
+  "structure_type": "correlation/transmission failure",
+  "maturity_level": 4,
+  "maturity_note": "method-shaping",
+  "status": "active",
+  "parent_artifact": "research/scenarios/2026-03-27-synchronous-breadbasket-stress.md",
+  "active_variants": [
+    "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
+    "research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md",
+    "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md"
+  ],
+  "key_notes": [
+    "research/notes/2026-03-27-breadbasket-regional-grounding-note.md",
+    "research/notes/2026-03-27-northern-wheat-shock-grounding-note.md",
+    "research/notes/2026-03-27-mena-wheat-importer-exposure-note.md"
+  ],
+  "key_syntheses": [
+    "research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md",
+    "research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md",
+    "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md"
+  ],
+  "loop_runs": [
+    "research/loops/2026-03-27-breadbasket-loop-run.md"
+  ],
+  "discard_records": [
+    "research/discards/2026-03-27-early-climate-discards.md"
+  ],
+  "strongest_variant": "research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md",
+  "most_generative_variant": "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
+  "weakest_variant": "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
+  "open_questions": [
+    "How should importer and reserve exposure be compared across the current wheat variants?",
+    "Does wheat remain the best lead crop for the branch, or should another crop family be tested next?"
+  ],
+  "next_recommended_pass": "comparison",
+  "last_updated": "2026-03-27"
+}
