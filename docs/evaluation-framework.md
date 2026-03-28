@@ -170,3 +170,5 @@ When applying this framework, each matrix should record:
 ## What this framework is for
 
 This framework is not trying to simulate validation loss. It is trying to keep the inquiry honest while the method is still learning what good outputs look like.
+
+For judging how developed a branch is overall, rather than how strong a single scenario is, see `docs/branch-maturity.md`.

@@ -54,6 +54,7 @@ Climate is therefore the first proving ground, not the permanent identity of the
 - `docs/glossary.md` - working definitions for key terms
 - `docs/research-tooling.md` - note on tools that would strengthen the research workflow
 - `docs/evaluation-framework.md` - reusable rubric for comparing scenarios and making curation decisions
+- `docs/branch-maturity.md` - lightweight rubric for judging how developed a branch is in the method
 - `ROADMAP.md` - phased development plan for the research program
 - `CONTRIBUTING.md` - norms for writing, sources, uncertainty, and edits
 - `research/notes/` - working notes, source synthesis, and questions
@@ -100,6 +101,7 @@ If you are new to the project, read these in order:
 4. `docs/research-loop.md`
 5. `docs/research-agenda.md`
 6. `docs/evaluation-framework.md`
+7. `docs/branch-maturity.md`
 
 Then, for the most developed current work:
 

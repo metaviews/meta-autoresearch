@@ -118,10 +118,11 @@ So the framework should stay shared, but the branch-specific tests should differ
 
 These two branches together suggest that meta-autoresearch is not only generating scenarios. It is discovering types of hidden structure that conventional inquiry underdetects.
 
-At least two such types are already visible:
+At least three such types are now visible:
 
 - `sequence failure`
 - `correlation/transmission failure`
+- `design/rule conflict under volatility`
 
 That is important because it moves the project closer to a reusable method. Instead of saying "here are some climate scenarios," the repo can increasingly say "here are recurring epistemic structures through which climate volatility becomes visible."
 
@@ -158,6 +159,8 @@ Instead:
 - related syntheses:
   - `research/syntheses/2026-03-27-whiplash-family-comparison.md`
   - `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
+  - `research/syntheses/2026-03-27-hydrologic-branch-comparison.md`
+  - `research/syntheses/2026-03-27-emerging-structure-types-comparison.md`
   - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`
   - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
   - `research/syntheses/2026-03-27-method-lessons-so-far.md`
