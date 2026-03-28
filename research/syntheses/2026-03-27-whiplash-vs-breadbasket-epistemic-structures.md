@@ -132,6 +132,8 @@ Right now:
 - the `breadbasket` branch is more operationally mature
 - the `whiplash` branch is more conceptually revealing about category failure
 
+The hydrologic branch is now beginning to sit between them: less mature than breadbasket, but increasingly useful for testing whether `design/rule conflict under volatility` should be treated as a stronger subtype or sibling to sequence failure.
+
 This is a healthy split.
 
 Breadbasket currently shows stronger internal elaboration, comparison, and downstream preparedness logic. Whiplash currently shows more clearly how institutional frames go wrong before system response even begins.
