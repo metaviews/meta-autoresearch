@@ -312,11 +312,64 @@ def print_run_check(run: dict[str, Any], missing_kinds: list[str], missing_files
         print("missing files referenced by run:\n- none")
 
 
+def print_run_show(run: dict[str, Any], missing_kinds: list[str], missing_files: list[str]) -> None:
+    print_kv("run", run.get("run_id", ""))
+    print_kv("date", run.get("date", ""))
+    print_kv("branch", run.get("branch_slug", ""))
+    print_kv("type", run.get("run_type", ""))
+    print_kv("completion_status", run.get("completion_status", ""))
+    print_kv("question", run.get("question", ""))
+    print_kv("next_step", run.get("next_step", ""))
+    print("stages_targeted:")
+    for item in run.get("stages_targeted", []):
+        print(f"- {item}")
+    print("expected_outputs:")
+    for item in run.get("expected_outputs", []):
+        kind = item.get("kind", "")
+        desc = item.get("description", "")
+        print(f"- {kind}: {desc}")
+    print("created_outputs:")
+    created = run.get("created_outputs", [])
+    if created:
+        for item in created:
+            if isinstance(item, dict):
+                print(f"- {item.get('kind', '')}: {item.get('path', '')}")
+    else:
+        print("- none")
+    print("notes:")
+    notes = run.get("notes", "").strip()
+    if notes:
+        for line in notes.splitlines():
+            print(f"- {line}")
+    else:
+        print("- none")
+    print("validation:")
+    if missing_kinds:
+        print("- missing expected output kinds:")
+        for item in missing_kinds:
+            print(f"  - {item}")
+    else:
+        print("- missing expected output kinds: none")
+    if missing_files:
+        print("- missing files referenced by run:")
+        for item in missing_files:
+            print(f"  - {item}")
+    else:
+        print("- missing files referenced by run: none")
+
+
 def command_run_check(args: argparse.Namespace) -> int:
     run, _, paths = load_run(args.run_id)
     missing_kinds, missing_files = run_check_result(run, paths)
     print_run_check(run, missing_kinds, missing_files)
     return 1 if missing_kinds or missing_files else 0
+
+
+def command_run_show(args: argparse.Namespace) -> int:
+    run, _, paths = load_run(args.run_id)
+    missing_kinds, missing_files = run_check_result(run, paths)
+    print_run_show(run, missing_kinds, missing_files)
+    return 0
 
 
 def command_run_update(args: argparse.Namespace) -> int:
@@ -408,6 +461,10 @@ def build_parser() -> argparse.ArgumentParser:
     run_check = run_sub.add_parser("check", help="Validate a run manifest")
     run_check.add_argument("run_id")
     run_check.set_defaults(func=command_run_check)
+
+    run_show = run_sub.add_parser("show", help="Show a run manifest with validation summary")
+    run_show.add_argument("run_id")
+    run_show.set_defaults(func=command_run_show)
 
     run_update = run_sub.add_parser("update", help="Update a run manifest")
     run_update.add_argument("run_id")

@@ -180,6 +180,10 @@ Creates a new run manifest for a branch and pass type.
 
 Checks whether a run produced the expected artifacts.
 
+### `run show`
+
+Shows a run manifest in a more readable form, including current outputs, notes, and validation summary.
+
 ### `run update`
 
 Updates a run manifest with created outputs, notes, status, or next-step changes.
@@ -250,6 +254,7 @@ Implemented:
 - `branch dossier`
 - `run new`
 - `run check`
+- `run show`
 - `run update`
 - `run complete`
 
@@ -260,6 +265,7 @@ Current invocation style:
 - `python -m meta_autoresearch_cli branch dossier <slug>`
 - `python -m meta_autoresearch_cli run new <branch> --type <pass-type>`
 - `python -m meta_autoresearch_cli run check <run-id>`
+- `python -m meta_autoresearch_cli run show <run-id>`
 - `python -m meta_autoresearch_cli run update <run-id> --add-output <kind> <path>`
 - `python -m meta_autoresearch_cli run complete <run-id>`
 

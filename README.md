@@ -127,6 +127,7 @@ Examples:
 - `python -m meta_autoresearch_cli branch check hydrologic`
 - `python -m meta_autoresearch_cli branch dossier whiplash`
 - `python -m meta_autoresearch_cli run new hydrologic --type maturity`
+- `python -m meta_autoresearch_cli run show <run-id>`
 - `python -m meta_autoresearch_cli run update <run-id> --add-output maturity_update research/syntheses/example.md`
 - `python -m meta_autoresearch_cli run complete <run-id>`
 
