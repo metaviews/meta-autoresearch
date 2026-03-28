@@ -17,12 +17,14 @@
     "research/notes/2026-03-27-breadbasket-regional-grounding-note.md",
     "research/notes/2026-03-27-northern-wheat-shock-grounding-note.md",
     "research/notes/2026-03-27-mena-wheat-importer-exposure-note.md",
-    "research/notes/2026-03-28-egypt-wheat-procurement-note.md"
+    "research/notes/2026-03-28-egypt-wheat-procurement-note.md",
+    "research/notes/2026-03-28-yemen-wheat-procurement-note.md"
   ],
   "key_syntheses": [
     "research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md",
     "research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md",
     "research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md",
+    "research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md",
     "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md"
   ],
   "loop_runs": [
@@ -35,9 +37,9 @@
   "most_generative_variant": "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
   "weakest_variant": "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
   "open_questions": [
-    "How should Egypt as a scale-procurement importer now be compared against Yemen as a procurement-constrained acute-risk importer?",
+    "Should the next downstream breadbasket scenario variant be Yemen, or is there a stronger importer archetype still missing?",
     "Does wheat remain the best lead crop for the branch, or should another crop family be tested after importer-focused downstream work?"
   ],
-  "next_recommended_pass": "comparison",
+  "next_recommended_pass": "variant",
   "last_updated": "2026-03-28"
 }
