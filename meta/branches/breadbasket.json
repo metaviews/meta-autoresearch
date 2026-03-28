@@ -39,9 +39,9 @@
   "most_generative_variant": "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
   "weakest_variant": "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
   "open_questions": [
-    "Is the downstream archetype layer now mature enough that the breadbasket branch should enter a maturity pass before adding any new crop family or country case?",
-    "Does wheat remain the best lead crop for the branch, or should another crop family be tested after importer-focused downstream work?"
+    "Should the next breadbasket cycle test another crop family as a new grounding pass, or is one more wheat-focused downstream comparison still higher value?",
+    "If another crop family is tested, which one offers the clearest structural contrast to wheat in the current branch?"
   ],
-  "next_recommended_pass": "maturity",
+  "next_recommended_pass": "grounding",
   "last_updated": "2026-03-28"
 }

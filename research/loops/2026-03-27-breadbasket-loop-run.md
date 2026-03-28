@@ -40,15 +40,18 @@ Document the first full breadbasket cycle from broad scenario family through gro
   - `research/notes/2026-03-27-wheat-second-node-comparison-note.md`
   - `research/notes/2026-03-27-russia-china-wheat-buffer-note.md`
   - `research/notes/2026-03-27-mena-wheat-importer-exposure-note.md`
+  - `research/notes/2026-03-28-egypt-wheat-procurement-note.md`
+  - `research/notes/2026-03-28-yemen-wheat-procurement-note.md`
 - researcher-provided materials:
   - none specific to this branch beyond the overall project framing
 - evidence strengths:
   - strong climate grounding for compound hot-dry wheat stress
   - good support for simultaneous breadbasket risk and reserve relevance
   - workable support for downstream importer vulnerability and policy amplification
+  - much stronger downstream archetype grounding than earlier in the branch
 - evidence gaps:
   - reserve adequacy is still less grounded than crop stress
-  - importer-side comparison is still thinner than upstream branch structure
+  - importer-side comparison is stronger now, but still thinner on reserve composition and procurement execution detail than on upstream wheat logic
   - trade and stock transmission remain unevenly evidenced across variants
 - source tensions or disagreements:
   - strong literature supports physical stress more clearly than downstream amplification
@@ -85,26 +88,38 @@ Document the first full breadbasket cycle from broad scenario family through gro
   - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
   - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
+  - `research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md`
+  - `research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md`
 - why these variants were chosen:
   - wheat had the strongest climate evidence in the repo
   - Russia provided a clear transmission anchor
   - Europe and China revealed different second-node roles: substitute export buffer vs domestic production/stock buffer
+  - Egypt and Yemen revealed different importer archetypes: scale procurement stress vs acute procurement fragility
 - what family structure started to appear:
   - parent family: correlated breadbasket stress
   - focused wheat branch: northern wheat correlation shock
   - comparison sub-branches: trade-buffer failure and production-buffer failure
+  - downstream archetype layer: scale-procurement state and procurement-constrained acute-risk importer
 
 ## Stage 6: Compare the variants
 
 - comparison syntheses created:
   - `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
   - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`
+  - `research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md`
+  - `research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md`
+  - `research/syntheses/2026-03-28-breadbasket-downstream-preparedness-comparison.md`
 - strongest variant:
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
 - most generative variant:
   - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
 - weakest or most provisional variant:
   - the Russia-China variant remains more inferential because its transmission depends more on stocks, domestic balancing, and import behavior than on direct trade substitution
+
+At the downstream layer:
+
+- strongest immediate importer pairing: `Russia-Europe x Egypt`
+- strongest acute-risk importer pairing: `Russia-Europe x Yemen`
 
 ## Stage 7: Evaluate and curate the branch
 
@@ -116,14 +131,16 @@ Document the first full breadbasket cycle from broad scenario family through gro
     - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
     - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
     - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
+    - `research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md`
+    - `research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md`
   - revise:
-    - importer and reserve comparison layer still needs another explicit pass
+    - reserve decomposition and importer execution detail remain weaker than the core wheat-node logic
   - merge:
     - none yet; internal variants are still structurally useful
   - discard:
     - generic food-security framings that failed to specify correlation and amplification clearly were implicitly left behind, but not yet documented as a formal discard log
 - branch maturity judgment:
-  - most mature branch currently in the repo; strong enough for repeated comparison, but not yet complete at the downstream preparedness layer
+  - most mature branch currently in the repo; now strong at both upstream and downstream comparison, and mature enough that the next meaningful question is whether to open a new crop-family grounding pass rather than keep extending wheat by default
 
 ## Stage 8: Synthesize across branches
 
@@ -137,6 +154,7 @@ Document the first full breadbasket cycle from broad scenario family through gro
   - showed that branch structure can hold multiple mechanisms without dissolving into vagueness
   - showed that physical stress and policy amplification should be separated analytically
   - showed that the best-evidenced and most generative variants are not always the same artifact
+  - showed that once upstream structure stabilizes, the method becomes more useful by developing downstream archetypes rather than adding upstream complexity immediately
 
 ## Stage 9: Assess cycle maturity
 
@@ -147,7 +165,7 @@ Document the first full breadbasket cycle from broad scenario family through gro
   - explicit curation and synthesis
 - brittle steps in this run:
   - reserve-level grounding
-  - importer-side comparison beyond the initial MENA layer
+  - detailed procurement-execution evidence within importer cases
   - formal discard logging
 - where stronger models were genuinely needed:
   - early branch generation and higher-order comparison drafting
@@ -157,7 +175,7 @@ Document the first full breadbasket cycle from broad scenario family through gro
   - comparison table generation
   - structured extraction of claims from known source notes
 - should this loop be repeated, deepened, paused, or stopped:
-  - deepened; the branch is strong enough to continue, but next passes should focus on importer/reserve exposure rather than opening more upstream node variants
+  - repeated selectively; the branch is mature enough that the next decision is not just what to add, but whether another wheat-country pass is still the best use of attention
 
 ## Outputs created
 
@@ -167,11 +185,15 @@ Document the first full breadbasket cycle from broad scenario family through gro
   - `research/notes/2026-03-27-wheat-second-node-comparison-note.md`
   - `research/notes/2026-03-27-russia-china-wheat-buffer-note.md`
   - `research/notes/2026-03-27-mena-wheat-importer-exposure-note.md`
+  - `research/notes/2026-03-28-egypt-wheat-procurement-note.md`
+  - `research/notes/2026-03-28-yemen-wheat-procurement-note.md`
 - scenarios:
   - `research/scenarios/2026-03-27-synchronous-breadbasket-stress.md`
   - `research/scenarios/2026-03-27-northern-wheat-correlation-shock.md`
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
   - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
+  - `research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md`
+  - `research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md`
 - experiments:
   - `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
 - syntheses:
@@ -179,6 +201,9 @@ Document the first full breadbasket cycle from broad scenario family through gro
   - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
   - `research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md`
   - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`
+  - `research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md`
+  - `research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md`
+  - `research/syntheses/2026-03-28-breadbasket-downstream-preparedness-comparison.md`
   - `research/syntheses/2026-03-27-whiplash-vs-breadbasket-epistemic-structures.md`
 
 ## What failed or was pruned
@@ -207,9 +232,9 @@ Document the first full breadbasket cycle from broad scenario family through gro
 ## Next move
 
 - immediate next step:
-  - compare how the Russia-Europe and Russia-China variants differ at the importer, reserve, and procurement level
+  - decide whether the branch should now test a new crop-family grounding pass rather than add another wheat-country case
 - longer follow-up:
-  - test whether wheat remains the best lead crop or whether another crop branch becomes more decision-useful
+  - decide whether wheat remains the best lead crop or whether another crop branch becomes more decision-useful
 - scaling relevance:
   - this run is a good candidate for future partial repetition because its stages are now visible and many sub-tasks are bounded enough for later delegation
 
