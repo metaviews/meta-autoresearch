@@ -202,6 +202,7 @@ Document the first substantial hydrologic branch pass from abstract stress-test 
   - `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
 - related discards:
   - `research/discards/2026-03-27-early-climate-discards.md`
+  - `research/discards/2026-03-27-hydrologic-implicit-discards.md`
 - related syntheses:
   - `research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md`
   - `research/syntheses/2026-03-27-hydrologic-branch-comparison.md`
