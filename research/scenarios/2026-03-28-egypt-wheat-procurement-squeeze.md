@@ -113,6 +113,8 @@ These sources support an Egypt variant in which importer vulnerability is driven
   - `research/experiments/2026-03-27-climate-scenario-comparison-pass.md`
 - related syntheses:
   - `research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md`
+  - `research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md`
+  - `research/syntheses/2026-03-28-breadbasket-downstream-preparedness-comparison.md`
   - `research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md`
 - related scenarios:
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`

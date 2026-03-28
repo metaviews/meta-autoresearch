@@ -26,6 +26,7 @@
     "research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md",
     "research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md",
     "research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md",
+    "research/syntheses/2026-03-28-breadbasket-downstream-preparedness-comparison.md",
     "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md"
   ],
   "loop_runs": [
@@ -38,9 +39,9 @@
   "most_generative_variant": "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
   "weakest_variant": "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
   "open_questions": [
-    "How should Egypt and Yemen now be compared directly against the Russia-Europe and Russia-China upstream variants in one integrated downstream-preparedness synthesis?",
+    "Is the downstream archetype layer now mature enough that the breadbasket branch should enter a maturity pass before adding any new crop family or country case?",
     "Does wheat remain the best lead crop for the branch, or should another crop family be tested after importer-focused downstream work?"
   ],
-  "next_recommended_pass": "comparison",
+  "next_recommended_pass": "maturity",
   "last_updated": "2026-03-28"
 }

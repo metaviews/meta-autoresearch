@@ -114,6 +114,7 @@ These sources support a Yemen variant in which the main danger is not simply les
 - related syntheses:
   - `research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md`
   - `research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md`
+  - `research/syntheses/2026-03-28-breadbasket-downstream-preparedness-comparison.md`
 - related scenarios:
   - `research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md`
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
