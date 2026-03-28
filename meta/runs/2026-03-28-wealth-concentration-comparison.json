@@ -1,0 +1,25 @@
+{
+  "run_id": "2026-03-28-wealth-concentration-comparison",
+  "date": "2026-03-28",
+  "branch_slug": "wealth-concentration",
+  "run_type": "comparison",
+  "question": "Does wealth concentration currently map most strongly to correlation/transmission failure, design/rule conflict under volatility, or a hybrid of both?",
+  "stages_targeted": [
+    6
+  ],
+  "expected_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "description": "At least one synthesis comparing variants or nodes"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "path": "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Compared the first wealth concentration branch against the three existing structure types and judged it a hybrid led by correlation/transmission failure with a strong design/rule-conflict component.",
+  "next_step": "grounding"
+}

@@ -2,9 +2,9 @@
   "slug": "wealth-concentration",
   "title": "Wealth Concentration",
   "domain": "political economy",
-  "structure_type": "undetermined",
-  "maturity_level": 1,
-  "maturity_note": "exploratory proving-ground run",
+  "structure_type": "hybrid: correlation/transmission failure + design/rule conflict under volatility",
+  "maturity_level": 2,
+  "maturity_note": "grounded proving-ground run",
   "status": "active",
   "parent_artifact": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "active_variants": [
@@ -13,16 +13,18 @@
   "key_notes": [
     "research/notes/2026-03-28-wealth-concentration-grounding-note.md"
   ],
-  "key_syntheses": [],
+  "key_syntheses": [
+    "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md"
+  ],
   "loop_runs": [],
   "discard_records": [],
   "strongest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "most_generative_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "weakest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "open_questions": [
-    "Which existing structure type, if any, maps most cleanly onto wealth concentration: sequence failure, correlation/transmission failure, or design/rule conflict under volatility?",
-    "What mechanisms inside wealth concentration look simple at first but actually generate cascading, hidden, or institutionally suppressed dynamics?"
+    "Should the next grounding pass test asset-regime/tax-design mismatch first, or hidden intermediation and transmission first?",
+    "What case would best clarify whether wealth concentration is mainly a transmission problem, a design/rule conflict problem, or a hybrid of both?"
   ],
-  "next_recommended_pass": "comparison",
+  "next_recommended_pass": "grounding",
   "last_updated": "2026-03-28"
 }
