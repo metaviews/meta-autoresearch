@@ -75,6 +75,25 @@ What is still unresolved:
 - whether the branch is best understood as a subtype of sequence failure
 - or whether it is becoming a distinct structure around `design/rule conflict under volatility`
 
+## Branch maturity judgment
+
+Using `docs/branch-maturity.md`, the hydrologic branch now looks like `Level 3: comparative`.
+
+Why:
+
+- it has clear framing and a distinct mechanism
+- it now has two meaningful named variants with different institutional forms
+- it has a real internal comparison synthesis
+- it has a loop-run record and stronger grounding than before
+
+Why it is not yet `Level 4: method-shaping`:
+
+- its structure-type status is still provisional rather than fully settled
+- its chronology and operator-facing evidence are thinner than the strongest branch work
+- it has not yet changed the method as decisively as the breadbasket branch has
+
+The practical implication is that hydrologic is no longer merely exploratory or singly grounded. It is ready for deeper pressure-testing, but not yet fully established as a method-shaping branch.
+
 ## Preparedness implications
 
 - SEQ suggests stress-testing integrated urban water portfolios and dual-purpose flood/water-supply operations
