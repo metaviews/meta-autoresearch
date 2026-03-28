@@ -82,6 +82,7 @@ The strongest framing is that Yemen is highly exposed because upstream wheat str
 
 - related scenarios:
   - `research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md`
+  - `research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md`
   - `research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md`
   - `research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md`
 - related syntheses:

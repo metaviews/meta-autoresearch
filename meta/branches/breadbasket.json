@@ -11,7 +11,8 @@
     "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
     "research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md",
     "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
-    "research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md"
+    "research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md",
+    "research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md"
   ],
   "key_notes": [
     "research/notes/2026-03-27-breadbasket-regional-grounding-note.md",
@@ -37,9 +38,9 @@
   "most_generative_variant": "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
   "weakest_variant": "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
   "open_questions": [
-    "Should the next downstream breadbasket scenario variant be Yemen, or is there a stronger importer archetype still missing?",
+    "How should Egypt and Yemen now be compared directly against the Russia-Europe and Russia-China upstream variants in one integrated downstream-preparedness synthesis?",
     "Does wheat remain the best lead crop for the branch, or should another crop family be tested after importer-focused downstream work?"
   ],
-  "next_recommended_pass": "variant",
+  "next_recommended_pass": "comparison",
   "last_updated": "2026-03-28"
 }

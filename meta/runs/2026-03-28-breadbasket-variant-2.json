@@ -1,0 +1,25 @@
+{
+  "run_id": "2026-03-28-breadbasket-variant-2",
+  "date": "2026-03-28",
+  "branch_slug": "breadbasket",
+  "run_type": "variant",
+  "question": "How would the current wheat-shock branch translate into a Yemen-focused procurement-constrained acute-risk scenario, and how does that differ from Egypt's scale-procurement stress?",
+  "stages_targeted": [
+    5
+  ],
+  "expected_outputs": [
+    {
+      "kind": "scenario_variant",
+      "description": "At least one new branch variant or case"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "scenario_variant",
+      "path": "research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Created a Yemen-focused procurement-fragility variant to complement the Egypt importer archetype and extend the branch's downstream preparedness layer.",
+  "next_step": "variant"
+}
