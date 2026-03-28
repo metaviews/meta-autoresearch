@@ -101,7 +101,7 @@ Typical signs:
 ## Current provisional read
 
 - `breadbasket` - Level 4: method-shaping
-- `whiplash` - Level 3 to 4: comparative and method-shaping, but still somewhat lighter on chronology than breadbasket is on transmission
+- `whiplash` - Level 4: method-shaping, now strong enough to stabilize `sequence failure` as a reusable structure with grounded variants, explicit pruning context, and a full loop record
 - `hydrologic` - Level 4: method-shaping, now strong enough to stabilize `design/rule conflict under volatility` as a distinct emerging structure type rather than only a comparative branch
 
 ## Working rule

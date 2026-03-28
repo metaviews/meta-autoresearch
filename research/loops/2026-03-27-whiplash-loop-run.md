@@ -37,11 +37,13 @@ Document the first full whiplash cycle from broad scenario generation through re
   - `research/notes/2026-03-27-climate-volatility-evidence-note.md`
   - `research/notes/2026-03-27-feather-river-whiplash-grounding-note.md`
   - `research/notes/2026-03-27-upper-colorado-whiplash-grounding-note.md`
+  - `research/notes/2026-03-28-upper-colorado-whiplash-chronology-note.md`
 - researcher-provided materials:
   - none specific to this branch beyond the overall project framing
 - evidence strengths:
   - good high-level support for interacting hazards, non-stationarity, and compound extremes
   - credible named-case support for both Feather River and Upper Colorado as sequence-oriented settings
+  - stronger Upper Colorado chronology and operator-facing evidence than earlier in the branch
 - evidence gaps:
   - weaker case chronology than in the breadbasket branch
   - limited direct evidence on how institutions interpreted recovery or relief in each case
@@ -116,7 +118,7 @@ Document the first full whiplash cycle from broad scenario generation through re
   - discard:
     - broader unbounded multi-hazard framings were effectively abandoned, but not yet documented in a formal discard log
 - branch maturity judgment:
-  - structurally promising and conceptually strong, but still less operationally mature than breadbasket because the evidence base is thinner and the parent family remains under `revise`
+  - method-shaping; the parent family remains under `revise`, but the branch itself is now grounded, comparable, auditable, and strong enough to stabilize `sequence failure` as a reusable structure type
 
 ## Stage 8: Synthesize across branches
 
@@ -129,6 +131,7 @@ Document the first full whiplash cycle from broad scenario generation through re
   - showed that branch comparison can distinguish strongest-evidenced from most disruptive variants
   - made sequence failure legible as an epistemic structure rather than only a climate scenario theme
   - demonstrated that a parent family can remain under `revise` while its sub-variants still earn `keep`
+  - showed that sequence-failure branches can become method-shaping without pretending their parent scenario has become final
 
 ## Stage 9: Assess cycle maturity
 
@@ -138,8 +141,7 @@ Document the first full whiplash cycle from broad scenario generation through re
   - comparison of distinct temporal mechanisms
   - cross-branch structural interpretation
 - brittle steps in this run:
-  - case chronology remains relatively thin
-  - direct evidence of institutional interpretation failure is weaker than the conceptual pattern
+  - direct evidence of institutional interpretation failure is still somewhat weaker than the structural pattern itself
   - no explicit discard log yet
 - where stronger models were genuinely needed:
   - early family reframing and branch comparison synthesis
@@ -149,7 +151,7 @@ Document the first full whiplash cycle from broad scenario generation through re
   - extracting recurring uncertainties and comparison points from the scenarios
   - structured updates to evaluation tables
 - should this loop be repeated, deepened, paused, or stopped:
-  - deepened; the family is worth continuing, but next work should focus on stronger case chronology rather than generating many more variants
+  - repeated selectively; the family is mature enough to serve as a benchmark, and future passes should test the structure in more discriminating ways rather than simply adding more examples
 
 ## Outputs created
 
@@ -157,6 +159,7 @@ Document the first full whiplash cycle from broad scenario generation through re
   - `research/notes/2026-03-27-climate-volatility-evidence-note.md`
   - `research/notes/2026-03-27-feather-river-whiplash-grounding-note.md`
   - `research/notes/2026-03-27-upper-colorado-whiplash-grounding-note.md`
+  - `research/notes/2026-03-28-upper-colorado-whiplash-chronology-note.md`
 - scenarios:
   - `research/scenarios/2026-03-27-compound-seasonal-whiplash.md`
   - `research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md`
@@ -196,7 +199,7 @@ Document the first full whiplash cycle from broad scenario generation through re
 ## Next move
 
 - immediate next step:
-  - deepen the Upper Colorado case with tighter chronology or operator-facing evidence
+  - use the branch to judge whether future candidate cases genuinely instantiate sequence failure rather than only generic compounding
 - longer follow-up:
   - return to the hydrologic branch and test whether it becomes a sibling or subtype relative to whiplash
 - scaling relevance:

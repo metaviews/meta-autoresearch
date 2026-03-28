@@ -73,10 +73,14 @@ Why:
 - both still challenge status-quo planning categories
 - both remain disciplined enough to support follow-up evidence work
 
-This does not yet move the parent scenario fully from `revise` to `keep`. The family is now credible, but it still needs either:
+The parent scenario still remains appropriately under `revise`, but the family itself is now strong enough to treat as method-shaping.
 
-- one stronger case chronology, or
-- a third variant showing the pattern in another setting
+Why:
+
+- the family holds across two grounded and meaningfully different variants
+- the Upper Colorado case now has tighter chronology and stronger operator-facing runoff-conversion evidence
+- the family has a loop-run record and explicit pruning context
+- the branch has helped stabilize `sequence failure` as a reusable structure type inside the method
 
 ### Best current variant
 
@@ -97,6 +101,7 @@ The most distinctive challenge to conventional planning remains `research/scenar
 - family-level comparison is more useful than polishing one regional scenario in isolation
 - a scenario family becomes more trustworthy when its pattern survives across different mechanisms
 - the method benefits from distinguishing `strongest-evidenced case` from `most conceptually disruptive case`
+- a branch can become method-shaping even when its parent artifact remains under `revise`, as long as the family-level structure is grounded, comparable, and reusable
 
 That last distinction matters for meta-autoresearch. The best-supported artifact and the most status-quo-challenging artifact are not always the same thing.
 
@@ -106,9 +111,9 @@ Do not add more whiplash variants immediately.
 
 Instead:
 
-1. deepen the Upper Colorado case with a tighter year cluster or operator-facing evidence
+1. use the branch as a benchmark for future sequence-failure cases in other domains or subdomains
 2. keep Feather River active as the more cross-hazard comparison case
-3. then return to the breadbasket family so the project does not overconcentrate on one scenario branch
+3. only add another whiplash variant if it materially tests the structure rather than merely extending the topic
 
 ## Links
 

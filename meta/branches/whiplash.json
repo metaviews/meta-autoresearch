@@ -3,8 +3,8 @@
   "title": "Whiplash",
   "domain": "climate volatility",
   "structure_type": "sequence failure",
-  "maturity_level": 3,
-  "maturity_note": "comparative, near method-shaping",
+  "maturity_level": 4,
+  "maturity_note": "method-shaping",
   "status": "active",
   "parent_artifact": "research/scenarios/2026-03-27-compound-seasonal-whiplash.md",
   "active_variants": [
@@ -30,9 +30,9 @@
   "most_generative_variant": "research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md",
   "weakest_variant": "research/scenarios/2026-03-27-compound-seasonal-whiplash.md",
   "open_questions": [
-    "What additional chronology or operator-facing evidence is needed to bring whiplash closer to Level 4?",
-    "Should hydrologic stay related to whiplash only through sequence logic, or remain more clearly distinct?"
+    "What sequence-failure cases in climate or beyond climate would best pressure-test whiplash as a reusable structure rather than only a climate branch?",
+    "How should whiplash relate to hydrologic now that design/rule conflict under volatility has stabilized as a sibling structure type?"
   ],
-  "next_recommended_pass": "maturity",
+  "next_recommended_pass": "comparison",
   "last_updated": "2026-03-28"
 }

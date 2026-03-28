@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-03-28-whiplash-maturity",
+  "date": "2026-03-28",
+  "branch_slug": "whiplash",
+  "run_type": "maturity",
+  "question": "Does the whiplash branch now merit Level 4 method-shaping status after the Upper Colorado chronology pass, or is it still only comparative?",
+  "stages_targeted": [
+    7,
+    8,
+    9
+  ],
+  "expected_outputs": [
+    {
+      "kind": "maturity_update",
+      "description": "A branch maturity or structure judgment update"
+    },
+    {
+      "kind": "loop_update",
+      "description": "A loop-run update or maturity assessment"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "maturity_update",
+      "path": "research/syntheses/2026-03-27-whiplash-family-comparison.md"
+    },
+    {
+      "kind": "loop_update",
+      "path": "research/loops/2026-03-27-whiplash-loop-run.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Used the maturity pass to promote whiplash to method-shaping, update its family comparison, and revise the loop run to reflect stronger chronology and reusable sequence-failure structure.",
+  "next_step": "maturity"
+}
