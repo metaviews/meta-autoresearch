@@ -1,0 +1,25 @@
+{
+  "run_id": "2026-03-28-breadbasket-variant",
+  "date": "2026-03-28",
+  "branch_slug": "breadbasket",
+  "run_type": "variant",
+  "question": "How would a Russia-Europe trade-buffer wheat shock translate into an Egypt-specific procurement and subsidy stress scenario, and what does that reveal about scale-dependent importer vulnerability?",
+  "stages_targeted": [
+    5
+  ],
+  "expected_outputs": [
+    {
+      "kind": "scenario_variant",
+      "description": "At least one new branch variant or case"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "scenario_variant",
+      "path": "research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Created an Egypt-focused importer archetype variant and supporting procurement note to extend the breadbasket branch downstream from wheat-node comparison into scale-importer preparedness.",
+  "next_step": "variant"
+}
