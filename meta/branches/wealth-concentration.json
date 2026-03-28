@@ -8,23 +8,25 @@
   "status": "active",
   "parent_artifact": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "active_variants": [
-    "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md"
+    "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
+    "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md"
   ],
   "key_notes": [
-    "research/notes/2026-03-28-wealth-concentration-grounding-note.md"
+    "research/notes/2026-03-28-wealth-concentration-grounding-note.md",
+    "research/notes/2026-03-28-us-asset-regime-mismatch-note.md"
   ],
   "key_syntheses": [
     "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md"
   ],
   "loop_runs": [],
   "discard_records": [],
-  "strongest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
+  "strongest_variant": "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
   "most_generative_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "weakest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "open_questions": [
-    "Should the next grounding pass test asset-regime/tax-design mismatch first, or hidden intermediation and transmission first?",
-    "What case would best clarify whether wealth concentration is mainly a transmission problem, a design/rule conflict problem, or a hybrid of both?"
+    "What would be the strongest contrasting branch inside wealth concentration: hidden intermediation/transmission, inheritance, or another institutional channel?",
+    "Does the US asset-regime case clarify the branch enough to move toward a comparison pass within the domain?"
   ],
-  "next_recommended_pass": "grounding",
+  "next_recommended_pass": "comparison",
   "last_updated": "2026-03-28"
 }
