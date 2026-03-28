@@ -1,0 +1,25 @@
+{
+  "run_id": "2026-03-28-wealth-concentration-comparison-2",
+  "date": "2026-03-28",
+  "branch_slug": "wealth-concentration",
+  "run_type": "comparison",
+  "question": "How does the bounded US asset-regime/tax-design mismatch variant compare with the broader wealth concentration balance-sheet/transmission framing, and what does that say about the branch's dominant structure?",
+  "stages_targeted": [
+    6
+  ],
+  "expected_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "description": "At least one synthesis comparing variants or nodes"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "path": "research/syntheses/2026-03-28-wealth-concentration-internal-comparison.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Compared the broad balance-sheet/transmission framing against the bounded US asset-regime mismatch framing and judged the branch to remain hybrid while giving the bounded rule-conflict case the stronger current evidence fit.",
+  "next_step": "comparison"
+}

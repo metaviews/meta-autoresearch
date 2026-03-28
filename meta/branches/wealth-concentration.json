@@ -16,7 +16,8 @@
     "research/notes/2026-03-28-us-asset-regime-mismatch-note.md"
   ],
   "key_syntheses": [
-    "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md"
+    "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md",
+    "research/syntheses/2026-03-28-wealth-concentration-internal-comparison.md"
   ],
   "loop_runs": [],
   "discard_records": [],
@@ -24,9 +25,9 @@
   "most_generative_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "weakest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "open_questions": [
-    "What would be the strongest contrasting branch inside wealth concentration: hidden intermediation/transmission, inheritance, or another institutional channel?",
-    "Does the US asset-regime case clarify the branch enough to move toward a comparison pass within the domain?"
+    "What is the strongest contrasting transmission-focused case to set against the US asset-regime mismatch branch?",
+    "Does wealth concentration resolve toward one dominant structure type with more grounding, or remain a meaningful hybrid?"
   ],
-  "next_recommended_pass": "comparison",
+  "next_recommended_pass": "grounding",
   "last_updated": "2026-03-28"
 }
