@@ -8,6 +8,8 @@ It is not the final version of the method. It is the first reusable description 
 
 The loop is written in a domain-general way on purpose. Climate is the current proving ground, but the cycle is meant to be usable in other domains where scenario exploration is more honest than premature prediction.
 
+The next phase of the project adds modest method infrastructure around this loop. The aim is to support the loop with better state, scaffolding, and validation, not to automate away the judgment inside it.
+
 ## The loop at a glance
 
 1. frame the inquiry
@@ -204,6 +206,8 @@ Decide whether the cycle is ready to be repeated more systematically or partiall
 - support work once the loop structure is already stable
 
 The target is not only lower inference cost. It is a process where capability is allocated deliberately, so the loop can stay rigorous while becoming more accessible to run.
+
+Some coordination work around the loop can also be delegated to lightweight local tooling before any model delegation is attempted. That includes state tracking, run scaffolding, and hygiene checks.
 
 ## Minimum viable successful loop
 

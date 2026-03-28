@@ -55,6 +55,7 @@ Climate is therefore the first proving ground, not the permanent identity of the
 - `docs/research-tooling.md` - note on tools that would strengthen the research workflow
 - `docs/evaluation-framework.md` - reusable rubric for comparing scenarios and making curation decisions
 - `docs/branch-maturity.md` - lightweight rubric for judging how developed a branch is in the method
+- `docs/method-infrastructure.md` - plan for the first CLI layer that reduces method overhead without automating judgment
 - `ROADMAP.md` - phased development plan for the research program
 - `CONTRIBUTING.md` - norms for writing, sources, uncertainty, and edits
 - `research/notes/` - working notes, source synthesis, and questions
@@ -83,6 +84,7 @@ Current state:
 - the research workspace now supports notes, scenarios, experiments, and syntheses
 - the first climate branches have been developed beyond abstract framing
 - the project is now in `evidence grounding + evaluation refinement`, with early attention turning toward reusable structure types
+- the next phase is `method infrastructure`: modest tooling to increase work per pass without turning the project into a product
 
 ## Current research branches
 
@@ -102,6 +104,7 @@ If you are new to the project, read these in order:
 5. `docs/research-agenda.md`
 6. `docs/evaluation-framework.md`
 7. `docs/branch-maturity.md`
+8. `docs/method-infrastructure.md`
 
 Then, for the most developed current work:
 

@@ -86,6 +86,21 @@ Examples:
 - `jupyter`
 - notebooks for comparative analysis and source review
 
+## 7. Method infrastructure tooling
+
+Useful for:
+
+- reducing coordination overhead across sessions
+- tracking branch maturity and next recommended passes
+- validating whether loop runs are missing critical artifacts
+- generating branch dossiers and next-pass packets
+
+Examples:
+
+- a small Python CLI
+- JSON manifests for branches and runs
+- generated markdown dossiers or check reports
+
 ## Working principle
 
 Tooling should strengthen rigor, traceability, and source handling. It should not make the project look more certain than the evidence allows.
@@ -100,6 +115,7 @@ If the repo adds any tooling soon, the highest-value order is:
 2. cleaner source extraction
 3. simple citation support
 4. structured evidence tables
+5. lightweight method infrastructure
 
 That order keeps the project focused on research quality before automation complexity.
 
@@ -112,3 +128,5 @@ As the project matures, model and tooling choices should follow a `right-sized c
 - redesign the process itself when a step is only expensive because the workflow is poorly structured
 
 The goal is not merely lower cost. The goal is a leaner research process that remains rigorous and broadly runnable.
+
+The first CLI layer should therefore automate method overhead rather than research judgment.

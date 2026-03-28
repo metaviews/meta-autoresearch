@@ -92,6 +92,8 @@ The intended progression is:
 
 This means the early repository is not separate from the method. It is the method's training ground.
 
+The next step in that training is modest infrastructure. The project now has enough method clarity to justify a small tooling layer that reduces coordination overhead, preserves branch state, and makes each pass more complete without automating judgment away.
+
 ## Emerging structure types
 
 One goal of v1 is not only to generate useful scenarios, but to identify recurring kinds of epistemic failure.

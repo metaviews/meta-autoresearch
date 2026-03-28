@@ -12,6 +12,7 @@ Practical read of the roadmap now:
 - Phase 4 is actively underway
 - Phase 5 has begun in an early form through the evaluation framework and scenario matrix
 - Phase 6 is not yet implemented, but the repo is now producing the kind of structured cycles that can later be tested for scale
+- the immediate bridge between Phase 5 and Phase 6 is a small `method infrastructure` layer that reduces coordination overhead and makes runs easier to repeat
 
 ## Phase 1: foundation and structure
 
@@ -73,6 +74,19 @@ Current signals of progress in this phase:
 - the whiplash branch has internal comparison and pruning pressure
 - the breadbasket branch now has sub-branch comparison and downstream exposure grounding
 - emerging epistemic structure types are starting to appear in the method itself
+- loop-run and discard artifacts now make both success and pruning auditable
+
+## Phase 5.5: method infrastructure
+
+Add a lightweight internal tooling layer that supports the method without turning the project into a product.
+
+Outputs:
+
+- structured branch and run state
+- loop-run scaffolding and validation
+- branch dossier generation for the next pass
+- clearer visibility into what is missing from a branch or run
+- better separation between judgment-heavy work and support-heavy work
 
 ## Phase 6: scaled-cycle design
 
@@ -85,6 +99,8 @@ Outputs:
 - guardrails for scaling without multiplying noise, drift, or false confidence
 - criteria for when a cycle is mature enough to be repeated programmatically or with cheaper models
 - a process design that stays accessible enough to run without permanent dependence on frontier-model budgets
+
+The first CLI layer planned in `docs/method-infrastructure.md` is the intended bridge into this phase.
 
 ## Phase 7: prototype decision
 

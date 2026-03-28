@@ -1,0 +1,236 @@
+# Method Infrastructure
+
+## Purpose
+
+This document specifies the first infrastructure layer for meta-autoresearch.
+
+The goal is not to automate research wholesale. The goal is to reduce method overhead so each pass can complete more useful work while preserving audibility, curation, and epistemic discipline.
+
+## Why this layer exists
+
+The current bottleneck is not idea generation. It is interaction bandwidth.
+
+Too much cycle state currently has to be reconstructed across sessions:
+
+- which branch is strongest
+- which variant is most provisional
+- which artifacts are missing
+- what pass type should happen next
+- what evidence or pruning still needs to be made explicit
+
+The first CLI layer is meant to reduce that overhead.
+
+## Design goal
+
+Increase `work per pass` modestly by moving from artifact-by-artifact coordination toward run-level coordination.
+
+That means the tooling should help with:
+
+- state
+- scaffolding
+- validation
+- packetization
+
+It should not replace judgment.
+
+## Non-goals
+
+This first layer is not:
+
+- an autonomous research system
+- a web app
+- a general product platform
+- a database-first architecture
+- model orchestration for full-cycle autonomy
+- automatic research writing without review
+
+## Core principles
+
+- `method first` - infrastructure should support the loop already documented in `docs/research-loop.md`
+- `judgment stays visible` - human and high-capability model judgment remain explicit
+- `state becomes legible` - branch and run status should be recoverable in one step
+- `small surface area` - solve the most repetitive coordination problems first
+- `right-sized capability` - do not add more software complexity than the method currently justifies
+
+## First layer scope
+
+The first layer should do five things.
+
+### 1. Scaffold a run
+
+Create the structured state for a new pass against a branch.
+
+Expected result:
+
+- a run manifest
+- declared pass type
+- expected outputs
+
+### 2. Track branch state
+
+Make current branch status explicit and recoverable.
+
+Expected result:
+
+- current maturity
+- current structure type
+- strongest and weakest variants
+- open questions
+- next recommended pass
+
+### 3. Validate method hygiene
+
+Check whether the branch or run is missing expected artifacts.
+
+Expected result:
+
+- warnings for missing grounding notes, loop runs, comparison syntheses, or discard records
+
+### 4. Generate a branch dossier
+
+Produce a compact packet for the next session.
+
+Expected result:
+
+- current branch summary
+- missing pieces
+- recommended next move
+- key artifact links
+
+### 5. Support later capability tiering
+
+Make it easier to identify which bounded sub-tasks might later move to cheaper or local models.
+
+Expected result:
+
+- explicit separation between judgment-heavy and support-heavy steps
+
+## Proposed technical shape
+
+- language: `Python`
+- manifest format: `JSON`
+- dependency strategy: stdlib-first where possible
+- first execution mode: local CLI, likely via `python -m ...`
+
+## Proposed state layout
+
+- `meta/branches/` - branch manifests
+- `meta/runs/` - run manifests
+- `meta/generated/` - generated dossiers or summaries
+
+Research artifacts remain in `research/`. The `meta/` directory should hold structured state, not canonical research content.
+
+## Proposed branch manifest
+
+Minimum fields:
+
+- `slug`
+- `title`
+- `domain`
+- `structure_type`
+- `maturity_level`
+- `status`
+- `parent_artifact`
+- `active_variants`
+- `key_notes`
+- `key_syntheses`
+- `loop_runs`
+- `discard_records`
+- `strongest_variant`
+- `most_generative_variant`
+- `weakest_variant`
+- `open_questions`
+- `next_recommended_pass`
+- `last_updated`
+
+## Proposed run manifest
+
+Minimum fields:
+
+- `run_id`
+- `date`
+- `branch_slug`
+- `run_type`
+- `question`
+- `stages_targeted`
+- `expected_outputs`
+- `created_outputs`
+- `completion_status`
+- `notes`
+- `next_step`
+
+## First pass types to encode
+
+- `grounding`
+- `variant`
+- `comparison`
+- `maturity`
+- `discard`
+- `capability-fit`
+
+Each pass type should imply expected artifact classes and minimum completion checks.
+
+## First CLI commands
+
+### `run new`
+
+Creates a new run manifest for a branch and pass type.
+
+### `run check`
+
+Checks whether a run produced the expected artifacts.
+
+### `branch status`
+
+Shows current branch state in a concise, human-readable form.
+
+### `branch check`
+
+Validates branch hygiene against the loop and maturity expectations.
+
+### `branch dossier`
+
+Generates a next-pass packet summarizing branch state, missing pieces, and likely next work.
+
+## First validation rules
+
+Examples:
+
+- a `grounding` run should create at least one grounding note or equivalent grounded scenario update
+- a `comparison` run should create at least one comparison synthesis
+- a `Level 3+` branch should have a loop-run artifact
+- a branch with meaningful pruning should have at least one discard record
+- a `Level 4` branch should connect clearly to a structure-type synthesis or method-level consequence
+
+## What this should improve
+
+- less time reconstructing branch state across sessions
+- more complete passes
+- more consistent branch comparison
+- clearer visibility into what deserves scale and what only deserves attention
+
+## What success looks like
+
+The first infrastructure layer is successful if it can:
+
+- start a new run in one command
+- recover branch state in one command
+- reveal missing artifacts in one command
+- generate a useful next-pass packet
+- remain understandable by directly reading the manifest files
+
+## Build order
+
+1. create the docs and state model
+2. add branch manifests
+3. add run manifests
+4. implement `run new`
+5. implement `branch status`
+6. implement `run check`
+7. implement `branch dossier`
+
+## Working rule
+
+This layer should automate method overhead, not method judgment.
+
+If the software starts making the process less legible, more opaque, or more autonomous than the current method can justify, it is growing too fast.
