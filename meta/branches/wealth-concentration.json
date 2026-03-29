@@ -22,7 +22,8 @@
   "key_syntheses": [
     "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md",
     "research/syntheses/2026-03-28-wealth-concentration-internal-comparison.md",
-    "research/syntheses/2026-03-28-wealth-concentration-resolution-comparison.md"
+    "research/syntheses/2026-03-28-wealth-concentration-resolution-comparison.md",
+    "research/syntheses/2026-03-28-wealth-concentration-lead-comparison.md"
   ],
   "loop_runs": [],
   "discard_records": [],
@@ -30,9 +31,9 @@
   "most_generative_variant": "research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md",
   "weakest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "open_questions": [
-    "After the India last-mile credit case, does the transmission side now compete more evenly with the asset-regime mismatch side?",
-    "Does one more direct comparison now make sense before any additional grounding in this branch?"
+    "Is the wealth concentration branch now mature enough for a branch-level maturity pass rather than another immediate case addition?",
+    "What would count as enough evidence to keep the branch hybrid versus promoting one structure type as dominant?"
   ],
-  "next_recommended_pass": "comparison",
+  "next_recommended_pass": "maturity",
   "last_updated": "2026-03-28"
 }
