@@ -10,12 +10,14 @@
   "active_variants": [
     "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
     "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
-    "research/scenarios/2026-03-28-private-credit-resilience-squeeze.md"
+    "research/scenarios/2026-03-28-private-credit-resilience-squeeze.md",
+    "research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md"
   ],
   "key_notes": [
     "research/notes/2026-03-28-wealth-concentration-grounding-note.md",
     "research/notes/2026-03-28-us-asset-regime-mismatch-note.md",
-    "research/notes/2026-03-28-wealth-transmission-channels-note.md"
+    "research/notes/2026-03-28-wealth-transmission-channels-note.md",
+    "research/notes/2026-03-28-india-nbfc-transmission-note.md"
   ],
   "key_syntheses": [
     "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md",
@@ -25,11 +27,11 @@
   "loop_runs": [],
   "discard_records": [],
   "strongest_variant": "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
-  "most_generative_variant": "research/scenarios/2026-03-28-private-credit-resilience-squeeze.md",
+  "most_generative_variant": "research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md",
   "weakest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "open_questions": [
-    "Which downstream sectoral or borrower-type case would best make the transmission branch more concrete without losing boundedness?",
-    "After one more transmission-focused case, does the branch still remain hybrid, or does one structure type clearly dominate?"
+    "After the India last-mile credit case, does the transmission side now compete more evenly with the asset-regime mismatch side?",
+    "Does one more direct comparison now make sense before any additional grounding in this branch?"
   ],
   "next_recommended_pass": "comparison",
   "last_updated": "2026-03-28"
