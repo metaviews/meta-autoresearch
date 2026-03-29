@@ -126,6 +126,7 @@ Use comparison to decide what the branch actually is, which variant is strongest
 
 - does comparison produce sharper curation?
 - is at least one variant clearly weaker, more provisional, or in need of revision?
+- in a new domain, does comparison clarify whether the branch is resolving toward a dominant structure or remaining a meaningful hybrid?
 
 ## Stage 7: Evaluate and curate the branch
 
@@ -161,6 +162,7 @@ Look above any one branch to identify what kind of epistemic structure the branc
 
 - has the work revealed a genuinely reusable structure, or only more domain content?
 - does the branch change the method, or only populate it?
+- if the branch is outside climate, has portability been demonstrated through repeated grounding and comparison rather than assumed from thematic similarity alone?
 
 ## Stage 9: Assess cycle maturity
 

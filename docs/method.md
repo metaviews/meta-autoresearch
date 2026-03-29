@@ -110,6 +110,15 @@ The third type matters because emergence does not only happen in events or scena
 
 The long-term aim is for those structure types to travel beyond climate where the fit is real and the method remains honest.
 
+Current evidence suggests that cross-domain portability is real, but often arrives in stages:
+
+- first as a broad structural fit
+- then as bounded grounded cases
+- then as an internal comparison between competing interpretations
+- only later, if warranted, as a cleaner dominant structure type
+
+That means a non-climate branch should not be expected to map neatly to one structure immediately. Hybrid status can be a legitimate stage of method development rather than a sign of failure.
+
 ## Measurement in v1
 
 The hardest part of applying autoresearch outside machine learning is measurement. In v1, the measurement will often be provisional and partly qualitative, but it still needs to be explicit.

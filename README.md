@@ -94,8 +94,12 @@ Current state:
 
 - `whiplash` - sequence failure, transition misreading, and category breakdown under non-stationarity
 - `breadbasket` - correlation, transmission, buffers, trade, and unequal downstream exposure
+- `hydrologic` - design/rule conflict under volatility in infrastructure, storage, and operating systems
+- `wealth-concentration` - first non-climate proving-ground branch; currently a comparative hybrid between transmission and rule-conflict structures
 
 These branches are not just topical clusters. They are being used to test whether the method can identify recurring epistemic structures that conventional inquiry tends to miss. Climate remains the current proving ground, but the methodological ambition is broader than climate.
+
+The current non-climate result matters: portability appears real, but it does not look instantaneous or clean. The first non-climate branch has become a `Level 3 comparative proving-ground run`, which suggests that cross-domain transfer may initially arrive as a hybrid branch that only later resolves toward a dominant structure type.
 
 ## Start here
 
