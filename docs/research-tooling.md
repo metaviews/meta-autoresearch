@@ -132,3 +132,18 @@ This should be read broadly. The available AI ecosystem is diverse and expanding
 The goal is not merely lower cost. The goal is a leaner research process that remains rigorous and broadly runnable.
 
 The first CLI layer should therefore automate method overhead rather than research judgment.
+
+## Next tooling priority
+
+The current tooling priority is no longer only state tracking. It is token and usage efficiency.
+
+That means the next tooling cycle should proceed in two phases:
+
+1. `context compression`
+   - generate smaller, cleaner packets for branch work so frontier-model context loads shrink
+2. `bounded cheap-model delegation`
+   - use a more affordable model layer for summarization, claim extraction, and comparison prep
+
+The preferred configuration approach is provider-agnostic, with OpenRouter as the first backend.
+
+This keeps the method portable across a wider model ecosystem while still addressing the immediate cost and usage-limit problem.

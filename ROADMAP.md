@@ -90,6 +90,11 @@ Outputs:
 - clearer visibility into what is missing from a branch or run
 - better separation between judgment-heavy work and support-heavy work
 
+Near-term continuation of this phase:
+
+- Iteration 2: context compression for branch snapshots, run packets, and comparison prep
+- Iteration 3: bounded affordable-model delegation via provider-agnostic config, with OpenRouter as the first backend
+
 ## Phase 6: scaled-cycle design
 
 Design how the research loop could run repeatedly and at larger volume without losing rigor.

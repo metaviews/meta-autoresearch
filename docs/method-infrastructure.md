@@ -291,3 +291,101 @@ This should still be treated as a support layer, not a final interface.
 This layer should automate method overhead, not method judgment.
 
 If the software starts making the process less legible, more opaque, or more autonomous than the current method can justify, it is growing too fast.
+
+## Next iteration
+
+The next infrastructure iteration should target a pressing operational problem: frontier-model token usage and account limits.
+
+The goal is not to replace the frontier model suddenly. The goal is to reduce how much high-cost context and low-complexity work reach it in the first place, then begin bounded delegation of clearly safer tasks to cheaper models.
+
+This next phase should happen in two steps.
+
+### Iteration 2: context compression
+
+Purpose:
+
+- reduce token overhead before a frontier model sees the work
+- package branch and run state into smaller, cleaner packets
+- lower repeated context reconstruction costs across sessions
+
+Planned additions:
+
+- `branch snapshot` - a more compact branch packet than the current dossier
+- `run packet` - a generated packet for one specific pass, including branch state, expected outputs, and only the most relevant artifacts
+- `artifact index` - a compact listing of branch notes, scenarios, syntheses, loop runs, discards, and recent runs
+- `stale-state detection` - warnings when manifests or generated packets appear out of date
+- `comparison prep` - generated comparison tables or summaries from current branch state and selected artifacts
+
+Success criteria:
+
+- a new pass can start from one compact generated packet rather than many manual reads
+- branch reconstruction costs fewer frontier-model tokens
+- stale branch state becomes visible automatically
+
+### Iteration 3: bounded model delegation
+
+Purpose:
+
+- begin offloading clearly bounded support tasks to more affordable models
+- preserve frontier-model use for interpretation, curation, and method judgment
+
+This should use provider-agnostic configuration, with OpenRouter as the first backend.
+
+#### Configuration approach
+
+Recommended environment variables:
+
+- `META_MODEL_BACKEND=openrouter`
+- `META_MODEL_DEFAULT_SMALL=<model-id>`
+- `META_MODEL_DEFAULT_MID=<model-id>`
+- `META_MODEL_DEFAULT_STRONG=<model-id>`
+- `OPENROUTER_API_KEY=<key>`
+- `OPENROUTER_BASE_URL=https://openrouter.ai/api/v1`
+
+Optional:
+
+- `OPENROUTER_HTTP_REFERER=<url>`
+- `OPENROUTER_APP_NAME=meta-autoresearch`
+
+The method should not be tightly coupled to OpenRouter. OpenRouter should be the first backend, not the permanent architecture.
+
+#### Good first delegated tasks
+
+- note summarization
+- scenario summarization
+- claim extraction
+- run-packet compression
+- comparison-prep drafting
+- branch-manifest suggestions
+- evaluation-prefill suggestions
+
+#### Tasks that should remain human or frontier-model tasks for now
+
+- structure-type judgment
+- branch-maturity promotion
+- curation decisions
+- final synthesis
+- strategic branch direction
+
+#### Safety rules
+
+- generated model output should go to `meta/generated/`, not directly into `research/`
+- generated output should always record task type, model slot, source artifacts, and timestamp
+- no delegated command should automatically set branch maturity, structure type, or curation outcomes
+- no delegated command should automatically rewrite canonical research artifacts
+
+#### Success criteria
+
+- at least one real pass uses a cheaper model for bounded prep work
+- frontier-model token usage decreases meaningfully for that pass
+- judgment visibility remains intact
+- delegated outputs remain clearly marked as draft/generated
+
+## Recommended build order from here
+
+1. implement Iteration 2 context compression features
+2. add provider-agnostic model configuration
+3. add OpenRouter as the first backend
+4. implement one delegated command such as `summarize-note`
+5. implement one delegated comparison-prep command
+6. run a real capability-fit test on those delegated tasks before expanding further

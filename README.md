@@ -89,6 +89,7 @@ Current state:
 - the next phase is `method infrastructure`: modest tooling to increase work per pass without turning the project into a product
 - the first CLI layer now exists for branch state, run scaffolding, branch checks, and dossier generation
 - model allocation is now treated as an explicit design concern: the method should learn how to distribute work across a diverse and evolving AI ecosystem rather than assume one model tier fits every task
+- the next tooling iterations will focus on reducing frontier-model token load through context compression first, then bounded delegation to more affordable models via a provider-agnostic configuration layer
 
 ## Current research branches
 

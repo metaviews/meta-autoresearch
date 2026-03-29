@@ -218,6 +218,13 @@ The project is not trying to imitate compute intensity for its own sake. It is t
 
 That means model allocation is itself part of the method. Over time, the project should become better at deciding which tasks belong to frontier models, which to local models, which to task-specific tools, and which should remain primarily human.
 
+The next practical step is to reduce frontier-model load in two ways:
+
+- first by compressing and packaging context more aggressively before it reaches the model
+- then by delegating bounded support tasks to a cheaper model layer through a provider-agnostic interface
+
+That sequence matters. If delegation happens before context compression, the project risks wasting cheaper-model calls on poorly packaged work.
+
 ## What success looks like in v1
 
 Success in this phase does not mean proving the method universally.
