@@ -277,6 +277,8 @@ Implemented:
 - `run packet`
 - `delegate summarize-note`
 - `delegate extract-claims`
+- `delegate branch-packet`
+- `delegate run-prep`
 
 Current invocation style:
 
@@ -297,6 +299,9 @@ Current invocation style:
 - `python -m meta_autoresearch_cli run packet <run-id>`
 - `python -m meta_autoresearch_cli delegate summarize-note <path>`
 - `python -m meta_autoresearch_cli delegate extract-claims <path>`
+- `python -m meta_autoresearch_cli delegate branch-packet <slug>`
+- `python -m meta_autoresearch_cli delegate run-prep <branch> --type <pass-type>`
+- `python -m meta_autoresearch_cli delegate batch <task> <pattern>`
 
 This should still be treated as a support layer, not a final interface.
 

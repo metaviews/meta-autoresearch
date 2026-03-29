@@ -103,7 +103,21 @@ Typical signs:
 - `breadbasket` - Level 4: method-shaping, now strong at both upstream wheat-node comparison and downstream importer-archetype mapping, making it the clearest branch for deciding when a mature line should stop expanding and start redirecting attention
 - `whiplash` - Level 4: method-shaping, now strong enough to stabilize `sequence failure` as a reusable structure with grounded variants, explicit pruning context, and a full loop record
 - `hydrologic` - Level 4: method-shaping, now strong enough to stabilize `design/rule conflict under volatility` as a distinct emerging structure type rather than only a comparative branch
-- `wealth-concentration` - Level 3: comparative proving-ground run, now strong enough to demonstrate non-climate portability with multiple grounded sub-branches and internal structural comparison, but not yet strong enough to reshape the method in the way the climate branches do
+- `wealth-concentration` - Level 4: method-shaping (hybrid portability demonstrated), first non-climate proving-ground branch; demonstrated that portability may arrive as hybrid before resolving to dominant structure; influenced method understanding of how structure types travel across domains
+
+## Hybrid structures
+
+The wealth-concentration branch revealed that non-climate portability may arrive as a **hybrid** of multiple structure types rather than mapping cleanly to one.
+
+**Key findings:**
+- Hybrid status is legitimate, not a failure mode
+- Portability may arrive in stages: thematic → structural resonance → hybrid → resolved → method-shaping
+- The hybrid finding itself is methodologically valuable—it changes how future non-climate branches are evaluated
+
+**For future branches:**
+- Test for hybrid status explicitly during structure mapping
+- Do not force branches into single-structure boxes if overlap is real
+- Hybrid at L3 is expected; hybrid at L4 needs to demonstrate method influence (as wealth-concentration did)
 
 ## Working rule
 

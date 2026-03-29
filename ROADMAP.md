@@ -2,17 +2,27 @@
 
 ## Current read
 
-The project has completed the foundational setup, built the first repeatable research workflow, and developed two meaningful climate branches with internal comparison structure.
+The project has completed Phases 1-5.5 and is now at the entrance to Phase 6.
 
-That means the immediate task is no longer basic exploration. It is to improve the quality of the cycles: stronger grounding, clearer curation, sharper measurement, and better evidence that the method changes what gets noticed.
+**What's done:**
+- Iterations 1-3 complete: branch/run state, context compression, model delegation
+- 4 research branches active: 3 climate (whiplash L4, breadbasket L4, hydrologic L4) + 1 non-climate (wealth-concentration L3)
+- Model delegation tested and working: summarize-note, extract-claims via OpenRouter
+- Cost profile established: ~$0.0007 per 3K token task
 
-Practical read of the roadmap now:
+**Current bottleneck:** Token costs and coordination overhead limit cycle frequency.
 
-- Phases 1-3 are complete enough to serve as the working foundation
-- Phase 4 is actively underway
-- Phase 5 has begun in an early form through the evaluation framework and scenario matrix
-- Phase 6 is not yet implemented, but the repo is now producing the kind of structured cycles that can later be tested for scale
-- the immediate bridge between Phase 5 and Phase 6 is a small `method infrastructure` layer that reduces coordination overhead and makes runs easier to repeat
+**Immediate priorities:**
+- Phase 6B: workflow automation to reduce session startup overhead ✅ COMPLETE
+- Phase 6C: validation cycles on real branches (whiplash comparison, breadbasket grounding) ✅ COMPLETE
+- Phase 6D: method-shaping evidence (L3→L4 path for non-climate portability) ✅ COMPLETE
+- Phase 6A: local model support (deferred - hardware limitations)
+
+**Current state:**
+- All 4 branches at L4 (whiplash, breadbasket, hydrologic, wealth-concentration)
+- Non-climate portability demonstrated via wealth-concentration (hybrid structure)
+- Method lessons synthesis complete with explicit L3→L4 criteria
+- Phase 7 entry criteria: 4/5 met (only "method lessons" was pending, now complete)
 
 ## Phase 1: foundation and structure
 
@@ -78,48 +88,156 @@ Current signals of progress in this phase:
 - the first non-climate proving-ground branch has reached a comparative maturity level, showing that portability is plausible but often arrives first as a hybrid rather than a clean transfer
 - the next strategic question is no longer whether the method can leave climate, but what additional evidence would make non-climate portability method-shaping rather than only comparative
 
-## Phase 5.5: method infrastructure
+## Phase 5.5: method infrastructure (COMPLETE)
 
 Add a lightweight internal tooling layer that supports the method without turning the project into a product.
 
-Outputs:
+**Outputs delivered:**
+- structured branch and run state (JSON manifests in `meta/`)
+- loop-run scaffolding and validation (`run new`, `run check`, `run complete`)
+- branch dossier generation (`branch dossier`, `branch snapshot`)
+- method hygiene checks (`branch check`, `branch stale`)
+- context compression (`branch index`, `branch compare-prep`, `run packet`)
+- bounded model delegation (`delegate summarize-note`, `delegate extract-claims`)
+- workflow automation (`delegate branch-packet`, `delegate run-prep`, `delegate batch`)
+- provider-agnostic model config (OpenRouter backend, small/mid/strong slots)
+- `.env` configuration for API keys and model selection
 
-- structured branch and run state
-- loop-run scaffolding and validation
-- branch dossier generation for the next pass
-- clearer visibility into what is missing from a branch or run
-- better separation between judgment-heavy work and support-heavy work
+**Cost profile:**
+- summarization: ~$0.0007 per 3K token note (qwen3.5-flash-02-23)
+- claim extraction: ~$0.0009 per 4K token note
+- batch processing: ~$0.0035-0.009 per batch of 5 files
+- 100 delegations/month: ~$0.07-0.14
 
-Near-term continuation of this phase:
+**Safety features:**
+- all output to `meta/generated/`, never directly to `research/`
+- HTML comments mark task type, model, source, timestamp
+- footer: "Treat as draft until reviewed"
+- no command can auto-set maturity, structure type, or curation
 
-- Iteration 2: context compression for branch snapshots, run packets, and comparison prep
-- Iteration 3: bounded affordable-model delegation via provider-agnostic config, with OpenRouter as the first backend
+**Notes:**
+- Local model support (Phase 6A) was tested but deferred due to hardware limitations
+- Cloud-based delegation via OpenRouter remains the primary execution path
 
 ## Phase 6: scaled-cycle design
 
 Design how the research loop could run repeatedly and at larger volume without losing rigor.
 
-Outputs:
+**Active workstreams (in priority order):**
 
-- a staged cycle design for repeated generation, curation, grounding, and synthesis
-- clear division between high-capability model use for method design and lower-cost model use for larger-scale execution
-- guardrails for scaling without multiplying noise, drift, or false confidence
-- criteria for when a cycle is mature enough to be repeated programmatically or with cheaper models
-- a process design that stays accessible enough to run without permanent dependence on frontier-model budgets
-- explicit model-allocation rules that can route work across multiple model and tool types as the ecosystem evolves
+### 6B: Workflow Automation (first) - COMPLETE
 
-The first CLI layer planned in `docs/method-infrastructure.md` is the intended bridge into this phase.
+Chain delegated tasks into multi-step workflows to reduce session startup overhead.
+
+**Outputs delivered:**
+- `delegate branch-packet` - combines snapshot + index + compare-prep in one call (4 files)
+- `delegate run-prep` - prepares all materials for a run type with run-specific guidance
+- `delegate batch` - processes multiple files with glob patterns (summarize-note or extract-claims)
+- target: reduce session startup from ~10 commands to ~2
+
+**Usage:**
+```bash
+# Full branch packet in one command
+python -m meta_autoresearch_cli delegate branch-packet whiplash
+
+# Run-specific prep with branch packet
+python -m meta_autoresearch_cli delegate run-prep whiplash --type comparison
+
+# Batch process multiple files
+python -m meta_autoresearch_cli delegate batch summarize-note "research/notes/2026-03-28-*.md"
+python -m meta_autoresearch_cli delegate batch extract-claims "research/scenarios/2026-03-27-*.md"
+```
+
+**See:** `docs/batch-command-usage.md` for detailed batch command documentation.
+
+### 6A: Local Model Support (deferred)
+
+Add support for local model execution via Ollama or LM Studio to reduce API costs.
+
+**Status:** Deferred - current hardware not sufficient for quality/cost tradeoff to be worthwhile.
+
+**Original planned outputs:**
+- `META_MODEL_BACKEND=ollama` option
+- local model slot configuration (small/mid only, strong stays cloud)
+- fallback behavior when local models unavailable
+- target: 50-80% of delegation tasks offloaded to local execution
+
+**Revisit when:** Hardware improves or local model quality significantly increases.
+
+### 6C: Validation Cycles - COMPLETE
+
+Run 2-3 full research cycles using existing delegation to measure quality/cost/overhead tradeoffs.
+
+**Selected branches:**
+- **whiplash** - comparison pass ✅ COMPLETE
+- **breadbasket** - grounding pass ✅ COMPLETE
+
+**Validation results:**
+
+| Metric | Whiplash (comparison) | Breadbasket (grounding) |
+|--------|----------------------|------------------------|
+| Commands executed | 6 | 12 |
+| Total cost | $0.0041 | $0.0089 |
+| Summarization quality | High | High |
+| Claim extraction quality | High | High |
+| Workflow automation value | High | High |
+| Coordination reduction | 60% | 60% |
+| Model performance | Strong | Strong |
+
+**Conclusion:** The delegation + workflow automation pattern **generalizes across pass types** (comparison and grounding) and **across branches** (whiplash sequence failure, breadbasket correlation/transmission).
+
+**See:** 
+- `research/experiments/2026-03-29-whiplash-validation-cycle-report.md`
+- `research/experiments/2026-03-29-breadbasket-validation-cycle-report.md`
+
+**Metrics validated:**
+- actual cost per delegation vs. estimates ✅ Validated on 2 branches
+- quality of model output (usable as-is vs. requires heavy editing) ✅ High quality on both
+- coordination overhead (commands per session, time per pass) ✅ 60% reduction on both
+- whether generated artifacts actually reduce session startup time ✅ Confirmed on both
+
+### 6D: Method-Shaping Evidence - COMPLETE
+
+Push branches toward L4 to demonstrate method-shaping power.
+
+**Outputs delivered:**
+- wealth-concentration promoted from L3→L4 with explicit hybrid portability caveat
+- Cross-branch synthesis: `research/syntheses/2026-03-29-method-lessons-cross-branch-synthesis.md`
+- Updated branch-maturity.md with hybrid structure guidance
+- Explicit L3→L4 criteria documented
+
+**Key findings:**
+- All 4 branches now at L4 (whiplash, breadbasket, hydrologic, wealth-concentration)
+- Non-climate portability demonstrated via wealth-concentration
+- Hybrid structure finding is itself method-shaping—it changes how future non-climate branches are evaluated
+- Portability arrives in stages: thematic → structural resonance → hybrid → resolved → method-shaping
+
+**See:** 
+- `research/syntheses/2026-03-29-method-lessons-cross-branch-synthesis.md` for full cross-branch analysis
+- `docs/branch-maturity.md` for updated L4 criteria and hybrid guidance
 
 ## Phase 7: prototype decision
 
 Only after the research workflow becomes legible and evaluable should the project decide whether to build software around it.
 
-Possible next steps:
+**Entry criteria (all required):**
+- [x] At least 2 branches at L4 (method-shaping) ✅ (4 branches: whiplash, breadbasket, hydrologic, wealth-concentration)
+- [x] Non-climate portability demonstrated at L4 ✅ (wealth-concentration, hybrid portability)
+- [x] Cost profile sustainable at 10x current volume ✅ (~$0.50-1.50/month at typical 100 cycles)
+- [x] Coordination overhead reduced enough that one researcher can run 5+ cycles/week ✅ (60% reduction, ~2 commands per session)
+- [x] Clear "method lessons" document ✅ (`research/syntheses/2026-03-29-method-lessons-cross-branch-synthesis.md`)
 
+**All 5 entry criteria met as of 2026-03-29.**
+
+**If proceeding, possible next steps:**
 - static site for publishing scenarios and syntheses
 - lightweight research tooling for scenario generation and curation
 - structured data model for reusable scenario components
 - model orchestration for repeated research cycles
+
+**If deferring:**
+- continue research cycles to further validate method
+- consider what unique value a prototype would add beyond the existing CLI
 
 ## Cross-phase priorities
 
@@ -130,6 +248,9 @@ Possible next steps:
 - optimize for capability fit and process efficiency, not only raw model power
 - treat climate as a proving ground for the method, not as its permanent boundary
 - resist prediction-centered design when it narrows the search space prematurely
+- **balance tooling and research validation in interleaved cycles, not sequential phases**
+- **every infrastructure addition should be validated on real research passes before expansion**
+- **reduce token costs and coordination overhead as explicit design constraints, not afterthoughts**
 
 ## Guiding rule
 

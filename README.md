@@ -170,6 +170,9 @@ python -m meta_autoresearch_cli run packet <run-id>
 ```bash
 python -m meta_autoresearch_cli delegate summarize-note <path>
 python -m meta_autoresearch_cli delegate extract-claims <path>
+python -m meta_autoresearch_cli delegate branch-packet <slug>
+python -m meta_autoresearch_cli delegate run-prep <branch> --type <pass-type>
+python -m meta_autoresearch_cli delegate batch <task> <pattern>   # Batch process files
 ```
 
 Pass types: `grounding`, `variant`, `comparison`, `maturity`, `discard`, `capability-fit`

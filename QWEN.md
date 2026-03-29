@@ -96,6 +96,9 @@ python -m meta_autoresearch_cli run packet <run-id>
 ```bash
 python -m meta_autoresearch_cli delegate summarize-note <path>    # Summarize a research note
 python -m meta_autoresearch_cli delegate extract-claims <path>    # Extract claims from artifact
+python -m meta_autoresearch_cli delegate branch-packet <slug>     # Generate complete branch packet
+python -m meta_autoresearch_cli delegate run-prep <branch> --type <pass-type>  # Prepare for run type
+python -m meta_autoresearch_cli delegate batch <task> <pattern>   # Batch process files (e.g., batch summarize-note 'research/notes/*.md')
 ```
 
 **Model slots:**

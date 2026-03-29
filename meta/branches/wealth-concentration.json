@@ -3,8 +3,8 @@
   "title": "Wealth Concentration",
   "domain": "political economy",
   "structure_type": "hybrid: correlation/transmission failure + design/rule conflict under volatility",
-  "maturity_level": 3,
-  "maturity_note": "comparative proving-ground run",
+  "maturity_level": 4,
+  "maturity_note": "method-shaping (hybrid portability demonstrated)",
   "status": "active",
   "parent_artifact": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "active_variants": [
@@ -24,7 +24,8 @@
     "research/syntheses/2026-03-28-wealth-concentration-internal-comparison.md",
     "research/syntheses/2026-03-28-wealth-concentration-resolution-comparison.md",
     "research/syntheses/2026-03-28-wealth-concentration-lead-comparison.md",
-    "research/syntheses/2026-03-29-wealth-concentration-evaluation-matrix.md"
+    "research/syntheses/2026-03-29-wealth-concentration-evaluation-matrix.md",
+    "research/syntheses/2026-03-29-method-lessons-cross-branch-synthesis.md"
   ],
   "loop_runs": [
     "research/loops/2026-03-28-wealth-concentration-loop-run.md"
@@ -34,11 +35,12 @@
   ],
   "strongest_variant": "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
   "most_generative_variant": "research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md",
-  "weakest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
+  "weakest_variant": "research/scenarios/2026-03-28-private-credit-resilience-squeeze.md",
   "open_questions": [
-    "After explicit discard logging and branch-specific evaluation, what would still be required to justify Level 4 rather than Level 3?",
-    "Does the branch need one more discriminating transmission or rule-centered case, or a clearer method-level consequence, before any promotion is warranted?"
+    "Will the hybrid status resolve toward a dominant structure with more grounding, or is hybrid a stable non-climate form?",
+    "How many non-climate branches are needed to generalize portability beyond a single case?",
+    "What domain should be next for non-climate proving-ground to test method generality?"
   ],
-  "next_recommended_pass": "maturity",
-  "last_updated": "2026-03-28"
+  "next_recommended_pass": "redirect or deepen",
+  "last_updated": "2026-03-29"
 }

@@ -806,10 +806,385 @@ Format each claim as:
     
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(output_content, encoding="utf-8", newline="\n")
-    
+
     print(f"generated: {relpath(paths.root, output_path)}")
     print(f"model: {model_id}")
     return 0
+
+
+# =============================================================================
+# Phase 6B: Workflow Automation
+# =============================================================================
+
+
+def command_delegate_branch_packet(args: argparse.Namespace) -> int:
+    """
+    Generate a complete branch packet combining snapshot + index + compare-prep.
+    
+    This is a workflow automation command that chains multiple generation tasks.
+    """
+    branch, _, paths = load_branch(args.slug)
+    
+    # Generate snapshot
+    snapshot_md = branch_snapshot_markdown(branch, paths)
+    snapshot_path = paths.generated / f"{branch['slug']}-snapshot.md"
+    snapshot_path.parent.mkdir(parents=True, exist_ok=True)
+    snapshot_path.write_text(snapshot_md, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, snapshot_path)}")
+    
+    # Generate artifact index
+    index_md = artifact_index_markdown(branch, paths)
+    index_path = paths.generated / f"{branch['slug']}-artifact-index.md"
+    index_path.parent.mkdir(parents=True, exist_ok=True)
+    index_path.write_text(index_md, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, index_path)}")
+    
+    # Generate comparison prep
+    prep_md = comparison_prep_markdown(branch, paths)
+    prep_path = paths.generated / f"{branch['slug']}-comparison-prep.md"
+    prep_path.parent.mkdir(parents=True, exist_ok=True)
+    prep_path.write_text(prep_md, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, prep_path)}")
+    
+    # Generate combined packet summary
+    packet_summary = f"""# Branch Packet: {branch['title']}
+
+**Generated:** {datetime.now().isoformat()}
+
+## Contents
+
+This packet combines three generated artifacts:
+
+1. **Snapshot** - `{branch['slug']}-snapshot.md`
+   - Current branch state at a glance
+   - Key variants, open questions, recent artifacts
+
+2. **Artifact Index** - `{branch['slug']}-artifact-index.md`
+   - Complete listing of notes, scenarios, syntheses, loop runs, discards
+   - Modification times and existence checks
+
+3. **Comparison Prep** - `{branch['slug']}-comparison-prep.md`
+   - Variant overview table with roles
+   - 8 evaluation dimensions
+   - Guiding questions from branch manifest
+   - Recommended comparison approach
+
+## Quick Reference
+
+- **Maturity:** {branch.get('maturity_level', 'N/A')} ({branch.get('maturity_note', '')})
+- **Structure type:** `{branch.get('structure_type', 'N/A')}`
+- **Next pass:** `{branch.get('next_recommended_pass', 'N/A')}`
+- **Strongest variant:** `{branch.get('strongest_variant', 'N/A')}`
+- **Most generative:** `{branch.get('most_generative_variant', 'N/A')}`
+
+## Recommended Next Steps
+
+1. Read the snapshot for current state (2 min)
+2. Skim the artifact index for what exists (1 min)
+3. Use comparison prep to guide your analysis (5-10 min)
+4. Run delegated tasks as needed:
+   - `delegate summarize-note <path>` for any grounding notes
+   - `delegate extract-claims <path>` for any scenarios
+5. Begin your research pass with the full context already assembled
+"""
+    
+    summary_path = paths.generated / f"{branch['slug']}-packet.md"
+    summary_path.write_text(packet_summary, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, summary_path)}")
+    
+    print(f"\nBranch packet complete: 4 files generated for '{branch['slug']}'")
+    return 0
+
+
+def command_delegate_run_prep(args: argparse.Namespace) -> int:
+    """
+    Prepare all materials for a specific run type.
+    
+    This is a workflow automation command that chains branch packet generation
+    with run-specific preparation tasks.
+    """
+    branch, _, paths = load_branch(args.branch)
+    run_type = args.type
+    
+    # First generate the branch packet
+    print(f"=== Generating branch packet for {branch['slug']} ===\n")
+    
+    # Generate snapshot
+    snapshot_md = branch_snapshot_markdown(branch, paths)
+    snapshot_path = paths.generated / f"{branch['slug']}-snapshot.md"
+    snapshot_path.write_text(snapshot_md, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, snapshot_path)}")
+    
+    # Generate artifact index
+    index_md = artifact_index_markdown(branch, paths)
+    index_path = paths.generated / f"{branch['slug']}-artifact-index.md"
+    index_path.write_text(index_md, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, index_path)}")
+    
+    # Generate comparison prep
+    prep_md = comparison_prep_markdown(branch, paths)
+    prep_path = paths.generated / f"{branch['slug']}-comparison-prep.md"
+    prep_path.write_text(prep_md, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, prep_path)}")
+    
+    # Generate run-specific prep
+    run_type_info = PASS_TYPES.get(run_type, {})
+    stages = run_type_info.get("stages", [])
+    expected = run_type_info.get("expected_outputs", [])
+    
+    run_prep = f"""# Run Prep: {run_type} pass for {branch['slug']}
+
+**Generated:** {datetime.now().isoformat()}
+**Target stages:** {[f"Stage {s}" for s in stages]}
+
+## Expected Outputs
+
+"""
+    for exp in expected:
+        run_prep += f"- **{exp['kind']}**: {exp['description']}\n"
+    
+    run_prep += f"""
+## Branch Context
+
+- **Maturity:** {branch.get('maturity_level', 'N/A')} ({branch.get('maturity_note', '')})
+- **Structure type:** `{branch.get('structure_type', 'N/A')}`
+- **Next recommended pass:** `{branch.get('next_recommended_pass', 'N/A')}`
+
+## Recommended Preparation Tasks
+
+"""
+    
+    # Add run-type specific recommendations
+    if run_type == "grounding":
+        run_prep += """1. Review existing grounding notes in artifact index
+2. Run `delegate summarize-note` on any new source materials
+3. Identify which scenario needs grounding
+4. Prepare to update scenario with case evidence
+"""
+    elif run_type == "variant":
+        run_prep += """1. Review parent scenario and existing variants
+2. Run `delegate extract-claims` on parent to identify variation points
+3. Prepare to generate 2-3 new variants with distinct mechanisms
+4. Ensure variants differ in structure, not just wording
+"""
+    elif run_type == "comparison":
+        run_prep += """1. Read comparison-prep document for variant overview
+2. Run `delegate summarize-note` on grounding notes if outdated
+3. Run `delegate extract-claims` on each variant
+4. Prepare to score variants against 8 evaluation dimensions
+5. Plan curation decisions: keep/revise/merge/discard per variant
+"""
+    elif run_type == "maturity":
+        run_prep += """1. Review all key_syntheses and loop_runs
+2. Assess whether branch meets Level 4 criteria (if currently L3)
+3. Identify what method-level insight the branch provides
+4. Prepare to update branch manifest with maturity judgment
+"""
+    elif run_type == "discard":
+        run_prep += """1. Review all active variants and parent scenario
+2. Identify weakest direction(s) to prune
+3. Prepare discard record explaining why
+4. Ensure discard is methodologically informative, not just negative
+"""
+    elif run_type == "capability-fit":
+        run_prep += """1. Review previous delegated task outputs
+2. Identify which tasks worked well vs. poorly
+3. Prepare to test a new delegation pattern
+4. Document quality/cost tradeoffs
+"""
+    else:
+        run_prep += """1. Review branch packet materials
+2. Prepare for your research pass
+"""
+    
+    run_prep += f"""
+## Files Generated
+
+- `{branch['slug']}-snapshot.md` - branch state overview
+- `{branch['slug']}-artifact-index.md` - complete artifact listing
+- `{branch['slug']}-comparison-prep.md` - variant comparison guide
+- `{branch['slug']}-{run_type}-prep.md` - this run-specific prep
+
+## Next Command
+
+After reviewing these materials, start your run:
+
+```bash
+python -m meta_autoresearch_cli run new {branch['slug']} --type {run_type}
+```
+"""
+    
+    run_prep_path = paths.generated / f"{branch['slug']}-{run_type}-prep.md"
+    run_prep_path.write_text(run_prep, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, run_prep_path)}")
+    
+    print(f"\nRun prep complete: 4 files generated for {run_type} pass on '{branch['slug']}'")
+    return 0
+
+
+def command_delegate_batch(args: argparse.Namespace) -> int:
+    """
+    Process multiple files in batch with a single delegation task.
+    
+    Supports summarize-note and extract-claims tasks with glob patterns.
+    """
+    paths = repo_paths()
+    task = args.task
+    pattern = args.pattern
+    
+    # Expand glob pattern to find matching files
+    import glob as glob_module
+    
+    # Handle both absolute and relative patterns
+    if not os.path.isabs(pattern):
+        search_path = paths.root / pattern
+    else:
+        search_path = Path(pattern)
+    
+    # Convert to string for glob and expand
+    pattern_str = str(search_path)
+    if '*' not in pattern_str and '?' not in pattern_str:
+        # Single file, not a pattern
+        matching_files = [search_path] if search_path.exists() else []
+    else:
+        matching_files = sorted(Path(p) for p in glob_module.glob(pattern_str))
+    
+    if not matching_files:
+        raise SystemExit(f"No files matching pattern: {pattern}")
+    
+    print(f"Found {len(matching_files)} file(s) matching '{pattern}'")
+    print(f"Task: {task}")
+    print()
+    
+    # Get model for small tasks
+    model_id, config = get_model_for_slot("small")
+    
+    # Process each file
+    results = []
+    errors = []
+    
+    for i, file_path in enumerate(matching_files, 1):
+        rel_path = relpath(paths.root, file_path)
+        print(f"[{i}/{len(matching_files)}] Processing {rel_path}...")
+        
+        try:
+            content = file_path.read_text(encoding="utf-8")
+            
+            if task == "summarize-note":
+                system_prompt, user_prompt = summarize_note_task(content, rel_path)
+                messages = [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ]
+                result = call_openrouter(messages, model_id, config)
+                
+                if not result:
+                    errors.append((rel_path, "Model returned empty response"))
+                    continue
+                
+                # Generate output filename
+                stem = file_path.stem
+                output_filename = f"{stem}-summary.md"
+                output_path = paths.generated / output_filename
+                
+                output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: summarize-note (batch) -->
+<!-- Model: {model_id} -->
+<!-- Source: {rel_path} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# Summary: {file_path.name}
+
+{result}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                output_path.write_text(output_content, encoding="utf-8", newline="\n")
+                results.append((rel_path, str(relpath(paths.root, output_path))))
+                
+            elif task == "extract-claims":
+                system_prompt = """You are extracting claims from research artifacts for meta-autoresearch.
+
+Your task: identify distinct, testable claims in the text.
+
+Guidelines:
+1. One claim per bullet point
+2. Preserve uncertainty qualifiers ("may", "suggests", "likely")
+3. Distinguish between evidence-backed claims and speculation
+4. Note when claims reference specific sources or cases
+
+This is a support task. Output will be reviewed by human curator."""
+
+                user_prompt = f"""Extract all claims from this artifact:
+
+File: {rel_path}
+
+---
+{content}
+---
+
+Format each claim as:
+- [Claim text] (evidence-backed | speculative) - [source if referenced]
+"""
+                messages = [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_prompt},
+                ]
+                result = call_openrouter(messages, model_id, config)
+                
+                if not result:
+                    errors.append((rel_path, "Model returned empty response"))
+                    continue
+                
+                # Generate output filename
+                stem = file_path.stem
+                output_filename = f"{stem}-claims.md"
+                output_path = paths.generated / output_filename
+                
+                output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: extract-claims (batch) -->
+<!-- Model: {model_id} -->
+<!-- Source: {rel_path} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# Claims Extracted: {file_path.name}
+
+{result}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                output_path.write_text(output_content, encoding="utf-8", newline="\n")
+                results.append((rel_path, str(relpath(paths.root, output_path))))
+            
+            else:
+                errors.append((rel_path, f"Unknown task: {task}"))
+                
+        except Exception as e:
+            errors.append((rel_path, str(e)))
+    
+    # Print summary
+    print()
+    print("=" * 60)
+    print(f"Batch processing complete")
+    print(f"  Successful: {len(results)}")
+    print(f"  Failed: {len(errors)}")
+    print()
+    
+    if results:
+        print("Generated files:")
+        for src, dst in results:
+            print(f"  {src} -> {dst}")
+    
+    if errors:
+        print("Errors:")
+        for src, err in errors:
+            print(f"  {src}: {err}")
+    
+    return 1 if errors else 0
 
 
 def command_branch_status(args: argparse.Namespace) -> int:
@@ -1429,6 +1804,22 @@ def build_parser() -> argparse.ArgumentParser:
     delegate_extract = delegate_sub.add_parser("extract-claims", help="Extract claims from an artifact")
     delegate_extract.add_argument("input", help="Path to the artifact file")
     delegate_extract.set_defaults(func=command_delegate_extract_claims)
+
+    # Phase 6B: Workflow automation
+    delegate_branch_packet = delegate_sub.add_parser("branch-packet", help="Generate complete branch packet (snapshot + index + compare-prep)")
+    delegate_branch_packet.add_argument("slug", help="Branch slug")
+    delegate_branch_packet.set_defaults(func=command_delegate_branch_packet)
+
+    delegate_run_prep = delegate_sub.add_parser("run-prep", help="Prepare all materials for a run type")
+    delegate_run_prep.add_argument("branch", help="Branch slug")
+    delegate_run_prep.add_argument("--type", required=True, choices=sorted(PASS_TYPES.keys()), help="Run type")
+    delegate_run_prep.set_defaults(func=command_delegate_run_prep)
+
+    # Phase 6B: Batch processing
+    delegate_batch = delegate_sub.add_parser("batch", help="Process multiple files in batch")
+    delegate_batch.add_argument("task", choices=["summarize-note", "extract-claims"], help="Task to run on all files")
+    delegate_batch.add_argument("pattern", help="Glob pattern for files (e.g., 'research/notes/*.md')")
+    delegate_batch.set_defaults(func=command_delegate_batch)
 
     run = subparsers.add_parser("run", help="Run manifest commands")
     run_sub = run.add_subparsers(dest="run_command", required=True)
