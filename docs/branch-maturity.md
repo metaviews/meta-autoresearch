@@ -103,6 +103,7 @@ Typical signs:
 - `breadbasket` - Level 4: method-shaping, now strong at both upstream wheat-node comparison and downstream importer-archetype mapping, making it the clearest branch for deciding when a mature line should stop expanding and start redirecting attention
 - `whiplash` - Level 4: method-shaping, now strong enough to stabilize `sequence failure` as a reusable structure with grounded variants, explicit pruning context, and a full loop record
 - `hydrologic` - Level 4: method-shaping, now strong enough to stabilize `design/rule conflict under volatility` as a distinct emerging structure type rather than only a comparative branch
+- `wealth-concentration` - Level 3: comparative proving-ground run, now strong enough to demonstrate non-climate portability with multiple grounded sub-branches and internal structural comparison, but not yet strong enough to reshape the method in the way the climate branches do
 
 ## Working rule
 

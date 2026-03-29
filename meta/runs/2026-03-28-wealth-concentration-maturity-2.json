@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-03-28-wealth-concentration-maturity-2",
+  "date": "2026-03-28",
+  "branch_slug": "wealth-concentration",
+  "run_type": "maturity",
+  "question": "Is the wealth concentration branch now mature enough to count as a comparative non-climate proving-ground, and what would it still need before method-shaping status is justified?",
+  "stages_targeted": [
+    7,
+    8,
+    9
+  ],
+  "expected_outputs": [
+    {
+      "kind": "maturity_update",
+      "description": "A branch maturity or structure judgment update"
+    },
+    {
+      "kind": "loop_update",
+      "description": "A loop-run update or maturity assessment"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "maturity_update",
+      "path": "docs/branch-maturity.md"
+    },
+    {
+      "kind": "loop_update",
+      "path": "research/loops/2026-03-28-wealth-concentration-loop-run.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Judged wealth concentration as a Level 3 comparative proving-ground branch: clearly portable and internally comparative, but not yet method-shaping at the level of the climate branches.",
+  "next_step": "maturity"
+}

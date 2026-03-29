@@ -3,8 +3,8 @@
   "title": "Wealth Concentration",
   "domain": "political economy",
   "structure_type": "hybrid: correlation/transmission failure + design/rule conflict under volatility",
-  "maturity_level": 2,
-  "maturity_note": "grounded proving-ground run",
+  "maturity_level": 3,
+  "maturity_note": "comparative proving-ground run",
   "status": "active",
   "parent_artifact": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "active_variants": [
@@ -25,7 +25,9 @@
     "research/syntheses/2026-03-28-wealth-concentration-resolution-comparison.md",
     "research/syntheses/2026-03-28-wealth-concentration-lead-comparison.md"
   ],
-  "loop_runs": [],
+  "loop_runs": [
+    "research/loops/2026-03-28-wealth-concentration-loop-run.md"
+  ],
   "discard_records": [],
   "strongest_variant": "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
   "most_generative_variant": "research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md",
