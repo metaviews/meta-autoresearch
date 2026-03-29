@@ -101,6 +101,11 @@ These branches are not just topical clusters. They are being used to test whethe
 
 The current non-climate result matters: portability appears real, but it does not look instantaneous or clean. The first non-climate branch has become a `Level 3 comparative proving-ground run`, which suggests that cross-domain transfer may initially arrive as a hybrid branch that only later resolves toward a dominant structure type.
 
+The current method-level read is therefore sharper than before:
+
+- `Level 3 non-climate portability` means the method can travel, ground itself, compare internally, and remain structurally useful outside climate
+- `Level 4 non-climate portability` would mean a non-climate branch changes the method itself rather than only validating it
+
 ## Start here
 
 If you are new to the project, read these in order:

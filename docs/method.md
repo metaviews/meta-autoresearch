@@ -119,6 +119,13 @@ Current evidence suggests that cross-domain portability is real, but often arriv
 
 That means a non-climate branch should not be expected to map neatly to one structure immediately. Hybrid status can be a legitimate stage of method development rather than a sign of failure.
 
+Current evidence also suggests a sharper distinction:
+
+- `comparative portability` - the method travels well enough to support grounded variants, internal comparison, pruning, and loop auditing outside climate
+- `method-shaping portability` - a non-climate branch changes the method itself by revising structure types, loop expectations, evaluation logic, or maturity criteria
+
+The first non-climate branch has reached the former but not yet the latter.
+
 ## Measurement in v1
 
 The hardest part of applying autoresearch outside machine learning is measurement. In v1, the measurement will often be provisional and partly qualitative, but it still needs to be explicit.

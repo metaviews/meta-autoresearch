@@ -76,6 +76,7 @@ Current signals of progress in this phase:
 - emerging epistemic structure types are starting to appear in the method itself
 - loop-run and discard artifacts now make both success and pruning auditable
 - the first non-climate proving-ground branch has reached a comparative maturity level, showing that portability is plausible but often arrives first as a hybrid rather than a clean transfer
+- the next strategic question is no longer whether the method can leave climate, but what additional evidence would make non-climate portability method-shaping rather than only comparative
 
 ## Phase 5.5: method infrastructure
 
