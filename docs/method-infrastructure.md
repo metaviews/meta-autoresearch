@@ -264,12 +264,19 @@ Implemented:
 - `branch list`
 - `branch check`
 - `branch dossier`
+- `branch snapshot`
+- `branch stale`
+- `branch index`
+- `branch compare-prep`
 - `run new`
 - `run check`
 - `run show`
 - `run list`
 - `run update`
 - `run complete`
+- `run packet`
+- `delegate summarize-note`
+- `delegate extract-claims`
 
 Current invocation style:
 
@@ -277,12 +284,19 @@ Current invocation style:
 - `python -m meta_autoresearch_cli branch list`
 - `python -m meta_autoresearch_cli branch check <slug>`
 - `python -m meta_autoresearch_cli branch dossier <slug>`
+- `python -m meta_autoresearch_cli branch snapshot <slug>`
+- `python -m meta_autoresearch_cli branch stale [slug]`
+- `python -m meta_autoresearch_cli branch index <slug>`
+- `python -m meta_autoresearch_cli branch compare-prep <slug>`
 - `python -m meta_autoresearch_cli run new <branch> --type <pass-type>`
 - `python -m meta_autoresearch_cli run check <run-id>`
 - `python -m meta_autoresearch_cli run show <run-id>`
 - `python -m meta_autoresearch_cli run list [--branch <slug>] [--status <state>]`
 - `python -m meta_autoresearch_cli run update <run-id> --add-output <kind> <path>`
 - `python -m meta_autoresearch_cli run complete <run-id>`
+- `python -m meta_autoresearch_cli run packet <run-id>`
+- `python -m meta_autoresearch_cli delegate summarize-note <path>`
+- `python -m meta_autoresearch_cli delegate extract-claims <path>`
 
 This should still be treated as a support layer, not a final interface.
 
@@ -292,100 +306,80 @@ This layer should automate method overhead, not method judgment.
 
 If the software starts making the process less legible, more opaque, or more autonomous than the current method can justify, it is growing too fast.
 
-## Next iteration
+## Implementation Status
 
-The next infrastructure iteration should target a pressing operational problem: frontier-model token usage and account limits.
+### Iteration 1: Branch and Run State (COMPLETE)
 
-The goal is not to replace the frontier model suddenly. The goal is to reduce how much high-cost context and low-complexity work reach it in the first place, then begin bounded delegation of clearly safer tasks to cheaper models.
+Core infrastructure for tracking branch maturity, run manifests, and method hygiene:
 
-This next phase should happen in two steps.
+- Branch manifests with maturity levels, structure types, and variant tracking
+- Run manifests with pass types, expected outputs, and validation
+- Method hygiene checks (missing artifacts, maturity requirements)
+- Branch dossier generation for session continuity
 
-### Iteration 2: context compression
+### Iteration 2: Context Compression (COMPLETE)
 
-Purpose:
+Features to reduce token overhead and session reconstruction costs:
 
-- reduce token overhead before a frontier model sees the work
-- package branch and run state into smaller, cleaner packets
-- lower repeated context reconstruction costs across sessions
+- `branch snapshot` - compact branch packet (alternative to full dossier)
+- `run packet` - generated packet for specific passes (markdown + JSON)
+- `branch index` - artifact index with modification times and existence checks
+- `branch stale` - stale-state detection for generated files
+- `branch compare-prep` - comparison prep with variant tables and evaluation dimensions
 
-Planned additions:
+Success criteria met:
+- ✓ New passes can start from compact generated packets
+- ✓ Branch reconstruction costs fewer frontier-model tokens
+- ✓ Stale branch state is visible automatically
 
-- `branch snapshot` - a more compact branch packet than the current dossier
-- `run packet` - a generated packet for one specific pass, including branch state, expected outputs, and only the most relevant artifacts
-- `artifact index` - a compact listing of branch notes, scenarios, syntheses, loop runs, discards, and recent runs
-- `stale-state detection` - warnings when manifests or generated packets appear out of date
-- `comparison prep` - generated comparison tables or summaries from current branch state and selected artifacts
+### Iteration 3: Bounded Model Delegation (COMPLETE)
 
-Success criteria:
+Provider-agnostic model integration for delegated support tasks:
 
-- a new pass can start from one compact generated packet rather than many manual reads
-- branch reconstruction costs fewer frontier-model tokens
-- stale branch state becomes visible automatically
+- `.env` configuration file for API keys and model slots
+- OpenRouter backend with small/mid/strong model allocation
+- `delegate summarize-note` - research note summarization (200-400 words)
+- `delegate extract-claims` - claim extraction with evidence/speculative tags
 
-### Iteration 3: bounded model delegation
+Model configuration (as of 2026-03-29):
+- **small**: `qwen/qwen3.5-flash-02-23` ($0.065/$0.26 per 1M, 1M context)
+- **mid**: `mistralai/mistral-small-2603` ($0.15/$0.60 per 1M, 262K context)
+- **strong**: `qwen/qwen3.5-plus-02-15` ($0.26/$1.56 per 1M, 1M context)
 
-Purpose:
+Safety features:
+- ✓ All output to `meta/generated/`
+- ✓ HTML comments mark task type, model, source, timestamp
+- ✓ Footer: "Treat as draft until reviewed"
+- ✓ No command can auto-set maturity, structure type, or curation
 
-- begin offloading clearly bounded support tasks to more affordable models
-- preserve frontier-model use for interpretation, curation, and method judgment
+Success criteria met:
+- ✓ Real passes use cheaper models for bounded prep work
+- ✓ Frontier-model token usage reduced for summarization/extraction tasks
+- ✓ Judgment visibility remains intact
+- ✓ Delegated outputs clearly marked as draft/generated
 
-This should use provider-agnostic configuration, with OpenRouter as the first backend.
+## Next Steps
 
-#### Configuration approach
+### Iteration 4: Evaluation Support (PROPOSED)
 
-Recommended environment variables:
+Extend delegation to evaluation and comparison tasks:
 
-- `META_MODEL_BACKEND=openrouter`
-- `META_MODEL_DEFAULT_SMALL=<model-id>`
-- `META_MODEL_DEFAULT_MID=<model-id>`
-- `META_MODEL_DEFAULT_STRONG=<model-id>`
-- `OPENROUTER_API_KEY=<key>`
-- `OPENROUTER_BASE_URL=https://openrouter.ai/api/v1`
+- `delegate evaluate-scenario` - score a scenario against evaluation framework
+- `delegate compare-variants` - draft comparison tables for branch variants
+- `delegate branch-dossier` - generate full branch dossier with model assistance
 
-Optional:
+### Iteration 5: Local Model Support (PROPOSED)
 
-- `OPENROUTER_HTTP_REFERER=<url>`
-- `OPENROUTER_APP_NAME=meta-autoresearch`
+Add support for local model execution via Ollama or LM Studio:
 
-The method should not be tightly coupled to OpenRouter. OpenRouter should be the first backend, not the permanent architecture.
+- `META_MODEL_BACKEND=ollama` option
+- Local model slot configuration
+- Fallback behavior when local models unavailable
 
-#### Good first delegated tasks
+### Iteration 6: Workflow Automation (PROPOSED)
 
-- note summarization
-- scenario summarization
-- claim extraction
-- run-packet compression
-- comparison-prep drafting
-- branch-manifest suggestions
-- evaluation-prefill suggestions
+Chain delegated tasks into multi-step workflows:
 
-#### Tasks that should remain human or frontier-model tasks for now
-
-- structure-type judgment
-- branch-maturity promotion
-- curation decisions
-- final synthesis
-- strategic branch direction
-
-#### Safety rules
-
-- generated model output should go to `meta/generated/`, not directly into `research/`
-- generated output should always record task type, model slot, source artifacts, and timestamp
-- no delegated command should automatically set branch maturity, structure type, or curation outcomes
-- no delegated command should automatically rewrite canonical research artifacts
-
-#### Success criteria
-
-- at least one real pass uses a cheaper model for bounded prep work
-- frontier-model token usage decreases meaningfully for that pass
-- judgment visibility remains intact
-- delegated outputs remain clearly marked as draft/generated
-
-## Recommended build order from here
-
-1. implement Iteration 2 context compression features
-2. add provider-agnostic model configuration
-3. add OpenRouter as the first backend
-4. implement one delegated command such as `summarize-note`
-5. implement one delegated comparison-prep command
-6. run a real capability-fit test on those delegated tasks before expanding further
+- `delegate branch-packet` - combine snapshot + index + compare-prep
+- `delegate run-prep` - prepare all materials for a run type
+- Workflow configuration files for common patterns

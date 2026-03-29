@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python *)",
+      "Bash(/c/users/jesse/appdata/local/microsoft/windowsapps/python *)",
+      "Bash(py *)",
+      "Bash(cmd *)",
+      "Bash(dir *)",
+      "Bash(python3 *)",
+      "Bash(powershell *)",
+      "Bash(c:\\windows\\system32\\cmd.exe *)"
+    ]
+  },
+  "$version": 3
+}

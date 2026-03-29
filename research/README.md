@@ -38,6 +38,14 @@ Examples:
 
 Keep the filename stable and use the document metadata to track status changes. That preserves links and keeps iteration legible.
 
+## Generated vs Canonical
+
+**Canonical research** lives in `research/` - notes, scenarios, syntheses, etc.
+
+**Generated support artifacts** live in `meta/generated/` - model summaries, claim extractions, comparison prep, etc.
+
+Generated files are marked with HTML comments and should be treated as drafts until reviewed. Use `branch stale` to detect when generated files need regeneration.
+
 ## Research inputs
 
 Experiments and notes can draw from both:

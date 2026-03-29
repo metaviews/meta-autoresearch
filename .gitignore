@@ -4,5 +4,7 @@ __pycache__/
 *.pyo
 *.pyd
 
+.env
+
 meta/generated/*.md
 !meta/generated/README.md

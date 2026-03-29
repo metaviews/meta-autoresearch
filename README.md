@@ -78,18 +78,18 @@ Climate is therefore the first proving ground, not the permanent identity of the
 
 ## Current status
 
-This repository is no longer only in a framing phase. The method, templates, evaluation rubric, and first research branches are now in place.
+The method, templates, evaluation rubric, and CLI infrastructure are now in place.
 
 Current state:
 
 - foundation, method, glossary, roadmap, and contribution docs are established
-- the research workspace now supports notes, scenarios, experiments, and syntheses
-- the first climate branches have been developed beyond abstract framing
-- the project is now in `evidence grounding + evaluation refinement`, with early attention turning toward reusable structure types
-- the next phase is `method infrastructure`: modest tooling to increase work per pass without turning the project into a product
-- the first CLI layer now exists for branch state, run scaffolding, branch checks, and dossier generation
-- model allocation is now treated as an explicit design concern: the method should learn how to distribute work across a diverse and evolving AI ecosystem rather than assume one model tier fits every task
-- the next tooling iterations will focus on reducing frontier-model token load through context compression first, then bounded delegation to more affordable models via a provider-agnostic configuration layer
+- the research workspace supports notes, scenarios, experiments, syntheses, loops, and discards
+- four research branches active: `whiplash` (L4), `breadbasket`, `hydrologic`, `wealth-concentration` (L3)
+- **Iteration 1 complete**: branch/run state tracking, method hygiene checks
+- **Iteration 2 complete**: context compression (snapshot, index, stale detection, compare-prep)
+- **Iteration 3 complete**: bounded model delegation via OpenRouter (summarize-note, extract-claims)
+- model allocation is now operational: small/mid/strong slots with cost-aware routing
+- generated artifacts stay in `meta/generated/`, marked as draft, never auto-set curation
 
 ## Current research branches
 
@@ -130,21 +130,51 @@ Then, for the most developed current work:
 
 ## CLI
 
-The first method-infrastructure CLI layer is intentionally small. It supports branch state, run manifests, checks, and dossier generation.
+The method-infrastructure CLI layer reduces coordination overhead without automating judgment.
 
-Examples:
+### Setup
 
-- `python -m meta_autoresearch_cli branch status breadbasket`
-- `python -m meta_autoresearch_cli branch check hydrologic`
-- `python -m meta_autoresearch_cli branch list`
-- `python -m meta_autoresearch_cli branch dossier whiplash`
-- `python -m meta_autoresearch_cli run new hydrologic --type maturity`
-- `python -m meta_autoresearch_cli run list --branch whiplash`
-- `python -m meta_autoresearch_cli run show <run-id>`
-- `python -m meta_autoresearch_cli run update <run-id> --add-output maturity_update research/syntheses/example.md`
-- `python -m meta_autoresearch_cli run complete <run-id>`
+1. Install Python 3.10+
+2. (Optional) Add API key to `.env` for delegated tasks:
+   ```
+   OPENROUTER_API_KEY=your-key-here
+   ```
 
-See `docs/method-infrastructure.md` for the design intent and scope.
+### Branch Commands
+
+```bash
+python -m meta_autoresearch_cli branch list
+python -m meta_autoresearch_cli branch status <slug>
+python -m meta_autoresearch_cli branch check <slug>
+python -m meta_autoresearch_cli branch dossier <slug>
+python -m meta_autoresearch_cli branch snapshot <slug>
+python -m meta_autoresearch_cli branch stale [slug]       # Check stale generated files
+python -m meta_autoresearch_cli branch index <slug>       # Generate artifact index
+python -m meta_autoresearch_cli branch compare-prep <slug> # Generate comparison prep
+```
+
+### Run Commands
+
+```bash
+python -m meta_autoresearch_cli run new <branch> --type <pass-type>
+python -m meta_autoresearch_cli run list [--branch <slug>] [--status <state>]
+python -m meta_autoresearch_cli run show <run-id>
+python -m meta_autoresearch_cli run check <run-id>
+python -m meta_autoresearch_cli run update <run-id> --add-output <kind> <path>
+python -m meta_autoresearch_cli run complete <run-id>
+python -m meta_autoresearch_cli run packet <run-id>
+```
+
+### Delegate Commands (requires API key)
+
+```bash
+python -m meta_autoresearch_cli delegate summarize-note <path>
+python -m meta_autoresearch_cli delegate extract-claims <path>
+```
+
+Pass types: `grounding`, `variant`, `comparison`, `maturity`, `discard`, `capability-fit`
+
+See `docs/method-infrastructure.md` for the design intent and full command reference.
 
 ## Contributing
 

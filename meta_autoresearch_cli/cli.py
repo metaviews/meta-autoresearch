@@ -2,10 +2,23 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import urllib.request
+import urllib.error
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime
 from pathlib import Path
 from typing import Any
+
+# Load .env file if present (for local development)
+_env_path = Path(__file__).parent.parent / ".env"
+if _env_path.exists():
+    with open(_env_path, "r") as f:
+        for line in f:
+            line = line.strip()
+            if line and not line.startswith("#") and "=" in line:
+                key, value = line.split("=", 1)
+                os.environ.setdefault(key.strip(), value.strip())
 
 
 PASS_TYPES: dict[str, dict[str, Any]] = {
@@ -49,6 +62,20 @@ PASS_TYPES: dict[str, dict[str, Any]] = {
         ],
     },
 }
+
+
+def get_model_config() -> dict[str, str]:
+    """Get provider-agnostic model configuration from environment."""
+    return {
+        "backend": os.environ.get("META_MODEL_BACKEND", "openrouter"),
+        "small": os.environ.get("META_MODEL_DEFAULT_SMALL", ""),
+        "mid": os.environ.get("META_MODEL_DEFAULT_MID", ""),
+        "strong": os.environ.get("META_MODEL_DEFAULT_STRONG", ""),
+        "openrouter_api_key": os.environ.get("OPENROUTER_API_KEY", ""),
+        "openrouter_base_url": os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"),
+        "openrouter_http_referer": os.environ.get("OPENROUTER_HTTP_REFERER", ""),
+        "openrouter_app_name": os.environ.get("OPENROUTER_APP_NAME", "meta-autoresearch"),
+    }
 
 
 @dataclass
@@ -164,6 +191,627 @@ def branch_manifests(paths: RepoPaths) -> list[tuple[dict[str, Any], Path]]:
     return manifests
 
 
+# =============================================================================
+# Iteration 2: Context Compression
+# =============================================================================
+
+
+def get_file_mtime(path: Path) -> datetime | None:
+    """Get file modification time, or None if file doesn't exist."""
+    if path.exists():
+        return datetime.fromtimestamp(path.stat().st_mtime)
+    return None
+
+
+def check_stale_generated(paths: RepoPaths, branch_slug: str) -> list[tuple[str, str, str]]:
+    """
+    Check if generated files are stale relative to their source manifests.
+    
+    Returns list of (generated_file, source_file, reason) tuples for stale files.
+    """
+    stale: list[tuple[str, str, str]] = []
+    branch_path = paths.branches / f"{branch_slug}.json"
+    
+    if not branch_path.exists():
+        return stale
+    
+    branch_mtime = get_file_mtime(branch_path)
+    if not branch_mtime:
+        return stale
+    
+    # Check branch dossier
+    dossier_path = paths.generated / f"{branch_slug}-dossier.md"
+    dossier_mtime = get_file_mtime(dossier_path)
+    if dossier_mtime and dossier_mtime < branch_mtime:
+        stale.append((
+            relpath(paths.root, dossier_path),
+            relpath(paths.root, branch_path),
+            "dossier older than branch manifest"
+        ))
+    
+    # Check branch snapshot
+    snapshot_path = paths.generated / f"{branch_slug}-snapshot.md"
+    snapshot_mtime = get_file_mtime(snapshot_path)
+    if snapshot_mtime and snapshot_mtime < branch_mtime:
+        stale.append((
+            relpath(paths.root, snapshot_path),
+            relpath(paths.root, branch_path),
+            "snapshot older than branch manifest"
+        ))
+    
+    # Check run packets for this branch
+    for run_path in paths.runs.glob("*.json"):
+        run_data = load_json(run_path)
+        if run_data.get("branch_slug") != branch_slug:
+            continue
+        
+        run_id = run_data.get("run_id", "")
+        packet_md = paths.generated / f"{run_id}-packet.md"
+        packet_json = paths.generated / f"{run_id}-packet.json"
+        run_mtime = get_file_mtime(run_path)
+        
+        if not run_mtime:
+            continue
+        
+        for packet_path in [packet_md, packet_json]:
+            packet_mtime = get_file_mtime(packet_path)
+            if packet_mtime and packet_mtime < run_mtime:
+                stale.append((
+                    relpath(paths.root, packet_path),
+                    relpath(paths.root, run_path),
+                    f"packet older than run manifest ({run_id})"
+                ))
+    
+    # Check if artifacts referenced in branch have been modified after generated files
+    branch_data = load_json(branch_path)
+    for artifact_list in ["key_notes", "key_syntheses", "loop_runs", "discard_records", "active_variants"]:
+        for artifact_rel in branch_data.get(artifact_list, []):
+            artifact_path = paths.root / artifact_rel
+            artifact_mtime = get_file_mtime(artifact_path)
+            if not artifact_mtime:
+                continue
+            
+            # Check against snapshot
+            if snapshot_mtime and artifact_mtime > snapshot_mtime:
+                stale.append((
+                    relpath(paths.root, snapshot_path),
+                    relpath(paths.root, artifact_path),
+                    f"snapshot older than {artifact_list} artifact"
+                ))
+                break  # One warning per generated file is enough
+    
+    return stale
+
+
+def command_branch_stale(args: argparse.Namespace) -> int:
+    """Check for stale generated files."""
+    paths = repo_paths()
+    
+    if args.slug:
+        # Check specific branch
+        branch_slugs = [args.slug]
+    else:
+        # Check all branches
+        branch_slugs = [p.stem for p in paths.branches.glob("*.json")]
+    
+    all_stale: list[tuple[str, str, str, str]] = []  # (branch, generated, source, reason)
+    
+    for slug in branch_slugs:
+        stale = check_stale_generated(paths, slug)
+        for gen, src, reason in stale:
+            all_stale.append((slug, gen, src, reason))
+    
+    if all_stale:
+        print("Stale generated files detected:")
+        for branch, gen, src, reason in all_stale:
+            print(f"\n  Branch: {branch}")
+            print(f"  Generated: {gen}")
+            print(f"  Source: {src}")
+            print(f"  Reason: {reason}")
+        return 1
+    else:
+        print("No stale generated files detected.")
+        return 0
+
+
+def collect_branch_artifacts(branch: dict[str, Any], paths: RepoPaths) -> dict[str, list[dict[str, Any]]]:
+    """
+    Collect artifact metadata for a branch in a compact format.
+    
+    Returns dict with categorized artifact info including path, mtime, and summary.
+    """
+    artifacts: dict[str, list[dict[str, Any]]] = {
+        "notes": [],
+        "scenarios": [],
+        "syntheses": [],
+        "loop_runs": [],
+        "discards": [],
+    }
+    
+    def artifact_info(rel_path: str) -> dict[str, Any]:
+        path = paths.root / rel_path
+        mtime = get_file_mtime(path)
+        return {
+            "path": rel_path,
+            "modified": mtime.isoformat() if mtime else None,
+            "exists": path.exists(),
+        }
+    
+    for rel in branch.get("key_notes", []):
+        artifacts["notes"].append(artifact_info(rel))
+    
+    for rel in branch.get("active_variants", []):
+        artifacts["scenarios"].append(artifact_info(rel))
+    
+    parent = branch.get("parent_artifact")
+    if parent:
+        artifacts["scenarios"].insert(0, {**artifact_info(parent), "parent": True})
+    
+    for rel in branch.get("key_syntheses", []):
+        artifacts["syntheses"].append(artifact_info(rel))
+    
+    for rel in branch.get("loop_runs", []):
+        artifacts["loop_runs"].append(artifact_info(rel))
+    
+    for rel in branch.get("discard_records", []):
+        artifacts["discards"].append(artifact_info(rel))
+    
+    return artifacts
+
+
+def artifact_index_markdown(branch: dict[str, Any], paths: RepoPaths) -> str:
+    """Generate a compact artifact index in markdown format."""
+    artifacts = collect_branch_artifacts(branch, paths)
+    
+    lines = [
+        f"# Artifact Index: {branch['title']}",
+        "",
+        f"**slug:** `{branch['slug']}`",
+        f"**generated:** {datetime.now().isoformat()}",
+        "",
+    ]
+    
+    for category, items in artifacts.items():
+        if not items:
+            continue
+        
+        lines.append(f"## {category.title()}")
+        lines.append("")
+        lines.append("| Path | Modified | Status |")
+        lines.append("|------|----------|--------|")
+        
+        for item in items:
+            status = "✓" if item["exists"] else "✗ missing"
+            if item.get("parent"):
+                status += " (parent)"
+            modified = item["modified"][:10] if item["modified"] else "N/A"
+            lines.append(f"| `{item['path']}` | {modified} | {status} |")
+        
+        lines.append("")
+    
+    # Summary
+    total = sum(len(items) for items in artifacts.values())
+    missing = sum(1 for items in artifacts.values() for item in items if not item["exists"])
+    
+    lines.append("## Summary")
+    lines.append("")
+    lines.append(f"- **Total artifacts:** {total}")
+    lines.append(f"- **Missing files:** {missing}")
+    lines.append(f"- **Branch maturity:** {branch.get('maturity_level', 'N/A')}")
+    lines.append(f"- **Structure type:** `{branch.get('structure_type', 'N/A')}`")
+    lines.append("")
+    
+    return "\n".join(lines)
+
+
+def command_branch_index(args: argparse.Namespace) -> int:
+    """Generate artifact index for a branch."""
+    branch, _, paths = load_branch(args.slug)
+    index_md = artifact_index_markdown(branch, paths)
+    
+    out = paths.generated / f"{branch['slug']}-artifact-index.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(index_md, encoding="utf-8", newline="\n")
+    
+    print(f"generated: {relpath(paths.root, out)}")
+    return 0
+
+
+def comparison_prep_markdown(branch: dict[str, Any], paths: RepoPaths) -> str:
+    """
+    Generate comparison prep material from branch state.
+    
+    Creates a compact summary of variants, key differences, and comparison dimensions.
+    """
+    lines = [
+        f"# Comparison Prep: {branch['title']}",
+        "",
+        f"**slug:** `{branch['slug']}`",
+        f"**structure type:** `{branch.get('structure_type', 'N/A')}`",
+        f"**maturity:** {branch.get('maturity_level', 'N/A')} ({branch.get('maturity_note', '')})",
+        "",
+    ]
+    
+    # Variant summary table
+    variants = branch.get("active_variants", [])
+    parent = branch.get("parent_artifact")
+    
+    if parent:
+        variants_with_parent = [parent] + variants
+    else:
+        variants_with_parent = variants
+    
+    lines.append("## Variants Overview")
+    lines.append("")
+    
+    if variants_with_parent:
+        lines.append("| Variant | Role | Status |")
+        lines.append("|---------|------|--------|")
+        
+        strongest = branch.get("strongest_variant", "")
+        most_generative = branch.get("most_generative_variant", "")
+        weakest = branch.get("weakest_variant", "")
+        
+        for v in variants_with_parent:
+            roles = []
+            if v == parent:
+                roles.append("parent")
+            if v == strongest:
+                roles.append("strongest")
+            if v == most_generative:
+                roles.append("most_generative")
+            if v == weakest:
+                roles.append("weakest")
+            
+            role_str = ", ".join(roles) if roles else "variant"
+            exists = "✓" if check_file_exists(paths.root, v) else "✗ missing"
+            short_path = v.split("/")[-1] if "/" in v else v
+            lines.append(f"| `{short_path}` | {role_str} | {exists} |")
+        
+        lines.append("")
+    
+    # Key comparison dimensions from evaluation framework
+    lines.append("## Comparison Dimensions")
+    lines.append("")
+    lines.append("Use these dimensions when comparing variants:")
+    lines.append("")
+    lines.append("1. **Evidence strength** - How well sources support claims")
+    lines.append("2. **Internal coherence** - Causal structure clarity")
+    lines.append("3. **Relevance** - Match to research question")
+    lines.append("4. **Preparedness value** - Decision-usefulness")
+    lines.append("5. **Novelty** - Expands search space vs restates familiar")
+    lines.append("6. **Actionability** - Clear next research step")
+    lines.append("7. **Status-quo challenge** - Questions dominant assumptions")
+    lines.append("8. **Imaginative power** - Expands plausible range")
+    lines.append("")
+    
+    # Open questions to guide comparison
+    open_questions = branch.get("open_questions", [])
+    if open_questions:
+        lines.append("## Guiding Questions")
+        lines.append("")
+        for i, q in enumerate(open_questions[:5], 1):
+            lines.append(f"{i}. {q}")
+        lines.append("")
+    
+    # Previous syntheses
+    key_syntheses = branch.get("key_syntheses", [])
+    if key_syntheses:
+        lines.append("## Previous Comparisons")
+        lines.append("")
+        for syn in key_syntheses[-3:]:
+            lines.append(f"- `{syn.split('/')[-1]}`")
+        lines.append("")
+    
+    # Recommended comparison approach
+    lines.append("## Recommended Approach")
+    lines.append("")
+    if len(variants_with_parent) >= 2:
+        lines.append(f"- Compare {len(variants_with_parent)} variants across 8 dimensions")
+        lines.append("- Identify which variant is strongest vs most generative")
+        lines.append("- Note where variants diverge in mechanism vs wording")
+        lines.append("- Record curation decision: keep/revise/merge/discard per variant")
+    else:
+        lines.append("- Need more variants before meaningful comparison")
+        lines.append("- Consider generating additional variants via `run new --type variant`")
+    lines.append("")
+    
+    # Next step
+    lines.append("## Next Step")
+    lines.append("")
+    lines.append(f"**Recommended pass:** `{branch.get('next_recommended_pass', 'N/A')}`")
+    lines.append("")
+    
+    return "\n".join(lines)
+
+
+def command_branch_compare_prep(args: argparse.Namespace) -> int:
+    """Generate comparison prep material for a branch."""
+    branch, _, paths = load_branch(args.slug)
+    prep_md = comparison_prep_markdown(branch, paths)
+    
+    out = paths.generated / f"{branch['slug']}-comparison-prep.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(prep_md, encoding="utf-8", newline="\n")
+    
+    print(f"generated: {relpath(paths.root, out)}")
+    return 0
+
+
+# =============================================================================
+# Iteration 3: Bounded Model Delegation
+# =============================================================================
+
+
+def call_openrouter(messages: list[dict[str, str]], model: str, config: dict[str, str]) -> str:
+    """
+    Call OpenRouter API with the given messages and model.
+    
+    Returns the response content or raises SystemExit on error.
+    """
+    api_key = config.get("openrouter_api_key", "")
+    if not api_key:
+        raise SystemExit("OPENROUTER_API_KEY not set. Add it to .env file.")
+    
+    base_url = config.get("openrouter_base_url", "https://openrouter.ai/api/v1")
+    http_referer = config.get("openrouter_http_referer", "")
+    app_name = config.get("openrouter_app_name", "meta-autoresearch")
+    
+    url = f"{base_url}/chat/completions"
+    
+    payload = {
+        "model": model,
+        "messages": messages,
+        "temperature": 0.3,
+        "max_tokens": 2000,
+    }
+    
+    data = json.dumps(payload).encode("utf-8")
+    
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": http_referer,
+        "X-Title": app_name,
+    }
+    
+    req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+    
+    try:
+        with urllib.request.urlopen(req, timeout=120) as response:
+            result = json.loads(response.read().decode("utf-8"))
+            choices = result.get("choices", [])
+            if choices:
+                message = choices[0].get("message", {})
+                return message.get("content", "")
+            return ""
+    except urllib.error.HTTPError as e:
+        error_body = e.read().decode("utf-8") if e.fp else ""
+        raise SystemExit(f"OpenRouter API error ({e.code}): {error_body}")
+    except urllib.error.URLError as e:
+        raise SystemExit(f"Failed to reach OpenRouter API: {e.reason}")
+    except json.JSONDecodeError as e:
+        raise SystemExit(f"Failed to parse API response: {e}")
+
+
+def get_model_for_slot(slot: str) -> tuple[str, dict[str, str]]:
+    """
+    Get model ID and config for the given slot (small, mid, strong).
+    
+    Returns (model_id, config) tuple.
+    """
+    config = get_model_config()
+    
+    slot_map = {
+        "small": config.get("small", ""),
+        "mid": config.get("mid", ""),
+        "strong": config.get("strong", ""),
+    }
+    
+    model_id = slot_map.get(slot, "")
+    if not model_id:
+        raise SystemExit(f"Model slot '{slot}' not configured. Set META_MODEL_DEFAULT_{slot.upper()} in .env")
+    
+    return model_id, config
+
+
+def summarize_note_task(content: str, file_path: str) -> str:
+    """
+    Create the system and user prompt for note summarization.
+    
+    Returns the formatted prompt for the model.
+    """
+    system_prompt = """You are assisting with meta-autoresearch, a method for exploring complex questions without premature closure.
+
+Your task is to summarize a research note. Follow these guidelines:
+
+1. **Extract key claims** - List the main assertions or observations (bullet points)
+2. **Identify evidence** - Note what sources, cases, or data are referenced
+3. **Surface uncertainties** - Flag what remains unclear or speculative
+4. **Note connections** - Identify links to scenarios, branches, or other artifacts
+5. **Preserve nuance** - Do not collapse uncertainty into false precision
+
+Keep the summary concise (200-400 words). Use markdown formatting.
+
+This is a support task. Your output will be reviewed by a human curator."""
+
+    user_prompt = f"""Summarize this research note:
+
+File: {file_path}
+
+---
+{content}
+---
+
+Provide your summary in this format:
+
+## Key Claims
+- ...
+
+## Evidence Referenced
+- ...
+
+## Uncertainties
+- ...
+
+## Connections
+- ...
+"""
+    
+    return system_prompt, user_prompt
+
+
+def command_delegate_summarize(args: argparse.Namespace) -> int:
+    """
+    Summarize a research note using a cheaper model.
+    
+    Output goes to meta/generated/ and is marked as draft.
+    """
+    paths = repo_paths()
+    
+    # Read input file
+    input_path = Path(args.input)
+    if not input_path.is_absolute():
+        input_path = paths.root / args.input
+    
+    if not input_path.exists():
+        raise SystemExit(f"Input file not found: {input_path}")
+    
+    content = input_path.read_text(encoding="utf-8")
+    
+    # Get model for small tasks
+    model_id, config = get_model_for_slot("small")
+    
+    # Create prompts
+    rel_path = relpath(paths.root, input_path)
+    system_prompt, user_prompt = summarize_note_task(content, rel_path)
+    
+    # Call model
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
+    
+    print(f"Calling {model_id} for summarization...")
+    summary = call_openrouter(messages, model_id, config)
+    
+    if not summary:
+        raise SystemExit("Model returned empty response")
+    
+    # Generate output filename
+    stem = input_path.stem
+    output_filename = f"{stem}-summary.md"
+    output_path = paths.generated / output_filename
+    
+    # Write output with metadata header
+    output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: summarize-note -->
+<!-- Model: {model_id} -->
+<!-- Source: {rel_path} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# Summary: {input_path.name}
+
+{summary}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+    
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(output_content, encoding="utf-8", newline="\n")
+    
+    print(f"generated: {relpath(paths.root, output_path)}")
+    print(f"model: {model_id}")
+    return 0
+
+
+def command_delegate_extract_claims(args: argparse.Namespace) -> int:
+    """
+    Extract claims from a research artifact using a cheaper model.
+    
+    Output goes to meta/generated/ and is marked as draft.
+    """
+    paths = repo_paths()
+    
+    # Read input file
+    input_path = Path(args.input)
+    if not input_path.is_absolute():
+        input_path = paths.root / args.input
+    
+    if not input_path.exists():
+        raise SystemExit(f"Input file not found: {input_path}")
+    
+    content = input_path.read_text(encoding="utf-8")
+    
+    # Get model for small tasks
+    model_id, config = get_model_for_slot("small")
+    
+    # Create prompts
+    rel_path = relpath(paths.root, input_path)
+    
+    system_prompt = """You are extracting claims from research artifacts for meta-autoresearch.
+
+Your task: identify distinct, testable claims in the text.
+
+Guidelines:
+1. One claim per bullet point
+2. Preserve uncertainty qualifiers ("may", "suggests", "likely")
+3. Distinguish between evidence-backed claims and speculation
+4. Note when claims reference specific sources or cases
+
+This is a support task. Output will be reviewed by human curator."""
+
+    user_prompt = f"""Extract all claims from this artifact:
+
+File: {rel_path}
+
+---
+{content}
+---
+
+Format each claim as:
+- [Claim text] (evidence-backed | speculative) - [source if referenced]
+"""
+    
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
+
+    print(f"Calling {model_id} for claim extraction...")
+    result = call_openrouter(messages, model_id, config)
+
+    if not result:
+        raise SystemExit("Model returned empty response for claim extraction")
+    
+    # Generate output filename
+    stem = input_path.stem
+    output_filename = f"{stem}-claims.md"
+    output_path = paths.generated / output_filename
+    
+    output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: extract-claims -->
+<!-- Model: {model_id} -->
+<!-- Source: {rel_path} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# Claims Extracted: {input_path.name}
+
+{result}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+    
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(output_content, encoding="utf-8", newline="\n")
+    
+    print(f"generated: {relpath(paths.root, output_path)}")
+    print(f"model: {model_id}")
+    return 0
+
+
 def command_branch_status(args: argparse.Namespace) -> int:
     branch, _, _ = load_branch(args.slug)
     print_kv("branch", branch["title"])
@@ -254,6 +902,108 @@ def command_branch_list(args: argparse.Namespace) -> int:
     return 0
 
 
+def branch_snapshot_markdown(branch: dict[str, Any], paths: RepoPaths) -> str:
+    """Generate a compact branch snapshot in markdown format."""
+    lines = [
+        f"# Branch Snapshot: {branch['title']}",
+        "",
+        f"**slug:** `{branch['slug']}`",
+        f"**maturity:** {branch.get('maturity_level', 'N/A')} ({branch.get('maturity_note', '')})",
+        f"**structure type:** `{branch.get('structure_type', 'N/A')}`",
+        f"**status:** {branch.get('status', 'N/A')}",
+        f"**next pass:** {branch.get('next_recommended_pass', 'N/A')}",
+        "",
+        "## Key Variants",
+        "",
+        f"- strongest: `{branch.get('strongest_variant', 'N/A')}`",
+        f"- most generative: `{branch.get('most_generative_variant', 'N/A')}`",
+        f"- weakest: `{branch.get('weakest_variant', 'N/A')}`",
+        "",
+        "## Active Variants",
+        "",
+    ]
+    for item in branch.get("active_variants", [])[:5]:
+        lines.append(f"- `{item}`")
+    lines.extend(["", "## Open Questions", ""])
+    for item in branch.get("open_questions", [])[:3]:
+        lines.append(f"- {item}")
+    lines.extend(["", "## Recent Artifacts", ""])
+    lines.append("**Notes:**")
+    for item in branch.get("key_notes", [])[-3:]:
+        lines.append(f"- `{item}`")
+    lines.append("")
+    lines.append("**Syntheses:**")
+    for item in branch.get("key_syntheses", [])[-3:]:
+        lines.append(f"- `{item}`")
+    lines.append("")
+    lines.append("**Loop Runs:**")
+    for item in branch.get("loop_runs", [])[-3:]:
+        lines.append(f"- `{item}`")
+    return "\n".join(lines).strip() + "\n"
+
+
+def command_branch_snapshot(args: argparse.Namespace) -> int:
+    """Generate a compact branch snapshot."""
+    branch, _, paths = load_branch(args.slug)
+    snapshot_md = branch_snapshot_markdown(branch, paths)
+    out = paths.generated / f"{branch['slug']}-snapshot.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(snapshot_md, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, out)}")
+    return 0
+
+
+def branch_snapshot_markdown(branch: dict[str, Any], paths: RepoPaths) -> str:
+    """Generate a compact branch snapshot in markdown format."""
+    lines = [
+        f"# Branch Snapshot: {branch['title']}",
+        "",
+        f"**slug:** `{branch['slug']}`",
+        f"**maturity:** {branch.get('maturity_level', 'N/A')} ({branch.get('maturity_note', '')})",
+        f"**structure type:** `{branch.get('structure_type', 'N/A')}`",
+        f"**status:** {branch.get('status', 'N/A')}",
+        f"**next pass:** {branch.get('next_recommended_pass', 'N/A')}",
+        "",
+        "## Key Variants",
+        "",
+        f"- strongest: `{branch.get('strongest_variant', 'N/A')}`",
+        f"- most generative: `{branch.get('most_generative_variant', 'N/A')}`",
+        f"- weakest: `{branch.get('weakest_variant', 'N/A')}`",
+        "",
+        "## Active Variants",
+        "",
+    ]
+    for item in branch.get("active_variants", [])[:5]:
+        lines.append(f"- `{item}`")
+    lines.extend(["", "## Open Questions", ""])
+    for item in branch.get("open_questions", [])[:3]:
+        lines.append(f"- {item}")
+    lines.extend(["", "## Recent Artifacts", ""])
+    lines.append("**Notes:**")
+    for item in branch.get("key_notes", [])[-3:]:
+        lines.append(f"- `{item}`")
+    lines.append("")
+    lines.append("**Syntheses:**")
+    for item in branch.get("key_syntheses", [])[-3:]:
+        lines.append(f"- `{item}`")
+    lines.append("")
+    lines.append("**Loop Runs:**")
+    for item in branch.get("loop_runs", [])[-3:]:
+        lines.append(f"- `{item}`")
+    return "\n".join(lines).strip() + "\n"
+
+
+def command_branch_snapshot(args: argparse.Namespace) -> int:
+    """Generate a compact branch snapshot."""
+    branch, _, paths = load_branch(args.slug)
+    snapshot_md = branch_snapshot_markdown(branch, paths)
+    out = paths.generated / f"{branch['slug']}-snapshot.md"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(snapshot_md, encoding="utf-8", newline="\n")
+    print(f"generated: {relpath(paths.root, out)}")
+    return 0
+
+
 def next_run_id(paths: RepoPaths, branch_slug: str, run_type: str) -> str:
     prefix = f"{date.today().isoformat()}-{branch_slug}-{run_type}"
     existing = sorted(paths.runs.glob(f"{prefix}*.json"))
@@ -298,6 +1048,162 @@ def load_run(run_id: str) -> tuple[dict[str, Any], Path, RepoPaths]:
     if not path.exists():
         raise SystemExit(f"Unknown run '{run_id}'. Expected manifest at {relpath(paths.root, path)}")
     return load_json(path), path, paths
+
+
+def run_packet_markdown(run: dict[str, Any], branch: dict[str, Any], paths: RepoPaths) -> str:
+    """Generate a run packet in markdown format."""
+    lines = [
+        f"# Run Packet: {run['run_id']}",
+        "",
+        f"**branch:** `{run['branch_slug']}`",
+        f"**type:** {run['run_type']}",
+        f"**status:** {run.get('completion_status', 'planned')}",
+        "",
+        "## Question",
+        "",
+        run.get('question', 'N/A'),
+        "",
+        "## Targeted Stages",
+        "",
+    ]
+    for stage in run.get("stages_targeted", []):
+        lines.append(f"- Stage {stage}")
+    lines.extend(["", "## Expected Outputs", ""])
+    for item in run.get("expected_outputs", []):
+        lines.append(f"- {item['kind']}: {item['description']}")
+    lines.extend(["", "## Branch Context", ""])
+    lines.append(f"**maturity:** {branch.get('maturity_level', 'N/A')} ({branch.get('maturity_note', '')})")
+    lines.append(f"**structure type:** `{branch.get('structure_type', 'N/A')}`")
+    lines.append(f"**next pass:** {branch.get('next_recommended_pass', 'N/A')}")
+    lines.extend(["", "## Strongest Variant", ""])
+    lines.append(f"`{branch.get('strongest_variant', 'N/A')}`")
+    lines.extend(["", "## Created Outputs", ""])
+    created = run.get("created_outputs", [])
+    if created:
+        for item in created:
+            if isinstance(item, dict):
+                lines.append(f"- {item.get('kind', '')}: {item.get('path', '')}")
+    else:
+        lines.append("- none yet")
+    lines.extend(["", "## Notes", ""])
+    notes = run.get("notes", "").strip()
+    if notes:
+        for line in notes.splitlines():
+            lines.append(f"- {line}")
+    else:
+        lines.append("- none")
+    return "\n".join(lines).strip() + "\n"
+
+
+def command_run_packet(args: argparse.Namespace) -> int:
+    """Generate a run packet in both markdown and JSON formats."""
+    run, _, paths = load_run(args.run_id)
+    branch, _, _ = load_branch(run["branch_slug"])
+    packet_md = run_packet_markdown(run, branch, paths)
+    out_md = paths.generated / f"{run['run_id']}-packet.md"
+    out_json = paths.generated / f"{run['run_id']}-packet.json"
+    out_md.parent.mkdir(parents=True, exist_ok=True)
+    out_md.write_text(packet_md, encoding="utf-8", newline="\n")
+    packet_json = {
+        "run_id": run["run_id"],
+        "branch_slug": run["branch_slug"],
+        "run_type": run["run_type"],
+        "question": run.get("question", ""),
+        "stages_targeted": run.get("stages_targeted", []),
+        "expected_outputs": run.get("expected_outputs", []),
+        "created_outputs": run.get("created_outputs", []),
+        "completion_status": run.get("completion_status", "planned"),
+        "notes": run.get("notes", ""),
+        "branch_context": {
+            "maturity_level": branch.get("maturity_level", ""),
+            "maturity_note": branch.get("maturity_note", ""),
+            "structure_type": branch.get("structure_type", ""),
+            "next_recommended_pass": branch.get("next_recommended_pass", ""),
+            "strongest_variant": branch.get("strongest_variant", ""),
+        },
+    }
+    write_json(out_json, packet_json)
+    print(f"generated: {relpath(paths.root, out_md)}")
+    print(f"generated: {relpath(paths.root, out_json)}")
+    return 0
+
+
+def run_packet_markdown(run: dict[str, Any], branch: dict[str, Any], paths: RepoPaths) -> str:
+    """Generate a run packet in markdown format."""
+    lines = [
+        f"# Run Packet: {run['run_id']}",
+        "",
+        f"**branch:** `{run['branch_slug']}`",
+        f"**type:** {run['run_type']}",
+        f"**status:** {run.get('completion_status', 'planned')}",
+        "",
+        "## Question",
+        "",
+        run.get('question', 'N/A'),
+        "",
+        "## Targeted Stages",
+        "",
+    ]
+    for stage in run.get("stages_targeted", []):
+        lines.append(f"- Stage {stage}")
+    lines.extend(["", "## Expected Outputs", ""])
+    for item in run.get("expected_outputs", []):
+        lines.append(f"- {item['kind']}: {item['description']}")
+    lines.extend(["", "## Branch Context", ""])
+    lines.append(f"**maturity:** {branch.get('maturity_level', 'N/A')} ({branch.get('maturity_note', '')})")
+    lines.append(f"**structure type:** `{branch.get('structure_type', 'N/A')}`")
+    lines.append(f"**next pass:** {branch.get('next_recommended_pass', 'N/A')}")
+    lines.extend(["", "## Strongest Variant", ""])
+    lines.append(f"`{branch.get('strongest_variant', 'N/A')}`")
+    lines.extend(["", "## Created Outputs", ""])
+    created = run.get("created_outputs", [])
+    if created:
+        for item in created:
+            if isinstance(item, dict):
+                lines.append(f"- {item.get('kind', '')}: {item.get('path', '')}")
+    else:
+        lines.append("- none yet")
+    lines.extend(["", "## Notes", ""])
+    notes = run.get("notes", "").strip()
+    if notes:
+        for line in notes.splitlines():
+            lines.append(f"- {line}")
+    else:
+        lines.append("- none")
+    return "\n".join(lines).strip() + "\n"
+
+
+def command_run_packet(args: argparse.Namespace) -> int:
+    """Generate a run packet in both markdown and JSON formats."""
+    run, _, paths = load_run(args.run_id)
+    branch, _, _ = load_branch(run["branch_slug"])
+    packet_md = run_packet_markdown(run, branch, paths)
+    out_md = paths.generated / f"{run['run_id']}-packet.md"
+    out_json = paths.generated / f"{run['run_id']}-packet.json"
+    out_md.parent.mkdir(parents=True, exist_ok=True)
+    out_md.write_text(packet_md, encoding="utf-8", newline="\n")
+    packet_json = {
+        "run_id": run["run_id"],
+        "branch_slug": run["branch_slug"],
+        "run_type": run["run_type"],
+        "question": run.get("question", ""),
+        "stages_targeted": run.get("stages_targeted", []),
+        "expected_outputs": run.get("expected_outputs", []),
+        "created_outputs": run.get("created_outputs", []),
+        "completion_status": run.get("completion_status", "planned"),
+        "notes": run.get("notes", ""),
+        "branch_context": {
+            "maturity_level": branch.get("maturity_level", ""),
+            "maturity_note": branch.get("maturity_note", ""),
+            "structure_type": branch.get("structure_type", ""),
+            "next_recommended_pass": branch.get("next_recommended_pass", ""),
+            "strongest_variant": branch.get("strongest_variant", ""),
+        },
+    }
+    write_json(out_json, packet_json)
+    print(f"generated: {relpath(paths.root, out_md)}")
+    print(f"generated: {relpath(paths.root, out_json)}")
+    return 0
 
 
 def run_manifests(paths: RepoPaths) -> list[tuple[dict[str, Any], Path]]:
@@ -496,8 +1402,40 @@ def build_parser() -> argparse.ArgumentParser:
     branch_list = branch_sub.add_parser("list", help="List known branches")
     branch_list.set_defaults(func=command_branch_list)
 
+    branch_snapshot = branch_sub.add_parser("snapshot", help="Generate compact branch snapshot")
+    branch_snapshot.add_argument("slug")
+    branch_snapshot.set_defaults(func=command_branch_snapshot)
+
+    branch_stale = branch_sub.add_parser("stale", help="Check for stale generated files")
+    branch_stale.add_argument("slug", nargs="?", default=None, help="Branch slug (optional, checks all if omitted)")
+    branch_stale.set_defaults(func=command_branch_stale)
+
+    branch_index = branch_sub.add_parser("index", help="Generate artifact index for a branch")
+    branch_index.add_argument("slug")
+    branch_index.set_defaults(func=command_branch_index)
+
+    branch_compare_prep = branch_sub.add_parser("compare-prep", help="Generate comparison prep material")
+    branch_compare_prep.add_argument("slug")
+    branch_compare_prep.set_defaults(func=command_branch_compare_prep)
+
+    # Iteration 3: Model delegation
+    delegate = subparsers.add_parser("delegate", help="Delegated model tasks")
+    delegate_sub = delegate.add_subparsers(dest="delegate_command", required=True)
+
+    delegate_summarize = delegate_sub.add_parser("summarize-note", help="Summarize a research note")
+    delegate_summarize.add_argument("input", help="Path to the note file")
+    delegate_summarize.set_defaults(func=command_delegate_summarize)
+
+    delegate_extract = delegate_sub.add_parser("extract-claims", help="Extract claims from an artifact")
+    delegate_extract.add_argument("input", help="Path to the artifact file")
+    delegate_extract.set_defaults(func=command_delegate_extract_claims)
+
     run = subparsers.add_parser("run", help="Run manifest commands")
     run_sub = run.add_subparsers(dest="run_command", required=True)
+
+    run_packet = run_sub.add_parser("packet", help="Generate run packet in markdown and JSON")
+    run_packet.add_argument("run_id")
+    run_packet.set_defaults(func=command_run_packet)
 
     run_new = run_sub.add_parser("new", help="Create a new run manifest")
     run_new.add_argument("branch")
