@@ -43,7 +43,6 @@ Document the first non-climate proving-ground cycle for wealth concentration fro
   - strong WID evidence for concentrated wealth, asset asymmetry, and policy design mismatch
   - workable transmission evidence through private credit, NBFIs, and India's NBFC/MFI funding squeeze
 - evidence gaps:
-  - no explicit discard record yet for this branch
   - no loop-specific synthesis of failed framings yet
   - transmission branch still thinner on borrower outcomes than on lender/funding stress
 - source tensions or disagreements:
@@ -102,7 +101,7 @@ Document the first non-climate proving-ground cycle for wealth concentration fro
 ## Stage 7: Evaluate and curate the branch
 
 - evaluation artifact used:
-  - no dedicated scenario matrix yet for this branch; judgment currently relies on comparison syntheses plus branch manifest state
+  - `research/syntheses/2026-03-29-wealth-concentration-evaluation-matrix.md`
 - curation decisions:
   - keep:
     - `research/scenarios/2026-03-28-wealth-concentration-structural-stress.md`
@@ -110,11 +109,11 @@ Document the first non-climate proving-ground cycle for wealth concentration fro
     - `research/scenarios/2026-03-28-private-credit-resilience-squeeze.md`
     - `research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md`
   - revise:
-    - the branch still needs a stronger maturity judgment and explicit pruning/discard visibility
+    - `research/scenarios/2026-03-28-private-credit-resilience-squeeze.md`
   - merge:
     - none yet
   - discard:
-    - generic inequality-only framings were left behind implicitly but are not yet documented as a discard artifact
+    - generic inequality-only framings are now documented explicitly in `research/discards/2026-03-28-wealth-concentration-discards.md`
 - branch maturity judgment:
   - `Level 3: comparative`; the branch now has multiple meaningful variants and repeated internal comparison, but it is not yet method-shaping
 
@@ -136,9 +135,8 @@ Document the first non-climate proving-ground cycle for wealth concentration fro
   - internal comparison
   - real CLI-guided run tracking
 - brittle steps in this run:
-  - no explicit discard record yet
-  - no dedicated branch evaluation matrix yet
   - no maturity-level update in docs before this loop run
+  - transmission branch still thinner on borrower outcomes than on lender/funding stress
 - where stronger models were genuinely needed:
   - framing the domain structurally rather than morally
   - comparing bounded variants and judging hybrid status
@@ -190,7 +188,7 @@ Document the first non-climate proving-ground cycle for wealth concentration fro
   - the method must accommodate branches that remain hybrid for a while rather than forcing premature structure resolution
 - what should be done differently next time:
   - add discard visibility earlier
-  - add a branch-specific evaluation matrix sooner
+  - create the branch-specific evaluation layer sooner in non-climate proving-ground branches
 
 ## Next move
 
@@ -216,9 +214,10 @@ Document the first non-climate proving-ground cycle for wealth concentration fro
 - related experiments:
   - none yet specific to this branch
 - related discards:
-  - none yet
+  - `research/discards/2026-03-28-wealth-concentration-discards.md`
 - related syntheses:
   - `research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md`
   - `research/syntheses/2026-03-28-wealth-concentration-internal-comparison.md`
   - `research/syntheses/2026-03-28-wealth-concentration-resolution-comparison.md`
   - `research/syntheses/2026-03-28-wealth-concentration-lead-comparison.md`
+  - `research/syntheses/2026-03-29-wealth-concentration-evaluation-matrix.md`

@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-03-29-wealth-concentration-maturity-2",
+  "date": "2026-03-29",
+  "branch_slug": "wealth-concentration",
+  "run_type": "maturity",
+  "question": "What explicit pruning and branch-specific evaluation would the wealth concentration proving-ground need before any Level 4 decision is justified?",
+  "stages_targeted": [
+    7,
+    8,
+    9
+  ],
+  "expected_outputs": [
+    {
+      "kind": "maturity_update",
+      "description": "A branch maturity or structure judgment update"
+    },
+    {
+      "kind": "loop_update",
+      "description": "A loop-run update or maturity assessment"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "maturity_update",
+      "path": "research/syntheses/2026-03-29-wealth-concentration-evaluation-matrix.md"
+    },
+    {
+      "kind": "loop_update",
+      "path": "research/discards/2026-03-28-wealth-concentration-discards.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "Added explicit pruning via a discard record and a branch-specific evaluation matrix to harden the wealth concentration proving-ground before any future Level 4 decision.",
+  "next_step": "maturity"
+}

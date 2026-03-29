@@ -23,18 +23,21 @@
     "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md",
     "research/syntheses/2026-03-28-wealth-concentration-internal-comparison.md",
     "research/syntheses/2026-03-28-wealth-concentration-resolution-comparison.md",
-    "research/syntheses/2026-03-28-wealth-concentration-lead-comparison.md"
+    "research/syntheses/2026-03-28-wealth-concentration-lead-comparison.md",
+    "research/syntheses/2026-03-29-wealth-concentration-evaluation-matrix.md"
   ],
   "loop_runs": [
     "research/loops/2026-03-28-wealth-concentration-loop-run.md"
   ],
-  "discard_records": [],
+  "discard_records": [
+    "research/discards/2026-03-28-wealth-concentration-discards.md"
+  ],
   "strongest_variant": "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
   "most_generative_variant": "research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md",
   "weakest_variant": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "open_questions": [
-    "Is the wealth concentration branch now mature enough for a branch-level maturity pass rather than another immediate case addition?",
-    "What would count as enough evidence to keep the branch hybrid versus promoting one structure type as dominant?"
+    "After explicit discard logging and branch-specific evaluation, what would still be required to justify Level 4 rather than Level 3?",
+    "Does the branch need one more discriminating transmission or rule-centered case, or a clearer method-level consequence, before any promotion is warranted?"
   ],
   "next_recommended_pass": "maturity",
   "last_updated": "2026-03-28"
