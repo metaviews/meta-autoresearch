@@ -101,21 +101,46 @@ python -m meta_autoresearch_cli delegate run-prep <branch> --type <pass-type>  #
 python -m meta_autoresearch_cli delegate batch <task> <pattern>   # Batch process files (e.g., batch summarize-note 'research/notes/*.md')
 ```
 
-**Model slots:**
+**Orchestrator commands** (Phase 7 - Scaled-cycle automation):
+```bash
+python -m meta_autoresearch_cli orchestrator run <plan.json>      # Execute a run plan
+python -m meta_autoresearch_cli orchestrator status               # Show cycle progress dashboard
+python -m meta_autoresearch_cli orchestrator benchmark            # Benchmark model performance
+```
+
+**Model slots** (configured in `.env`):
 - `small`: qwen/qwen3.5-flash-02-23 ($0.065/$0.26 per 1M, 1M context)
 - `mid`: mistralai/mistral-small-2603 ($0.15/$0.60 per 1M, 262K context)
 - `strong`: qwen/qwen3.5-plus-02-15 ($0.26/$1.56 per 1M, 1M context)
 
+**Fallback models** (tried if primary times out):
+- Configured via `META_MODEL_FALLBACK_SMALL`, `META_MODEL_FALLBACK_MID`, `META_MODEL_FALLBACK_STRONG`
+- Default timeout: 90 seconds per model attempt
+
 **Pass types:** `grounding`, `variant`, `comparison`, `maturity`, `discard`, `capability-fit`
 
-### Model Configuration (Optional)
-For delegated model tasks (Iteration 3):
+### Model Configuration (Required for Delegation/Orchestrator)
+
+Create `.env` file in project root:
 ```bash
-export META_MODEL_BACKEND=openrouter
-export META_MODEL_DEFAULT_SMALL=<model-id>
-export META_MODEL_DEFAULT_MID=<model-id>
-export META_MODEL_DEFAULT_STRONG=<model-id>
-export OPENROUTER_API_KEY=<key>
+# OpenRouter API key (required for model delegation)
+OPENROUTER_API_KEY=your-key-here
+
+# Primary models for each slot
+META_MODEL_DEFAULT_SMALL=qwen/qwen3.5-flash-02-23
+META_MODEL_DEFAULT_MID=mistralai/mistral-small-2603
+META_MODEL_DEFAULT_STRONG=qwen/qwen3.5-plus-02-15
+
+# Fallback models (comma-separated, tried if primary fails/times out)
+META_MODEL_FALLBACK_SMALL=meta-llama/llama-3-8b-instruct,google/gemma-2-9b-it
+META_MODEL_FALLBACK_MID=mistralai/mistral-7b-instruct,qwen/qwen3.5-flash-02-23
+META_MODEL_FALLBACK_STRONG=qwen/qwen3.5-flash-02-23,meta-llama/llama-3-70b-instruct
+
+# API timeout per model attempt (seconds)
+META_MODEL_TIMEOUT=90
+
+# Optional: OpenRouter configuration
+OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
 ```
 
 ## Development Conventions
@@ -197,7 +222,7 @@ For new contributors, read in order:
 
 Implemented:
 - `branch snapshot` - compact branch packets
-- `run packet` - generated packets for specific passes  
+- `run packet` - generated packets for specific passes
 - `branch index` - artifact index with modification times and existence checks
 - `branch stale` - stale-state detection, warns when generated packets are older than source manifests
 - `branch compare-prep` - comparison prep with variant tables, dimensions, and guiding questions
@@ -207,11 +232,34 @@ Implemented:
 Implemented:
 - `.env` configuration file with OpenRouter support
 - Provider-agnostic model config (small/mid/strong slots)
+- Fallback models with configurable timeout
 - `delegate summarize-note <path>` - summarize research notes to 200-400 words
 - `delegate extract-claims <path>` - extract claims with evidence/speculative tags
 - Safety: all output to `meta/generated/`, marked as draft, never auto-sets maturity/curation
 
-Next: Test delegation on real artifacts, evaluate quality vs cost tradeoffs.
+**Phase 6: Workflow Automation** (COMPLETED)
+
+Implemented:
+- `delegate branch-packet` - generate snapshot + index + compare-prep in one call
+- `delegate run-prep` - prepare all materials for a run type
+- `delegate batch` - process multiple files with glob patterns
+
+**Phase 7A: Scaled-Cycle Orchestrator** (COMPLETED)
+
+Implemented:
+- `orchestrator run <plan.json>` - execute autonomous research cycles
+- `orchestrator status` - show HTML dashboard with progress/costs
+- `orchestrator benchmark` - test model performance to find fastest option
+- Per-task timing tracking in cycle states
+- Automatic fallback to alternate models on timeout/failure
+
+Validation results (10-cycle test on whiplash):
+- 10/10 cycles completed successfully
+- ~2.7 minutes per cycle average
+- ~$0.0032 cost per cycle
+- 0 failures, 0 human interventions
+
+See `docs/model-performance.md` for model configuration and benchmarking guide.
 
 ## Working Rules
 

@@ -1,0 +1,8 @@
+{
+  "name": "whiplash-test-1",
+  "branch": "whiplash",
+  "pass_type": "comparison",
+  "cycles": 1,
+  "autonomy_level": "low",
+  "description": "Single cycle test with improved error handling"
+}

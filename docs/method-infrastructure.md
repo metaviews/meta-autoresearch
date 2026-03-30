@@ -302,6 +302,9 @@ Current invocation style:
 - `python -m meta_autoresearch_cli delegate branch-packet <slug>`
 - `python -m meta_autoresearch_cli delegate run-prep <branch> --type <pass-type>`
 - `python -m meta_autoresearch_cli delegate batch <task> <pattern>`
+- `python -m meta_autoresearch_cli orchestrator run <plan.json>`
+- `python -m meta_autoresearch_cli orchestrator status`
+- `python -m meta_autoresearch_cli orchestrator benchmark`
 
 This should still be treated as a support layer, not a final interface.
 
@@ -310,6 +313,11 @@ This should still be treated as a support layer, not a final interface.
 This layer should automate method overhead, not method judgment.
 
 If the software starts making the process less legible, more opaque, or more autonomous than the current method can justify, it is growing too fast.
+
+## Related Documentation
+
+- `docs/model-performance.md` - Model configuration, fallbacks, benchmarking, and performance tracking
+- `research/experiments/2026-03-29-lessons-from-10-cycles.md` - Validation results from first 10-cycle orchestrator test
 
 ## Implementation Status
 

@@ -1,0 +1,7 @@
+{
+  "name": "whiplash-comparison-batch3",
+  "branch": "whiplash",
+  "pass_type": "comparison",
+  "cycles": 4,
+  "autonomy_level": "low"
+}

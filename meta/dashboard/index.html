@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta-Autoresearch Dashboard</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 2rem; background: #f5f5f5; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { color: #333; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }
+        .stat-card { background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .stat-value { font-size: 2rem; font-weight: bold; color: #2563eb; }
+        .stat-label { color: #666; margin-top: 0.5rem; }
+        .plan { background: white; margin: 1rem 0; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .cycle { display: flex; justify-content: space-between; padding: 0.75rem; border-bottom: 1px solid #eee; }
+        .cycle:last-child { border-bottom: none; }
+        .status { padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; }
+        .status-completed { background: #dcfce7; color: #166534; }
+        .status-failed { background: #fee2e2; color: #991b1b; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-running { background: #dbeafe; color: #1e40af; }
+        .cycle-info { flex: 1; }
+        .cycle-meta { color: #666; font-size: 0.875rem; }
+        .error { background: #fef2f2; color: #991b1b; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-size: 0.875rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Meta-Autoresearch Dashboard</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">10</div>
+                <div class="stat-label">Total Cycles</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #16a34a;">10</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #dc2626;">0</div>
+                <div class="stat-label">Failed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #f59e0b;">0</div>
+                <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #2563eb;">0</div>
+                <div class="stat-label">Running</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">$0.03</div>
+                <div class="stat-label">Total Cost</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">26.9m</div>
+                <div class="stat-label">Total Time</div>
+            </div>
+        </div>
+        
+        <h2>Run Plans</h2>
+
+        <div class="plan">
+            <h3>whiplash-comparison-batch1</h3>
+            <p>3 cycles</p>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 1</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 140.9s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 2</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 196.9s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 3</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 154.1s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+        </div>
+
+        <div class="plan">
+            <h3>whiplash-comparison-batch2</h3>
+            <p>3 cycles</p>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 1</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 172.4s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 2</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 140.1s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 3</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 151.1s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+        </div>
+
+        <div class="plan">
+            <h3>whiplash-comparison-batch3</h3>
+            <p>3 cycles</p>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 1</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 181.4s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 2</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 151.0s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 3</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 145.0s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+        </div>
+
+        <div class="plan">
+            <h3>whiplash-comparison-final</h3>
+            <p>1 cycles</p>
+
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle 1</strong>: whiplash / comparison
+                    <div class="cycle-meta">
+                        Duration: 179.8s | Cost: $0.0032
+ | Outputs: 7 files
+                    </div>
+
+                </div>
+                <span class="status status-completed">completed</span>
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+        // Auto-refresh every 30 seconds
+        setTimeout(() => location.reload(), 30000);
+    </script>
+</body>
+</html>

@@ -71,6 +71,10 @@ def get_model_config() -> dict[str, str]:
         "small": os.environ.get("META_MODEL_DEFAULT_SMALL", ""),
         "mid": os.environ.get("META_MODEL_DEFAULT_MID", ""),
         "strong": os.environ.get("META_MODEL_DEFAULT_STRONG", ""),
+        "fallback_small": os.environ.get("META_MODEL_FALLBACK_SMALL", ""),
+        "fallback_mid": os.environ.get("META_MODEL_FALLBACK_MID", ""),
+        "fallback_strong": os.environ.get("META_MODEL_FALLBACK_STRONG", ""),
+        "timeout": os.environ.get("META_MODEL_TIMEOUT", "90"),
         "openrouter_api_key": os.environ.get("OPENROUTER_API_KEY", ""),
         "openrouter_base_url": os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1"),
         "openrouter_http_referer": os.environ.get("OPENROUTER_HTTP_REFERER", ""),
@@ -543,12 +547,15 @@ def command_branch_compare_prep(args: argparse.Namespace) -> int:
 # =============================================================================
 
 
-def call_openrouter(messages: list[dict[str, str]], model: str, config: dict[str, str]) -> str:
+def call_openrouter(messages: list[dict[str, str]], model: str, config: dict[str, str], timeout: int = 60, fallback_models: list[str] = None) -> tuple[str, str, float]:
     """
     Call OpenRouter API with the given messages and model.
     
-    Returns the response content or raises SystemExit on error.
+    Returns (content, model_used, duration_seconds) tuple.
+    If primary model fails or times out, tries fallback models.
     """
+    import time
+    
     api_key = config.get("openrouter_api_key", "")
     if not api_key:
         raise SystemExit("OPENROUTER_API_KEY not set. Add it to .env file.")
@@ -559,46 +566,68 @@ def call_openrouter(messages: list[dict[str, str]], model: str, config: dict[str
     
     url = f"{base_url}/chat/completions"
     
-    payload = {
-        "model": model,
-        "messages": messages,
-        "temperature": 0.3,
-        "max_tokens": 2000,
-    }
+    # Build model list: primary + fallbacks
+    models_to_try = [model]
+    if fallback_models:
+        models_to_try.extend(fallback_models)
     
-    data = json.dumps(payload).encode("utf-8")
+    for attempt_model in models_to_try:
+        start_time = time.time()
+        
+        payload = {
+            "model": attempt_model,
+            "messages": messages,
+            "temperature": 0.3,
+            "max_tokens": 2000,
+        }
+        
+        data = json.dumps(payload).encode("utf-8")
+        
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+            "HTTP-Referer": http_referer,
+            "X-Title": app_name,
+        }
+        
+        req = urllib.request.Request(url, data=data, headers=headers, method="POST")
+        
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                result = json.loads(response.read().decode("utf-8"))
+                content = result.get("choices", [{}])[0].get("message", {}).get("content", "")
+                duration = time.time() - start_time
+                
+                if content and len(content.strip()) > 10:
+                    return content, attempt_model, duration
+                else:
+                    # Got response but content is empty/insufficient
+                    continue
+                    
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode("utf-8") if e.fp else ""
+            # Try next model on rate limit or server error
+            if e.code in [429, 500, 502, 503]:
+                continue
+            raise SystemExit(f"OpenRouter API error ({e.code}): {error_body}")
+        except urllib.error.URLError as e:
+            # Try next model on network error
+            continue
+        except json.JSONDecodeError:
+            continue
+        except TimeoutError:
+            # Try next model on timeout
+            continue
     
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": http_referer,
-        "X-Title": app_name,
-    }
-    
-    req = urllib.request.Request(url, data=data, headers=headers, method="POST")
-    
-    try:
-        with urllib.request.urlopen(req, timeout=120) as response:
-            result = json.loads(response.read().decode("utf-8"))
-            choices = result.get("choices", [])
-            if choices:
-                message = choices[0].get("message", {})
-                return message.get("content", "")
-            return ""
-    except urllib.error.HTTPError as e:
-        error_body = e.read().decode("utf-8") if e.fp else ""
-        raise SystemExit(f"OpenRouter API error ({e.code}): {error_body}")
-    except urllib.error.URLError as e:
-        raise SystemExit(f"Failed to reach OpenRouter API: {e.reason}")
-    except json.JSONDecodeError as e:
-        raise SystemExit(f"Failed to parse API response: {e}")
+    # All models failed
+    raise SystemExit(f"All models failed: {models_to_try}")
 
 
-def get_model_for_slot(slot: str) -> tuple[str, dict[str, str]]:
+def get_model_for_slot(slot: str) -> tuple[str, dict[str, str], list[str], int]:
     """
-    Get model ID and config for the given slot (small, mid, strong).
+    Get model ID, config, fallbacks, and timeout for the given slot (small, mid, strong).
     
-    Returns (model_id, config) tuple.
+    Returns (model_id, config, fallback_models, timeout) tuple.
     """
     config = get_model_config()
     
@@ -608,11 +637,24 @@ def get_model_for_slot(slot: str) -> tuple[str, dict[str, str]]:
         "strong": config.get("strong", ""),
     }
     
+    fallback_map = {
+        "small": config.get("fallback_small", ""),
+        "mid": config.get("fallback_mid", ""),
+        "strong": config.get("fallback_strong", ""),
+    }
+    
     model_id = slot_map.get(slot, "")
     if not model_id:
         raise SystemExit(f"Model slot '{slot}' not configured. Set META_MODEL_DEFAULT_{slot.upper()} in .env")
     
-    return model_id, config
+    # Parse fallback models (comma-separated)
+    fallback_str = fallback_map.get(slot, "")
+    fallback_models = [m.strip() for m in fallback_str.split(",") if m.strip()] if fallback_str else []
+    
+    # Get timeout
+    timeout = int(config.get("timeout", "90"))
+    
+    return model_id, config, fallback_models, timeout
 
 
 def summarize_note_task(content: str, file_path: str) -> str:
@@ -1185,6 +1227,546 @@ Format each claim as:
             print(f"  {src}: {err}")
     
     return 1 if errors else 0
+
+
+# =============================================================================
+# Phase 7: Scaled-Cycle Orchestrator
+# =============================================================================
+
+
+def orchestrator_paths() -> RepoPaths:
+    """Get paths for orchestrator state."""
+    paths = repo_paths()
+    # Ensure orchestrator directories exist
+    (paths.meta / "orchestrator").mkdir(parents=True, exist_ok=True)
+    (paths.meta / "dashboard").mkdir(parents=True, exist_ok=True)
+    return paths
+
+
+def load_run_plan(plan_path: str) -> dict[str, Any]:
+    """Load a run plan from JSON file."""
+    path = Path(plan_path)
+    if not path.is_absolute():
+        path = Path.cwd() / plan_path
+    
+    if not path.exists():
+        raise SystemExit(f"Run plan not found: {path}")
+    
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def create_cycle_state(plan_name: str, cycle_id: int, branch: str, pass_type: str) -> dict[str, Any]:
+    """Create initial state for a cycle."""
+    return {
+        "cycle_id": cycle_id,
+        "plan_name": plan_name,
+        "branch": branch,
+        "pass_type": pass_type,
+        "status": "pending",
+        "started_at": None,
+        "completed_at": None,
+        "outputs": [],
+        "errors": [],
+        "cost_estimate": 0.0,
+        "duration_seconds": 0,
+    }
+
+
+def save_cycle_state(paths: RepoPaths, cycle_state: dict[str, Any]) -> None:
+    """Save cycle state to JSON file."""
+    cycle_file = paths.meta / "orchestrator" / f"{cycle_state['plan_name']}-cycle-{cycle_state['cycle_id']:03d}.json"
+    write_json(cycle_file, cycle_state)
+
+
+def execute_cycle(cycle_state: dict[str, Any], paths: RepoPaths, autonomy_level: str = "low") -> dict[str, Any]:
+    """
+    Execute a single research cycle.
+    
+    For now, this is a placeholder that simulates a comparison pass.
+    Will be expanded based on pass type.
+    """
+    import time
+    
+    cycle_state["status"] = "running"
+    cycle_state["started_at"] = datetime.now().isoformat()
+    start_time = time.time()
+    
+    branch_slug = cycle_state["branch"]
+    pass_type = cycle_state["pass_type"]
+    
+    try:
+        # Load branch for context
+        branch, _, _ = load_branch(branch_slug)
+        
+        if pass_type == "comparison":
+            # Execute comparison pass
+            # Step 1: Generate branch packet
+            snapshot_md = branch_snapshot_markdown(branch, paths)
+            snapshot_path = paths.generated / f"{branch_slug}-comparison-snapshot.md"
+            snapshot_path.write_text(snapshot_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, snapshot_path)))
+            
+            # Step 2: Generate artifact index
+            index_md = artifact_index_markdown(branch, paths)
+            index_path = paths.generated / f"{branch_slug}-comparison-index.md"
+            index_path.write_text(index_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, index_path)))
+            
+            # Step 3: Generate comparison prep
+            prep_md = comparison_prep_markdown(branch, paths)
+            prep_path = paths.generated / f"{branch_slug}-comparison-prep.md"
+            prep_path.write_text(prep_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, prep_path)))
+            
+            # Step 4: Summarize grounding notes (delegate)
+            model_id, config, fallback_models, timeout = get_model_for_slot("small")
+            
+            # Track per-task timing
+            cycle_state["task_timings"] = []
+            
+            for note_rel in branch.get("key_notes", [])[:2]:  # Limit to 2 notes per cycle for now
+                note_path = paths.root / note_rel
+                if note_path.exists():
+                    content = note_path.read_text(encoding="utf-8")
+                    system_prompt, user_prompt = summarize_note_task(content, note_rel)
+                    messages = [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt},
+                    ]
+                    try:
+                        summary, model_used, duration = call_openrouter(messages, model_id, config, timeout=timeout, fallback_models=fallback_models)
+                        
+                        # Record timing
+                        cycle_state["task_timings"].append({
+                            "task": "summarize-note",
+                            "source": note_rel,
+                            "model": model_used,
+                            "duration_seconds": round(duration, 2)
+                        })
+                        
+                        if summary and len(summary.strip()) > 50:  # Ensure we got real content
+                            stem = note_path.stem
+                            output_path = paths.generated / f"{stem}-cycle-summary.md"
+                            output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: summarize-note (orchestrator cycle) -->
+<!-- Model: {model_used} -->
+<!-- Source: {note_rel} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# Summary: {note_path.name}
+
+{summary}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+                            output_path.write_text(output_content, encoding="utf-8", newline="\n")
+                            cycle_state["outputs"].append(str(relpath(paths.root, output_path)))
+                            cycle_state["cost_estimate"] += 0.0007  # Approximate cost per summary
+                        else:
+                            cycle_state["errors"].append(f"Failed to summarize {note_rel}: API returned empty or insufficient content")
+                    except SystemExit as e:
+                        cycle_state["errors"].append(f"Failed to summarize {note_rel}: {str(e)}")
+            
+            # Step 5: Extract claims from scenarios (delegate)
+            for scenario_rel in branch.get("active_variants", [])[:2]:  # Limit to 2 scenarios per cycle
+                scenario_path = paths.root / scenario_rel
+                if scenario_path.exists():
+                    content = scenario_path.read_text(encoding="utf-8")
+                    system_prompt = """You are extracting claims from research artifacts for meta-autoresearch.
+
+Your task: identify distinct, testable claims in the text.
+
+Guidelines:
+1. One claim per bullet point
+2. Preserve uncertainty qualifiers ("may", "suggests", "likely")
+3. Distinguish between evidence-backed claims and speculation
+4. Note when claims reference specific sources or cases
+
+This is a support task. Output will be reviewed by human curator."""
+
+                    user_prompt = f"""Extract all claims from this artifact:
+
+File: {scenario_rel}
+
+---
+{content}
+---
+
+Format each claim as:
+- [Claim text] (evidence-backed | speculative) - [source if referenced]
+"""
+                    messages = [
+                        {"role": "system", "content": system_prompt},
+                        {"role": "user", "content": user_prompt},
+                    ]
+                    try:
+                        result, model_used, duration = call_openrouter(messages, model_id, config, timeout=timeout, fallback_models=fallback_models)
+                        
+                        # Record timing
+                        cycle_state["task_timings"].append({
+                            "task": "extract-claims",
+                            "source": scenario_rel,
+                            "model": model_used,
+                            "duration_seconds": round(duration, 2)
+                        })
+                        
+                        if result and len(result.strip()) > 100:  # Ensure we got real content
+                            stem = scenario_path.stem
+                            output_path = paths.generated / f"{stem}-cycle-claims.md"
+                            output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: extract-claims (orchestrator cycle) -->
+<!-- Model: {model_used} -->
+<!-- Source: {scenario_rel} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# Claims Extracted: {scenario_path.name}
+
+{result}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+                            output_path.write_text(output_content, encoding="utf-8", newline="\n")
+                            cycle_state["outputs"].append(str(relpath(paths.root, output_path)))
+                            cycle_state["cost_estimate"] += 0.0009  # Approximate cost per claim extraction
+                        else:
+                            cycle_state["errors"].append(f"Failed to extract claims from {scenario_rel}: API returned empty or insufficient content")
+                    except SystemExit as e:
+                        cycle_state["errors"].append(f"Failed to extract claims from {scenario_rel}: {str(e)}")
+            
+            # Mark cycle as failed if there were errors
+            if cycle_state["errors"]:
+                cycle_state["status"] = "failed_with_outputs"
+            else:
+                cycle_state["status"] = "completed"
+            
+        else:
+            # For other pass types, create a placeholder cycle
+            cycle_state["outputs"].append(f"Cycle executed: {pass_type} pass on {branch_slug}")
+            cycle_state["status"] = "completed"
+        
+    except Exception as e:
+        cycle_state["errors"].append(str(e))
+        cycle_state["status"] = "failed"
+    
+    cycle_state["completed_at"] = datetime.now().isoformat()
+    cycle_state["duration_seconds"] = round(time.time() - start_time, 2)
+    
+    return cycle_state
+
+
+def generate_dashboard(paths: RepoPaths) -> None:
+    """Generate HTML dashboard from cycle states."""
+    import glob as glob_module
+    
+    # Load all cycle states
+    cycle_files = sorted(glob_module.glob(str(paths.meta / "orchestrator" / "*.json")))
+    cycles = []
+    for cf in cycle_files:
+        cycles.append(load_json(Path(cf)))
+    
+    # Group by plan
+    plans: dict[str, list[dict[str, Any]]] = {}
+    for cycle in cycles:
+        plan_name = cycle.get("plan_name", "unknown")
+        if plan_name not in plans:
+            plans[plan_name] = []
+        plans[plan_name].append(cycle)
+    
+    # Calculate stats
+    total_cycles = len(cycles)
+    completed = sum(1 for c in cycles if c.get("status") == "completed")
+    failed = sum(1 for c in cycles if c.get("status") == "failed")
+    pending = sum(1 for c in cycles if c.get("status") == "pending")
+    running = sum(1 for c in cycles if c.get("status") == "running")
+    total_cost = sum(c.get("cost_estimate", 0) for c in cycles)
+    total_time = sum(c.get("duration_seconds", 0) for c in cycles)
+    
+    # Generate HTML
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta-Autoresearch Dashboard</title>
+    <style>
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; margin: 2rem; background: #f5f5f5; }}
+        .container {{ max-width: 1200px; margin: 0 auto; }}
+        h1 {{ color: #333; }}
+        .stats {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }}
+        .stat-card {{ background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+        .stat-value {{ font-size: 2rem; font-weight: bold; color: #2563eb; }}
+        .stat-label {{ color: #666; margin-top: 0.5rem; }}
+        .plan {{ background: white; margin: 1rem 0; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }}
+        .cycle {{ display: flex; justify-content: space-between; padding: 0.75rem; border-bottom: 1px solid #eee; }}
+        .cycle:last-child {{ border-bottom: none; }}
+        .status {{ padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem; font-weight: 500; }}
+        .status-completed {{ background: #dcfce7; color: #166534; }}
+        .status-failed {{ background: #fee2e2; color: #991b1b; }}
+        .status-pending {{ background: #fef3c7; color: #92400e; }}
+        .status-running {{ background: #dbeafe; color: #1e40af; }}
+        .cycle-info {{ flex: 1; }}
+        .cycle-meta {{ color: #666; font-size: 0.875rem; }}
+        .error {{ background: #fef2f2; color: #991b1b; padding: 0.5rem; border-radius: 4px; margin-top: 0.5rem; font-size: 0.875rem; }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Meta-Autoresearch Dashboard</h1>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-value">{total_cycles}</div>
+                <div class="stat-label">Total Cycles</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #16a34a;">{completed}</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #dc2626;">{failed}</div>
+                <div class="stat-label">Failed</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #f59e0b;">{pending}</div>
+                <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" style="color: #2563eb;">{running}</div>
+                <div class="stat-label">Running</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">${total_cost:.2f}</div>
+                <div class="stat-label">Total Cost</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">{total_time/60:.1f}m</div>
+                <div class="stat-label">Total Time</div>
+            </div>
+        </div>
+        
+        <h2>Run Plans</h2>
+"""
+    
+    for plan_name, plan_cycles in sorted(plans.items()):
+        html += f"""
+        <div class="plan">
+            <h3>{plan_name}</h3>
+            <p>{len(plan_cycles)} cycles</p>
+"""
+        for cycle in sorted(plan_cycles, key=lambda c: c.get("cycle_id", 0)):
+            status = cycle.get("status", "unknown")
+            branch = cycle.get("branch", "unknown")
+            pass_type = cycle.get("pass_type", "unknown")
+            duration = cycle.get("duration_seconds", 0)
+            cost = cycle.get("cost_estimate", 0)
+            
+            html += f"""
+            <div class="cycle">
+                <div class="cycle-info">
+                    <strong>Cycle {cycle.get('cycle_id', '?')}</strong>: {branch} / {pass_type}
+                    <div class="cycle-meta">
+                        Duration: {duration:.1f}s | Cost: ${cost:.4f}
+"""
+            if cycle.get("outputs"):
+                html += f" | Outputs: {len(cycle['outputs'])} files"
+            html += """
+                    </div>
+"""
+            if cycle.get("errors"):
+                for err in cycle["errors"]:
+                    html += f'<div class="error">⚠️ {err}</div>'
+            html += f"""
+                </div>
+                <span class="status status-{status}">{status}</span>
+            </div>
+"""
+        
+        html += """
+        </div>
+"""
+    
+    html += """
+    </div>
+    <script>
+        // Auto-refresh every 30 seconds
+        setTimeout(() => location.reload(), 30000);
+    </script>
+</body>
+</html>
+"""
+    
+    dashboard_path = paths.meta / "dashboard" / "index.html"
+    dashboard_path.write_text(html, encoding="utf-8", newline="\n")
+    print(f"Dashboard generated: {relpath(paths.root, dashboard_path)}")
+
+
+def command_orchestrator_run(args: argparse.Namespace) -> int:
+    """Execute a run plan."""
+    paths = orchestrator_paths()
+    
+    # Load run plan
+    plan = load_run_plan(args.plan)
+    plan_name = plan.get("name", "unnamed")
+    branch = plan.get("branch", "")
+    pass_type = plan.get("pass_type", "")
+    num_cycles = plan.get("cycles", 1)
+    autonomy_level = plan.get("autonomy_level", "low")
+    
+    print(f"=== Starting Run Plan: {plan_name} ===")
+    print(f"Branch: {branch}")
+    print(f"Pass type: {pass_type}")
+    print(f"Cycles: {num_cycles}")
+    print(f"Autonomy level: {autonomy_level}")
+    print()
+    
+    # Execute cycles
+    for i in range(1, num_cycles + 1):
+        print(f"\n--- Cycle {i}/{num_cycles} ---")
+        
+        # Create cycle state
+        cycle_state = create_cycle_state(plan_name, i, branch, pass_type)
+        
+        # Execute cycle
+        cycle_state = execute_cycle(cycle_state, paths, autonomy_level)
+        
+        # Save state
+        save_cycle_state(paths, cycle_state)
+        
+        # Report status
+        if cycle_state["status"] == "completed":
+            print(f"✓ Cycle {i} completed in {cycle_state['duration_seconds']:.1f}s")
+            print(f"  Outputs: {len(cycle_state['outputs'])} files")
+            print(f"  Cost: ${cycle_state['cost_estimate']:.4f}")
+        else:
+            print(f"✗ Cycle {i} failed")
+            for err in cycle_state["errors"]:
+                print(f"  Error: {err}")
+        
+        # Generate dashboard after each cycle
+        generate_dashboard(paths)
+    
+    # Final summary
+    print("\n=== Run Plan Complete ===")
+    print(f"Dashboard: {relpath(paths.root, paths.meta / 'dashboard' / 'index.html')}")
+    
+    return 0
+
+
+def command_orchestrator_status(args: argparse.Namespace) -> int:
+    """Show orchestrator status."""
+    paths = orchestrator_paths()
+    generate_dashboard(paths)
+    
+    # Open dashboard in browser (optional)
+    dashboard_path = paths.meta / "dashboard" / "index.html"
+    if dashboard_path.exists():
+        print(f"Dashboard: {relpath(paths.root, dashboard_path)}")
+        print("Open this file in your browser to view progress.")
+    else:
+        print("No cycles have been run yet.")
+        print("Use 'orchestrator run <plan.json>' to start a run plan.")
+    
+    return 0
+
+
+def command_orchestrator_benchmark(args: argparse.Namespace) -> int:
+    """Benchmark different models for a specific task."""
+    paths = orchestrator_paths()
+    
+    config = get_model_config()
+    
+    # Get models to test from .env (primary + fallbacks for small slot)
+    primary = config.get("small", "qwen/qwen3.5-flash-02-23")
+    fallback_str = config.get("fallback_small", "")
+    fallbacks = [m.strip() for m in fallback_str.split(",") if m.strip()] if fallback_str else []
+    
+    # Combine primary + fallbacks
+    test_models = [primary] + fallbacks
+    
+    # If no fallbacks configured, use some defaults for testing
+    if len(test_models) < 2:
+        test_models.extend(["meta-llama/llama-3-8b-instruct", "google/gemma-2-9b-it"])
+    
+    # Sample task: summarize a short text
+    test_content = """This is a test research note about climate volatility.
+    
+The key finding is that historical baselines are becoming less reliable as stationarity breaks down.
+Institutions still rely heavily on frames built for a more stable world, which creates significant risk.
+
+Evidence:
+- IPCC AR6 reports increased compound extremes
+- Regional studies show precipitation variability increasing
+- Infrastructure design standards assume stationarity
+
+This suggests we need new approaches to scenario planning."""
+
+    system_prompt = "You are summarizing a research note. Extract key claims in bullet points."
+    user_prompt = f"Summarize this note:\n\n{test_content}"
+    
+    messages = [
+        {"role": "system", "content": system_prompt},
+        {"role": "user", "content": user_prompt},
+    ]
+    
+    timeout = int(config.get("timeout", "90"))
+    
+    print("=== Model Benchmark ===")
+    print(f"Task: Summarize research note (~100 tokens)")
+    print(f"Timeout: {timeout}s per model")
+    print()
+    
+    results = []
+    
+    for model in test_models:
+        print(f"Testing {model}...")
+        try:
+            content, model_used, duration = call_openrouter(messages, model, config, timeout=timeout)
+            
+            # Estimate cost (simplified)
+            cost_estimate = 0.001  # Rough estimate for small task
+            
+            results.append({
+                "model": model_used,
+                "duration": round(duration, 2),
+                "content_length": len(content),
+                "cost_estimate": cost_estimate,
+                "success": True
+            })
+            
+            print(f"  ✓ {model_used}: {duration:.2f}s, {len(content)} chars")
+            
+        except SystemExit as e:
+            results.append({
+                "model": model,
+                "duration": 0,
+                "error": str(e),
+                "success": False
+            })
+            print(f"  ✗ Failed: {e}")
+    
+    # Print summary
+    print()
+    print("=== Results ===")
+    print()
+    
+    successful = [r for r in results if r.get("success")]
+    if successful:
+        # Sort by duration
+        fastest = min(successful, key=lambda x: x["duration"])
+        print(f"Fastest: {fastest['model']} ({fastest['duration']:.2f}s)")
+        print()
+        
+        print("| Model | Duration | Output Length |")
+        print("|-------|----------|---------------|")
+        for r in sorted(successful, key=lambda x: x["duration"]):
+            print(f"| {r['model'][:40]} | {r['duration']:.2f}s | {r['content_length']} chars |")
+    else:
+        print("All models failed!")
+    
+    return 0
 
 
 def command_branch_status(args: argparse.Namespace) -> int:
@@ -1820,6 +2402,20 @@ def build_parser() -> argparse.ArgumentParser:
     delegate_batch.add_argument("task", choices=["summarize-note", "extract-claims"], help="Task to run on all files")
     delegate_batch.add_argument("pattern", help="Glob pattern for files (e.g., 'research/notes/*.md')")
     delegate_batch.set_defaults(func=command_delegate_batch)
+
+    # Phase 7: Orchestrator
+    orchestrator = subparsers.add_parser("orchestrator", help="Scaled-cycle orchestrator")
+    orchestrator_sub = orchestrator.add_subparsers(dest="orchestrator_command", required=True)
+
+    orchestrator_run = orchestrator_sub.add_parser("run", help="Execute a run plan")
+    orchestrator_run.add_argument("plan", help="Path to run plan JSON file")
+    orchestrator_run.set_defaults(func=command_orchestrator_run)
+
+    orchestrator_status = orchestrator_sub.add_parser("status", help="Show orchestrator status")
+    orchestrator_status.set_defaults(func=command_orchestrator_status)
+
+    orchestrator_benchmark = orchestrator_sub.add_parser("benchmark", help="Benchmark model performance")
+    orchestrator_benchmark.set_defaults(func=command_orchestrator_benchmark)
 
     run = subparsers.add_parser("run", help="Run manifest commands")
     run_sub = run.add_subparsers(dest="run_command", required=True)

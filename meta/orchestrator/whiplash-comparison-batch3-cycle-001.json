@@ -1,0 +1,21 @@
+{
+  "cycle_id": 1,
+  "plan_name": "whiplash-comparison-batch3",
+  "branch": "whiplash",
+  "pass_type": "comparison",
+  "status": "completed",
+  "started_at": "2026-03-30T03:29:46.870695",
+  "completed_at": "2026-03-30T03:32:48.240800",
+  "outputs": [
+    "meta/generated/whiplash-comparison-snapshot.md",
+    "meta/generated/whiplash-comparison-index.md",
+    "meta/generated/whiplash-comparison-prep.md",
+    "meta/generated/2026-03-27-feather-river-whiplash-grounding-note-cycle-summary.md",
+    "meta/generated/2026-03-27-upper-colorado-whiplash-grounding-note-cycle-summary.md",
+    "meta/generated/2026-03-27-feather-river-wet-to-fire-whiplash-cycle-claims.md",
+    "meta/generated/2026-03-27-upper-colorado-recovery-to-shortage-whiplash-cycle-claims.md"
+  ],
+  "errors": [],
+  "cost_estimate": 0.0031999999999999997,
+  "duration_seconds": 181.37
+}

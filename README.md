@@ -175,9 +175,18 @@ python -m meta_autoresearch_cli delegate run-prep <branch> --type <pass-type>
 python -m meta_autoresearch_cli delegate batch <task> <pattern>   # Batch process files
 ```
 
+### Orchestrator Commands (Phase 7 - Scaled-cycle automation)
+
+```bash
+python -m meta_autoresearch_cli orchestrator run <plan.json>       # Execute autonomous cycles
+python -m meta_autoresearch_cli orchestrator status                # Show progress dashboard
+python -m meta_autoresearch_cli orchestrator benchmark             # Test model performance
+```
+
 Pass types: `grounding`, `variant`, `comparison`, `maturity`, `discard`, `capability-fit`
 
 See `docs/method-infrastructure.md` for the design intent and full command reference.
+See `docs/model-performance.md` for model configuration and benchmarking guide.
 
 ## Contributing
 

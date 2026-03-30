@@ -1,0 +1,9 @@
+{
+  "name": "whiplash-comparison-10",
+  "branch": "whiplash",
+  "pass_type": "comparison",
+  "cycles": 10,
+  "autonomy_level": "low",
+  "description": "Initial 10-cycle test of autonomous comparison pass on whiplash branch",
+  "created": "2026-03-29"
+}
