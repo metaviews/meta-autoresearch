@@ -1,0 +1,15 @@
+id: inst:federal-reserve
+type: institution
+name: Federal Reserve
+domain: political economy
+description: |
+  US central bank with monetary policy tools that affect wealth concentration
+  through asset price channels. Quantitative easing and interest rate policy
+  can amplify wealth concentration under volatility.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md
+metadata:
+  function: monetary policy, financial regulation
+  transmission_channels: interest rates, quantitative easing

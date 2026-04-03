@@ -1,0 +1,18 @@
+id: region:feather-river
+type: region
+name: Feather River corridor
+domain: climate volatility
+description: |
+  Northern Sierra planning geography where reservoirs, snowpack, vegetation growth,
+  wildfire risk, transmission infrastructure, and emergency response all overlap.
+  Used as a bounded case for testing sequence failure (wet-to-fire whiplash).
+related_branches:
+  - whiplash
+related_artifacts:
+  - research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md
+  - research/notes/2026-03-27-feather-river-whiplash-grounding-note.md
+metadata:
+  geography: Northern Sierra, California
+  systems: water, wildfire, transmission, emergency response
+  structure_types:
+    - sequence failure

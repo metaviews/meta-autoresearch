@@ -1,0 +1,17 @@
+id: infra:regulatory-framework
+type: infrastructure
+name: Financial regulatory framework (Basel, Dodd-Frank)
+domain: political economy
+description: |
+  Banking regulation designed for traditional deposit-funded institutions:
+  capital requirements, liquidity coverage, stress testing. Rules assume
+  slow-moving depositors, transparent balance sheets, regulatory access.
+  NBFI operates outside this framework.
+related_branches:
+  - hydrologic
+related_artifacts:
+  - research/scenarios/2026-04-02-financial-regulation-design-failure.md
+metadata:
+  type: regulatory architecture
+  design_assumption: stable, slow-moving banking
+  conflict: NBFI volatility, wholesale funding, less transparency

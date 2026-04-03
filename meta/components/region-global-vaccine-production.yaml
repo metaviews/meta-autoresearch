@@ -1,0 +1,19 @@
+id: region:global-vaccine-production
+type: region
+name: Global vaccine production centers
+domain: political economy
+description: |
+  Vaccine production concentrated in few sites: US (Moderna, Pfizer), EU (BioNTech,
+  AstraZeneca), India (Serum Institute). mRNA technology and fill-finish capacity
+  create barriers to entry. Geographic concentration creates single points of failure.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-pandemic-preparedness-concentration.md
+metadata:
+  role: vaccine manufacturing concentration
+  commodity: vaccines, mRNA technology
+  key_nodes: US, EU, India (Serum Institute)
+  structure_types:
+    - correlation/transmission failure
+    - design/rule conflict under volatility

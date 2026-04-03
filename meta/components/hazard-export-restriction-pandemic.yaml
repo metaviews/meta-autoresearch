@@ -1,0 +1,16 @@
+id: hazard:export-restriction-pandemic
+type: hazard
+name: Pandemic product export restrictions
+domain: political economy
+description: |
+  Export restrictions on vaccines, PPE, antivirals during pandemic emergencies.
+  Concentrated producers restrict exports to domestic markets, creating access
+  disparities for import-dependent countries.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-pandemic-preparedness-concentration.md
+metadata:
+  hazard_type: policy
+  transmission_channel: trade restriction, vaccine nationalism
+  compounding_factors: concentrated production, emergency demand

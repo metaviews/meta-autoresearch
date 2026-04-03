@@ -1,0 +1,19 @@
+id: mech:buffer-loss-confidence
+type: mechanism
+name: Buffer loss confidence (large domestic system stops absorbing shocks)
+domain: climate volatility
+description: |
+  Large domestic production-and-stock system (e.g., China) loses confidence as
+  global shock absorber under correlated stress. Instead of stabilizing through
+  internal balancing, system may conserve stocks or increase import demand,
+  tightening global market from demand side rather than supply side.
+structure_type: correlation/transmission failure
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md
+  - research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md
+metadata:
+  failure_mode: loss of buffer confidence
+  transmission_channel: stock conservation, import demand shift
+  node_role: domestic balancer, not exporter

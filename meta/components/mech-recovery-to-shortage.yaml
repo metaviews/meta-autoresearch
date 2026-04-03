@@ -1,0 +1,19 @@
+id: mech:recovery-to-shortage
+type: mechanism
+name: Apparent recovery masking structural shortage
+domain: climate volatility
+description: |
+  Wet or recovery phase improves visible metrics (reservoir levels, short-term supply)
+  and creates public sense that scarcity has eased. Institutional attention shifts
+  away from chronic stress. Structural shortage remains unaddressed, creating
+  vulnerability when conditions shift again.
+structure_type: sequence failure
+related_branches:
+  - whiplash
+related_artifacts:
+  - research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md
+  - research/syntheses/2026-03-27-whiplash-family-comparison.md
+metadata:
+  transition_type: recovery-to-stress
+  failure_mode: institutional attention shift
+  planning_categories: water, scarcity, emergency preparedness

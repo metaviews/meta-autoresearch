@@ -1,0 +1,15 @@
+id: evidence:imf-private-credit-outlook
+type: evidence
+name: IMF private credit outlook and borrower stress analysis
+domain: political economy
+description: |
+  IMF analysis showing private credit at $2.1 trillion with more than
+  one-third of borrowers having interest costs above current earnings.
+  Identifies stale valuations, hidden leverage, and financial linkages.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-private-credit-resilience-squeeze.md
+metadata:
+  source_type: international financial analysis
+  topic: private credit, borrower stress, leverage

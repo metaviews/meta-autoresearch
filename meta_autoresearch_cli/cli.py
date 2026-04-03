@@ -703,6 +703,614 @@ Provide your summary in this format:
     return system_prompt, user_prompt
 
 
+# =============================================================================
+# Phase 7B: Component Index
+# =============================================================================
+
+COMPONENT_TYPES = ["region", "mechanism", "institution", "infrastructure", "evidence", "hazard"]
+
+
+def components_dir() -> Path:
+    """Get the components directory path."""
+    return repo_paths().meta / "components"
+
+
+def load_component_yaml(component_dir: Path) -> list[dict[str, Any]]:
+    """Load all component YAML files from the components directory."""
+    import yaml
+    
+    components = []
+    for yaml_file in component_dir.glob("*.yaml"):
+        try:
+            with open(yaml_file, "r", encoding="utf-8") as f:
+                component = yaml.safe_load(f)
+                if component and "id" in component:
+                    component["_source_file"] = yaml_file.name
+                    components.append(component)
+        except Exception as e:
+            print(f"Warning: Could not parse {yaml_file.name}: {e}")
+    return components
+
+
+def component_index_markdown(components: list[dict[str, Any]]) -> str:
+    """Generate markdown index from components."""
+    lines = [
+        "# Component Index",
+        "",
+        f"**Generated:** {date.today().isoformat()}",
+        f"**Total components:** {len(components)}",
+        "",
+        "---",
+        "",
+    ]
+    
+    # Group by type
+    by_type: dict[str, list[dict[str, Any]]] = {}
+    for comp in components:
+        comp_type = comp.get("type", "unknown")
+        if comp_type not in by_type:
+            by_type[comp_type] = []
+        by_type[comp_type].append(comp)
+    
+    for comp_type in COMPONENT_TYPES:
+        type_components = by_type.get(comp_type, [])
+        if not type_components:
+            continue
+        
+        lines.append(f"## {comp_type.title()}s")
+        lines.append("")
+        lines.append("| ID | Name | Domain | Related Branches |")
+        lines.append("|----|------|--------|------------------|")
+        
+        for comp in sorted(type_components, key=lambda c: c.get("id", "")):
+            comp_id = comp.get("id", "unknown")
+            name = comp.get("name", "Unknown")
+            domain = comp.get("domain", "N/A")
+            branches = ", ".join(comp.get("related_branches", [])) or "N/A"
+            lines.append(f"| `{comp_id}` | {name} | {domain} | {branches} |")
+        
+        lines.append("")
+    
+    lines.append("---")
+    lines.append("")
+    lines.append("*This index is auto-generated from `meta/components/*.yaml` files.*")
+    
+    return "\n".join(lines)
+
+
+def command_component_index(args: argparse.Namespace) -> int:
+    """Build component index from YAML files."""
+    try:
+        import yaml
+    except ImportError:
+        raise SystemExit("PyYAML not installed. Run: pip install pyyaml")
+    
+    comp_dir = components_dir()
+    if not comp_dir.exists():
+        raise SystemExit(f"Components directory not found: {comp_dir}")
+    
+    components = load_component_yaml(comp_dir)
+    
+    if not components:
+        print("No component YAML files found in", comp_dir)
+        return 0
+    
+    # Generate index markdown
+    index_md = component_index_markdown(components)
+    
+    # Write to components directory
+    index_path = comp_dir / "INDEX.md"
+    index_path.write_text(index_md, encoding="utf-8", newline="\n")
+    
+    # Also update README with current count
+    readme_path = comp_dir / "README.md"
+    if readme_path.exists():
+        content = readme_path.read_text(encoding="utf-8")
+        # Update the component count in the table if present
+        # For now, just note that index was generated
+    
+    print(f"Generated component index: {len(components)} components")
+    print(f"  {index_path.relative_to(repo_paths().root)}")
+    
+    # Print summary by type
+    by_type: dict[str, int] = {}
+    for comp in components:
+        comp_type = comp.get("type", "unknown")
+        by_type[comp_type] = by_type.get(comp_type, 0) + 1
+    
+    for comp_type in COMPONENT_TYPES:
+        count = by_type.get(comp_type, 0)
+        if count > 0:
+            print(f"  {comp_type}: {count}")
+    
+    return 0
+
+
+def command_component_search(args: argparse.Namespace) -> int:
+    """Search for components by query."""
+    try:
+        import yaml
+    except ImportError:
+        raise SystemExit("PyYAML not installed. Run: pip install pyyaml")
+    
+    query = args.query.lower()
+    comp_dir = components_dir()
+    
+    if not comp_dir.exists():
+        raise SystemExit(f"Components directory not found: {comp_dir}")
+    
+    components = load_component_yaml(comp_dir)
+    
+    # Filter by type if specified
+    if args.type:
+        components = [c for c in components if c.get("type") == args.type]
+    
+    # Search in id, name, description, and domain
+    matches = []
+    for comp in components:
+        searchable = " ".join([
+            comp.get("id", ""),
+            comp.get("name", ""),
+            comp.get("description", ""),
+            comp.get("domain", ""),
+            " ".join(comp.get("related_branches", [])),
+        ]).lower()
+        
+        if query in searchable:
+            matches.append(comp)
+    
+    if not matches:
+        print(f"No components found matching '{query}'")
+        if args.type:
+            print(f"(filtered by type: {args.type})")
+        return 0
+    
+    # Print results
+    print(f"Found {len(matches)} component(s) matching '{query}':\n")
+    
+    for comp in sorted(matches, key=lambda c: c.get("id", "")):
+        comp_id = comp.get("id", "unknown")
+        name = comp.get("name", "Unknown")
+        comp_type = comp.get("type", "unknown")
+        domain = comp.get("domain", "N/A")
+        branches = ", ".join(comp.get("related_branches", [])) or "N/A"
+        
+        print(f"  `{comp_id}` ({comp_type})")
+        print(f"    Name: {name}")
+        print(f"    Domain: {domain}")
+        print(f"    Related branches: {branches}")
+        
+        # Show first sentence of description
+        desc = comp.get("description", "").strip().replace("\n", " ")
+        if desc:
+            first_sentence = desc.split(".")[0][:100]
+            if len(desc) > 100:
+                first_sentence += "..."
+            print(f"    Description: {first_sentence}")
+        print()
+    
+    return 0
+
+
+def command_component_list(args: argparse.Namespace) -> int:
+    """List components by type."""
+    try:
+        import yaml
+    except ImportError:
+        raise SystemExit("PyYAML not installed. Run: pip install pyyaml")
+    
+    comp_dir = components_dir()
+    
+    if not comp_dir.exists():
+        raise SystemExit(f"Components directory not found: {comp_dir}")
+    
+    components = load_component_yaml(comp_dir)
+    
+    # Filter by type if specified
+    if args.type:
+        components = [c for c in components if c.get("type") == args.type]
+        type_filter = f" ({args.type})"
+    else:
+        type_filter = ""
+    
+    if not components:
+        print(f"No components found{type_filter}")
+        return 0
+    
+    print(f"Components{type_filter}: {len(components)}\n")
+    
+    # Group by type for display
+    by_type: dict[str, list[dict[str, Any]]] = {}
+    for comp in components:
+        comp_type = comp.get("type", "unknown")
+        if comp_type not in by_type:
+            by_type[comp_type] = []
+        by_type[comp_type].append(comp)
+    
+    for comp_type in sorted(by_type.keys()):
+        type_components = by_type[comp_type]
+        print(f"## {comp_type.title()}s ({len(type_components)})")
+        
+        for comp in sorted(type_components, key=lambda c: c.get("id", "")):
+            comp_id = comp.get("id", "unknown")
+            name = comp.get("name", "Unknown")
+            print(f"  `{comp_id}` — {name}")
+        
+        print()
+    
+    return 0
+
+
+def command_component_suggest(args: argparse.Namespace) -> int:
+    """Suggest components for a new branch."""
+    try:
+        import yaml
+    except ImportError:
+        raise SystemExit("PyYAML not installed. Run: pip install pyyaml")
+    
+    # Load branch manifest
+    branch, _, paths = load_branch(args.slug)
+    
+    comp_dir = components_dir()
+    if not comp_dir.exists():
+        raise SystemExit(f"Components directory not found: {comp_dir}")
+    
+    components = load_component_yaml(comp_dir)
+    
+    branch_domain = branch.get("domain", "")
+    structure_type = branch.get("structure_type", "")
+    branch_slug = branch.get("slug", "")
+    
+    # Find relevant components
+    relevant = []
+    for comp in components:
+        score = 0
+        reasons = []
+        
+        # Match by domain
+        if comp.get("domain") == branch_domain:
+            score += 3
+            reasons.append("same domain")
+        
+        # Match by structure type in metadata
+        comp_structure_types = comp.get("metadata", {}).get("structure_types", [])
+        if structure_type and any(structure_type.lower() in st.lower() for st in comp_structure_types):
+            score += 2
+            reasons.append("matching structure type")
+        
+        # Match by related branches
+        if branch_slug in comp.get("related_branches", []):
+            score += 5
+            reasons.append("from this branch")
+        
+        if score > 0:
+            relevant.append((score, comp, reasons))
+    
+    if not relevant:
+        print(f"No existing components found for branch '{branch_slug}'")
+        print("\nThis is a new branch domain. Consider creating components for:")
+        print("  - Key regions or geographies")
+        print("  - Core mechanisms or failure patterns")
+        print("  - Relevant institutions or infrastructure")
+        return 0
+    
+    # Sort by score and print
+    relevant.sort(key=lambda x: (-x[0], x[1].get("id", "")))
+    
+    print(f"Suggested components for '{branch_slug}':\n")
+    
+    for score, comp, reasons in relevant:
+        comp_id = comp.get("id", "unknown")
+        name = comp.get("name", "Unknown")
+        comp_type = comp.get("type", "unknown")
+        
+        print(f"  `{comp_id}` ({comp_type}) — {name}")
+        print(f"    Relevance: {', '.join(reasons)} (score: {score})")
+        print()
+    
+    print("Use these component IDs when generating new scenarios or comparing branches.")
+    
+    return 0
+
+
+# =============================================================================
+# Phase 7C: Curation Support
+# =============================================================================
+
+EVALUATION_DIMENSIONS = [
+    ("evidence_strength", "Evidence strength", "How well sources support claims"),
+    ("internal_coherence", "Internal coherence", "Causal structure clarity"),
+    ("relevance", "Relevance", "Match to research question"),
+    ("preparedness_value", "Preparedness value", "Decision-usefulness"),
+    ("novelty", "Novelty", "Expands search space vs restates familiar"),
+    ("actionability", "Actionability", "Clear next research step"),
+    ("status_quo_challenge", "Status-quo challenge", "Questions dominant assumptions"),
+    ("imaginative_power", "Imaginative power", "Expands plausible range"),
+]
+
+
+def read_markdown_frontmatter(content: str) -> dict[str, Any]:
+    """Extract YAML frontmatter from markdown content."""
+    try:
+        import yaml
+    except ImportError:
+        return {}
+    
+    if not content.startswith("---"):
+        return {}
+    
+    try:
+        end = content.index("---", 3)
+        frontmatter = content[4:end].strip()
+        return yaml.safe_load(frontmatter) or {}
+    except (ValueError, Exception):
+        return {}
+
+
+def extract_variant_info(content: str, path: str) -> dict[str, Any]:
+    """Extract variant information from markdown content."""
+    frontmatter = read_markdown_frontmatter(content)
+    
+    # Extract first 200 chars of body for summary
+    body = content
+    if body.startswith("---"):
+        try:
+            end = body.index("---", 3)
+            body = body[end + 3:].strip()
+        except ValueError:
+            pass
+    
+    # Remove markdown headers for summary
+    lines = body.split("\n")
+    summary_lines = []
+    for line in lines:
+        if line.startswith("#"):
+            continue
+        if line.strip():
+            summary_lines.append(line.strip())
+            if len(" ".join(summary_lines)) > 200:
+                break
+    
+    summary = " ".join(summary_lines)[:200] + "..." if summary_lines else "No summary available"
+    
+    return {
+        "id": frontmatter.get("title", path.split("/")[-1]),
+        "path": path,
+        "type": frontmatter.get("scenario type", "variant"),
+        "status": frontmatter.get("status", "draft"),
+        "summary": summary,
+    }
+
+
+def command_curate_compare(args: argparse.Namespace) -> int:
+    """Generate side-by-side comparison table for variants."""
+    paths = repo_paths()
+    
+    variant_paths = args.variants
+    if len(variant_paths) < 2:
+        raise SystemExit("At least two variant paths required for comparison")
+    
+    # Load variant information
+    variants = []
+    for path_str in variant_paths:
+        path = Path(path_str)
+        if not path.is_absolute():
+            path = paths.root / path_str
+        
+        if not path.exists():
+            print(f"Warning: Variant not found: {path_str}")
+            continue
+        
+        content = path.read_text(encoding="utf-8")
+        info = extract_variant_info(content, path_str)
+        variants.append(info)
+    
+    if len(variants) < 2:
+        raise SystemExit("Need at least two valid variants for comparison")
+    
+    # Generate comparison markdown
+    lines = [
+        "# Variant Comparison",
+        "",
+        f"**Generated:** {date.today().isoformat()}",
+        f"**Variants:** {len(variants)}",
+        "",
+        "---",
+        "",
+        "## Side-by-Side Summary",
+        "",
+    ]
+    
+    # Create comparison table
+    headers = ["Aspect"] + [f"Variant {i+1}" for i in range(len(variants))]
+    lines.append("| " + " | ".join(headers) + " |")
+    lines.append("|" + "|".join(["---"] * len(headers)) + "|")
+    
+    # Path row
+    paths_row = ["**Path**"] + [f"`{v['path'].split('/')[-1]}`" for v in variants]
+    lines.append("| " + " | ".join(paths_row) + " |")
+    
+    # Type row
+    types_row = ["**Type**"] + [v["type"] for v in variants]
+    lines.append("| " + " | ".join(types_row) + " |")
+    
+    # Status row
+    status_row = ["**Status**"] + [v["status"] for v in variants]
+    lines.append("| " + " | ".join(status_row) + " |")
+    
+    lines.append("")
+    lines.append("## Summary Descriptions")
+    lines.append("")
+    
+    for i, v in enumerate(variants, 1):
+        lines.append(f"### Variant {i}")
+        lines.append("")
+        lines.append(f"**Path:** `{v['path']}`")
+        lines.append("")
+        lines.append(v["summary"])
+        lines.append("")
+    
+    lines.append("---")
+    lines.append("")
+    lines.append("## Evaluation Dimensions")
+    lines.append("")
+    lines.append("Use these dimensions when comparing:")
+    lines.append("")
+    for dim_id, dim_name, dim_desc in EVALUATION_DIMENSIONS:
+        lines.append(f"{dim_id.replace('_', ' ').title()}: {dim_desc}")
+    lines.append("")
+    
+    lines.append("---")
+    lines.append("")
+    lines.append("## Comparison Questions")
+    lines.append("")
+    lines.append("1. Which variant has stronger evidence support?")
+    lines.append("2. Which variant has clearer causal logic?")
+    lines.append("3. Which variant is more decision-useful?")
+    lines.append("4. Which variant challenges status-quo assumptions more effectively?")
+    lines.append("5. Which variant should be marked strongest? weakest? most generative?")
+    lines.append("")
+    
+    # Output
+    output_path = paths.generated / f"comparison-{'-vs-'.join(Path(p).stem for p in variant_paths[:2])}.md"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text("\n".join(lines), encoding="utf-8", newline="\n")
+    
+    print(f"Generated comparison table: {relpath(paths.root, output_path)}")
+    print(f"Variants compared: {len(variants)}")
+    
+    return 0
+
+
+def command_curate_matrix(args: argparse.Namespace) -> int:
+    """Generate evaluation matrix draft for branch variants."""
+    paths = repo_paths()
+    
+    # Load branch
+    branch, _, _ = load_branch(args.slug)
+    
+    variants = branch.get("active_variants", [])
+    parent = branch.get("parent_artifact")
+    
+    if parent:
+        all_artifacts = [parent] + variants
+    else:
+        all_artifacts = variants
+    
+    if not all_artifacts:
+        raise SystemExit(f"No variants found for branch '{args.slug}'")
+    
+    # Load variant information
+    variant_data = []
+    for path_str in all_artifacts:
+        path = paths.root / path_str
+        if not path.exists():
+            print(f"Warning: Artifact not found: {path_str}")
+            continue
+        
+        content = path.read_text(encoding="utf-8")
+        info = extract_variant_info(content, path_str)
+        info["is_parent"] = (path_str == parent)
+        variant_data.append(info)
+    
+    if not variant_data:
+        raise SystemExit("No valid variants found")
+    
+    # Generate evaluation matrix markdown
+    lines = [
+        "# Evaluation Matrix",
+        "",
+        f"**Branch:** `{branch['slug']}`",
+        f"**Generated:** {date.today().isoformat()}",
+        f"**Variants:** {len(variant_data)}",
+        "",
+        "---",
+        "",
+        "## Instructions",
+        "",
+        "Fill in scores (1-5) for each variant across all dimensions.",
+        "Add brief rationale for scores that differ significantly.",
+        "Mark curation decision (keep/revise/discard) for each variant.",
+        "",
+        "---",
+        "",
+        "## Evaluation Table",
+        "",
+    ]
+    
+    # Create header row
+    headers = ["Dimension"] + [f"{i+1}. {v['path'].split('/')[-1][:30]}{'...' if len(v['path'].split('/')[-1]) > 30 else ''}" for i, v in enumerate(variant_data)]
+    lines.append("| " + " | ".join(headers) + " |")
+    lines.append("|" + "|".join(["---"] * len(headers)) + "|")
+    
+    # Score rows for each dimension
+    for dim_id, dim_name, dim_desc in EVALUATION_DIMENSIONS:
+        row = [f"**{dim_name}**<br/>{dim_desc}"]
+        for _ in variant_data:
+            row.append("_score + rationale_")
+        lines.append("| " + " | ".join(row) + " |")
+    
+    # Curation decision row
+    curation_row = ["**Curation**"]
+    for v in variant_data:
+        if v.get("is_parent"):
+            curation_row.append("_parent_")
+        else:
+            curation_row.append("keep / revise / discard")
+    lines.append("| " + " | ".join(curation_row) + " |")
+    
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append("## Variant Details")
+    lines.append("")
+    
+    for i, v in enumerate(variant_data, 1):
+        lines.append(f"### {i}. {v['path'].split('/')[-1]}")
+        lines.append("")
+        lines.append(f"**Path:** `{v['path']}`")
+        lines.append(f"**Type:** {v['type']}")
+        lines.append(f"**Status:** {v['status']}")
+        lines.append("")
+        lines.append("**Summary:**")
+        lines.append("")
+        lines.append(v["summary"])
+        lines.append("")
+    
+    lines.append("---")
+    lines.append("")
+    lines.append("## Curation Decisions")
+    lines.append("")
+    lines.append("### Keep")
+    lines.append("")
+    lines.append("_List variants to keep and why:_")
+    lines.append("")
+    lines.append("### Revise")
+    lines.append("")
+    lines.append("_List variants to revise and what changes are needed:_")
+    lines.append("")
+    lines.append("### Discard")
+    lines.append("")
+    lines.append("_List variants to discard and why:_")
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append("## Next Step")
+    lines.append("")
+    lines.append(f"_Recommended pass: {branch.get('next_recommended_pass', 'TBD')}_")
+    lines.append("")
+    
+    # Output
+    output_path = paths.generated / f"{branch['slug']}-evaluation-matrix-draft.md"
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text("\n".join(lines), encoding="utf-8", newline="\n")
+    
+    print(f"Generated evaluation matrix draft: {relpath(paths.root, output_path)}")
+    print(f"Variants included: {len(variant_data)}")
+    
+    return 0
+
+
 def command_delegate_summarize(args: argparse.Namespace) -> int:
     """
     Summarize a research note using a cheaper model.
@@ -722,7 +1330,7 @@ def command_delegate_summarize(args: argparse.Namespace) -> int:
     content = input_path.read_text(encoding="utf-8")
     
     # Get model for small tasks
-    model_id, config = get_model_for_slot("small")
+    model_id, config, fallbacks, timeout = get_model_for_slot("small")
     
     # Create prompts
     rel_path = relpath(paths.root, input_path)
@@ -787,7 +1395,7 @@ def command_delegate_extract_claims(args: argparse.Namespace) -> int:
     content = input_path.read_text(encoding="utf-8")
     
     # Get model for small tasks
-    model_id, config = get_model_for_slot("small")
+    model_id, config, fallbacks, timeout = get_model_for_slot("small")
     
     # Create prompts
     rel_path = relpath(paths.root, input_path)
@@ -1099,7 +1707,7 @@ def command_delegate_batch(args: argparse.Namespace) -> int:
     print()
     
     # Get model for small tasks
-    model_id, config = get_model_for_slot("small")
+    model_id, config, fallbacks, timeout = get_model_for_slot("small")
     
     # Process each file
     results = []
@@ -2374,6 +2982,38 @@ def build_parser() -> argparse.ArgumentParser:
     branch_compare_prep = branch_sub.add_parser("compare-prep", help="Generate comparison prep material")
     branch_compare_prep.add_argument("slug")
     branch_compare_prep.set_defaults(func=command_branch_compare_prep)
+
+    # Phase 7B: Component index
+    component = subparsers.add_parser("component", help="Component index commands")
+    component_sub = component.add_subparsers(dest="component_command", required=True)
+
+    component_index = component_sub.add_parser("index", help="Build component index from YAML files")
+    component_index.set_defaults(func=command_component_index)
+
+    component_search = component_sub.add_parser("search", help="Search for components by query")
+    component_search.add_argument("query", help="Search query")
+    component_search.add_argument("--type", choices=COMPONENT_TYPES, help="Filter by component type")
+    component_search.set_defaults(func=command_component_search)
+
+    component_list = component_sub.add_parser("list", help="List components by type")
+    component_list.add_argument("--type", choices=COMPONENT_TYPES, help="Filter by component type")
+    component_list.set_defaults(func=command_component_list)
+
+    component_suggest = component_sub.add_parser("suggest", help="Suggest components for a branch")
+    component_suggest.add_argument("slug", help="Branch slug")
+    component_suggest.set_defaults(func=command_component_suggest)
+
+    # Phase 7C: Curation support
+    curate = subparsers.add_parser("curate", help="Curation support commands")
+    curate_sub = curate.add_subparsers(dest="curate_command", required=True)
+
+    curate_compare = curate_sub.add_parser("compare", help="Generate side-by-side comparison table")
+    curate_compare.add_argument("variants", nargs="+", help="Variant paths to compare")
+    curate_compare.set_defaults(func=command_curate_compare)
+
+    curate_matrix = curate_sub.add_parser("matrix", help="Generate evaluation matrix draft")
+    curate_matrix.add_argument("slug", help="Branch slug")
+    curate_matrix.set_defaults(func=command_curate_matrix)
 
     # Iteration 3: Model delegation
     delegate = subparsers.add_parser("delegate", help="Delegated model tasks")

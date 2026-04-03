@@ -1,0 +1,18 @@
+id: mech:compute-access-compounding
+type: mechanism
+name: Compute access compounding (infrastructure concentration creates capability advantages)
+domain: political economy
+description: |
+  Access to large-scale compute clusters (10,000+ GPUs) enables frontier AI development.
+  Actors with compute access develop better models, attract more capital, secure more chip
+  allocation, creating compounding advantage. Concentration is geographic (chip fabs),
+  infrastructural (data centers), and regulatory (export controls), not just financial.
+structure_type: hybrid (correlation/transmission + design/rule conflict)
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-ai-compute-concentration-stress.md
+metadata:
+  failure_mode: infrastructure concentration
+  transmission_channel: chip access, energy, capital
+  regulatory_lag: rules for distributed software face concentrated hardware

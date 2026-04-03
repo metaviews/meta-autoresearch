@@ -1,0 +1,16 @@
+id: hazard:wildfire
+type: hazard
+name: Wildfire
+domain: climate volatility
+description: |
+  Fire hazard exacerbated by wet-to-dry transitions. Wet periods produce
+  vegetation growth that becomes fuel under subsequent hot-dry conditions.
+  Represents compound hazard in sequence failure structure.
+related_branches:
+  - whiplash
+related_artifacts:
+  - research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md
+metadata:
+  hazard_type: fire
+  transition_dependent: true
+  compounding_factors: vegetation growth, fuel drying

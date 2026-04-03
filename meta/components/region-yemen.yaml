@@ -1,0 +1,20 @@
+id: region:yemen
+type: region
+name: Yemen (wheat importer, fragile state)
+domain: climate volatility
+description: |
+  Wheat importer with severe procurement fragility due to conflict, FX weakness,
+  port disruption, and constrained commercial importer capacity. Represents acute-risk
+  importer archetype where upstream market tightening connects rapidly to humanitarian stress.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md
+  - research/notes/2026-03-28-yemen-wheat-procurement-note.md
+  - research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md
+metadata:
+  role: import-dependent buyer (fragile state)
+  commodity: wheat
+  archetype: acute-risk importer
+  structure_types:
+    - correlation/transmission failure

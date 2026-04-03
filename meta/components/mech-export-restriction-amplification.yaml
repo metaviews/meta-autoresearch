@@ -1,0 +1,18 @@
+id: mech:export-restriction-amplification
+type: mechanism
+name: Export restriction amplifies physical stress
+domain: climate volatility
+description: |
+  Physical stress (drought, crop shortfall) triggers policy response (export restrictions,
+  trade barriers) that amplifies the original shock through trade channels. Import-dependent
+  buyers face compounded stress: physical shortage plus policy-driven access restriction.
+structure_type: correlation/transmission failure
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md
+  - research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md
+metadata:
+  failure_mode: policy amplification
+  transmission_channel: trade restrictions
+  stress_condition: correlated production shortfall

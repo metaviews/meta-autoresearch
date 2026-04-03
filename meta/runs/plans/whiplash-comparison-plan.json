@@ -1,0 +1,12 @@
+{
+  "name": "whiplash-comparison-cycle",
+  "branch": "whiplash",
+  "pass_type": "comparison",
+  "cycles": 2,
+  "autonomy_level": "low",
+  "question": "Does the sequence failure structure hold across climate, policy, and hybrid agentic/non-agentic sequences?",
+  "expected_outputs": [
+    {"kind": "comparison_synthesis", "description": "Synthesis comparing climate vs. policy vs. hybrid sequence mechanisms"},
+    {"kind": "loop_update", "description": "Loop-run record documenting the cycle"}
+  ]
+}

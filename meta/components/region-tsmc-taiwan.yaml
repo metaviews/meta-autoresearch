@@ -1,0 +1,18 @@
+id: region:tsmc-taiwan
+type: region
+name: Taiwan (TSMC chip manufacturing)
+domain: political economy
+description: |
+  Taiwan produces 90%+ of leading-edge semiconductors including AI chips through TSMC.
+  Geographic concentration creates single point of failure for AI compute supply.
+  Subject to geopolitical risk and natural disaster exposure.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-ai-compute-concentration-stress.md
+metadata:
+  role: primary chip manufacturing node
+  commodity: advanced semiconductors
+  market_share: 90%+ of leading-edge
+  structure_types:
+    - correlation/transmission failure

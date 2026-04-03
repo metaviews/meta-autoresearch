@@ -1,0 +1,18 @@
+id: region:india-credit
+type: region
+name: India (NBFC credit transmission)
+domain: political economy
+description: |
+  Non-Banking Financial Companies (NBFCs) provide last-mile credit transmission
+  in India. Under volatility, these transmission channels face liquidity squeezes
+  that expose wealth concentration fragility. Used as a bounded case for transmission failure.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md
+  - research/notes/2026-03-28-india-nbfc-transmission-note.md
+metadata:
+  geography: India
+  systems: NBFC credit, last-mile finance
+  structure_types:
+    - correlation/transmission failure

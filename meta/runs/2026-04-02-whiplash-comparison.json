@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-04-02-whiplash-comparison",
+  "date": "2026-04-02",
+  "branch_slug": "whiplash",
+  "run_type": "comparison",
+  "question": "Does the sequence failure structure hold across climate and policy domains, or does human agency in policy change the mechanism fundamentally?",
+  "stages_targeted": [
+    6
+  ],
+  "expected_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "description": "At least one synthesis comparing variants or nodes"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "path": "research/syntheses/2026-04-02-climate-vs-policy-sequence-comparison.md"
+    },
+    {
+      "kind": "scenario_variant",
+      "path": "research/scenarios/2026-04-02-policy-regime-whiplash.md"
+    },
+    {
+      "kind": "loop_record",
+      "path": "research/loops/2026-04-02-whiplash-comparison-loop-run.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "",
+  "next_step": "comparison"
+}

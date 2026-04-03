@@ -9,7 +9,9 @@
   "parent_artifact": "research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md",
   "active_variants": [
     "research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md",
-    "research/scenarios/2026-03-27-upper-colorado-compact-and-storage-whiplash.md"
+    "research/scenarios/2026-03-27-upper-colorado-compact-and-storage-whiplash.md",
+    "research/scenarios/2026-04-02-hydrologic-downstream-consequences.md",
+    "research/scenarios/2026-04-02-financial-regulation-design-failure.md"
   ],
   "key_notes": [
     "research/notes/2026-03-27-seq-hydrologic-whiplash-grounding-note.md",
@@ -18,10 +20,14 @@
   "key_syntheses": [
     "research/syntheses/2026-03-27-hydrologic-branch-comparison.md",
     "research/syntheses/2026-03-27-emerging-structure-types-comparison.md",
-    "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md"
+    "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md",
+    "research/syntheses/2026-04-02-hydrologic-maturity-assessment.md",
+    "research/syntheses/2026-04-02-climate-vs-financial-design-rule.md"
   ],
   "loop_runs": [
-    "research/loops/2026-03-27-hydrologic-loop-run.md"
+    "research/loops/2026-03-27-hydrologic-loop-run.md",
+    "research/loops/2026-04-02-hydrologic-maturity-loop-run.md",
+    "research/loops/2026-04-02-hydrologic-comparison-loop-run.md"
   ],
   "discard_records": [
     "research/discards/2026-03-27-hydrologic-implicit-discards.md"
@@ -31,8 +37,12 @@
   "weakest_variant": "research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md",
   "open_questions": [
     "How should the branch distinguish sequence failure from design/rule conflict when both are present?",
-    "What downstream preparedness consequences should be added so the branch is less infrastructure-internal?"
+    "What downstream sectors (agriculture, energy, urban supply) are most vulnerable to hydrologic design/rule conflict?",
+    "Does the design/rule structure travel to non-climate infrastructure domains (e.g., financial regulation, tech governance)?",
+    "Should hydrologic test non-climate portability to strengthen L4 method-shaping claim?",
+    "Is financial regulation a pure design/rule conflict case or a hybrid with correlation/transmission?",
+    "Do physical infrastructure conflicts differ qualitatively from regulatory architecture conflicts?"
   ],
-  "next_recommended_pass": "maturity",
-  "last_updated": "2026-03-27"
+  "next_recommended_pass": "comparison",
+  "last_updated": "2026-04-02"
 }

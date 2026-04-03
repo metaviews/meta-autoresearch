@@ -1,0 +1,19 @@
+id: region:russia-wheat
+type: region
+name: Russia (wheat export node)
+domain: climate volatility
+description: |
+  Major wheat export node in global trade system. Export restrictions or credible
+  export fears from this region can reshape wheat trade expectations quickly.
+  Used as a bounded case for testing correlation/transmission failure.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md
+  - research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md
+  - research/notes/2026-03-27-northern-wheat-shock-grounding-note.md
+metadata:
+  role: primary export node
+  commodity: wheat
+  structure_types:
+    - correlation/transmission failure

@@ -1,0 +1,15 @@
+id: inst:regulatory-agency
+type: institution
+name: Regulatory agency (policy implementation)
+domain: political economy
+description: |
+  Government agencies responsible for implementing and enforcing regulations.
+  Subject to regime shifts with political transitions. Compliance systems built
+  for one regime may malfunction under another.
+related_branches:
+  - whiplash
+related_artifacts:
+  - research/scenarios/2026-04-02-policy-regime-whiplash.md
+metadata:
+  function: regulation implementation, enforcement
+  vulnerability: regime transition, rule changes

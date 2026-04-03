@@ -1,0 +1,15 @@
+id: inst:who-covax
+type: institution
+name: WHO / COVAX facility
+domain: political economy
+description: |
+  Global health institutions attempting to address vaccine access disparities.
+  COVAX depended on same concentrated producers it sought to redistribute from.
+  Rules designed for distributed production face concentrated reality.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-pandemic-preparedness-concentration.md
+metadata:
+  function: global health coordination, vaccine access
+  limitation: depends on concentrated producers

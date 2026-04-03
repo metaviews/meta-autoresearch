@@ -1,0 +1,15 @@
+id: inst:export-control-regime
+type: institution
+name: AI chip export control regime
+domain: political economy
+description: |
+  Export controls on advanced AI chips and manufacturing equipment.
+  Creates geographic access asymmetries and concentrates compute capability
+  in approved regions. Regulatory design lagging technology concentration.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-ai-compute-concentration-stress.md
+metadata:
+  function: trade restriction, technology control
+  effect: geographic access asymmetry

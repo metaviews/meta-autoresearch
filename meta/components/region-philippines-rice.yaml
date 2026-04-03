@@ -1,0 +1,19 @@
+id: region:philippines-rice
+type: region
+name: Philippines (rice importer, archipelago)
+domain: climate volatility
+description: |
+  One of world's largest rice importers (2-3 MMT annually). Domestic production
+  covers ~85-90% of consumption. Imports sourced primarily from Vietnam and Thailand.
+  Archipelago geography (7,000+ islands) creates logistics vulnerability for distribution.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-04-02-philippines-rice-import-stress.md
+metadata:
+  role: import-dependent buyer (archipelago state)
+  commodity: rice
+  import_volume: 2-3 MMT annually
+  archetype: archipelago importer
+  structure_types:
+    - correlation/transmission failure

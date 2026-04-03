@@ -1,0 +1,20 @@
+id: region:egypt
+type: region
+name: Egypt (wheat importer)
+domain: climate volatility
+description: |
+  Major wheat importer with state procurement systems and subsidy programs.
+  Represents importer archetype with moderate institutional capacity and reserves.
+  Used as a bounded case for downstream exposure in breadbasket correlation failure.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md
+  - research/notes/2026-03-28-egypt-wheat-procurement-note.md
+  - research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md
+metadata:
+  role: import-dependent buyer
+  commodity: wheat
+  archetype: moderate-capacity importer
+  structure_types:
+    - correlation/transmission failure

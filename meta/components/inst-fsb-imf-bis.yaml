@@ -1,0 +1,17 @@
+id: inst:fsb-imf-bis
+type: institution
+name: International financial oversight (FSB, IMF, BIS)
+domain: political economy
+description: |
+  International financial institutions monitoring systemic risk.
+  FSB tracks NBFI footprint, IMF assesses financial stability,
+  BIS researches regulatory arbitrage. All flag NBFI vulnerabilities
+  but lack enforcement authority.
+related_branches:
+  - hydrologic
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-financial-regulation-design-failure.md
+metadata:
+  function: financial stability monitoring, regulatory standards
+  limitation: monitoring without enforcement

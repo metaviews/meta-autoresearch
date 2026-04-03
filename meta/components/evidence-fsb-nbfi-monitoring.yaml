@@ -1,0 +1,15 @@
+id: evidence:fsb-nbfi-monitoring
+type: evidence
+name: FSB NBFI global monitoring report
+domain: political economy
+description: |
+  Financial Stability Board report on non-bank financial intermediation
+  scale and vulnerabilities. Shows very large NBFI footprint and
+  vulnerability-focused core data.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-private-credit-resilience-squeeze.md
+metadata:
+  source_type: international financial monitoring
+  topic: NBFI scale, vulnerabilities, systemic risk

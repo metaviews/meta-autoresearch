@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-04-02-hydrologic-maturity",
+  "date": "2026-04-02",
+  "branch_slug": "hydrologic",
+  "run_type": "maturity",
+  "question": "Is the hydrologic branch ready for L4 method-shaping status, or does it need more grounding before claiming design/rule conflict as a reusable structure type?",
+  "stages_targeted": [
+    7,
+    8,
+    9
+  ],
+  "expected_outputs": [
+    {
+      "kind": "maturity_update",
+      "description": "A branch maturity or structure judgment update"
+    },
+    {
+      "kind": "loop_update",
+      "description": "A loop-run update or maturity assessment"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "maturity_assessment",
+      "path": "research/syntheses/2026-04-02-hydrologic-maturity-assessment.md"
+    },
+    {
+      "kind": "loop_record",
+      "path": "research/loops/2026-04-02-hydrologic-maturity-loop-run.md"
+    }
+  ],
+  "completion_status": "completed_with_gaps",
+  "notes": "",
+  "next_step": "maturity"
+}

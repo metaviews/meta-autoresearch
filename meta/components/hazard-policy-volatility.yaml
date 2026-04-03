@@ -1,0 +1,16 @@
+id: hazard:policy-volatility
+type: hazard
+name: Policy volatility (rapid regime transitions)
+domain: political economy
+description: |
+  Rapid shifts in policy direction across domains (trade, monetary, regulatory, immigration).
+  Creates adaptation stress for businesses, institutions, and individuals who optimized
+  for previous regime. Transition velocity exceeds compliance and reallocation timelines.
+related_branches:
+  - whiplash
+related_artifacts:
+  - research/scenarios/2026-04-02-policy-regime-whiplash.md
+metadata:
+  hazard_type: policy
+  transmission_channel: compliance, capital allocation, business planning
+  domains: trade, monetary, regulatory, immigration

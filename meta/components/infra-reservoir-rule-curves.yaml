@@ -1,0 +1,17 @@
+id: infra:reservoir-rule-curves
+type: infrastructure
+name: Reservoir rule curves and operating rules
+domain: climate volatility
+description: |
+  Reservoir operating rules and rule curves designed for historical
+  streamflow distributions. Fail under wet-dry sequence stress when
+  conditions shift faster than rules can adapt.
+related_branches:
+  - hydrologic
+related_artifacts:
+  - research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md
+  - research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md
+metadata:
+  type: operating rules
+  design_assumption: stationarity, historical distribution
+  failure_mode: distribution shift, volatility

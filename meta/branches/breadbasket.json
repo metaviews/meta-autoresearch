@@ -12,14 +12,17 @@
     "research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md",
     "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
     "research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md",
-    "research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md"
+    "research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md",
+    "research/scenarios/2026-04-02-southeast-asia-rice-correlation-shock.md",
+    "research/scenarios/2026-04-02-philippines-rice-import-stress.md"
   ],
   "key_notes": [
     "research/notes/2026-03-27-breadbasket-regional-grounding-note.md",
     "research/notes/2026-03-27-northern-wheat-shock-grounding-note.md",
     "research/notes/2026-03-27-mena-wheat-importer-exposure-note.md",
     "research/notes/2026-03-28-egypt-wheat-procurement-note.md",
-    "research/notes/2026-03-28-yemen-wheat-procurement-note.md"
+    "research/notes/2026-03-28-yemen-wheat-procurement-note.md",
+    "research/notes/2026-04-02-rice-climate-yield-evidence-note.md"
   ],
   "key_syntheses": [
     "research/syntheses/2026-03-27-breadbasket-physical-stress-vs-policy-amplification.md",
@@ -27,21 +30,26 @@
     "research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md",
     "research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md",
     "research/syntheses/2026-03-28-breadbasket-downstream-preparedness-comparison.md",
-    "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md"
+    "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md",
+    "research/syntheses/2026-04-02-wheat-vs-rice-crop-comparison.md"
   ],
   "loop_runs": [
-    "research/loops/2026-03-27-breadbasket-loop-run.md"
+    "research/loops/2026-03-27-breadbasket-loop-run.md",
+    "research/loops/2026-04-02-breadbasket-comparison-loop-run.md"
   ],
   "discard_records": [
     "research/discards/2026-03-27-early-climate-discards.md"
   ],
   "strongest_variant": "research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md",
-  "most_generative_variant": "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
+  "most_generative_variant": "research/scenarios/2026-04-02-southeast-asia-rice-correlation-shock.md",
   "weakest_variant": "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
   "open_questions": [
-    "Should the next breadbasket cycle test another crop family as a new grounding pass, or is one more wheat-focused downstream comparison still higher value?",
-    "If another crop family is tested, which one offers the clearest structural contrast to wheat in the current branch?"
+    "Does the correlation/transmission structure hold across different crop families (wheat, rice) or are there crop-specific mechanisms?",
+    "What importer archetypes beyond Egypt/Yemen should be tested (e.g., Philippines for rice, Nigeria for wheat)?",
+    "Should the branch now compare crop-specific transmission vs. cross-crop correlation (e.g., wheat AND rice stress simultaneously)?",
+    "Does the structure generalize to maize or other staple crops?",
+    "Do archipelago importers (Philippines) face different vulnerabilities than continental importers (Egypt)?"
   ],
-  "next_recommended_pass": "grounding",
-  "last_updated": "2026-03-28"
+  "next_recommended_pass": "comparison",
+  "last_updated": "2026-04-02"
 }

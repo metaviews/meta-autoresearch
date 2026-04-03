@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-04-02-breadbasket-comparison",
+  "date": "2026-04-02",
+  "branch_slug": "breadbasket",
+  "run_type": "comparison",
+  "question": "Does the correlation/transmission structure hold across wheat and rice, or are there crop-specific mechanisms that require structure revision?",
+  "stages_targeted": [
+    6
+  ],
+  "expected_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "description": "At least one synthesis comparing variants or nodes"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "path": "research/syntheses/2026-04-02-wheat-vs-rice-crop-comparison.md"
+    },
+    {
+      "kind": "scenario_variant",
+      "path": "research/scenarios/2026-04-02-southeast-asia-rice-correlation-shock.md"
+    },
+    {
+      "kind": "loop_record",
+      "path": "research/loops/2026-04-02-breadbasket-comparison-loop-run.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "",
+  "next_step": "comparison"
+}

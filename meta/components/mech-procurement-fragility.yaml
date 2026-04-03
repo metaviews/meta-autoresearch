@@ -1,0 +1,19 @@
+id: mech:procurement-fragility
+type: mechanism
+name: Procurement fragility (fragile state import execution failure)
+domain: climate volatility
+description: |
+  Upstream supply tightening hits fragile import chain where commercial importers
+  face FX constraints, port disruption, financial restrictions, and conflict-related
+  fragmentation. Failure is through import execution, liquidity, logistics, and
+  household vulnerability rather than state fiscal stress.
+structure_type: correlation/transmission failure
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md
+  - research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md
+metadata:
+  failure_mode: import execution failure
+  transmission_channel: commercial importers, FX, ports
+  importer_archetype: fragile state

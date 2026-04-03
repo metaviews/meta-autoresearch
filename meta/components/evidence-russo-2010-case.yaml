@@ -1,0 +1,15 @@
+id: evidence:russo-2010-case
+type: evidence
+name: 2010 Russia flash drought case
+domain: climate volatility
+description: |
+  Historical case of Russian flash drought leading to export restriction
+  and international price escalation. Provides concrete analog for
+  transmission mechanism from crop stress to trade policy to price shock.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-northern-wheat-correlation-shock.md
+metadata:
+  source_type: historical case
+  topic: export restriction, price transmission, wheat shock

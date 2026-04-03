@@ -1,0 +1,21 @@
+id: mech:asset-regime-lock-in
+type: mechanism
+name: Asset regime design concentrates wealth under volatility
+domain: political economy
+description: |
+  Asset regime structures (tax policy, monetary policy, financial regulation)
+  designed for different economic conditions concentrate wealth when volatility
+  increases. The regime itself becomes a transmission channel for inequality,
+  not merely a passive backdrop. Hybrid structure: both transmission failure
+  (channels concentrate rather than distribute) and design/rule conflict
+  (rules no longer fit current dynamics).
+structure_type: hybrid (correlation/transmission + design/rule conflict)
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md
+  - research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md
+metadata:
+  failure_mode: structural concentration
+  transmission_channel: tax, monetary policy, financial regulation
+  hybrid: true

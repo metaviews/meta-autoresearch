@@ -2,22 +2,25 @@
   "slug": "wealth-concentration",
   "title": "Wealth Concentration",
   "domain": "political economy",
-  "structure_type": "hybrid: correlation/transmission failure + design/rule conflict under volatility",
+  "structure_type": "hybrid: correlation/transmission + design/rule conflict",
   "maturity_level": 4,
-  "maturity_note": "method-shaping (hybrid portability demonstrated)",
+  "maturity_note": "method-shaping (hybrid portability demonstrated across three non-climate domains: finance, compute, pandemic)",
   "status": "active",
   "parent_artifact": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
   "active_variants": [
     "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
     "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
     "research/scenarios/2026-03-28-private-credit-resilience-squeeze.md",
-    "research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md"
+    "research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md",
+    "research/scenarios/2026-04-02-ai-compute-concentration-stress.md",
+    "research/scenarios/2026-04-02-pandemic-preparedness-concentration.md"
   ],
   "key_notes": [
     "research/notes/2026-03-28-wealth-concentration-grounding-note.md",
     "research/notes/2026-03-28-us-asset-regime-mismatch-note.md",
     "research/notes/2026-03-28-wealth-transmission-channels-note.md",
-    "research/notes/2026-03-28-india-nbfc-transmission-note.md"
+    "research/notes/2026-03-28-india-nbfc-transmission-note.md",
+    "research/notes/2026-04-02-compute-concentration-evidence-note.md"
   ],
   "key_syntheses": [
     "research/syntheses/2026-03-28-wealth-concentration-structure-mapping.md",
@@ -25,22 +28,30 @@
     "research/syntheses/2026-03-28-wealth-concentration-resolution-comparison.md",
     "research/syntheses/2026-03-28-wealth-concentration-lead-comparison.md",
     "research/syntheses/2026-03-29-wealth-concentration-evaluation-matrix.md",
-    "research/syntheses/2026-03-29-method-lessons-cross-branch-synthesis.md"
+    "research/syntheses/2026-03-29-method-lessons-cross-branch-synthesis.md",
+    "research/syntheses/2026-04-02-finance-vs-compute-concentration.md",
+    "research/syntheses/2026-04-02-finance-compute-pandemic-comparison.md",
+    "research/syntheses/2026-04-02-wealth-concentration-maturity-assessment.md"
   ],
   "loop_runs": [
-    "research/loops/2026-03-28-wealth-concentration-loop-run.md"
+    "research/loops/2026-03-28-wealth-concentration-loop-run.md",
+    "research/loops/2026-04-02-wealth-concentration-comparison-loop-run.md",
+    "research/loops/2026-04-02-wealth-concentration-maturity-loop-run.md"
   ],
   "discard_records": [
     "research/discards/2026-03-28-wealth-concentration-discards.md"
   ],
   "strongest_variant": "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
-  "most_generative_variant": "research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md",
+  "most_generative_variant": "research/scenarios/2026-04-02-pandemic-preparedness-concentration.md",
   "weakest_variant": "research/scenarios/2026-03-28-private-credit-resilience-squeeze.md",
   "open_questions": [
-    "Will the hybrid status resolve toward a dominant structure with more grounding, or is hybrid a stable non-climate form?",
-    "How many non-climate branches are needed to generalize portability beyond a single case?",
-    "What domain should be next for non-climate proving-ground to test method generality?"
+    "Does the hybrid status (transmission + rule-conflict) resolve with more grounding, or is hybrid a stable non-climate form?",
+    "Does the concentration structure generalize across domains (finance, AI/compute, pandemic preparedness)?",
+    "What domain should be next for non-climate proving-ground to test method generality (biotech, energy, other)?",
+    "Is infrastructure concentration more explicit than financial concentration for structure visualization?",
+    "How many non-climate domains are needed for L4 method-shaping claim?",
+    "Does public good dimension (pandemic) change the mechanism or just add complexity?"
   ],
   "next_recommended_pass": "redirect or deepen",
-  "last_updated": "2026-03-29"
+  "last_updated": "2026-04-02"
 }

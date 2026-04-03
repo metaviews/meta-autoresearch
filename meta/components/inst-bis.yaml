@@ -1,0 +1,15 @@
+id: inst:bis
+type: institution
+name: Bank for International Settlements (BIS)
+domain: political economy
+description: |
+  International financial institution serving central banks. Provides analysis
+  on balance-sheet buffers, refinancing pressure, and financial system resilience.
+  Key source for understanding delayed recognition of stress.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-private-credit-resilience-squeeze.md
+metadata:
+  function: central bank cooperation, financial analysis
+  data_types: balance-sheet buffers, refinancing dynamics

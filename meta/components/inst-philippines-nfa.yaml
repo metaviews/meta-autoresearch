@@ -1,0 +1,15 @@
+id: inst:philippines-nfa
+type: institution
+name: Philippines National Food Authority (NFA)
+domain: climate volatility
+description: |
+  State agency responsible for rice procurement, buffer stock management,
+  and price stabilization. Manages rice imports to fill domestic production gap.
+  Subject to budget constraints and regional supply competition.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-04-02-philippines-rice-import-stress.md
+metadata:
+  function: rice procurement, price stabilization
+  limitation: budget constraints, regional competition

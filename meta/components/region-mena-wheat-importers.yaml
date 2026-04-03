@@ -1,0 +1,18 @@
+id: region:mena-wheat-importers
+type: region
+name: MENA wheat importers (cluster)
+domain: climate volatility
+description: |
+  Middle East and North Africa region as cluster of wheat-importing states
+  with high dependence on Black Sea and European suppliers. Supplier-cluster
+  concentration creates correlated vulnerability to Russia-Europe shocks.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/notes/2026-03-27-mena-wheat-importer-exposure-note.md
+  - research/syntheses/2026-03-28-wheat-variant-importer-reserve-comparison.md
+metadata:
+  geography: Middle East and North Africa
+  commodity: wheat
+  structure_types:
+    - correlation/transmission failure

@@ -1,0 +1,18 @@
+id: mech:vaccine-access-compounding
+type: mechanism
+name: Vaccine access compounding (production concentration creates access advantages)
+domain: political economy
+description: |
+  Access to vaccine production capacity enables pandemic response autonomy.
+  Actors with production capacity secure domestic supply, export surplus, gain
+  diplomatic leverage. Concentration is technological (mRNA patents), geographic
+  (production sites), and regulatory (FDA/EMA approval), not just manufacturing.
+structure_type: hybrid (correlation/transmission + design/rule conflict)
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-pandemic-preparedness-concentration.md
+metadata:
+  failure_mode: production concentration
+  transmission_channel: vaccine access, export restrictions
+  regulatory_lag: global health rules for distributed production face concentrated reality

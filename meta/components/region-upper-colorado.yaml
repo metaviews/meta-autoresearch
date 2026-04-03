@@ -1,0 +1,20 @@
+id: region:upper-colorado
+type: region
+name: Upper Colorado Basin
+domain: climate volatility
+description: |
+  Major river basin spanning multiple US states. Subject to Colorado River Compact
+  allocation rules designed for surplus conditions that no longer exist. Used as a
+  bounded case for both sequence failure (recovery-to-shortage) and design/rule conflict.
+related_branches:
+  - whiplash
+  - hydrologic
+related_artifacts:
+  - research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md
+  - research/scenarios/2026-03-27-upper-colorado-compact-and-storage-whiplash.md
+metadata:
+  geography: Western United States
+  systems: water allocation, reservoir management, interstate compact
+  structure_types:
+    - sequence failure
+    - design/rule conflict under volatility

@@ -1,0 +1,20 @@
+id: mech:transmission-squeeze
+type: mechanism
+name: Transmission squeeze (financial channels fail under stress)
+domain: political economy
+description: |
+  Credit or capital transmission channels (e.g., private credit, NBFCs) that
+  function well under stable conditions become constrained under volatility.
+  Wealth concentration creates fragility when transmission channels that depend
+  on continuous liquidity face stress.
+structure_type: correlation/transmission failure
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-private-credit-resilience-squeeze.md
+  - research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md
+  - research/notes/2026-03-28-india-nbfc-transmission-note.md
+metadata:
+  failure_mode: liquidity constraint
+  transmission_channel: credit, capital flows
+  stress_condition: volatility

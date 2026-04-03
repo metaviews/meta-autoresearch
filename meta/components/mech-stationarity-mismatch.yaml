@@ -1,0 +1,20 @@
+id: mech:stationarity-mismatch
+type: mechanism
+name: Stationarity mismatch (rules built for stable conditions face volatility)
+domain: climate volatility
+description: |
+  Infrastructure operating rules, allocation frameworks, thresholds, or purposes
+  were designed for stationary climate conditions. Under non-stationarity
+  (increased volatility, whiplash transitions), these rules create second-order
+  failures beyond the climate event itself.
+structure_type: design/rule conflict under volatility
+related_branches:
+  - hydrologic
+related_artifacts:
+  - research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md
+  - research/scenarios/2026-03-27-upper-colorado-compact-and-storage-whiplash.md
+  - research/syntheses/2026-03-27-hydrologic-branch-comparison.md
+metadata:
+  failure_mode: institutional breakdown
+  design_assumption: stationarity
+  reality: non-stationarity, whiplash

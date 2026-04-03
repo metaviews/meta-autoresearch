@@ -1,0 +1,16 @@
+id: inst:imf
+type: institution
+name: International Monetary Fund (IMF)
+domain: political economy
+description: |
+  International financial institution providing global financial stability
+  analysis, private credit monitoring, and macroeconomic surveillance.
+  Reports on private credit scale, borrower stress, and financial linkages.
+related_branches:
+  - wealth-concentration
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-28-private-credit-resilience-squeeze.md
+metadata:
+  function: financial surveillance, stability reports
+  data_types: private credit, borrower stress, financial linkages

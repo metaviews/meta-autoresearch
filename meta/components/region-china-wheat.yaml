@@ -1,0 +1,18 @@
+id: region:china-wheat
+type: region
+name: China (wheat production buffer)
+domain: climate volatility
+description: |
+  Very large wheat producer with very large ending stocks. Functions as domestic
+  balancing system rather than major exporter. Under correlated stress, may lose
+  confidence as global buffer through stock conservation or increased import demand.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md
+  - research/notes/2026-03-27-russia-china-wheat-buffer-note.md
+metadata:
+  role: production buffer, stock holder
+  commodity: wheat
+  structure_types:
+    - correlation/transmission failure

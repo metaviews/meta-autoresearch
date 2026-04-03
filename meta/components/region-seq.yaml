@@ -1,0 +1,18 @@
+id: region:seq
+type: region
+name: Southeast Queensland
+domain: climate volatility
+description: |
+  Australian region with integrated water grid infrastructure centered on
+  Wivenhoe Dam. Rules designed for drought face reality of whiplash flooding.
+  Used as a bounded case for design/rule conflict under volatility.
+related_branches:
+  - hydrologic
+related_artifacts:
+  - research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md
+  - research/notes/2026-03-27-seq-hydrologic-whiplash-grounding-note.md
+metadata:
+  geography: Queensland, Australia
+  systems: water grid, dam operations
+  structure_types:
+    - design/rule conflict under volatility

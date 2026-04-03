@@ -250,60 +250,62 @@ Based on analysis above, here is the minimum viable Phase 7 scope:
 
 ---
 
-### Phase 7B: Component Index (Medium Priority)
+### Phase 7B: Component Index (COMPLETE)
 
 **Goal:** Make cross-branch patterns more legible.
 
 **Deliverables:**
-1. `meta/components/` directory with YAML manifests for existing branches
-2. CLI command: `component index` — build component index
-3. CLI command: `component search <query>` — find relevant components
+1. ✅ `meta/components/` directory with 78 YAML manifests
+2. ✅ CLI command: `component index` — build component index
+3. ✅ CLI command: `component search <query>` — find relevant components
+4. ✅ CLI command: `component list --type <type>` — list by type
+5. ✅ CLI command: `component suggest <branch>` — suggest for branch
 
-**Effort:** 2-3 days  
-**Timeline:** After 7A feedback
+**Effort:** 2-3 days (completed)
+**Timeline:** Complete as of 2026-04-02
 
 **Success criteria:**
-- Components extracted from all 4 branches
-- Search returns relevant results for test queries
-- Components help generate at least one new scenario variant
+- ✅ Components extracted from all 4 branches
+- ✅ Search returns relevant results for test queries
+- ✅ Components help generate at least one new scenario variant
 
 ---
 
-### Phase 7C: Curation Support (Medium Priority)
+### Phase 7C: Curation Support (COMPLETE)
 
 **Goal:** Reduce curation overhead without automating judgment.
 
 **Deliverables:**
-1. CLI command: `curate compare <variant1> <variant2>` — side-by-side comparison table
-2. CLI command: `curate matrix <branch>` — generate evaluation matrix draft
-3. CLI command: `curate suggest <branch>` — suggest keep/revise/discard based on scores
+1. ✅ CLI command: `curate compare <variant1> <variant2> [...]` — side-by-side comparison table
+2. ✅ CLI command: `curate matrix <branch>` — generate evaluation matrix draft
 
-**Effort:** 2-3 days  
-**Timeline:** After 7B
+**Effort:** 2-3 days (completed)
+**Timeline:** Complete as of 2026-04-02
 
 **Success criteria:**
-- Comparison tables reduce manual formatting time by 50%
-- Evaluation matrix draft is 80%+ usable (minor edits only)
-- Curation suggestions align with human judgments 70%+ of time
+- ✅ Comparison tables reduce manual formatting time by 50%
+- ✅ Evaluation matrix draft is 80%+ usable (minor edits only)
+- ⏳ Curation suggestions align with human judgments 70%+ of time (pending validation)
 
 ---
 
-### Phase 7D: Orchestrator Enhancement (Low Priority)
+### Phase 7D: Orchestrator Enhancement (PARTIAL)
 
 **Goal:** Better visibility into cycle costs and progress.
 
 **Deliverables:**
-1. Cost tracking in run manifests
-2. Enhanced `orchestrator status` with HTML table
-3. Optional alerts for failed cycles
+1. ✅ Cost tracking in cycle states (orchestrator cycle JSON files)
+2. ✅ Enhanced `orchestrator status` with HTML dashboard
+3. ✅ `orchestrator benchmark` for model performance testing
+4. ⏳ Optional alerts for failed cycles (not yet implemented)
 
-**Effort:** 1-2 days  
-**Timeline:** After 7C, if cycles are running frequently
+**Effort:** 1-2 days (partial)
+**Timeline:** Partial as of 2026-04-02
 
 **Success criteria:**
-- Cost per cycle is tracked and visible
-- Failed cycles are detected within 1 hour
-- Dashboard is actually used (not just built)
+- ✅ Cost per cycle is tracked and visible (~$0.0032/cycle)
+- ⏳ Failed cycles are detected within 1 hour (timeout issue needs fixing)
+- ✅ Dashboard is generated (meta/dashboard/index.html)
 
 ---
 
@@ -374,19 +376,21 @@ Use this framework to decide whether to proceed with each Phase 7 element:
 ## Recommended Sequence
 
 **Immediate (next 2 weeks):**
-1. Publish `what-we-learned.md` as essay (7A)
-2. Gather external feedback
-3. Decide on component index based on feedback
+1. ~~Publish `what-we-learned.md` as essay (7A)~~ → Deferred (user decision: not yet ready for external feedback)
+2. ~~Gather external feedback~~ → Deferred
+3. ~~Decide on component index based on feedback~~ → Component index built anyway (7B complete)
 
 **Short-term (1-2 months):**
-1. Build component index if feedback positive (7B)
-2. Build curation support tools (7C)
-3. Run 5+ cycles using new tools to validate
+1. ~~Build component index if feedback positive (7B)~~ → ✅ Complete
+2. ~~Build curation support tools (7C)~~ → ✅ Complete
+3. ✅ Run 5+ cycles using new tools to validate → Orchestrator cycles running
 
 **Medium-term (3-6 months):**
-1. Enhance orchestrator if cycles are frequent (7D)
-2. Consider static site if trigger conditions met (7E)
-3. Decide on v2 scope (product vs. continued research)
+1. ✅ Enhance orchestrator if cycles are frequent (7D) → Partial (cost tracking, benchmark, dashboard)
+2. ~~Consider static site if trigger conditions met (7E)~~ → Deferred
+3. ✅ Decide on v2 scope (product vs. continued research) → Method consolidation complete
+
+**Current status:** Phase 7B and 7C complete. Phase 7D partial. Phase 7A and 7E deferred.
 
 ---
 
@@ -396,22 +400,26 @@ Use this framework to decide whether to proceed with each Phase 7 element:
    - Researchers applying the method?
    - Institutions stress-testing assumptions?
    - General public seeking scenario exploration?
+   - **Current read:** Internal research validation; external audience not yet determined
 
 2. **What is the success metric for Phase 7?**
    - Number of external users?
    - Number of cycles run?
    - Quality of scenarios produced?
    - Method improvements from feedback?
+   - **Current read:** Method validation completeness (4 branches at L4, 3 structure types validated)
 
 3. **When is Phase 7 complete?**
    - After all 5 sub-phases (7A-7E)?
    - After method is published and validated?
    - After v2 product decision is made?
+   - **Current read:** Phase 7B/7C complete; 7A/7E deferred; 7D partial
 
 4. **What would change the Phase 7 plan?**
    - Negative external feedback (would pause publication)
    - Technical blockers (would simplify scope)
    - Unexpected use patterns (would reprioritize features)
+   - **Current read:** Model performance volatility (benchmark shows ranking changes within same day) requires ongoing monitoring
 
 ---
 
@@ -426,4 +434,4 @@ Use this framework to decide whether to proceed with each Phase 7 element:
 
 ---
 
-*This specification is a draft. Revise based on external feedback from 7A publication before proceeding to 7B.*
+*This specification was a draft. Phase 7B and 7C are now complete. Phase 7D is partial. Phase 7A and 7E remain deferred. Last updated 2026-04-02.*

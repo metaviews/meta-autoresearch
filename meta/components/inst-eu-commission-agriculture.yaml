@@ -1,0 +1,15 @@
+id: inst:eu-commission-agriculture
+type: institution
+name: European Commission (agriculture and trade)
+domain: climate volatility
+description: |
+  EU institution responsible for agricultural policy and trade regulation.
+  Can impose export restrictions that amplify wheat trade shocks.
+  Represents institutional response capacity in correlation/transmission failure.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md
+metadata:
+  function: agricultural policy, trade regulation
+  response_type: export restrictions, trade policy

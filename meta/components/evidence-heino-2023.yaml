@@ -1,0 +1,15 @@
+id: evidence:heino-2023
+type: evidence
+name: Heino et al. (2023) climate-yield study
+domain: climate volatility
+description: |
+  Peer-reviewed study on increasing hot-dry wheat stress across northern-latitude
+  production regions including Europe. Supports correlation structure in breadbasket branch.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md
+  - research/notes/2026-03-27-northern-wheat-shock-grounding-note.md
+metadata:
+  source_type: peer-reviewed paper
+  topic: climate-yield correlation, wheat stress

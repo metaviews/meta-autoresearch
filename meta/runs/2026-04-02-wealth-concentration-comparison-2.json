@@ -1,0 +1,25 @@
+{
+  "run_id": "2026-04-02-wealth-concentration-comparison-2",
+  "date": "2026-04-02",
+  "branch_slug": "wealth-concentration",
+  "run_type": "comparison",
+  "question": "Does the hybrid concentration structure (transmission + rule-conflict) hold consistently across finance, compute, and pandemic preparedness domains, or does pandemic preparedness introduce fundamentally different mechanisms due to public good dimensions?",
+  "stages_targeted": [
+    6
+  ],
+  "expected_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "description": "At least one synthesis comparing variants or nodes"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "path": "research/syntheses/2026-04-02-finance-compute-pandemic-comparison.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "",
+  "next_step": "comparison"
+}

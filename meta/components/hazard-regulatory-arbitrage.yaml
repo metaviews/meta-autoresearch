@@ -1,0 +1,16 @@
+id: hazard:regulatory-arbitrage
+type: hazard
+name: Regulatory arbitrage (risk migration to less-regulated segments)
+domain: political economy
+description: |
+  Financial activity migrates from regulated to less-regulated segments
+  (banks to NBFI, public to private markets). Regulatory framework
+  designed for legacy system faces risk in shadow system.
+related_branches:
+  - hydrologic
+related_artifacts:
+  - research/scenarios/2026-04-02-financial-regulation-design-failure.md
+metadata:
+  hazard_type: structural
+  transmission_channel: regulatory migration, shadow banking
+  compounding_factors: innovation speed, enforcement gaps

@@ -1,0 +1,15 @@
+id: inst:fsb
+type: institution
+name: Financial Stability Board (FSB)
+domain: political economy
+description: |
+  International body monitoring global financial stability. Tracks non-bank
+  financial intermediation (NBFI) scale, vulnerabilities, and systemic risks.
+  Key source for private credit and shadow banking analysis.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-private-credit-resilience-squeeze.md
+metadata:
+  function: financial stability monitoring, NBFI analysis
+  data_types: NBFI scale, vulnerability assessments

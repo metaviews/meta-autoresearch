@@ -1,0 +1,33 @@
+{
+  "run_id": "2026-04-02-wealth-concentration-comparison",
+  "date": "2026-04-02",
+  "branch_slug": "wealth-concentration",
+  "run_type": "comparison",
+  "question": "Does the concentration structure (hybrid: transmission + rule-conflict) hold across financial and compute domains, or does compute introduce fundamentally different mechanisms?",
+  "stages_targeted": [
+    6
+  ],
+  "expected_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "description": "At least one synthesis comparing variants or nodes"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "path": "research/syntheses/2026-04-02-finance-vs-compute-concentration.md"
+    },
+    {
+      "kind": "scenario_variant",
+      "path": "research/scenarios/2026-04-02-ai-compute-concentration-stress.md"
+    },
+    {
+      "kind": "loop_record",
+      "path": "research/loops/2026-04-02-wealth-concentration-comparison-loop-run.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "",
+  "next_step": "comparison"
+}

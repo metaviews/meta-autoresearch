@@ -1,0 +1,19 @@
+id: mech:supplier-cluster-concentration
+type: mechanism
+name: Supplier-cluster concentration (import dependence on correlated nodes)
+domain: climate volatility
+description: |
+  Importers rely heavily on supplier cluster (e.g., Russia + EU + Black Sea)
+  rather than single country. Correlated stress across cluster creates
+  preparedness failure because diversification within cluster provides
+  false sense of security when all nodes face similar conditions.
+structure_type: correlation/transmission failure
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md
+  - research/notes/2026-03-27-mena-wheat-importer-exposure-note.md
+metadata:
+  failure_mode: correlated supplier stress
+  transmission_channel: trade concentration
+  false_security: within-cluster diversification

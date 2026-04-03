@@ -1,0 +1,18 @@
+id: region:southeast-asia-rice
+type: region
+name: Southeast Asia rice exporters (Thailand, Vietnam)
+domain: climate volatility
+description: |
+  Thailand and Vietnam together account for significant share of global rice exports.
+  Function as secondary export cluster alongside India. Subject to monsoon volatility
+  and correlated hot-dry stress. Used as export cluster in rice correlation scenarios.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-04-02-southeast-asia-rice-correlation-shock.md
+metadata:
+  role: secondary rice export cluster
+  commodity: rice
+  countries: Thailand, Vietnam
+  structure_types:
+    - correlation/transmission failure

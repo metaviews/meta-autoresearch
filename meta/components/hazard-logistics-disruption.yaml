@@ -1,0 +1,16 @@
+id: hazard:logistics-disruption
+type: hazard
+name: Archipelago logistics disruption
+domain: climate volatility
+description: |
+  Distribution challenges for archipelago states (7,000+ islands in Philippines).
+  Rice imports require coordinated shipping and regional distribution hubs.
+  Supply stress amplifies logistics bottlenecks.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-04-02-philippines-rice-import-stress.md
+metadata:
+  hazard_type: logistics
+  transmission_channel: shipping, distribution hubs
+  compounding_factors: procurement delays, regional competition

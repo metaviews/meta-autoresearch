@@ -1,0 +1,16 @@
+id: evidence:gaupp-2020
+type: evidence
+name: Gaupp et al. (2020) simultaneous breadbasket failure study
+domain: climate volatility
+description: |
+  Peer-reviewed study analyzing simultaneous breadbasket failure risk
+  using region-specific agricultural production data. Reports increasing
+  simultaneous failure risk for wheat, maize, and soybean.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-synchronous-breadbasket-stress.md
+  - research/scenarios/2026-03-27-northern-wheat-correlation-shock.md
+metadata:
+  source_type: peer-reviewed paper
+  topic: simultaneous breadbasket failure, correlated crop stress

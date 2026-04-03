@@ -1,0 +1,19 @@
+id: mech:wet-to-fire
+type: mechanism
+name: Wet-to-fire transition
+domain: climate volatility
+description: |
+  Wet period produces stronger vegetation growth, infrastructure wear from storms,
+  and administrative fatigue. Following hot-dry period dries fuels, raises fire danger,
+  and creates simultaneous pressure on power, water, transport, and emergency systems.
+  The preparedness failure is the transition between planning modes, not the events themselves.
+structure_type: sequence failure
+related_branches:
+  - whiplash
+related_artifacts:
+  - research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md
+  - research/syntheses/2026-03-27-whiplash-family-comparison.md
+metadata:
+  transition_type: wet-to-dry
+  failure_mode: institutional sequencing
+  planning_categories: flood, fire, water, emergency response

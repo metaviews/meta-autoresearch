@@ -1,0 +1,17 @@
+id: hazard:agricultural-drought
+type: hazard
+name: Agricultural and ecological drought
+domain: climate volatility
+description: |
+  Drought affecting agricultural production and ecological systems.
+  Increasing under climate volatility, often following wet periods
+  that create false sense of water security.
+related_branches:
+  - hydrologic
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md
+metadata:
+  hazard_type: drought
+  affected_systems: agriculture, ecology, water supply
+  ipcc_assessment: increasing in some regions

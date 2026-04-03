@@ -2,27 +2,34 @@
 
 ## Current read
 
-The project has completed Phases 1-5.5 and is now at the entrance to Phase 6.
+The project has completed Phases 1-7C and is now at the entrance to Phase 8 (method consolidation and strategic direction).
 
 **What's done:**
 - Iterations 1-3 complete: branch/run state, context compression, model delegation
-- 4 research branches active: 3 climate (whiplash L4, breadbasket L4, hydrologic L4) + 1 non-climate (wealth-concentration L3)
+- 4 research branches active: 3 climate (whiplash L4, breadbasket L4, hydrologic L4) + 1 non-climate (wealth-concentration L4)
 - Model delegation tested and working: summarize-note, extract-claims via OpenRouter
-- Cost profile established: ~$0.0007 per 3K token task
+- Cost profile established: ~$0.0032/cycle with orchestrator
+- Phase 7B (component index): 78 components extracted, CLI commands working
+- Phase 7C (curation support): curate compare and curate matrix commands working
+- Phase 7D (orchestrator): benchmark, dashboard, cost tracking (partial)
+- Method consolidation: what-we-learned.md, method-guide.md, artifact-taxonomy.md, foundation-questions.md
+- Model evaluation routine established with monthly benchmark
 
-**Current bottleneck:** Token costs and coordination overhead limit cycle frequency.
+**Current bottleneck:** Model performance volatility (benchmark rankings change within same day); orchestrator timeout for multi-cycle plans.
 
 **Immediate priorities:**
-- Phase 6B: workflow automation to reduce session startup overhead ✅ COMPLETE
-- Phase 6C: validation cycles on real branches (whiplash comparison, breadbasket grounding) ✅ COMPLETE
-- Phase 6D: method-shaping evidence (L3→L4 path for non-climate portability) ✅ COMPLETE
-- Phase 6A: local model support (deferred - hardware limitations)
+- Phase 7B: component index ✅ COMPLETE
+- Phase 7C: curation support ✅ COMPLETE
+- Phase 7D: orchestrator enhancement ⏳ PARTIAL (timeout fix needed)
+- Method consolidation ✅ COMPLETE
+- Model evaluation routine ✅ ESTABLISHED
 
 **Current state:**
 - All 4 branches at L4 (whiplash, breadbasket, hydrologic, wealth-concentration)
-- Non-climate portability demonstrated via wealth-concentration (hybrid structure)
+- Non-climate portability demonstrated via wealth-concentration (hybrid structure, 3 domains)
 - Method lessons synthesis complete with explicit L3→L4 criteria
-- Phase 7 entry criteria: 4/5 met (only "method lessons" was pending, now complete)
+- Phase 7 entry criteria: all 5 met
+- Phase 7B/7C complete; Phase 7D partial; Phase 7A/7E deferred
 
 ## Phase 1: foundation and structure
 
@@ -216,24 +223,34 @@ Push branches toward L4 to demonstrate method-shaping power.
 - `research/syntheses/2026-03-29-method-lessons-cross-branch-synthesis.md` for full cross-branch analysis
 - `docs/branch-maturity.md` for updated L4 criteria and hybrid guidance
 
-## Phase 7: prototype decision
+## Phase 7: prototype decision (COMPLETE for 7B/7C, PARTIAL for 7D, DEFERRED for 7A/7E)
 
 Only after the research workflow becomes legible and evaluable should the project decide whether to build software around it.
 
 **Entry criteria (all required):**
 - [x] At least 2 branches at L4 (method-shaping) ✅ (4 branches: whiplash, breadbasket, hydrologic, wealth-concentration)
-- [x] Non-climate portability demonstrated at L4 ✅ (wealth-concentration, hybrid portability)
+- [x] Non-climate portability demonstrated at L4 ✅ (wealth-concentration, hybrid portability across 3 domains)
 - [x] Cost profile sustainable at 10x current volume ✅ (~$0.50-1.50/month at typical 100 cycles)
 - [x] Coordination overhead reduced enough that one researcher can run 5+ cycles/week ✅ (60% reduction, ~2 commands per session)
-- [x] Clear "method lessons" document ✅ (`research/syntheses/2026-03-29-method-lessons-cross-branch-synthesis.md`)
+- [x] Clear "method lessons" document ✅ (`docs/what-we-learned.md`)
 
 **All 5 entry criteria met as of 2026-03-29.**
 
+**Phase 7 sub-phases:**
+
+| Sub-phase | Status | Deliverables |
+|-----------|--------|--------------|
+| 7A: Method Publication | ⏸️ Deferred | External feedback not yet ready |
+| 7B: Component Index | ✅ Complete | 78 components, 5 CLI commands |
+| 7C: Curation Support | ✅ Complete | curate compare, curate matrix |
+| 7D: Orchestrator Enhancement | ⏳ Partial | Benchmark, dashboard, cost tracking; timeout fix needed |
+| 7E: Static Site | ⏸️ Deferred | Trigger conditions not met |
+
 **If proceeding, possible next steps:**
-- static site for publishing scenarios and syntheses
-- lightweight research tooling for scenario generation and curation
-- structured data model for reusable scenario components
-- model orchestration for repeated research cycles
+- Fix orchestrator timeout for multi-cycle plans
+- Run model benchmark monthly to track performance changes
+- Consider method publication when ready for external feedback
+- Decide on v2 scope (product vs. continued research)
 
 **If deferring:**
 - continue research cycles to further validate method
@@ -251,7 +268,30 @@ Only after the research workflow becomes legible and evaluable should the projec
 - **balance tooling and research validation in interleaved cycles, not sequential phases**
 - **every infrastructure addition should be validated on real research passes before expansion**
 - **reduce token costs and coordination overhead as explicit design constraints, not afterthoughts**
+- **evaluate available models monthly for combined cost efficiency and capability** ⭐ NEW
+- **model performance is volatile; benchmark before making changes** ⭐ NEW
 
 ## Guiding rule
 
 Do not build product complexity or cycle scale faster than methodological clarity.
+
+## Phase 8: method consolidation and strategic direction (ENTERING)
+
+**Purpose:** Assess what the method has become, what it can do, and where it should go.
+
+**Entry criteria (all required):**
+- [x] All 4 branches at L4
+- [x] 3 stable structure types validated across domains
+- [x] Non-climate portability demonstrated (3 domains for wealth-concentration)
+- [x] Phase 7B/7C tooling complete
+- [x] Method consolidation documents written
+- [x] Model evaluation routine established
+
+**Current status:** ✅ All entry criteria met as of 2026-04-02.
+
+**Phase 8 questions:**
+1. What is the method now capable of that it wasn't at v1 start?
+2. What strategic directions are now open that weren't before?
+3. What should the method stop doing, keep doing, or start doing?
+4. What is the audience for this work?
+5. What would constitute v2?

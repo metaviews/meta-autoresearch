@@ -1,0 +1,15 @@
+id: evidence:usda-wheat-balance
+type: evidence
+name: USDA wheat supply and use balance sheets
+domain: climate volatility
+description: |
+  Supply and use data showing Russia as major wheat exporter and China as
+  very large producer with very large ending stocks but minimal exports.
+  Supports differentiation between export node and domestic buffer roles.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md
+metadata:
+  source_type: government data
+  topic: wheat production, stocks, trade balance

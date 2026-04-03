@@ -1,0 +1,16 @@
+id: infra:private-credit-market
+type: infrastructure
+name: Private credit market
+domain: political economy
+description: |
+  Non-bank lending infrastructure including direct lending, distressed debt,
+  real estate credit, and other private credit strategies. Subject to
+  refinancing squeezes and hidden leverage under volatility.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-private-credit-resilience-squeeze.md
+metadata:
+  type: financial intermediation
+  vulnerability: refinancing stress, hidden leverage
+  scale: $2.1 trillion (IMF)

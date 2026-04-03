@@ -1,0 +1,18 @@
+id: mech:dual-node-correlation
+type: mechanism
+name: Dual-node correlation (substitute buffers fail together)
+domain: climate volatility
+description: |
+  Simultaneous stress on primary export node and substitute buffer narrows
+  trade diversification options exactly when import-dependent buyers need them most.
+  The problem is not absolute collapse but reduced substitutability and hardened price formation.
+structure_type: correlation/transmission failure
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md
+  - research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md
+metadata:
+  node_count: 2
+  failure_mode: reduced substitutability
+  transmission_channel: trade, price formation

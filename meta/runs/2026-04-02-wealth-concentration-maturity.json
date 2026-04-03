@@ -1,0 +1,35 @@
+{
+  "run_id": "2026-04-02-wealth-concentration-maturity",
+  "date": "2026-04-02",
+  "branch_slug": "wealth-concentration",
+  "run_type": "maturity",
+  "question": "Is the wealth-concentration branch ready for L4 method-shaping status based on three non-climate domains demonstrating hybrid concentration structure?",
+  "stages_targeted": [
+    7,
+    8,
+    9
+  ],
+  "expected_outputs": [
+    {
+      "kind": "maturity_update",
+      "description": "A branch maturity or structure judgment update"
+    },
+    {
+      "kind": "loop_update",
+      "description": "A loop-run update or maturity assessment"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "maturity_assessment",
+      "path": "research/syntheses/2026-04-02-wealth-concentration-maturity-assessment.md"
+    },
+    {
+      "kind": "loop_record",
+      "path": "research/loops/2026-04-02-wealth-concentration-maturity-loop-run.md"
+    }
+  ],
+  "completion_status": "completed_with_gaps",
+  "notes": "",
+  "next_step": "redirect or deepen"
+}

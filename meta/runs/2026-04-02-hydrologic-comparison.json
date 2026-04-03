@@ -1,0 +1,25 @@
+{
+  "run_id": "2026-04-02-hydrologic-comparison",
+  "date": "2026-04-02",
+  "branch_slug": "hydrologic",
+  "run_type": "comparison",
+  "question": "Does the design/rule conflict structure hold across climate infrastructure (reservoir rules) and financial regulation (banking rules), or does financial regulation introduce fundamentally different mechanisms?",
+  "stages_targeted": [
+    6
+  ],
+  "expected_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "description": "At least one synthesis comparing variants or nodes"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "path": "research/syntheses/2026-04-02-climate-vs-financial-design-rule.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "",
+  "next_step": "comparison"
+}

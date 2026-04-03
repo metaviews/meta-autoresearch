@@ -1,0 +1,18 @@
+id: region:europe-wheat
+type: region
+name: European wheat belt
+domain: climate volatility
+description: |
+  One of the world's largest wheat-producing and wheat-exporting regions.
+  Functions as a key substitute buffer when Black Sea exports are constrained.
+  Used as a bounded case for correlation/transmission failure in wheat trade.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md
+  - research/syntheses/2026-03-27-russia-europe-vs-russia-china-wheat-comparison.md
+metadata:
+  role: substitute export buffer
+  commodity: wheat
+  structure_types:
+    - correlation/transmission failure

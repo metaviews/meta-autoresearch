@@ -1,0 +1,16 @@
+id: hazard:chip-supply-disruption
+type: hazard
+name: Chip supply disruption (semiconductor supply chain failure)
+domain: political economy
+description: |
+  Disruption to advanced semiconductor supply chain through fab outage,
+  geopolitical conflict, natural disaster, or export controls. Creates
+  compute access crisis for AI development due to geographic concentration.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-ai-compute-concentration-stress.md
+metadata:
+  hazard_type: supply chain
+  transmission_channel: chip access, export controls
+  compounding_factors: geographic concentration, no quick substitutes

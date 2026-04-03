@@ -1,0 +1,20 @@
+id: mech:balance-sheet-compounding
+type: mechanism
+name: Balance-sheet compounding (wealth concentration through asset and return asymmetry)
+domain: political economy
+description: |
+  Wealth concentration intensifies because top groups own assets and balance-sheet
+  positions that compound more efficiently. Financial assets scale better than
+  housing-heavy middle-class portfolios. Large fortunes save more, diversify more,
+  withstand shocks better, capture higher returns. System changes qualitatively as
+  concentration rises.
+structure_type: hybrid (correlation/transmission + design/rule conflict)
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-wealth-concentration-structural-stress.md
+  - research/notes/2026-03-28-wealth-concentration-grounding-note.md
+metadata:
+  failure_mode: self-reinforcing concentration
+  transmission_channel: asset composition, returns, tax design
+  asymmetry: top vs. middle asset structure

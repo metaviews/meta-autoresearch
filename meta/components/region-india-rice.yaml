@@ -1,0 +1,19 @@
+id: region:india-rice
+type: region
+name: India (rice export node)
+domain: climate volatility
+description: |
+  World's largest rice exporter, accounting for around 40% of global rice trade.
+  Has imposed export restrictions in recent years (2023 non-basmati ban).
+  Subject to monsoon volatility and hot-dry stress. Used as primary export node
+  in rice correlation scenarios.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-04-02-southeast-asia-rice-correlation-shock.md
+metadata:
+  role: primary rice export node
+  commodity: rice
+  export_share: 40% of global rice trade
+  structure_types:
+    - correlation/transmission failure

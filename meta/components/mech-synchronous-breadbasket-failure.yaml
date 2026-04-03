@@ -1,0 +1,18 @@
+id: mech:synchronous-breadbasket-failure
+type: mechanism
+name: Synchronous breadbasket failure (correlated production stress)
+domain: climate volatility
+description: |
+  Multiple major food-producing regions experience hot-dry growing-season shocks
+  in same period. None singularly catastrophic, but synchronization erodes resilience
+  assumptions. Trade, storage, insurance, and substitution buffers have limits when
+  backup regions are also under stress.
+structure_type: correlation/transmission failure
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-synchronous-breadbasket-stress.md
+metadata:
+  failure_mode: correlated production shortfall
+  transmission_channel: trade, reserves, policy response
+  crop_scope: grain and oilseed

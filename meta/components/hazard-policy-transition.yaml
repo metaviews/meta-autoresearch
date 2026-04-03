@@ -1,0 +1,16 @@
+id: hazard:policy-transition
+type: hazard
+name: Climate policy transition volatility
+domain: climate volatility
+description: |
+  Climate policy shifts between mitigation, adaptation, and emergency response.
+  Each regime requires different infrastructure, capital, and expertise.
+  Transition velocity exceeds adaptation capacity.
+related_branches:
+  - whiplash
+related_artifacts:
+  - research/scenarios/2026-04-02-climate-policy-whiplash.md
+metadata:
+  hazard_type: policy
+  transmission_channel: capital stranding, expertise mismatch
+  policy_regimes: mitigation, adaptation, emergency response

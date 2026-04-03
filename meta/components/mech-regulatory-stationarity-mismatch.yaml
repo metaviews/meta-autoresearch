@@ -1,0 +1,18 @@
+id: mech:regulatory-stationarity-mismatch
+type: mechanism
+name: Regulatory stationarity mismatch (rules for stable system face volatile reality)
+domain: political economy
+description: |
+  Financial regulation designed for stable, slow-moving banking faces reality
+  of fast NBFI runs, wholesale funding, private valuations. Rules assume
+  deposit-funded stability; reality is shadow banking volatility. Regulatory
+  adaptation lags financial innovation.
+structure_type: design/rule conflict under volatility
+related_branches:
+  - hydrologic
+related_artifacts:
+  - research/scenarios/2026-04-02-financial-regulation-design-failure.md
+metadata:
+  failure_mode: regulatory architecture mismatch
+  transmission_channel: NBFI runs, regulatory blind spots
+  analog: reservoir rules for stationarity face non-stationarity

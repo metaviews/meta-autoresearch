@@ -1,0 +1,18 @@
+id: hazard:credit-squeeze
+type: hazard
+name: Credit squeeze
+domain: political economy
+description: |
+  Financial hazard where credit availability contracts under volatility.
+  NBFCs and other transmission channels face liquidity constraints that
+  expose wealth concentration fragility. Represents transmission failure
+  in financial systems.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-private-credit-resilience-squeeze.md
+  - research/scenarios/2026-03-28-india-last-mile-credit-squeeze.md
+metadata:
+  hazard_type: financial
+  transmission_channel: credit, liquidity
+  stress_condition: volatility

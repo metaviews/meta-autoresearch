@@ -1,0 +1,12 @@
+{
+  "name": "breadbasket-comparison-cycle",
+  "branch": "breadbasket",
+  "pass_type": "comparison",
+  "cycles": 2,
+  "autonomy_level": "low",
+  "question": "Does the correlation/transmission structure hold across wheat and rice, and across continental and archipelago importers?",
+  "expected_outputs": [
+    {"kind": "comparison_synthesis", "description": "Synthesis comparing wheat vs. rice mechanisms"},
+    {"kind": "loop_update", "description": "Loop-run record documenting the cycle"}
+  ]
+}

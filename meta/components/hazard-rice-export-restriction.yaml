@@ -1,0 +1,16 @@
+id: hazard:rice-export-restriction
+type: hazard
+name: Rice export restriction (trade policy amplification)
+domain: climate volatility
+description: |
+  Export restrictions on rice imposed by major exporters (India, Thailand, Vietnam)
+  in response to domestic production stress or price pressure. Amplifies physical
+  shortfalls into trade shocks. Particularly impactful due to thin rice trade share.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-04-02-southeast-asia-rice-correlation-shock.md
+metadata:
+  hazard_type: policy
+  transmission_channel: trade restriction
+  compounding_factors: thin trade market, staple dependence

@@ -1,0 +1,19 @@
+id: region:us-wealth
+type: region
+name: United States (asset regime)
+domain: political economy
+description: |
+  Asset regime with tax structures, monetary policy, and financial regulations
+  that concentrate wealth under volatility. Used as a bounded case for hybrid
+  structure (transmission + rule-conflict) in non-climate domain.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md
+  - research/notes/2026-03-28-us-asset-regime-mismatch-note.md
+metadata:
+  geography: United States
+  systems: tax, monetary policy, financial regulation
+  structure_types:
+    - correlation/transmission failure
+    - design/rule conflict under volatility

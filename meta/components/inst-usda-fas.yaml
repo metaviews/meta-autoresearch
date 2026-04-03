@@ -1,0 +1,16 @@
+id: inst:usda-fas
+type: institution
+name: USDA Foreign Agricultural Service
+domain: climate volatility
+description: |
+  US government agency providing global agricultural production, trade, and
+  market analysis. Key source for wheat trade flows, import/export data,
+  and supplier concentration analysis.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md
+  - research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md
+metadata:
+  function: agricultural trade analysis, market data
+  data_types: production, trade flows, import/export statistics

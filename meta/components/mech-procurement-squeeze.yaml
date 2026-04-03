@@ -1,0 +1,19 @@
+id: mech:procurement-squeeze
+type: mechanism
+name: Procurement squeeze (importer fiscal and tender stress)
+domain: climate volatility
+description: |
+  Upstream supply tightening creates importer vulnerability through procurement
+  mechanics (tender timing, financing, FX availability, subsidy burden) rather than
+  immediate physical shortage. Large import systems can be fragile because scale
+  creates fiscal-management and subsidy-stability problems.
+structure_type: correlation/transmission failure
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md
+  - research/syntheses/2026-03-28-breadbasket-downstream-preparedness-comparison.md
+metadata:
+  failure_mode: fiscal and procurement stress
+  transmission_channel: tenders, FX, subsidy burden
+  importer_archetype: large-scale state procurement

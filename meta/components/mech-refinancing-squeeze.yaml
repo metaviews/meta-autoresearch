@@ -1,0 +1,19 @@
+id: mech:refinancing-squeeze
+type: mechanism
+name: Refinancing squeeze (withdrawal of intermediation under stress)
+domain: political economy
+description: |
+  Private credit and non-bank intermediation face stress through withdrawal of
+  financing capacity rather than headline collapse. Borrowers with high interest
+  burdens struggle to refinance. Funds, insurers, pension holders protect themselves
+  by pulling back, repricing, or selling liquid assets elsewhere.
+structure_type: correlation/transmission failure
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-private-credit-resilience-squeeze.md
+  - research/notes/2026-03-28-wealth-transmission-channels-note.md
+metadata:
+  failure_mode: intermediation withdrawal
+  transmission_channel: private credit, NBFI, refinancing
+  stress_indicator: delayed recognition, then sharp squeeze

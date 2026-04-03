@@ -1,0 +1,16 @@
+id: infra:data-center-compute
+type: infrastructure
+name: AI data center compute infrastructure
+domain: political economy
+description: |
+  Large-scale data centers with 10,000-100,000+ GPU clusters for AI training.
+  Require significant power (100MW+), cooling, and specialized networking.
+  Concentrated in few locations due to energy and infrastructure constraints.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-ai-compute-concentration-stress.md
+metadata:
+  type: compute infrastructure
+  scale: 10,000-100,000+ GPUs
+  constraints: power, cooling, networking

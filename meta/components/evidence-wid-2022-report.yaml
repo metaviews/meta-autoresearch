@@ -1,0 +1,16 @@
+id: evidence:wid-2022-report
+type: evidence
+name: World Inequality Report (2022)
+domain: political economy
+description: |
+  Comprehensive report on global wealth inequality. Shows top 10% owned 76%
+  of household wealth in 2021, bottom 50% owned 2%. Top 1% captured 38%
+  of additional wealth since mid-1990s. Links concentration to savings rates,
+  returns, privatization, deregulation, and tax policy.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-wealth-concentration-structural-stress.md
+metadata:
+  source_type: research report
+  topic: wealth concentration, asset composition, inequality drivers

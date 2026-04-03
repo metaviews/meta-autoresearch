@@ -1,0 +1,16 @@
+id: infra:ppe-supply-chain
+type: infrastructure
+name: PPE manufacturing and distribution
+domain: political economy
+description: |
+  PPE (masks, gowns, gloves) manufacturing concentrated in China and Southeast Asia.
+  Just-in-time supply chains optimized for cost, not resilience. Pandemic demand
+  overwhelmed concentrated production capacity.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-04-02-pandemic-preparedness-concentration.md
+metadata:
+  type: medical supply chain
+  geographic_concentration: China, Southeast Asia
+  vulnerability: demand surge, export restrictions

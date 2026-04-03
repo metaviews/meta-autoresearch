@@ -1,0 +1,18 @@
+id: mech:policy-regime-whiplash
+type: mechanism
+name: Policy regime whiplash (rapid transition between policy regimes)
+domain: political economy
+description: |
+  Rapid transitions between policy regimes (expansion-to-contraction, deregulation-to-reregulation,
+  openness-to-restriction) create preparedness failures. Actors optimize for current regime, then
+  face whiplash when conditions shift faster than adaptation is possible. Transition is the risk,
+  not the endpoints.
+structure_type: sequence failure
+related_branches:
+  - whiplash
+related_artifacts:
+  - research/scenarios/2026-04-02-policy-regime-whiplash.md
+metadata:
+  failure_mode: transition velocity exceeds adaptation
+  planning_categories: expansion, contraction, compliance, capital allocation
+  analog: wet-to-fire, recovery-to-shortage (climate)

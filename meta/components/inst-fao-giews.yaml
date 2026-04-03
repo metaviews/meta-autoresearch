@@ -1,0 +1,16 @@
+id: inst:fao-giews
+type: institution
+name: FAO GIEWS (Global Information and Early Warning System)
+domain: climate volatility
+description: |
+  UN system providing early warning information on food supply and demand.
+  Issues country briefs on cereal production, trade, and food security status.
+  Key source for importer dependence and procurement data.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md
+  - research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md
+metadata:
+  function: food security early warning, country briefs
+  data_types: cereal production, imports, food security status

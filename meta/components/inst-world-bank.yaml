@@ -1,0 +1,16 @@
+id: inst:world-bank
+type: institution
+name: World Bank
+domain: climate volatility
+description: |
+  International financial institution providing macroeconomic analysis and
+  development data. Documents FX stress, public finance impacts, and external
+  shock effects on developing economies.
+related_branches:
+  - breadbasket
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-egypt-wheat-procurement-squeeze.md
+metadata:
+  function: macroeconomic analysis, development finance
+  data_types: FX reserves, public finances, shock impacts

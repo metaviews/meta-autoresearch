@@ -1,0 +1,15 @@
+id: evidence:reliefweb-market-bulletin
+type: evidence
+name: ReliefWeb market and trade bulletin (Yemen)
+domain: climate volatility
+description: |
+  Humanitarian reporting on Yemen market conditions including currency
+  depreciation, food basket costs, and port import flows. Supports
+  procurement fragility mechanism in fragile state importer.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md
+metadata:
+  source_type: humanitarian reporting
+  topic: currency, food prices, import flows

@@ -1,0 +1,16 @@
+id: hazard:currency-depreciation
+type: hazard
+name: Currency depreciation (import capacity erosion)
+domain: climate volatility
+description: |
+  Rapid currency depreciation erodes import capacity for wheat-buying nations.
+  Compounds upstream supply shocks by reducing purchasing power at precisely
+  the moment when global prices are rising. Key hazard for fragile state importers.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-28-yemen-wheat-procurement-fragility.md
+metadata:
+  hazard_type: financial
+  transmission_channel: import purchasing power
+  compounding_factors: global price rise, FX reserves depletion

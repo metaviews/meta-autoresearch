@@ -1,0 +1,18 @@
+id: mech:climate-policy-hybrid
+type: mechanism
+name: Climate policy hybrid sequence (agentic response to non-agentic change)
+domain: climate volatility
+description: |
+  Climate policy transitions (mitigation-to-adaptation, adaptation-to-emergency)
+  create preparedness failures through transition velocity. Physical climate whiplash
+  triggers policy whiplash, creating compound stress. Actors optimize for current
+  policy regime, creating vulnerability to transition.
+structure_type: "sequence failure (hybrid: agentic + non-agentic)"
+related_branches:
+  - whiplash
+related_artifacts:
+  - research/scenarios/2026-04-02-climate-policy-whiplash.md
+metadata:
+  failure_mode: policy transition velocity + physical climate stress
+  transmission_channel: capital allocation, institutional expertise, infrastructure
+  hybrid: agentic policy response to non-agentic climate change

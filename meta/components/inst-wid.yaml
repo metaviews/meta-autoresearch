@@ -1,0 +1,16 @@
+id: inst:wid
+type: institution
+name: World Inequality Lab (WID)
+domain: political economy
+description: |
+  Research institution producing World Inequality Report. Tracks global
+  wealth concentration, asset composition, savings rates, returns asymmetry,
+  and policy drivers of inequality.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-wealth-concentration-structural-stress.md
+  - research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md
+metadata:
+  function: inequality research, wealth tracking
+  data_types: wealth shares, asset composition, savings rates, returns

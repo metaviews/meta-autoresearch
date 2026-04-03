@@ -1,0 +1,18 @@
+id: region:global-wealth-top-10
+type: region
+name: Global top 10% wealth holders
+domain: political economy
+description: |
+  Top 10% of global wealth distribution owning 76% of household wealth.
+  Asset composition heavily weighted toward financial assets rather than
+  housing. Capture disproportionate share of new wealth accumulation.
+related_branches:
+  - wealth-concentration
+related_artifacts:
+  - research/scenarios/2026-03-28-wealth-concentration-structural-stress.md
+metadata:
+  wealth_share: 76% of global household wealth (2021)
+  asset_type: financial assets dominant
+  structure_types:
+    - correlation/transmission failure
+    - design/rule conflict under volatility

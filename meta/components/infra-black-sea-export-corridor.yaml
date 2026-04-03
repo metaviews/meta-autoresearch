@@ -1,0 +1,16 @@
+id: infra:black-sea-export-corridor
+type: infrastructure
+name: Black Sea export corridor
+domain: climate volatility
+description: |
+  Major wheat export infrastructure including ports, shipping routes, and
+  trade channels from Russia and Ukraine to global markets. Subject to
+  export restrictions and climate-driven supply shocks.
+related_branches:
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md
+metadata:
+  type: trade corridor
+  commodity: wheat
+  vulnerability: export restrictions, climate stress

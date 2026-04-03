@@ -1,0 +1,19 @@
+id: mech:wet-dry-sequence-failure
+type: mechanism
+name: Wet-dry sequence failure (infrastructure designed for single hazard faces both)
+domain: climate volatility
+description: |
+  Basin or region experiences intense precipitation followed by heat and drying.
+  Infrastructure and operating rules optimized for historically familiar flood-risk
+  tradeoffs fail when conditions shift. Assets designed for one-sided optimization
+  fail in sequence: culverts, retention, reservoir rules, intake quality, hydropower,
+  irrigation, habitat protection.
+structure_type: design/rule conflict under volatility
+related_branches:
+  - hydrologic
+related_artifacts:
+  - research/scenarios/2026-03-27-hydrologic-whiplash-and-design-failure.md
+metadata:
+  failure_mode: distribution shift, volatility
+  planning_categories: flood, drought, water management
+  infrastructure_inertia: standards lag conditions
