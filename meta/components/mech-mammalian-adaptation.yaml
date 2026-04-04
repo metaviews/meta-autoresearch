@@ -1,0 +1,18 @@
+id: mech:mammalian-adaptation
+type: mechanism
+name: Mammalian adaptation (viral evolution for mammalian hosts)
+domain: biological volatility
+description: |
+  HPAI H5N1 acquires mutations associated with mammalian adaptation (PB2 E627K,
+  D701N). Each spillover event (poultry → mammal) is opportunity for adaptation.
+  Cumulative probability increases with each outbreak. Mammalian adaptation
+  is prerequisite for sustained human transmission.
+structure_type: sequence failure
+related_branches:
+  - avian-flu-zoonotic
+related_artifacts:
+  - research/scenarios/2026-04-03-wild-bird-migration-hpai-pathway.md
+metadata:
+  failure_mode: sequential risk accumulation
+  transmission_channel: viral evolution, host jumping
+  adaptation_signals: PB2 E627K, D701N mutations

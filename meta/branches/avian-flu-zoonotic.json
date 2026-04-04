@@ -1,0 +1,47 @@
+{
+  "slug": "avian-flu-zoonotic",
+  "title": "Avian Flu Zoonotic Transmission",
+  "domain": "biological volatility",
+  "structure_type": "hybrid: correlation/transmission + sequence failure + design/rule conflict",
+  "maturity_level": 4,
+  "maturity_note": "method-shaping (multi-component hybrid validated, biological volatility accommodation added to method documents)",
+  "status": "active",
+  "parent_artifact": "research/scenarios/2026-04-03-hpai-global-agriculture-disruption.md",
+  "active_variants": [
+    "research/scenarios/2026-04-03-us-dairy-herd-hpai-outbreak.md",
+    "research/scenarios/2026-04-03-wild-bird-migration-hpai-pathway.md",
+    "research/scenarios/2026-04-03-south-american-sea-lion-hpai-mortality.md"
+  ],
+  "key_notes": [
+    "research/notes/2026-04-03-hpai-zoonotic-grounding-note.md",
+    "research/notes/2026-04-03-hpai-trade-restriction-evidence.md",
+    "research/notes/2026-04-03-hpai-transmission-chain-quantification.md",
+    "research/notes/2026-04-03-hpai-biosecurity-inadequacy-assessment.md"
+  ],
+  "key_syntheses": [
+    "research/syntheses/2026-04-03-hpai-structure-type-comparison.md",
+    "research/syntheses/2026-04-03-hpai-vs-existing-structure-types.md",
+    "research/syntheses/2026-04-03-hpai-vs-breadbasket-trade-comparison.md",
+    "research/syntheses/2026-04-03-hpai-vs-whiplash-sequence-comparison.md",
+    "research/syntheses/2026-04-03-method-lessons-cross-branch-synthesis-updated.md"
+  ],
+  "loop_runs": [
+    "research/loops/2026-04-03-avian-flu-zoonotic-comparison-loop-run.md",
+    "research/loops/2026-04-03-avian-flu-grounding-loop-run.md"
+  ],
+  "discard_records": [
+    "research/discards/2026-04-03-hpai-early-discards.md"
+  ],
+  "strongest_variant": "research/scenarios/2026-04-03-us-dairy-herd-hpai-outbreak.md",
+  "most_generative_variant": "research/scenarios/2026-04-03-wild-bird-migration-hpai-pathway.md",
+  "weakest_variant": "research/scenarios/2026-04-03-south-american-sea-lion-hpai-mortality.md",
+  "open_questions": [
+    "Does the 3-component hybrid hold with stronger grounding?",
+    "How does biological volatility (viral evolution, host jumping) differ from climate volatility as a driver?",
+    "Should HPAI be compared against breadbasket (trade correlation) or whiplash (transmission sequence)?",
+    "What trade restriction cascade evidence exists for HPAI-affected agricultural sectors?",
+    "Can intervention points break the transmission chain at specific stages?"
+  ],
+  "next_recommended_pass": "redirect or deepen",
+  "last_updated": "2026-04-03"
+}

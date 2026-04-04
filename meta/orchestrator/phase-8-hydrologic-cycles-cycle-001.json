@@ -1,0 +1,47 @@
+{
+  "cycle_id": 1,
+  "plan_name": "phase-8-hydrologic-cycles",
+  "branch": "hydrologic",
+  "pass_type": "comparison",
+  "status": "completed",
+  "started_at": "2026-04-03T19:32:22.897798",
+  "completed_at": "2026-04-03T19:32:49.253415",
+  "outputs": [
+    "meta/generated/hydrologic-comparison-snapshot.md",
+    "meta/generated/hydrologic-comparison-index.md",
+    "meta/generated/hydrologic-comparison-prep.md",
+    "meta/generated/2026-03-27-seq-hydrologic-whiplash-grounding-note-cycle-summary.md",
+    "meta/generated/2026-03-27-upper-colorado-hydrologic-design-note-cycle-summary.md",
+    "meta/generated/2026-03-27-seq-grid-and-wivenhoe-whiplash-cycle-claims.md",
+    "meta/generated/2026-03-27-upper-colorado-compact-and-storage-whiplash-cycle-claims.md"
+  ],
+  "errors": [],
+  "cost_estimate": 0.0031999999999999997,
+  "duration_seconds": 26.36,
+  "task_timings": [
+    {
+      "task": "summarize-note",
+      "source": "research/notes/2026-03-27-seq-hydrologic-whiplash-grounding-note.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 3.38
+    },
+    {
+      "task": "summarize-note",
+      "source": "research/notes/2026-03-27-upper-colorado-hydrologic-design-note.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 4.83
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 8.53
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-upper-colorado-compact-and-storage-whiplash.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 9.57
+    }
+  ]
+}

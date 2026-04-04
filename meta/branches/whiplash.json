@@ -22,14 +22,17 @@
   "key_syntheses": [
     "research/syntheses/2026-03-27-whiplash-family-comparison.md",
     "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md",
-    "research/syntheses/2026-04-02-climate-vs-policy-sequence-comparison.md"
+    "research/syntheses/2026-04-02-climate-vs-policy-sequence-comparison.md",
+    "research/syntheses/2026-04-03-whiplash-three-way-comparison.md",
+    "research/syntheses/2026-04-03-whiplash-variant-comparison.md"
   ],
   "loop_runs": [
     "research/loops/2026-03-27-whiplash-loop-run.md",
     "research/loops/2026-04-02-whiplash-comparison-loop-run.md"
   ],
   "discard_records": [
-    "research/discards/2026-03-27-early-climate-discards.md"
+    "research/discards/2026-03-27-early-climate-discards.md",
+    "research/discards/2026-04-03-whiplash-early-discards.md"
   ],
   "strongest_variant": "research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md",
   "most_generative_variant": "research/scenarios/2026-04-02-policy-regime-whiplash.md",

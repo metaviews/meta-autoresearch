@@ -39,7 +39,8 @@
     "research/loops/2026-04-02-wealth-concentration-maturity-loop-run.md"
   ],
   "discard_records": [
-    "research/discards/2026-03-28-wealth-concentration-discards.md"
+    "research/discards/2026-03-28-wealth-concentration-discards.md",
+    "research/discards/2026-04-03-wealth-concentration-early-discards.md"
   ],
   "strongest_variant": "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
   "most_generative_variant": "research/scenarios/2026-04-02-pandemic-preparedness-concentration.md",

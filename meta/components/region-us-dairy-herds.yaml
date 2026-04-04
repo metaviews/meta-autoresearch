@@ -1,0 +1,19 @@
+id: region:us-dairy-herds
+type: region
+name: US Dairy Herds (HPAI affected)
+domain: biological volatility
+description: |
+  US dairy herds affected by HPAI H5N1 (2024-2025). Multi-state outbreak
+  with cattle-to-cattle transmission documented. First cattle-to-human
+  transmission confirmed (Texas dairy worker, 2024). US is world's largest
+  dairy producer ($900B+ global industry).
+related_branches:
+  - avian-flu-zoonotic
+related_artifacts:
+  - research/scenarios/2026-04-03-us-dairy-herd-hpai-outbreak.md
+metadata:
+  role: agricultural production node (dairy)
+  commodity: milk, dairy products
+  outbreak_status: ongoing
+  structure_types:
+    - correlation/transmission failure

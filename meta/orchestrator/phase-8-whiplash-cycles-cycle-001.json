@@ -1,0 +1,47 @@
+{
+  "cycle_id": 1,
+  "plan_name": "phase-8-whiplash-cycles",
+  "branch": "whiplash",
+  "pass_type": "comparison",
+  "status": "completed",
+  "started_at": "2026-04-03T20:03:09.515146",
+  "completed_at": "2026-04-03T20:03:34.515168",
+  "outputs": [
+    "meta/generated/whiplash-comparison-snapshot.md",
+    "meta/generated/whiplash-comparison-index.md",
+    "meta/generated/whiplash-comparison-prep.md",
+    "meta/generated/2026-03-27-feather-river-whiplash-grounding-note-cycle-summary.md",
+    "meta/generated/2026-03-27-upper-colorado-whiplash-grounding-note-cycle-summary.md",
+    "meta/generated/2026-03-27-feather-river-wet-to-fire-whiplash-cycle-claims.md",
+    "meta/generated/2026-03-27-upper-colorado-recovery-to-shortage-whiplash-cycle-claims.md"
+  ],
+  "errors": [],
+  "cost_estimate": 0.0031999999999999997,
+  "duration_seconds": 25.0,
+  "task_timings": [
+    {
+      "task": "summarize-note",
+      "source": "research/notes/2026-03-27-feather-river-whiplash-grounding-note.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 3.52
+    },
+    {
+      "task": "summarize-note",
+      "source": "research/notes/2026-03-27-upper-colorado-whiplash-grounding-note.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 4.67
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 8.42
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 8.38
+    }
+  ]
+}

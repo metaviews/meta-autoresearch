@@ -30,7 +30,8 @@
     "research/loops/2026-04-02-hydrologic-comparison-loop-run.md"
   ],
   "discard_records": [
-    "research/discards/2026-03-27-hydrologic-implicit-discards.md"
+    "research/discards/2026-03-27-hydrologic-implicit-discards.md",
+    "research/discards/2026-04-03-hydrologic-early-discards.md"
   ],
   "strongest_variant": "research/scenarios/2026-03-27-upper-colorado-compact-and-storage-whiplash.md",
   "most_generative_variant": "research/scenarios/2026-03-27-seq-grid-and-wivenhoe-whiplash.md",

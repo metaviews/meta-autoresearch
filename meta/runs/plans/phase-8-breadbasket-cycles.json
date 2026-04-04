@@ -1,0 +1,12 @@
+{
+  "name": "phase-8-breadbasket-cycles",
+  "branch": "breadbasket",
+  "pass_type": "comparison",
+  "cycles": 3,
+  "autonomy_level": "low",
+  "question": "Does the correlation/transmission structure hold across wheat, rice, and cross-crop simultaneous stress? What importer subtypes emerge?",
+  "expected_outputs": [
+    {"kind": "comparison_synthesis", "description": "Synthesis comparing crop variants and importer archetypes"},
+    {"kind": "loop_update", "description": "Loop-run record documenting the cycle"}
+  ]
+}

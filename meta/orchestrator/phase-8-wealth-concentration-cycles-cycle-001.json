@@ -1,0 +1,47 @@
+{
+  "cycle_id": 1,
+  "plan_name": "phase-8-wealth-concentration-cycles",
+  "branch": "wealth-concentration",
+  "pass_type": "comparison",
+  "status": "completed",
+  "started_at": "2026-04-03T19:33:22.337950",
+  "completed_at": "2026-04-03T19:33:45.898318",
+  "outputs": [
+    "meta/generated/wealth-concentration-comparison-snapshot.md",
+    "meta/generated/wealth-concentration-comparison-index.md",
+    "meta/generated/wealth-concentration-comparison-prep.md",
+    "meta/generated/2026-03-28-wealth-concentration-grounding-note-cycle-summary.md",
+    "meta/generated/2026-03-28-us-asset-regime-mismatch-note-cycle-summary.md",
+    "meta/generated/2026-03-28-wealth-concentration-structural-stress-cycle-claims.md",
+    "meta/generated/2026-03-28-us-asset-regime-and-wealth-lock-in-cycle-claims.md"
+  ],
+  "errors": [],
+  "cost_estimate": 0.0031999999999999997,
+  "duration_seconds": 23.56,
+  "task_timings": [
+    {
+      "task": "summarize-note",
+      "source": "research/notes/2026-03-28-wealth-concentration-grounding-note.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 5.68
+    },
+    {
+      "task": "summarize-note",
+      "source": "research/notes/2026-03-28-us-asset-regime-mismatch-note.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 3.67
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-28-wealth-concentration-structural-stress.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 5.44
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-28-us-asset-regime-and-wealth-lock-in.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 8.73
+    }
+  ]
+}

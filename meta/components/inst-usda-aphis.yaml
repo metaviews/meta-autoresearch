@@ -1,0 +1,16 @@
+id: inst:usda-aphis
+type: institution
+name: USDA APHIS (Animal and Plant Health Inspection Service)
+domain: biological volatility
+description: |
+  US federal agency responsible for animal disease surveillance and response.
+  Confirmed HPAI H5N1 in US dairy herds (March 2024). Implemented testing
+  requirements for interstate cattle movement. Coordinates with CDC on
+  human-animal interface.
+related_branches:
+  - avian-flu-zoonotic
+related_artifacts:
+  - research/scenarios/2026-04-03-us-dairy-herd-hpai-outbreak.md
+metadata:
+  function: animal disease surveillance, outbreak response
+  limitation: designed for contained outbreaks, not ongoing reintroduction

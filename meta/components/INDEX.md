@@ -1,7 +1,7 @@
 # Component Index
 
-**Generated:** 2026-04-02
-**Total components:** 77
+**Generated:** 2026-04-03
+**Total components:** 83
 
 ---
 
@@ -24,6 +24,7 @@
 | `region:southeast-asia-rice` | Southeast Asia rice exporters (Thailand, Vietnam) | climate volatility | breadbasket |
 | `region:tsmc-taiwan` | Taiwan (TSMC chip manufacturing) | political economy | wealth-concentration |
 | `region:upper-colorado` | Upper Colorado Basin | climate volatility | whiplash, hydrologic |
+| `region:us-dairy-herds` | US Dairy Herds (HPAI affected) | biological volatility | avian-flu-zoonotic |
 | `region:us-wealth` | United States (asset regime) | political economy | wealth-concentration |
 | `region:yemen` | Yemen (wheat importer, fragile state) | climate volatility | breadbasket |
 
@@ -34,9 +35,11 @@
 | `mech:asset-regime-lock-in` | Asset regime design concentrates wealth under volatility | political economy | wealth-concentration |
 | `mech:balance-sheet-compounding` | Balance-sheet compounding (wealth concentration through asset and return asymmetry) | political economy | wealth-concentration |
 | `mech:buffer-loss-confidence` | Buffer loss confidence (large domestic system stops absorbing shocks) | climate volatility | breadbasket |
+| `mech:climate-policy-hybrid` | Climate policy hybrid sequence (agentic response to non-agentic change) | climate volatility | whiplash |
 | `mech:compute-access-compounding` | Compute access compounding (infrastructure concentration creates capability advantages) | political economy | wealth-concentration |
 | `mech:dual-node-correlation` | Dual-node correlation (substitute buffers fail together) | climate volatility | breadbasket |
 | `mech:export-restriction-amplification` | Export restriction amplifies physical stress | climate volatility | breadbasket |
+| `mech:mammalian-adaptation` | Mammalian adaptation (viral evolution for mammalian hosts) | biological volatility | avian-flu-zoonotic |
 | `mech:policy-regime-whiplash` | Policy regime whiplash (rapid transition between policy regimes) | political economy | whiplash |
 | `mech:procurement-fragility` | Procurement fragility (fragile state import execution failure) | climate volatility | breadbasket |
 | `mech:procurement-squeeze` | Procurement squeeze (importer fiscal and tender stress) | climate volatility | breadbasket |
@@ -50,6 +53,7 @@
 | `mech:vaccine-access-compounding` | Vaccine access compounding (production concentration creates access advantages) | political economy | wealth-concentration |
 | `mech:wet-dry-sequence-failure` | Wet-dry sequence failure (infrastructure designed for single hazard faces both) | climate volatility | hydrologic |
 | `mech:wet-to-fire` | Wet-to-fire transition | climate volatility | whiplash |
+| `mech:wild-bird-reservoir` | Wild bird reservoir (ongoing reintroduction risk) | biological volatility | avian-flu-zoonotic |
 
 ## Institutions
 
@@ -65,6 +69,7 @@
 | `inst:imf` | International Monetary Fund (IMF) | political economy | wealth-concentration, breadbasket |
 | `inst:philippines-nfa` | Philippines National Food Authority (NFA) | climate volatility | breadbasket |
 | `inst:regulatory-agency` | Regulatory agency (policy implementation) | political economy | whiplash |
+| `inst:usda-aphis` | USDA APHIS (Animal and Plant Health Inspection Service) | biological volatility | avian-flu-zoonotic |
 | `inst:usda-fas` | USDA Foreign Agricultural Service | climate volatility | breadbasket |
 | `inst:who-covax` | WHO / COVAX facility | political economy | wealth-concentration |
 | `inst:wid` | World Inequality Lab (WID) | political economy | wealth-concentration |
@@ -110,6 +115,7 @@
 | `hazard:policy-volatility` | Policy volatility (rapid regime transitions) | political economy | whiplash |
 | `hazard:regulatory-arbitrage` | Regulatory arbitrage (risk migration to less-regulated segments) | political economy | hydrologic |
 | `hazard:rice-export-restriction` | Rice export restriction (trade policy amplification) | climate volatility | breadbasket |
+| `hazard:trade-restriction-amplification` | Trade restriction amplification (agricultural export bans) | biological volatility | avian-flu-zoonotic, breadbasket |
 | `hazard:wildfire` | Wildfire | climate volatility | whiplash |
 
 ---

@@ -140,6 +140,8 @@ Maintain a log of model changes:
 
 | Date | Change | Reason | Impact |
 |------|--------|--------|--------|
+| 2026-04-03 | Orchestrator 2-cycle plan completed | 600s timeout needed for multi-cycle | Cycles 1: 166s, Cycle 2: 23s (total ~$0.0064) |
+| 2026-04-02 (3) | Orchestrator cycle 2 with mimo-v2-flash | Full comparison pass | 22.8s for 4 tasks (2 summaries + 2 claims) |
 | 2026-04-02 (2) | Switched small slot to xiaomi/mimo-v2-flash | 2.54s vs 7.03s (gemini), 2.8x faster | Cycle time reduced further |
 | 2026-04-02 (1) | Switched small slot to gemini-2.5-flash-lite | 1.75s vs 6.73s (qwen), 3.8x faster | Cycle time reduced from ~90s to ~25s |
 | 2026-04-02 | Fixed delegate extract-claims bug | Unpacking error in get_model_for_slot | Claims extraction now works |

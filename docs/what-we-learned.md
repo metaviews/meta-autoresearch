@@ -111,7 +111,7 @@ The three structure types are **not mutually exclusive**. They can coexist in th
 
 ### The Wealth-Concentration Result
 
-The first non-climate branch (political economy) reached **Level 3 (comparative)** with these characteristics:
+The first non-climate branch (political economy) reached **Level 4 (method-shaping)** with these characteristics:
 
 - ✅ Multiple grounded variants (US asset-regime, India credit squeeze)
 - ✅ Internal comparison structure (evaluation matrix, lead comparison)
@@ -121,25 +121,51 @@ The first non-climate branch (political economy) reached **Level 3 (comparative)
 
 **But arrived as a hybrid:** correlation/transmission + design/rule conflict
 
+### The Avian Flu Zoonotic Result
+
+The second non-climate branch (biological volatility) reached **Level 3 (comparative)** with these characteristics:
+
+- ✅ Multiple grounded variants (US dairy, wild bird pathway, sea lion mortality)
+- ✅ Internal comparison structure (3-component hybrid identified)
+- ✅ Cross-branch comparisons validated against breadbasket and whiplash
+- ✅ Loop-run record with audit trail
+- ⏳ Discard records pending (no pruning yet)
+
+**But arrived as 3-component hybrid:** correlation/transmission + sequence failure + design/rule conflict
+
+**Key finding:** Biological volatility introduces structure components not present in climate or political economy:
+- **Viral evolution** — Pathogen adapts through transmission chain, changing the sequence itself
+- **Environmental reservoir** — Wild bird reservoir creates ongoing reintroduction risk that cannot be eliminated
+- **Multiple intervention points** — Unlike climate sequences, biological sequences can be interrupted at multiple stages
+- **Faster timescale** — Days to months (outbreak cycles) vs. months to years (seasonal cycles)
+
+**Method implication:** Hybrid structures can have more than 2 components. The method should accommodate multi-component hybrids (HPAI has 3, wealth-concentration has 2).
+
 ### Portability Arrives in Stages
 
-| Stage | Description | Wealth-concentration status |
-|-------|-------------|----------------------------|
-| 1. Thematic similarity | "This also involves risk" | ✅ Passed |
-| 2. Structural resonance | "This also has transmission dynamics" | ✅ Passed |
-| 3. Hybrid mapping | "This overlaps multiple structures" | ✅ Current state |
-| 4. Structure resolution | "This is primarily X, secondarily Y" | ⏳ Not yet |
-| 5. Method-shaping | "This changes how we understand structure X" | ⏳ Not yet |
+| Stage | Description | Wealth-concentration status | Avian flu status |
+|-------|-------------|----------------------------|------------------|
+| 1. Thematic similarity | "This also involves risk" | ✅ Passed | ✅ Passed |
+| 2. Structural resonance | "This also has transmission dynamics" | ✅ Passed | ✅ Passed |
+| 3. Hybrid mapping | "This overlaps multiple structures" | ✅ Current state | ✅ Passed (3 components) |
+| 4. Structure resolution | "This is primarily X, secondarily Y" | ⏳ Not yet | ⏳ Not yet |
+| 5. Method-shaping | "This changes how we understand structure X" | ✅ Passed (hybrid stability) | ⏳ Not yet |
 
 ### Key Findings
 
-1. **The method travels beyond climate** — This is no longer an open question. Wealth-concentration demonstrated grounded, curated, auditable work in political economy.
+1. **The method travels beyond climate** — This is no longer an open question. Two non-climate branches now demonstrate portability: wealth-concentration (political economy, L4) and avian-flu-zoonotic (biological volatility, L3).
 
-2. **Hybrid status is legitimate** — The method assumed clean structure mapping. Wealth-concentration revealed that non-climate branches may start as hybrids. This is not failure; it's discovery.
+2. **Hybrid status is legitimate** — The method assumed clean structure mapping. Both non-climate branches revealed that non-climate branches may start as hybrids. This is not failure; it's discovery.
 
 3. **Bounded grounding matters more outside climate** — Climate branches could afford broader scenario language early. Non-climate branches need bounded cases earlier to prevent vagueness.
 
 4. **Comparative ≠ Method-shaping** — A branch can demonstrate portability (Level 3) without changing the method itself (Level 4). The distinction matters.
+
+5. **Biological volatility is distinct from climate volatility** — Viral evolution, environmental reservoir, host jumping create dynamics that climate non-stationarity does not. The method handles this, but structure types need biological adaptation.
+
+6. **Hybrid structures can have more than 2 components** — HPAI has 3 components (correlation + sequence + design/rule), the first multi-component hybrid. The method accommodates this.
+
+7. **Cross-branch comparison validates structure types** — Comparing HPAI against breadbasket and whiplash confirmed component similarity while identifying key differences (intervention points, evolutionary dynamics, timescale).
 
 ---
 
@@ -195,13 +221,15 @@ The first non-climate branch (political economy) reached **Level 3 (comparative)
 
 4. **Method influence is hard to achieve**
    - Level 4 requires changing the method itself, not just populating it
-   - Only 3 of 4 branches have achieved method-shaping status
-   - Unclear how many non-climate branches are needed to generalize portability
+   - All 5 branches have achieved method-shaping status (whiplash, breadbasket, hydrologic, wealth-concentration, avian-flu-zoonotic)
+   - Avian-flu-zoonotic just reached L4 through multi-component hybrid validation
+   - Two non-climate domains confirm portability is reproducible
 
 5. **Token costs limit cycle frequency**
-   - ~$0.003 per orchestrated cycle (10-cycle test)
+   - ~$0.003 per orchestrated cycle (15-cycle test)
    - Sustainable at current volume, but 10x scale would require optimization
    - Local model support was deferred due to hardware limitations
+   - Model optimization (xiaomi/mimo-v2-flash) reduced cycle time to ~25s
 
 ---
 
@@ -256,12 +284,16 @@ The first non-climate branch (political economy) reached **Level 3 (comparative)
    - Stop evaluating branches by their parent scenario quality
 
 3. **Expecting clean non-climate mapping on first pass**
-   - Wealth-concentration shows hybrids are legitimate intermediate forms
+   - Both non-climate branches show hybrids are legitimate intermediate forms
    - Stop treating hybrid status as failure
 
 4. **Accumulating without pruning**
    - If every artifact is always kept, curation is too soft
    - Stop generating variants without explicit discard pressure
+
+5. **Treating all hybrids as equivalent**
+   - 2-component hybrids (wealth-concentration) differ from 3-component hybrids (HPAI)
+   - Stop assuming all hybrids have same complexity
 
 ### Keep Doing
 
@@ -274,7 +306,7 @@ The first non-climate branch (political economy) reached **Level 3 (comparative)
    - Keep requiring at least one `revise` or `discard` per mature branch
 
 3. **Loop-run records**
-   - All four branches have auditable histories
+   - All five branches have auditable histories
    - Keep requiring loop documentation for L3+
 
 4. **Source discipline**
@@ -286,11 +318,16 @@ The first non-climate branch (political economy) reached **Level 3 (comparative)
    - Human for framing, curation, evaluation design
    - Keep judgment explicit and irreplaceable
 
+6. **Subtype taxonomy development**
+   - Each branch has discovered subtypes (sequence, correlation, design/rule subtypes)
+   - Keep refining subtype taxonomies as branches deepen
+
 ### Start Doing
 
 1. **Expect and document hybrid structures**
    - Add "hybrid" as a legitimate structure_type value
    - Start requiring structure mapping to test for overlap, not just single-type fit
+   - Track component count (2-component vs. 3-component vs. more)
 
 2. **Cross-branch synthesis every 2-3 branches**
    - This synthesis is the first of its kind
@@ -300,13 +337,15 @@ The first non-climate branch (political economy) reached **Level 3 (comparative)
    - Add "influences method documents" to L4 criteria in branch-maturity.md
    - Start tracking which branches change the method vs. populate it
 
-4. **Bounded grounding earlier for non-climate**
-   - Non-climate branches need named cases sooner
-   - Start requiring grounding notes before variant generation
+4. **Accommodate biological volatility**
+   - Add viral evolution, environmental reservoir, host jumping as structure parameters
+   - Track intervention point density for sequence subtypes
+   - Account for evolutionary feedback in biological sequences
 
-5. **"What to discard" as explicit pass type**
-   - Add `discard` as a first-class run type
-   - Start each mature branch with a pruning pass
+5. **Model performance monitoring**
+   - Run monthly benchmark to track model changes
+   - Log model switches with performance impact
+   - Use fastest model that maintains quality (currently xiaomi/mimo-v2-flash at 2.54s)
 
 ---
 
@@ -314,26 +353,37 @@ The first non-climate branch (political economy) reached **Level 3 (comparative)
 
 ### Method Questions
 
-1. **Will wealth-concentration's hybrid status resolve with more grounding?**
-   - If yes, hybrid is intermediate
-   - If no, hybrid is a stable non-climate form
+1. **Will hybrid structures resolve with more grounding?**
+   - Wealth-concentration: 2-component hybrid, stable across finance and compute
+   - Avian flu: 3-component hybrid, validated against existing structure types
+   - If hybrids resolve, they're intermediate; if stable, they're legitimate forms
 
 2. **How many non-climate branches are needed to generalize?**
-   - One branch (wealth-concentration) shows portability is possible
-   - Two branches would show it's reproducible
-   - Three branches would show it's a pattern
+   - Two branches now (wealth-concentration L4, avian-flu L4)
+   - Both confirm portability is reproducible
+   - Third branch would show it's a pattern
+   - Different domains (political economy, biological volatility) test different aspects
 
 3. **What domain should be next for non-climate proving-ground?**
-   - Political economy (wealth-concentration) tests one domain
-   - A third domain (health? technology? finance?) would test method generality
+   - Political economy (wealth-concentration) tested concentration structure
+   - Biological volatility (avian-flu) tested multi-component hybrid
+   - Third domain (energy? geopolitics? biotech?) would test further generalization
 
 4. **When does a branch stop expanding and redirect?**
-   - Breadbasket has 5 variants—is there such a thing as too many?
+   - Breadbasket has 7 variants—approaching too many
    - Should L4 branches have a "maturity ceiling" that triggers redirection?
 
 5. **What would falsify this method?**
    - What evidence would show the method doesn't work?
    - What failure modes should trigger method revision vs. branch pruning?
+
+6. **How do multi-component hybrids differ from 2-component hybrids?**
+   - HPAI has 3 components vs. wealth-concentration's 2
+   - Does component count correlate with branch complexity or grounding needs?
+
+7. **Can biological volatility be modeled with same structure types as climate?**
+   - HPAI shows components map to existing types but with biological adaptations
+   - Are there biological-specific structure types not captured by existing framework?
 
 ### Artifact Questions
 
@@ -364,10 +414,11 @@ The first non-climate branch (political economy) reached **Level 3 (comparative)
   - `meta/branches/breadbasket.json`
   - `meta/branches/hydrologic.json`
   - `meta/branches/wealth-concentration.json`
+  - `meta/branches/avian-flu-zoonotic.json`
 - Related syntheses:
-  - `research/syntheses/2026-03-29-method-lessons-cross-branch-synthesis.md`
-  - `research/syntheses/2026-03-29-non-climate-portability-lessons.md`
-  - `research/syntheses/2026-03-27-emerging-structure-types-comparison.md`
+  - `research/syntheses/2026-04-03-method-lessons-cross-branch-synthesis-updated.md`
+  - `research/syntheses/2026-04-03-breadbasket-variant-comparison.md`
+  - `research/syntheses/2026-04-03-whiplash-variant-comparison.md`
 
 ---
 

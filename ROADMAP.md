@@ -2,31 +2,34 @@
 
 ## Current read
 
-The project has completed Phases 1-7C and is now at the entrance to Phase 8 (method consolidation and strategic direction).
+The project has completed Phases 1-7C and is now in Phase 8 (method consolidation and new domain exploration).
 
 **What's done:**
 - Iterations 1-3 complete: branch/run state, context compression, model delegation
-- 4 research branches active: 3 climate (whiplash L4, breadbasket L4, hydrologic L4) + 1 non-climate (wealth-concentration L4)
+- 5 research branches active: 3 climate (whiplash L4, breadbasket L4, hydrologic L4) + 2 non-climate (wealth-concentration L4, avian-flu-zoonotic L2)
 - Model delegation tested and working: summarize-note, extract-claims via OpenRouter
-- Cost profile established: ~$0.0032/cycle with orchestrator
-- Phase 7B (component index): 78 components extracted, CLI commands working
+- Cost profile established: ~$0.0032/cycle with orchestrator, ~25s per cycle (xiaomi/mimo-v2-flash)
+- Phase 7B (component index): 83 components extracted, CLI commands working
 - Phase 7C (curation support): curate compare and curate matrix commands working
 - Phase 7D (orchestrator): benchmark, dashboard, cost tracking (partial)
 - Method consolidation: what-we-learned.md, method-guide.md, artifact-taxonomy.md, foundation-questions.md
 - Model evaluation routine established with monthly benchmark
+- **New domain proving-ground: avian-flu-zoonotic** (biological volatility, 3-component hybrid structure identified at L2)
 
-**Current bottleneck:** Model performance volatility (benchmark rankings change within same day); orchestrator timeout for multi-cycle plans.
+**Current bottleneck:** Grounding pass execution for avian-flu-zoonotic; orchestrator grounding pass type needs fuller implementation.
 
 **Immediate priorities:**
-- Phase 7B: component index ✅ COMPLETE
+- Phase 7B: component index ✅ COMPLETE (83 components)
 - Phase 7C: curation support ✅ COMPLETE
-- Phase 7D: orchestrator enhancement ⏳ PARTIAL (timeout fix needed)
+- Phase 7D: orchestrator enhancement ⏳ PARTIAL (grounding pass type needs expansion)
 - Method consolidation ✅ COMPLETE
 - Model evaluation routine ✅ ESTABLISHED
+- **New domain: avian-flu-zoonotic** ⏳ L2 (grounding in progress, 3-component hybrid identified)
 
 **Current state:**
-- All 4 branches at L4 (whiplash, breadbasket, hydrologic, wealth-concentration)
-- Non-climate portability demonstrated via wealth-concentration (hybrid structure, 3 domains)
+- 4 branches at L4 (whiplash, breadbasket, hydrologic, wealth-concentration)
+- 1 branch at L2 (avian-flu-zoonotic, biological volatility)
+- Non-climate portability demonstrated via wealth-concentration (hybrid, 2 domains) and avian-flu-zoonotic (hybrid, biological volatility)
 - Method lessons synthesis complete with explicit L3→L4 criteria
 - Phase 7 entry criteria: all 5 met
 - Phase 7B/7C complete; Phase 7D partial; Phase 7A/7E deferred

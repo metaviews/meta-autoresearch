@@ -1,0 +1,19 @@
+id: mech:wild-bird-reservoir
+type: mechanism
+name: Wild bird reservoir (ongoing reintroduction risk)
+domain: biological volatility
+description: |
+  HPAI H5N1 is enzootic in wild bird populations globally. Wild bird migration
+  spreads virus across continents seasonally. Reservoir cannot be eliminated
+  with current tools, creating ongoing reintroduction risk for poultry, mammals,
+  and other susceptible hosts.
+structure_type: design/rule conflict under volatility
+related_branches:
+  - avian-flu-zoonotic
+related_artifacts:
+  - research/scenarios/2026-04-03-wild-bird-migration-hpai-pathway.md
+  - research/scenarios/2026-04-03-south-american-sea-lion-hpai-mortality.md
+metadata:
+  failure_mode: biosecurity framework mismatch
+  transmission_channel: wild bird migration, environmental contamination
+  flyways: Atlantic, Pacific, Central, East Asian-Australasian

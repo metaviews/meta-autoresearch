@@ -69,6 +69,12 @@ Produce multiple scenario directions that differ in mechanism, not only in wordi
 - exploratory scenario set
 - early curation notes
 - first family labels if they start to emerge
+- component suggestions for reusable elements
+
+### Tooling support
+
+- `component suggest <branch>` — find existing components relevant to this branch
+- `delegate branch-packet <branch>` — generate packet for context
 
 ### Gate to continue
 
@@ -104,11 +110,18 @@ Test whether the branch survives translation into multiple named cases or mechan
 - regional variants
 - node comparisons
 - subtype scenarios
+- component extractions for reusable elements
+
+### Tooling support
+
+- `delegate extract-claims <variant>` — extract claims from each variant for comparison
+- `curate compare <variant1> <variant2>` — generate comparison table
 
 ### Gate to continue
 
 - do the variants reveal a real family structure?
 - are the differences structural, or only rhetorical?
+- have variants been tested against component index for reuse potential?
 
 ## Stage 6: Compare the variants
 
@@ -121,12 +134,20 @@ Use comparison to decide what the branch actually is, which variant is strongest
 - comparison synthesis
 - stronger sense of best-evidenced versus most generative variants
 - clearer next-step priorities
+- subtype distinctions if variants cluster by mechanism
+
+### Tooling support
+
+- `curate compare <variant1> <variant2> [...]` — generate side-by-side comparison table
+- `curate matrix <branch>` — generate evaluation matrix draft for all variants
+- `delegate summarize-note <note>` — summarize grounding notes before comparison
 
 ### Gate to continue
 
 - does comparison produce sharper curation?
 - is at least one variant clearly weaker, more provisional, or in need of revision?
 - in a new domain, does comparison clarify whether the branch is resolving toward a dominant structure or remaining a meaningful hybrid?
+- have subtype distinctions emerged (e.g., broad vs. acute correlation, agentic vs. non-agentic sequence)?
 
 ## Stage 7: Evaluate and curate the branch
 
@@ -140,11 +161,19 @@ Apply the formal evaluation layer so the branch is judged explicitly rather than
 - curation outcomes: `keep`, `revise`, `merge`, `discard`
 - branch-specific next step
 - discard or merge records when pruning is meaningful enough to preserve
+- explicit subtype documentation if variants cluster by mechanism
+
+### Tooling support
+
+- `curate matrix <branch>` — generate evaluation matrix draft with all 8 dimensions
+- `component index` — verify components are extracted from variants for reuse
 
 ### Gate to continue
 
 - is the branch worth deeper investment?
 - does the evidence support the level of confidence implied?
+- has at least one `discard` or `revise` decision been made? (if every artifact is kept, curation is too soft)
+- for hybrid branches: have both components (transmission + rule-conflict) been tested?
 
 ## Stage 8: Synthesize across branches
 
@@ -157,12 +186,19 @@ Look above any one branch to identify what kind of epistemic structure the branc
 - cross-branch comparison
 - emerging structure types
 - method lessons about how different branches behave
+- subtype refinements (broad vs. acute, agentic vs. non-agentic, physical vs. regulatory)
+
+### Tooling support
+
+- `component search <query>` — find cross-branch patterns by mechanism
+- `branch compare-prep <branch>` — generate comparison prep material
 
 ### Gate to continue
 
 - has the work revealed a genuinely reusable structure, or only more domain content?
 - does the branch change the method, or only populate it?
 - if the branch is outside climate, has portability been demonstrated through repeated grounding and comparison rather than assumed from thematic similarity alone?
+- have subtype distinctions been documented and tested across branches?
 
 ## Stage 9: Assess cycle maturity
 
@@ -176,12 +212,20 @@ Decide whether the cycle is ready to be repeated more systematically or partiall
 - quality risks for scaling
 - decision about whether to rerun, deepen, branch, or stop
 - decision about which steps require frontier capability and which can be right-sized to cheaper or local execution
+- benchmark results if model changes are considered
+
+### Tooling support
+
+- `orchestrator benchmark` — test model performance to find fastest option
+- `orchestrator run <plan.json>` — execute autonomous cycles with cost tracking
+- `branch stale` — check for stale generated files
 
 ### Gate to continue
 
 - are the failure modes understood well enough to repeat the loop?
 - would scaling produce more signal or just more noise?
 - does the current design depend on unnecessary model capability or cost?
+- has model benchmark been run recently? (model performance is volatile)
 
 ## Roles across the loop
 

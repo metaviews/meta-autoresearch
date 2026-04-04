@@ -31,14 +31,17 @@
     "research/syntheses/2026-03-28-egypt-vs-yemen-importer-archetypes.md",
     "research/syntheses/2026-03-28-breadbasket-downstream-preparedness-comparison.md",
     "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md",
-    "research/syntheses/2026-04-02-wheat-vs-rice-crop-comparison.md"
+    "research/syntheses/2026-04-02-wheat-vs-rice-crop-comparison.md",
+    "research/syntheses/2026-04-03-breadbasket-importer-archetypes.md",
+    "research/syntheses/2026-04-03-breadbasket-variant-comparison.md"
   ],
   "loop_runs": [
     "research/loops/2026-03-27-breadbasket-loop-run.md",
     "research/loops/2026-04-02-breadbasket-comparison-loop-run.md"
   ],
   "discard_records": [
-    "research/discards/2026-03-27-early-climate-discards.md"
+    "research/discards/2026-03-27-early-climate-discards.md",
+    "research/discards/2026-04-03-breadbasket-early-discards.md"
   ],
   "strongest_variant": "research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md",
   "most_generative_variant": "research/scenarios/2026-04-02-southeast-asia-rice-correlation-shock.md",

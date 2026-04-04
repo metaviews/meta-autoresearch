@@ -1,0 +1,12 @@
+{
+  "name": "phase-8-whiplash-cycles",
+  "branch": "whiplash",
+  "pass_type": "comparison",
+  "cycles": 2,
+  "autonomy_level": "low",
+  "question": "Does the sequence failure structure hold across climate, policy, and hybrid sequences? What subtypes emerge?",
+  "expected_outputs": [
+    {"kind": "comparison_synthesis", "description": "Synthesis comparing sequence variants across domains"},
+    {"kind": "loop_update", "description": "Loop-run record documenting the cycle"}
+  ]
+}

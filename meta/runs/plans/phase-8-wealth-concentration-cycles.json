@@ -1,0 +1,12 @@
+{
+  "name": "phase-8-wealth-concentration-cycles",
+  "branch": "wealth-concentration",
+  "pass_type": "comparison",
+  "cycles": 3,
+  "autonomy_level": "low",
+  "question": "Does the hybrid concentration structure hold consistently across finance, compute, and pandemic preparedness domains? What subtypes emerge?",
+  "expected_outputs": [
+    {"kind": "comparison_synthesis", "description": "Synthesis comparing concentration across non-climate domains"},
+    {"kind": "loop_update", "description": "Loop-run record documenting the cycle"}
+  ]
+}

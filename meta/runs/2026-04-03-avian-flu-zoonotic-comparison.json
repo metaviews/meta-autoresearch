@@ -1,0 +1,41 @@
+{
+  "run_id": "2026-04-03-avian-flu-zoonotic-comparison",
+  "date": "2026-04-03",
+  "branch_slug": "avian-flu-zoonotic",
+  "run_type": "comparison",
+  "question": "What structure type does HPAI follow: correlation (US dairy trade amplification), sequence (wild bird transmission pathway), design/rule conflict (sea lion biosecurity mismatch), or hybrid?",
+  "stages_targeted": [
+    6
+  ],
+  "expected_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "description": "At least one synthesis comparing variants or nodes"
+    }
+  ],
+  "created_outputs": [
+    {
+      "kind": "comparison_synthesis",
+      "path": "research/syntheses/2026-04-03-hpai-structure-type-comparison.md"
+    },
+    {
+      "kind": "scenario_variant",
+      "path": "research/scenarios/2026-04-03-us-dairy-herd-hpai-outbreak.md"
+    },
+    {
+      "kind": "scenario_variant",
+      "path": "research/scenarios/2026-04-03-wild-bird-migration-hpai-pathway.md"
+    },
+    {
+      "kind": "scenario_variant",
+      "path": "research/scenarios/2026-04-03-south-american-sea-lion-hpai-mortality.md"
+    },
+    {
+      "kind": "grounding_note",
+      "path": "research/notes/2026-04-03-hpai-zoonotic-grounding-note.md"
+    }
+  ],
+  "completion_status": "completed",
+  "notes": "",
+  "next_step": "comparison"
+}

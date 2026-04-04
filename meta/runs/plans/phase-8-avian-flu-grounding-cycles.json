@@ -1,0 +1,12 @@
+{
+  "name": "phase-8-avian-flu-grounding-cycles",
+  "branch": "avian-flu-zoonotic",
+  "pass_type": "grounding",
+  "cycles": 3,
+  "autonomy_level": "low",
+  "question": "Strengthen each hybrid component with quantified evidence: trade restriction cascade, transmission chain probabilities, biosecurity inadequacy.",
+  "expected_outputs": [
+    {"kind": "grounding_note", "description": "At least one new or updated grounding note"},
+    {"kind": "scenario_update", "description": "At least one grounded scenario update or named case variant"}
+  ]
+}

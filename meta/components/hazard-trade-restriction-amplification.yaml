@@ -1,0 +1,18 @@
+id: hazard:trade-restriction-amplification
+type: hazard
+name: Trade restriction amplification (agricultural export bans)
+domain: biological volatility
+description: |
+  Countries impose import bans on HPAI-affected regions. Poultry, dairy, and
+  egg trade restrictions cascade through supply chains. Export-dependent
+  economies face secondary disruption. Trade amplification couples agricultural
+  sectors through shared disruption pathways.
+related_branches:
+  - avian-flu-zoonotic
+  - breadbasket
+related_artifacts:
+  - research/scenarios/2026-04-03-us-dairy-herd-hpai-outbreak.md
+metadata:
+  hazard_type: policy
+  transmission_channel: trade restrictions, export bans
+  compounding_factors: supply chain coupling, export dependence

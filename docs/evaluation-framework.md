@@ -99,6 +99,45 @@ Does the scenario expand what the inquiry can seriously imagine without detachin
 
 ## Optional supporting dimensions
 
+These dimensions may be relevant for specific structure types or domains. Use them when they sharpen judgment, not as universal requirements.
+
+### Hybrid structure dimensions (for branches with hybrid structure_type)
+
+When a branch exhibits hybrid structure (e.g., correlation/transmission + design/rule conflict), evaluate:
+
+- **Component completeness** — Are both structure components tested and evidenced?
+- **Component interaction** — Is the interaction between components documented?
+- **Resolution trajectory** — Is there evidence the hybrid is stabilizing or resolving?
+
+**Note:** Hybrid branches should require both components to earn active variant status. Transmission-only or rule-conflict-only variants are redundant when a stronger variant covers both.
+
+### Non-climate portability dimensions
+
+When a branch tests non-climate portability, evaluate:
+
+- **Bounded grounding timeliness** — Did the branch produce named cases early enough? (non-climate branches need bounded grounding earlier than climate)
+- **Structure mapping clarity** — Is the relationship to existing structure types clear?
+- **Hybrid documentation** — If the branch arrived as hybrid, is that documented as legitimate intermediate form?
+
+### Subtype-specific dimensions
+
+Some structure subtypes introduce additional evaluation considerations:
+
+**Importer subtypes (correlation/transmission):**
+- Logistics complexity amplification
+- Distribution channel vulnerability
+- Domestic fallback availability
+
+**Sequence subtypes:**
+- Asymmetric reversibility (can one component reverse faster than another?)
+- Dual unpredictability (are there multiple independent sources of unpredictability?)
+- Compounding adaptation burden (do multiple adaptation requirements compound?)
+
+**Design/rule subtypes:**
+- Adaptation velocity (how fast can rules adapt vs. how fast conditions change?)
+- Transparency (are the conflicting rules visible to operators?)
+- Regulatory arbitrage (can actors migrate to less-regulated segments?)
+
 Use these when needed, but do not require them in every pass.
 
 - source diversity

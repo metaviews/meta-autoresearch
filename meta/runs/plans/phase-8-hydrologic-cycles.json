@@ -1,0 +1,12 @@
+{
+  "name": "phase-8-hydrologic-cycles",
+  "branch": "hydrologic",
+  "pass_type": "comparison",
+  "cycles": 2,
+  "autonomy_level": "low",
+  "question": "Does the design/rule conflict structure hold across physical infrastructure and regulatory architecture? What subtypes emerge?",
+  "expected_outputs": [
+    {"kind": "comparison_synthesis", "description": "Synthesis comparing physical vs. regulatory design/rule conflict"},
+    {"kind": "loop_update", "description": "Loop-run record documenting the cycle"}
+  ]
+}
