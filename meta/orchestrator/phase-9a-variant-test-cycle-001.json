@@ -1,0 +1,40 @@
+{
+  "cycle_id": 1,
+  "plan_name": "phase-9a-variant-test",
+  "branch": "whiplash",
+  "pass_type": "variant",
+  "status": "completed",
+  "started_at": "2026-04-03T21:55:56.707314",
+  "completed_at": "2026-04-03T21:56:08.602682",
+  "outputs": [
+    "meta/generated/whiplash-variant-snapshot.md",
+    "meta/generated/whiplash-variant-index.md",
+    "meta/generated/whiplash-variant-prep.md",
+    "meta/generated/2026-03-27-feather-river-wet-to-fire-whiplash-variant-claims.md",
+    "meta/generated/2026-03-27-compound-seasonal-whiplash-variant-claims.md",
+    "meta/generated/2026-03-27-upper-colorado-recovery-to-shortage-whiplash-variant-claims.md"
+  ],
+  "errors": [],
+  "cost_estimate": 0.0027,
+  "duration_seconds": 11.9,
+  "task_timings": [
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-feather-river-wet-to-fire-whiplash.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 6.7
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-compound-seasonal-whiplash.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 8.63
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-upper-colorado-recovery-to-shortage-whiplash.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 11.88
+    }
+  ]
+}

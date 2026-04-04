@@ -1,0 +1,12 @@
+{
+  "name": "phase-9a-orchestrator-test",
+  "branch": "breadbasket",
+  "pass_type": "grounding",
+  "cycles": 1,
+  "autonomy_level": "low",
+  "question": "Test grounding pass type implementation.",
+  "expected_outputs": [
+    {"kind": "grounding_note", "description": "At least one new or updated grounding note"},
+    {"kind": "scenario_update", "description": "At least one grounded scenario update or named case variant"}
+  ]
+}

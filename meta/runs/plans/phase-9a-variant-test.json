@@ -1,0 +1,11 @@
+{
+  "name": "phase-9a-variant-test",
+  "branch": "whiplash",
+  "pass_type": "variant",
+  "cycles": 1,
+  "autonomy_level": "low",
+  "question": "Test variant pass type implementation.",
+  "expected_outputs": [
+    {"kind": "scenario_variant", "description": "At least one new branch variant or case"}
+  ]
+}

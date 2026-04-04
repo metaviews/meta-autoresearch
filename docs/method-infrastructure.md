@@ -389,10 +389,51 @@ Add support for local model execution via Ollama or LM Studio:
 - Local model slot configuration
 - Fallback behavior when local models unavailable
 
-### Iteration 6: Workflow Automation (PROPOSED)
+### Iteration 6: Workflow Automation (COMPLETE)
 
 Chain delegated tasks into multi-step workflows:
 
 - `delegate branch-packet` - combine snapshot + index + compare-prep
 - `delegate run-prep` - prepare all materials for a run type
-- Workflow configuration files for common patterns
+- `delegate batch` - process multiple files with glob patterns
+
+### Phase 9: L5 Tooling (COMPLETE)
+
+Infrastructure for L5 generalizability and scale:
+
+#### 9A: All Pass Types Working
+All orchestrator pass types produce real outputs (not placeholders):
+- grounding, variant, maturity, discard, comparison
+
+#### 9B: Parallel Execution
+All pass types use `parallel_model_calls()` for concurrent API calls:
+- Average cycle time: 24s → 8.7s (2.8x speedup)
+- Grounding: 4.4x, maturity: 3.2x, comparison: 2.8x, variant: 2.0x, discard: 2.1x
+
+#### 9C: Automation Layer
+- Automated component extraction after new scenarios
+- Automated branch manifest updates after cycle completion
+- `branch l5-readiness <slug>` — L5 readiness assessment CLI
+
+#### 9D: Scale Enablement
+- `branch template <type> <slug> --title --domain` — Template-based branch creation
+- `branch integrate <slug> --method <method>` — Cross-method integration synthesis
+- Dynamic model selection based on task complexity
+
+#### Updated Model Configuration (as of 2026-04-04)
+- **small**: `xiaomi/mimo-v2-flash` (~2.5s benchmark, fastest available)
+- **mid**: `mistralai/mistral-small-2603` ($0.15/$0.60 per 1M, 262K context)
+- **strong**: `qwen/qwen3.5-plus-02-15` ($0.26/$1.56 per 1M, 1M context)
+- **App attribution**: "Meta Autoresearch" (visible in OpenRouter logs)
+- **Cost**: ~$0.0032/cycle, ~9s per cycle (parallel execution)
+
+#### New CLI Commands
+- `python -m meta_autoresearch_cli branch l5-readiness <slug>`
+- `python -m meta_autoresearch_cli branch template <type> <slug> --title --domain`
+- `python -m meta_autoresearch_cli branch integrate <slug> --method <method>`
+- `python -m meta_autoresearch_cli component index`
+- `python -m meta_autoresearch_cli component search <query>`
+- `python -m meta_autoresearch_cli component list [--type <type>]`
+- `python -m meta_autoresearch_cli component suggest <slug>`
+- `python -m meta_autoresearch_cli curate compare <v1> <v2> [...]`
+- `python -m meta_autoresearch_cli curate matrix <branch>`

@@ -4,8 +4,8 @@
   "branch": "breadbasket",
   "pass_type": "comparison",
   "status": "completed",
-  "started_at": "2026-04-03T20:02:36.671707",
-  "completed_at": "2026-04-03T20:02:59.988970",
+  "started_at": "2026-04-03T21:34:57.310875",
+  "completed_at": "2026-04-03T21:35:03.669315",
   "outputs": [
     "meta/generated/breadbasket-comparison-snapshot.md",
     "meta/generated/breadbasket-comparison-index.md",
@@ -17,31 +17,31 @@
   ],
   "errors": [],
   "cost_estimate": 0.0031999999999999997,
-  "duration_seconds": 23.32,
+  "duration_seconds": 6.36,
   "task_timings": [
     {
       "task": "summarize-note",
       "source": "research/notes/2026-03-27-breadbasket-regional-grounding-note.md",
       "model": "xiaomi/mimo-v2-flash",
-      "duration_seconds": 4.21
+      "duration_seconds": 4.36
     },
     {
       "task": "summarize-note",
       "source": "research/notes/2026-03-27-northern-wheat-shock-grounding-note.md",
       "model": "xiaomi/mimo-v2-flash",
-      "duration_seconds": 4.53
+      "duration_seconds": 5.0
     },
     {
       "task": "extract-claims",
       "source": "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
       "model": "xiaomi/mimo-v2-flash",
-      "duration_seconds": 7.07
+      "duration_seconds": 6.28
     },
     {
       "task": "extract-claims",
       "source": "research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md",
       "model": "xiaomi/mimo-v2-flash",
-      "duration_seconds": 7.51
+      "duration_seconds": 6.35
     }
   ]
 }

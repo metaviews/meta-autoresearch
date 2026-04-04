@@ -1,7 +1,30 @@
 # Model Performance and Fallbacks
 
-**Added:** 2026-03-29  
-**Feature:** Fallback models + per-task timing + model benchmarking
+**Added:** 2026-03-29
+**Updated:** 2026-04-04
+**Feature:** Fallback models + per-task timing + model benchmarking + dynamic selection
+
+---
+
+## Current Model Configuration (as of 2026-04-04)
+
+| Slot | Model | Benchmark | Cost per 1M tokens | Context |
+|------|-------|-----------|-------------------|---------|
+| **small** | xiaomi/mimo-v2-flash | ~2.5s | varies | varies |
+| **mid** | mistralai/mistral-small-2603 | ~10s | $0.15/$0.60 | 262K |
+| **strong** | qwen/qwen3.5-plus-02-15 | ~15s | $0.26/$1.56 | 1M |
+
+**Fallback models:**
+- small: qwen/qwen3.5-flash-02-23, google/gemini-2.5-flash-lite
+- mid: mistralai/mistral-7b-instruct, qwen/qwen3.5-flash-02-23
+- strong: qwen/qwen3.5-flash-02-23, meta-llama/llama-3-70b-instruct
+
+**App attribution:** "Meta Autoresearch" (visible in OpenRouter logs)
+
+**Performance:**
+- Average cycle time: ~9s (parallel execution, 2.8x speedup from sequential)
+- Cost per cycle: ~$0.0032
+- Monthly cost at 100 cycles: ~$0.32
 
 ---
 
@@ -22,15 +45,18 @@ A model that takes 5 seconds at 3am might take 60+ seconds at peak hours.
 Configure fallback models in your `.env` file:
 
 ```bash
-# Primary models
-META_MODEL_DEFAULT_SMALL=qwen/qwen3.5-flash-02-23
+# Primary models (updated 2026-04-04)
+META_MODEL_DEFAULT_SMALL=xiaomi/mimo-v2-flash
 META_MODEL_DEFAULT_MID=mistralai/mistral-small-2603
 META_MODEL_DEFAULT_STRONG=qwen/qwen3.5-plus-02-15
 
 # Fallback models (comma-separated, tried in order if primary fails)
-META_MODEL_FALLBACK_SMALL=meta-llama/llama-3-8b-instruct,google/gemma-2-9b-it
+META_MODEL_FALLBACK_SMALL=qwen/qwen3.5-flash-02-23,google/gemini-2.5-flash-lite
 META_MODEL_FALLBACK_MID=mistralai/mistral-7b-instruct,qwen/qwen3.5-flash-02-23
 META_MODEL_FALLBACK_STRONG=qwen/qwen3.5-flash-02-23,meta-llama/llama-3-70b-instruct
+
+# App attribution (visible in OpenRouter logs)
+OPENROUTER_APP_NAME=Meta Autoresearch
 
 # Timeout per model attempt (seconds)
 META_MODEL_TIMEOUT=90
@@ -138,10 +164,10 @@ META_MODEL_DEFAULT_STRONG=qwen/qwen3.5-plus-02-15
 
 ## Fallback Strategy
 
-Current fallback chain for `small` slot:
-1. `qwen/qwen3.5-flash-02-23` (primary)
-2. `meta-llama/llama-3-8b-instruct` (fallback 1)
-3. `google/gemma-2-9b-it` (fallback 2)
+Current fallback chain for `small` slot (as of 2026-04-04):
+1. `xiaomi/mimo-v2-flash` (primary, ~2.5s benchmark)
+2. `qwen/qwen3.5-flash-02-23` (fallback 1)
+3. `google/gemini-2.5-flash-lite` (fallback 2)
 
 **Timeout:** 90 seconds per model before trying next
 
@@ -149,6 +175,53 @@ Current fallback chain for `small` slot:
 - If fallback is triggered frequently, increase timeout or change primary
 - If primary is consistently slow, run benchmark and update default
 - If a model consistently fails, remove from rotation
+
+---
+
+## Dynamic Model Selection
+
+The `select_model_for_task()` function auto-selects models based on task complexity:
+
+| Task Type | Complexity | Model Slot | Example Models |
+|-----------|------------|------------|----------------|
+| extract-claims (<5K tokens) | Simple | small | xiaomi/mimo-v2-flash |
+| summarize-note (<5K tokens) | Simple | small | xiaomi/mimo-v2-flash |
+| comparison prep, drafting | Moderate | mid | mistral-small-2603 |
+| structure-typing, evaluation | Complex | strong | qwen3.5-plus-02-15 |
+| cross-method integration | Complex | strong | qwen3.5-plus-02-15 |
+
+**Usage:**
+```python
+# In orchestrator cycles (default: uses config model)
+parallel_model_calls(tasks, config)
+
+# With dynamic selection (auto-selects based on task type)
+parallel_model_calls(tasks, config, use_dynamic_selection=True)
+```
+
+**Benefits:**
+- Cost optimization: Simple tasks use cheapest model
+- Quality preservation: Complex tasks use strongest model
+- Automatic: No manual model selection needed
+
+---
+
+## App Attribution
+
+The `X-Title` and `X-OpenRouter-Title` headers are set to identify your app in OpenRouter logs:
+
+```bash
+# In .env
+OPENROUTER_APP_NAME=Meta Autoresearch
+OPENROUTER_HTTP_REFERER=https://github.com/meta-autoresearch
+```
+
+**Headers sent:**
+- `HTTP-Referer: https://github.com/meta-autoresearch`
+- `X-Title: Meta Autoresearch`
+- `X-OpenRouter-Title: Meta Autoresearch`
+
+This allows you to identify meta-autoresearch activity in your OpenRouter usage logs.
 
 ---
 

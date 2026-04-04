@@ -1,0 +1,33 @@
+{
+  "cycle_id": 1,
+  "plan_name": "phase-9a-maturity-test",
+  "branch": "hydrologic",
+  "pass_type": "maturity",
+  "status": "completed",
+  "started_at": "2026-04-03T21:56:18.556045",
+  "completed_at": "2026-04-03T21:56:22.633261",
+  "outputs": [
+    "meta/generated/hydrologic-maturity-snapshot.md",
+    "meta/generated/hydrologic-maturity-index.md",
+    "meta/generated/hydrologic-maturity-prep.md",
+    "meta/generated/2026-03-27-hydrologic-branch-comparison-maturity-summary.md",
+    "meta/generated/2026-03-27-emerging-structure-types-comparison-maturity-summary.md"
+  ],
+  "errors": [],
+  "cost_estimate": 0.0014,
+  "duration_seconds": 4.08,
+  "task_timings": [
+    {
+      "task": "summarize-note",
+      "source": "research/syntheses/2026-03-27-hydrologic-branch-comparison.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 3.5
+    },
+    {
+      "task": "summarize-note",
+      "source": "research/syntheses/2026-03-27-emerging-structure-types-comparison.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 4.07
+    }
+  ]
+}

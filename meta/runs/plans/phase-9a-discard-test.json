@@ -1,0 +1,11 @@
+{
+  "name": "phase-9a-discard-test",
+  "branch": "wealth-concentration",
+  "pass_type": "discard",
+  "cycles": 1,
+  "autonomy_level": "low",
+  "question": "Test discard pass type implementation.",
+  "expected_outputs": [
+    {"kind": "discard_record", "description": "At least one discard or merge record"}
+  ]
+}

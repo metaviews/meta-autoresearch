@@ -24,7 +24,8 @@
     "research/syntheses/2026-03-27-initial-scenario-evaluation-matrix.md",
     "research/syntheses/2026-04-02-climate-vs-policy-sequence-comparison.md",
     "research/syntheses/2026-04-03-whiplash-three-way-comparison.md",
-    "research/syntheses/2026-04-03-whiplash-variant-comparison.md"
+    "research/syntheses/2026-04-03-whiplash-variant-comparison.md",
+    "research/syntheses/2026-04-04-whiplash-resilience-engineering-integration.md"
   ],
   "loop_runs": [
     "research/loops/2026-03-27-whiplash-loop-run.md",
@@ -45,5 +46,5 @@
     "Is hybrid sequence more dangerous than pure sequences or just different?"
   ],
   "next_recommended_pass": "comparison",
-  "last_updated": "2026-04-02"
+  "last_updated": "2026-04-04"
 }

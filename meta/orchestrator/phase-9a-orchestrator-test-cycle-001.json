@@ -1,0 +1,66 @@
+{
+  "cycle_id": 1,
+  "plan_name": "phase-9a-orchestrator-test",
+  "branch": "breadbasket",
+  "pass_type": "grounding",
+  "status": "completed",
+  "started_at": "2026-04-04T03:53:52.558765",
+  "completed_at": "2026-04-04T03:54:14.600109",
+  "outputs": [
+    "meta/generated/breadbasket-grounding-snapshot.md",
+    "meta/generated/breadbasket-grounding-index.md",
+    "meta/generated/breadbasket-grounding-prep.md",
+    "meta/generated/2026-03-27-breadbasket-regional-grounding-note-grounding-summary.md",
+    "meta/generated/2026-03-27-mena-wheat-importer-exposure-note-grounding-summary.md",
+    "meta/generated/2026-03-27-northern-wheat-shock-grounding-note-grounding-summary.md",
+    "meta/generated/2026-03-27-russia-china-wheat-buffer-stress-grounding-claims.md",
+    "meta/generated/2026-03-27-russia-europe-wheat-trade-shock-grounding-claims.md",
+    "meta/generated/2026-03-27-northern-wheat-correlation-shock-grounding-claims.md"
+  ],
+  "errors": [],
+  "cost_estimate": 0.0048,
+  "duration_seconds": 22.04,
+  "task_timings": [
+    {
+      "task": "summarize-note",
+      "source": "research/notes/2026-03-27-breadbasket-regional-grounding-note.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 17.2
+    },
+    {
+      "task": "summarize-note",
+      "source": "research/notes/2026-03-27-mena-wheat-importer-exposure-note.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 17.46
+    },
+    {
+      "task": "summarize-note",
+      "source": "research/notes/2026-03-27-northern-wheat-shock-grounding-note.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 19.26
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-russia-china-wheat-buffer-stress.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 19.92
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-russia-europe-wheat-trade-shock.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 20.81
+    },
+    {
+      "task": "extract-claims",
+      "source": "research/scenarios/2026-03-27-northern-wheat-correlation-shock.md",
+      "model": "xiaomi/mimo-v2-flash",
+      "duration_seconds": 22.02
+    }
+  ],
+  "automation": {
+    "components_extracted": 0,
+    "new_component_files": [],
+    "manifest_updated": false
+  }
+}

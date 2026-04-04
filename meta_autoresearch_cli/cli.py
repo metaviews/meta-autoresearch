@@ -5,6 +5,7 @@ import json
 import os
 import urllib.request
 import urllib.error
+import concurrent.futures
 from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
@@ -18,7 +19,7 @@ if _env_path.exists():
             line = line.strip()
             if line and not line.startswith("#") and "=" in line:
                 key, value = line.split("=", 1)
-                os.environ.setdefault(key.strip(), value.strip())
+                os.environ[key.strip()] = value.strip()
 
 
 PASS_TYPES: dict[str, dict[str, Any]] = {
@@ -562,7 +563,7 @@ def call_openrouter(messages: list[dict[str, str]], model: str, config: dict[str
     
     base_url = config.get("openrouter_base_url", "https://openrouter.ai/api/v1")
     http_referer = config.get("openrouter_http_referer", "")
-    app_name = config.get("openrouter_app_name", "meta-autoresearch")
+    app_name = config.get("openrouter_app_name", "Meta Autoresearch")
     
     url = f"{base_url}/chat/completions"
     
@@ -588,6 +589,7 @@ def call_openrouter(messages: list[dict[str, str]], model: str, config: dict[str
             "Content-Type": "application/json",
             "HTTP-Referer": http_referer,
             "X-Title": app_name,
+            "X-OpenRouter-Title": app_name,
         }
         
         req = urllib.request.Request(url, data=data, headers=headers, method="POST")
@@ -701,6 +703,130 @@ Provide your summary in this format:
 """
     
     return system_prompt, user_prompt
+
+
+# =============================================================================
+# Phase 9B: Parallel Execution
+# =============================================================================
+
+
+def call_openrouter_task(messages, model_id, config, timeout, fallback_models):
+    """Wrapper for call_openrouter that returns result dict for parallel execution."""
+    try:
+        content, model_used, duration = call_openrouter(messages, model_id, config, timeout=timeout, fallback_models=fallback_models)
+        return {
+            "success": True,
+            "content": content,
+            "model": model_used,
+            "duration": duration,
+            "error": None
+        }
+    except SystemExit as e:
+        return {
+            "success": False,
+            "content": None,
+            "model": model_id,
+            "duration": 0,
+            "error": str(e)
+        }
+
+
+def parallel_model_calls(tasks, config, max_workers=None, use_dynamic_selection=False):
+    """
+    Execute multiple model calls in parallel.
+    
+    Args:
+        tasks: List of dicts with keys:
+            - messages: List of message dicts for the API call
+            - source: Source file path (for tracking)
+            - task_type: Task type string (e.g., "summarize-note")
+        config: Model config dict from get_model_for_slot
+        max_workers: Max parallel workers (defaults to len(tasks))
+        use_dynamic_selection: If True, use select_model_for_task instead of config
+    
+    Returns:
+        List of result dicts with task info, content, timing, and errors.
+    """
+    if use_dynamic_selection:
+        # Use dynamic model selection
+        results = []
+        for task in tasks:
+            content_length = len(task.get("messages", [])[-1].get("content", ""))
+            model_id, task_config, fallback_models, timeout = select_model_for_task(task["task_type"], content_length)
+            
+            try:
+                api_result = call_openrouter_task(
+                    task["messages"],
+                    model_id,
+                    task_config,
+                    timeout,
+                    fallback_models
+                )
+                result = {
+                    "task_type": task["task_type"],
+                    "source": task["source"],
+                    "success": api_result["success"],
+                    "content": api_result["content"],
+                    "model": api_result["model"],
+                    "duration": api_result["duration"],
+                    "error": api_result["error"]
+                }
+            except SystemExit as e:
+                result = {
+                    "task_type": task["task_type"],
+                    "source": task["source"],
+                    "success": False,
+                    "content": None,
+                    "model": model_id,
+                    "duration": 0,
+                    "error": str(e)
+                }
+            results.append(result)
+        return results
+    else:
+        # Use config-provided model (existing behavior)
+        model_id = config.get("small", "qwen/qwen3.5-flash-02-23")
+        # Get fallbacks from env
+        fallback_str = os.environ.get("META_MODEL_FALLBACK_SMALL", "")
+        fallback_models = [m.strip() for m in fallback_str.split(",") if m.strip()] if fallback_str else []
+        timeout = int(os.environ.get("META_MODEL_TIMEOUT", "90"))
+        
+        if max_workers is None:
+            max_workers = len(tasks)
+        
+        results = []
+        
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all tasks
+            future_to_task = {}
+            for task in tasks:
+                future = executor.submit(
+                    call_openrouter_task,
+                    task["messages"],
+                    model_id,
+                    config,
+                    timeout,
+                    fallback_models
+                )
+                future_to_task[future] = task
+            
+            # Collect results as they complete
+            for future in concurrent.futures.as_completed(future_to_task):
+                task = future_to_task[future]
+                api_result = future.result()
+                
+                result = {
+                    "task_type": task["task_type"],
+                    "source": task["source"],
+                    "success": api_result["success"],
+                    "content": api_result["content"],
+                    "model": api_result["model"],
+                    "duration": api_result["duration"],
+                    "error": api_result["error"]
+                }
+                results.append(result)
+        
+        return results
 
 
 # =============================================================================
@@ -1927,57 +2053,32 @@ def execute_cycle(cycle_state: dict[str, Any], paths: RepoPaths, autonomy_level:
             prep_path.write_text(prep_md, encoding="utf-8", newline="\n")
             cycle_state["outputs"].append(str(relpath(paths.root, prep_path)))
             
-            # Step 4: Summarize grounding notes (delegate)
+            # Step 4: Summarize grounding notes and extract claims from scenarios (parallel delegate)
             model_id, config, fallback_models, timeout = get_model_for_slot("small")
-            
+
             # Track per-task timing
             cycle_state["task_timings"] = []
-            
+
+            # Build task list for parallel execution
+            tasks = []
+
+            # Add summarize tasks for notes
             for note_rel in branch.get("key_notes", [])[:2]:  # Limit to 2 notes per cycle for now
                 note_path = paths.root / note_rel
                 if note_path.exists():
                     content = note_path.read_text(encoding="utf-8")
                     system_prompt, user_prompt = summarize_note_task(content, note_rel)
-                    messages = [
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt},
-                    ]
-                    try:
-                        summary, model_used, duration = call_openrouter(messages, model_id, config, timeout=timeout, fallback_models=fallback_models)
-                        
-                        # Record timing
-                        cycle_state["task_timings"].append({
-                            "task": "summarize-note",
-                            "source": note_rel,
-                            "model": model_used,
-                            "duration_seconds": round(duration, 2)
-                        })
-                        
-                        if summary and len(summary.strip()) > 50:  # Ensure we got real content
-                            stem = note_path.stem
-                            output_path = paths.generated / f"{stem}-cycle-summary.md"
-                            output_content = f"""<!-- GENERATED: do not treat as canonical research -->
-<!-- Task: summarize-note (orchestrator cycle) -->
-<!-- Model: {model_used} -->
-<!-- Source: {note_rel} -->
-<!-- Generated: {datetime.now().isoformat()} -->
+                    tasks.append({
+                        "task_type": "summarize-note",
+                        "source": note_rel,
+                        "source_path": note_path,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    })
 
-# Summary: {note_path.name}
-
-{summary}
-
----
-*This is a generated support artifact. Treat as draft until reviewed.*
-"""
-                            output_path.write_text(output_content, encoding="utf-8", newline="\n")
-                            cycle_state["outputs"].append(str(relpath(paths.root, output_path)))
-                            cycle_state["cost_estimate"] += 0.0007  # Approximate cost per summary
-                        else:
-                            cycle_state["errors"].append(f"Failed to summarize {note_rel}: API returned empty or insufficient content")
-                    except SystemExit as e:
-                        cycle_state["errors"].append(f"Failed to summarize {note_rel}: {str(e)}")
-            
-            # Step 5: Extract claims from scenarios (delegate)
+            # Add extract claims tasks for scenarios
             for scenario_rel in branch.get("active_variants", [])[:2]:  # Limit to 2 scenarios per cycle
                 scenario_path = paths.root / scenario_rel
                 if scenario_path.exists():
@@ -2005,51 +2106,543 @@ File: {scenario_rel}
 Format each claim as:
 - [Claim text] (evidence-backed | speculative) - [source if referenced]
 """
-                    messages = [
-                        {"role": "system", "content": system_prompt},
-                        {"role": "user", "content": user_prompt},
-                    ]
-                    try:
-                        result, model_used, duration = call_openrouter(messages, model_id, config, timeout=timeout, fallback_models=fallback_models)
-                        
-                        # Record timing
-                        cycle_state["task_timings"].append({
-                            "task": "extract-claims",
-                            "source": scenario_rel,
-                            "model": model_used,
-                            "duration_seconds": round(duration, 2)
-                        })
-                        
-                        if result and len(result.strip()) > 100:  # Ensure we got real content
-                            stem = scenario_path.stem
-                            output_path = paths.generated / f"{stem}-cycle-claims.md"
-                            output_content = f"""<!-- GENERATED: do not treat as canonical research -->
-<!-- Task: extract-claims (orchestrator cycle) -->
-<!-- Model: {model_used} -->
-<!-- Source: {scenario_rel} -->
+                    tasks.append({
+                        "task_type": "extract-claims",
+                        "source": scenario_rel,
+                        "source_path": scenario_path,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    })
+
+            # Execute all tasks in parallel
+            if tasks:
+                parallel_results = parallel_model_calls(tasks, config)
+
+                for result in parallel_results:
+                    cycle_state["task_timings"].append({
+                        "task": result["task_type"],
+                        "source": result["source"],
+                        "model": result["model"],
+                        "duration_seconds": round(result["duration"], 2)
+                    })
+
+                    if result["success"]:
+                        if result["content"] and len(result["content"].strip()) > 50:
+                            # Find corresponding task to get source_path
+                            task = next((t for t in tasks if t["source"] == result["source"]), None)
+                            if task:
+                                source_path = task["source_path"]
+                                stem = source_path.stem
+                                if result["task_type"] == "summarize-note":
+                                    output_path = paths.generated / f"{stem}-cycle-summary.md"
+                                    cycle_state["cost_estimate"] += 0.0007
+                                else:
+                                    output_path = paths.generated / f"{stem}-cycle-claims.md"
+                                    cycle_state["cost_estimate"] += 0.0009
+
+                                output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: {result['task_type']} (orchestrator cycle, parallel) -->
+<!-- Model: {result['model']} -->
+<!-- Source: {result['source']} -->
 <!-- Generated: {datetime.now().isoformat()} -->
 
-# Claims Extracted: {scenario_path.name}
+# {'Summary' if result['task_type'] == 'summarize-note' else 'Claims Extracted'}: {source_path.name}
 
-{result}
+{result['content']}
 
 ---
 *This is a generated support artifact. Treat as draft until reviewed.*
 """
-                            output_path.write_text(output_content, encoding="utf-8", newline="\n")
-                            cycle_state["outputs"].append(str(relpath(paths.root, output_path)))
-                            cycle_state["cost_estimate"] += 0.0009  # Approximate cost per claim extraction
+                                output_path.write_text(output_content, encoding="utf-8", newline="\n")
+                                cycle_state["outputs"].append(str(relpath(paths.root, output_path)))
                         else:
-                            cycle_state["errors"].append(f"Failed to extract claims from {scenario_rel}: API returned empty or insufficient content")
-                    except SystemExit as e:
-                        cycle_state["errors"].append(f"Failed to extract claims from {scenario_rel}: {str(e)}")
+                            cycle_state["errors"].append(f"Failed to process {result['source']}: API returned empty or insufficient content")
+                    else:
+                        cycle_state["errors"].append(f"Failed to process {result['source']}: {result['error']}")
             
             # Mark cycle as failed if there were errors
             if cycle_state["errors"]:
                 cycle_state["status"] = "failed_with_outputs"
             else:
                 cycle_state["status"] = "completed"
-            
+
+        elif pass_type == "grounding":
+            # Execute grounding pass
+            # Step 1: Generate branch packet
+            snapshot_md = branch_snapshot_markdown(branch, paths)
+            snapshot_path = paths.generated / f"{branch_slug}-grounding-snapshot.md"
+            snapshot_path.write_text(snapshot_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, snapshot_path)))
+
+            # Step 2: Generate artifact index
+            index_md = artifact_index_markdown(branch, paths)
+            index_path = paths.generated / f"{branch_slug}-grounding-index.md"
+            index_path.write_text(index_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, index_path)))
+
+            # Step 3: Generate grounding prep
+            prep_md = comparison_prep_markdown(branch, paths)
+            prep_path = paths.generated / f"{branch_slug}-grounding-prep.md"
+            prep_path.write_text(prep_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, prep_path)))
+
+            # Step 4: Summarize grounding notes and extract claims from scenarios (parallel delegate)
+            model_id, config, fallback_models, timeout = get_model_for_slot("small")
+            cycle_state["task_timings"] = []
+
+            # Build task list for parallel execution
+            tasks = []
+
+            # Add summarize tasks for notes
+            for note_rel in branch.get("key_notes", [])[:3]:  # Up to 3 notes
+                note_path = paths.root / note_rel
+                if note_path.exists():
+                    content = note_path.read_text(encoding="utf-8")
+                    system_prompt, user_prompt = summarize_note_task(content, note_rel)
+                    tasks.append({
+                        "task_type": "summarize-note",
+                        "source": note_rel,
+                        "source_path": note_path,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    })
+
+            # Add extract claims tasks for scenarios
+            for scenario_rel in branch.get("active_variants", [])[:3]:  # Up to 3 scenarios
+                scenario_path = paths.root / scenario_rel
+                if scenario_path.exists():
+                    content = scenario_path.read_text(encoding="utf-8")
+                    system_prompt = """You are extracting claims from research artifacts for meta-autoresearch.
+
+Your task: identify distinct, testable claims in the text.
+
+Guidelines:
+1. One claim per bullet point
+2. Preserve uncertainty qualifiers ("may", "suggests", "likely")
+3. Distinguish between evidence-backed claims and speculation
+4. Note when claims reference specific sources or cases
+
+This is a support task. Output will be reviewed by human curator."""
+
+                    user_prompt = f"""Extract all claims from this artifact:
+
+File: {scenario_rel}
+
+---
+{content}
+---
+
+Format each claim as:
+- [Claim text] (evidence-backed | speculative) - [source if referenced]
+"""
+                    tasks.append({
+                        "task_type": "extract-claims",
+                        "source": scenario_rel,
+                        "source_path": scenario_path,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    })
+
+            # Execute all tasks in parallel
+            if tasks:
+                parallel_results = parallel_model_calls(tasks, config)
+
+                for result in parallel_results:
+                    cycle_state["task_timings"].append({
+                        "task": result["task_type"],
+                        "source": result["source"],
+                        "model": result["model"],
+                        "duration_seconds": round(result["duration"], 2)
+                    })
+
+                    if result["success"]:
+                        if result["content"] and len(result["content"].strip()) > 50:
+                            # Find corresponding task to get source_path
+                            task = next((t for t in tasks if t["source"] == result["source"]), None)
+                            if task:
+                                source_path = task["source_path"]
+                                stem = source_path.stem
+                                if result["task_type"] == "summarize-note":
+                                    output_path = paths.generated / f"{stem}-grounding-summary.md"
+                                    cycle_state["cost_estimate"] += 0.0007
+                                else:
+                                    output_path = paths.generated / f"{stem}-grounding-claims.md"
+                                    cycle_state["cost_estimate"] += 0.0009
+
+                                output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: {result['task_type']} (orchestrator grounding, parallel) -->
+<!-- Model: {result['model']} -->
+<!-- Source: {result['source']} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# {'Summary' if result['task_type'] == 'summarize-note' else 'Claims Extracted'}: {source_path.name}
+
+{result['content']}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+                                output_path.write_text(output_content, encoding="utf-8", newline="\n")
+                                cycle_state["outputs"].append(str(relpath(paths.root, output_path)))
+                        else:
+                            cycle_state["errors"].append(f"Failed to process {result['source']}: API returned empty or insufficient content")
+                    else:
+                        cycle_state["errors"].append(f"Failed to process {result['source']}: {result['error']}")
+
+            # Mark cycle as failed if there were errors
+            if cycle_state["errors"]:
+                cycle_state["status"] = "failed_with_outputs"
+            else:
+                cycle_state["status"] = "completed"
+
+        elif pass_type == "variant":
+            # Execute variant pass
+            # Step 1: Generate branch packet
+            snapshot_md = branch_snapshot_markdown(branch, paths)
+            snapshot_path = paths.generated / f"{branch_slug}-variant-snapshot.md"
+            snapshot_path.write_text(snapshot_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, snapshot_path)))
+
+            # Step 2: Generate artifact index
+            index_md = artifact_index_markdown(branch, paths)
+            index_path = paths.generated / f"{branch_slug}-variant-index.md"
+            index_path.write_text(index_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, index_path)))
+
+            # Step 3: Generate variant prep
+            prep_md = comparison_prep_markdown(branch, paths)
+            prep_path = paths.generated / f"{branch_slug}-variant-prep.md"
+            prep_path.write_text(prep_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, prep_path)))
+
+            # Step 4: Extract claims from parent + variants (parallel delegate)
+            model_id, config, fallback_models, timeout = get_model_for_slot("small")
+            cycle_state["task_timings"] = []
+
+            # Build task list for parallel execution
+            tasks = []
+
+            # Add parent scenario
+            parent_rel = branch.get("parent_artifact")
+            if parent_rel:
+                parent_path = paths.root / parent_rel
+                if parent_path.exists():
+                    content = parent_path.read_text(encoding="utf-8")
+                    system_prompt = """You are extracting claims from research artifacts for meta-autoresearch.
+
+Your task: identify distinct, testable claims in the text.
+
+Guidelines:
+1. One claim per bullet point
+2. Preserve uncertainty qualifiers ("may", "suggests", "likely")
+3. Distinguish between evidence-backed claims and speculation
+4. Note when claims reference specific sources or cases
+
+This is a support task. Output will be reviewed by human curator."""
+
+                    user_prompt = f"""Extract all claims from this artifact:
+
+File: {parent_rel}
+
+---
+{content}
+---
+
+Format each claim as:
+- [Claim text] (evidence-backed | speculative) - [source if referenced]
+"""
+                    tasks.append({
+                        "task_type": "extract-claims",
+                        "source": parent_rel,
+                        "source_path": parent_path,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    })
+
+            # Add existing variants
+            for scenario_rel in branch.get("active_variants", [])[:2]:  # Up to 2 variants
+                scenario_path = paths.root / scenario_rel
+                if scenario_path.exists():
+                    content = scenario_path.read_text(encoding="utf-8")
+                    system_prompt = """You are extracting claims from research artifacts for meta-autoresearch.
+
+Your task: identify distinct, testable claims in the text.
+
+Guidelines:
+1. One claim per bullet point
+2. Preserve uncertainty qualifiers ("may", "suggests", "likely")
+3. Distinguish between evidence-backed claims and speculation
+4. Note when claims reference specific sources or cases
+
+This is a support task. Output will be reviewed by human curator."""
+
+                    user_prompt = f"""Extract all claims from this artifact:
+
+File: {scenario_rel}
+
+---
+{content}
+---
+
+Format each claim as:
+- [Claim text] (evidence-backed | speculative) - [source if referenced]
+"""
+                    tasks.append({
+                        "task_type": "extract-claims",
+                        "source": scenario_rel,
+                        "source_path": scenario_path,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    })
+
+            # Execute all tasks in parallel
+            if tasks:
+                parallel_results = parallel_model_calls(tasks, config)
+
+                for result in parallel_results:
+                    cycle_state["task_timings"].append({
+                        "task": result["task_type"],
+                        "source": result["source"],
+                        "model": result["model"],
+                        "duration_seconds": round(result["duration"], 2)
+                    })
+
+                    if result["success"]:
+                        if result["content"] and len(result["content"].strip()) > 100:
+                            task = next((t for t in tasks if t["source"] == result["source"]), None)
+                            if task:
+                                source_path = task["source_path"]
+                                stem = source_path.stem
+                                output_path = paths.generated / f"{stem}-variant-claims.md"
+                                cycle_state["cost_estimate"] += 0.0009
+
+                                output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: extract-claims (orchestrator variant, parallel) -->
+<!-- Model: {result['model']} -->
+<!-- Source: {result['source']} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# Claims Extracted: {source_path.name}
+
+{result['content']}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+                                output_path.write_text(output_content, encoding="utf-8", newline="\n")
+                                cycle_state["outputs"].append(str(relpath(paths.root, output_path)))
+                        else:
+                            cycle_state["errors"].append(f"Failed to process {result['source']}: API returned empty or insufficient content")
+                    else:
+                        cycle_state["errors"].append(f"Failed to process {result['source']}: {result['error']}")
+
+            if cycle_state["errors"]:
+                cycle_state["status"] = "failed_with_outputs"
+            else:
+                cycle_state["status"] = "completed"
+
+        elif pass_type == "maturity":
+            # Execute maturity pass
+            # Step 1: Generate branch packet
+            snapshot_md = branch_snapshot_markdown(branch, paths)
+            snapshot_path = paths.generated / f"{branch_slug}-maturity-snapshot.md"
+            snapshot_path.write_text(snapshot_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, snapshot_path)))
+
+            # Step 2: Generate artifact index
+            index_md = artifact_index_markdown(branch, paths)
+            index_path = paths.generated / f"{branch_slug}-maturity-index.md"
+            index_path.write_text(index_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, index_path)))
+
+            # Step 3: Generate maturity prep
+            prep_md = comparison_prep_markdown(branch, paths)
+            prep_path = paths.generated / f"{branch_slug}-maturity-prep.md"
+            prep_path.write_text(prep_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, prep_path)))
+
+            # Step 4: Summarize key syntheses (parallel delegate)
+            model_id, config, fallback_models, timeout = get_model_for_slot("small")
+            cycle_state["task_timings"] = []
+
+            tasks = []
+            for syn_rel in branch.get("key_syntheses", [])[:2]:  # Up to 2 syntheses
+                syn_path = paths.root / syn_rel
+                if syn_path.exists():
+                    content = syn_path.read_text(encoding="utf-8")
+                    system_prompt, user_prompt = summarize_note_task(content, syn_rel)
+                    tasks.append({
+                        "task_type": "summarize-note",
+                        "source": syn_rel,
+                        "source_path": syn_path,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    })
+
+            if tasks:
+                parallel_results = parallel_model_calls(tasks, config)
+
+                for result in parallel_results:
+                    cycle_state["task_timings"].append({
+                        "task": result["task_type"],
+                        "source": result["source"],
+                        "model": result["model"],
+                        "duration_seconds": round(result["duration"], 2)
+                    })
+
+                    if result["success"]:
+                        if result["content"] and len(result["content"].strip()) > 50:
+                            task = next((t for t in tasks if t["source"] == result["source"]), None)
+                            if task:
+                                source_path = task["source_path"]
+                                stem = source_path.stem
+                                output_path = paths.generated / f"{stem}-maturity-summary.md"
+                                cycle_state["cost_estimate"] += 0.0007
+
+                                output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: summarize-note (orchestrator maturity, parallel) -->
+<!-- Model: {result['model']} -->
+<!-- Source: {result['source']} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# Summary: {source_path.name}
+
+{result['content']}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+                                output_path.write_text(output_content, encoding="utf-8", newline="\n")
+                                cycle_state["outputs"].append(str(relpath(paths.root, output_path)))
+                        else:
+                            cycle_state["errors"].append(f"Failed to process {result['source']}: API returned empty or insufficient content")
+                    else:
+                        cycle_state["errors"].append(f"Failed to process {result['source']}: {result['error']}")
+
+            if cycle_state["errors"]:
+                cycle_state["status"] = "failed_with_outputs"
+            else:
+                cycle_state["status"] = "completed"
+
+        elif pass_type == "discard":
+            # Execute discard pass
+            # Step 1: Generate branch packet
+            snapshot_md = branch_snapshot_markdown(branch, paths)
+            snapshot_path = paths.generated / f"{branch_slug}-discard-snapshot.md"
+            snapshot_path.write_text(snapshot_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, snapshot_path)))
+
+            # Step 2: Generate artifact index
+            index_md = artifact_index_markdown(branch, paths)
+            index_path = paths.generated / f"{branch_slug}-discard-index.md"
+            index_path.write_text(index_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, index_path)))
+
+            # Step 3: Generate discard prep
+            prep_md = comparison_prep_markdown(branch, paths)
+            prep_path = paths.generated / f"{branch_slug}-discard-prep.md"
+            prep_path.write_text(prep_md, encoding="utf-8", newline="\n")
+            cycle_state["outputs"].append(str(relpath(paths.root, prep_path)))
+
+            # Step 4: Extract claims from all variants (parallel delegate)
+            model_id, config, fallback_models, timeout = get_model_for_slot("small")
+            cycle_state["task_timings"] = []
+
+            tasks = []
+            for scenario_rel in branch.get("active_variants", [])[:3]:  # Up to 3 variants
+                scenario_path = paths.root / scenario_rel
+                if scenario_path.exists():
+                    content = scenario_path.read_text(encoding="utf-8")
+                    system_prompt = """You are extracting claims from research artifacts for meta-autoresearch.
+
+Your task: identify distinct, testable claims in the text.
+
+Guidelines:
+1. One claim per bullet point
+2. Preserve uncertainty qualifiers ("may", "suggests", "likely")
+3. Distinguish between evidence-backed claims and speculation
+4. Note when claims reference specific sources or cases
+
+This is a support task. Output will be reviewed by human curator."""
+
+                    user_prompt = f"""Extract all claims from this artifact:
+
+File: {scenario_rel}
+
+---
+{content}
+---
+
+Format each claim as:
+- [Claim text] (evidence-backed | speculative) - [source if referenced]
+"""
+                    tasks.append({
+                        "task_type": "extract-claims",
+                        "source": scenario_rel,
+                        "source_path": scenario_path,
+                        "messages": [
+                            {"role": "system", "content": system_prompt},
+                            {"role": "user", "content": user_prompt},
+                        ],
+                    })
+
+            if tasks:
+                parallel_results = parallel_model_calls(tasks, config)
+
+                for result in parallel_results:
+                    cycle_state["task_timings"].append({
+                        "task": result["task_type"],
+                        "source": result["source"],
+                        "model": result["model"],
+                        "duration_seconds": round(result["duration"], 2)
+                    })
+
+                    if result["success"]:
+                        if result["content"] and len(result["content"].strip()) > 100:
+                            task = next((t for t in tasks if t["source"] == result["source"]), None)
+                            if task:
+                                source_path = task["source_path"]
+                                stem = source_path.stem
+                                output_path = paths.generated / f"{stem}-discard-claims.md"
+                                cycle_state["cost_estimate"] += 0.0009
+
+                                output_content = f"""<!-- GENERATED: do not treat as canonical research -->
+<!-- Task: extract-claims (orchestrator discard, parallel) -->
+<!-- Model: {result['model']} -->
+<!-- Source: {result['source']} -->
+<!-- Generated: {datetime.now().isoformat()} -->
+
+# Claims Extracted: {source_path.name}
+
+{result['content']}
+
+---
+*This is a generated support artifact. Treat as draft until reviewed.*
+"""
+                                output_path.write_text(output_content, encoding="utf-8", newline="\n")
+                                cycle_state["outputs"].append(str(relpath(paths.root, output_path)))
+                        else:
+                            cycle_state["errors"].append(f"Failed to process {result['source']}: API returned empty or insufficient content")
+                    else:
+                        cycle_state["errors"].append(f"Failed to process {result['source']}: {result['error']}")
+
+            if cycle_state["errors"]:
+                cycle_state["status"] = "failed_with_outputs"
+            else:
+                cycle_state["status"] = "completed"
+
         else:
             # For other pass types, create a placeholder cycle
             cycle_state["outputs"].append(f"Cycle executed: {pass_type} pass on {branch_slug}")
@@ -2061,8 +2654,700 @@ Format each claim as:
     
     cycle_state["completed_at"] = datetime.now().isoformat()
     cycle_state["duration_seconds"] = round(time.time() - start_time, 2)
+
+    # Phase 9C: Automated component extraction and manifest updates
+    cycle_state = post_cycle_automation(cycle_state, paths)
+
+    return cycle_state
+
+
+# =============================================================================
+# Phase 9C: Automation
+# =============================================================================
+
+
+def extract_components_from_scenario(scenario_path: Path, branch_slug: str, paths: RepoPaths) -> list[str]:
+    """
+    Extract component YAML files from a scenario file.
+    
+    Analyzes the scenario content and generates component YAML files for:
+    - Regions mentioned
+    - Mechanisms described
+    - Institutions referenced
+    - Infrastructure mentioned
+    - Evidence cited
+    - Hazards identified
+    
+    Returns list of generated component file paths.
+    """
+    try:
+        import yaml
+    except ImportError:
+        return []
+    
+    content = scenario_path.read_text(encoding="utf-8")
+    generated = []
+    
+    # Extract title from metadata
+    title = "Unknown"
+    for line in content.split("\n")[:30]:
+        if line.startswith("- title:"):
+            title = line.split(":", 1)[1].strip()
+            break
+    
+    # Extract domain slice
+    domain = "unknown"
+    for line in content.split("\n")[:30]:
+        if line.startswith("- domain slice:"):
+            domain = line.split(":", 1)[1].strip()
+            break
+    
+    # Extract structure type hint
+    structure_type = branch_slug
+    
+    # Simple keyword-based component extraction
+    component_patterns = {
+        "region": [],
+        "institution": [],
+        "infrastructure": [],
+        "hazard": [],
+    }
+    
+    # Check for known entity patterns
+    content_lower = content.lower()
+    
+    # Regions
+    region_map = {
+        "feather river": "region:feather-river",
+        "upper colorado": "region:upper-colorado",
+        "southeast queensland": "region:seq",
+        "russia": "region:russia-wheat",
+        "europe": "region:europe-wheat",
+        "egypt": "region:egypt",
+        "yemen": "region:yemen",
+        "philippines": "region:philippines-rice",
+        "india": "region:india-credit",
+        "china": "region:china-wheat",
+        "south america": "region:south-america",
+        "peru": "region:peru",
+        "chile": "region:chile",
+        "texas": "region:texas",
+        "california": "region:california",
+    }
+    
+    for keyword, comp_id in region_map.items():
+        if keyword in content_lower:
+            component_patterns["region"].append(comp_id)
+    
+    # Institutions
+    inst_map = {
+        "usda": "inst:usda-fas",
+        "fao": "inst:fao-giews",
+        "who": "inst:who",
+        "woah": "inst:woah",
+        "cdc": "inst:cdc",
+        "federal reserve": "inst:federal-reserve",
+        "imf": "inst:imf",
+        "world bank": "inst:world-bank",
+        "nfa": "inst:philippines-nfa",
+    }
+    
+    for keyword, comp_id in inst_map.items():
+        if keyword in content_lower:
+            component_patterns["institution"].append(comp_id)
+    
+    # Hazards
+    hazard_map = {
+        "wildfire": "hazard:wildfire",
+        "drought": "hazard:agricultural-drought",
+        "flood": "hazard:heavy-precipitation",
+        "credit squeeze": "hazard:credit-squeeze",
+        "currency depreciation": "hazard:currency-depreciation",
+        "trade restriction": "hazard:trade-restriction-amplification",
+        "export ban": "hazard:trade-restriction-amplification",
+        "price spike": "hazard:price-spike",
+    }
+    
+    for keyword, comp_id in hazard_map.items():
+        if keyword in content_lower:
+            component_patterns["hazard"].append(comp_id)
+    
+    # Generate new component files for unique findings
+    for comp_type, comp_ids in component_patterns.items():
+        for comp_id in set(comp_ids):
+            comp_path = paths.meta / "components" / f"{comp_id}.yaml"
+            if not comp_path.exists():
+                # Generate placeholder component
+                comp_name = comp_id.replace(f"{comp_type}:", "").replace("-", " ").title()
+                comp_yaml = f"""id: {comp_id}
+type: {comp_type}
+name: {comp_name}
+domain: extracted from {branch_slug} branch
+description: |
+  Auto-extracted from scenario: {scenario_path.name}
+  Title: {title}
+  Domain: {domain}
+related_branches:
+  - {branch_slug}
+related_artifacts:
+  - {relpath(paths.root, scenario_path)}
+metadata:
+  extraction_source: automated
+  structure_types:
+    - {structure_type}
+"""
+                comp_path.write_text(comp_yaml, encoding="utf-8", newline="\n")
+                generated.append(str(relpath(paths.root, comp_path)))
+    
+    return generated
+
+
+def update_branch_manifest_after_cycle(branch_slug: str, cycle_state: dict, paths: RepoPaths) -> bool:
+    """
+    Update branch manifest with outputs from completed cycle.
+    
+    Adds new outputs to appropriate manifest fields:
+    - Notes → key_notes
+    - Scenarios → active_variants
+    - Syntheses → key_syntheses
+    - Loop runs → loop_runs
+    - Discards → discard_records
+    
+    Returns True if manifest was updated, False otherwise.
+    """
+    branch_path = branch_manifest_path(branch_slug)
+    if not branch_path.exists():
+        return False
+    
+    branch = load_json(branch_path)
+    updated = False
+    
+    # Get new outputs from cycle
+    new_outputs = cycle_state.get("outputs", [])
+    
+    for output_path in new_outputs:
+        if not output_path or output_path.startswith("Cycle executed"):
+            continue
+        
+        # Categorize output by path
+        if "research/notes/" in output_path:
+            if output_path not in branch.get("key_notes", []):
+                branch.setdefault("key_notes", []).append(output_path)
+                updated = True
+        elif "research/scenarios/" in output_path:
+            if output_path not in branch.get("active_variants", []):
+                branch.setdefault("active_variants", []).append(output_path)
+                updated = True
+        elif "research/syntheses/" in output_path:
+            if output_path not in branch.get("key_syntheses", []):
+                branch.setdefault("key_syntheses", []).append(output_path)
+                updated = True
+        elif "research/loops/" in output_path:
+            if output_path not in branch.get("loop_runs", []):
+                branch.setdefault("loop_runs", []).append(output_path)
+                updated = True
+        elif "research/discards/" in output_path:
+            if output_path not in branch.get("discard_records", []):
+                branch.setdefault("discard_records", []).append(output_path)
+                updated = True
+    
+    # Update timestamp
+    if updated:
+        branch["last_updated"] = date.today().isoformat()
+        write_json(branch_path, branch)
+    
+    return updated
+
+
+def post_cycle_automation(cycle_state: dict, paths: RepoPaths) -> dict[str, Any]:
+    """
+    Run automated post-cycle tasks:
+    1. Extract components from new scenario outputs
+    2. Update branch manifest with new outputs
+    
+    Returns updated cycle state with automation results.
+    """
+    branch_slug = cycle_state.get("branch", "")
+    outputs = cycle_state.get("outputs", [])
+    
+    # Extract components from new scenario outputs
+    new_components = []
+    for output_path in outputs:
+        if "research/scenarios/" in output_path:
+            scenario_path = paths.root / output_path
+            if scenario_path.exists():
+                extracted = extract_components_from_scenario(scenario_path, branch_slug, paths)
+                new_components.extend(extracted)
+    
+    # Update branch manifest
+    manifest_updated = update_branch_manifest_after_cycle(branch_slug, cycle_state, paths)
+    
+    # Record automation results in cycle state
+    cycle_state["automation"] = {
+        "components_extracted": len(new_components),
+        "new_component_files": new_components,
+        "manifest_updated": manifest_updated,
+    }
     
     return cycle_state
+
+
+def command_branch_l5_readiness(args: argparse.Namespace) -> int:
+    """
+    Assess L5 readiness for a branch.
+    
+    L5 criteria:
+    - Template reusability (required)
+    - Cross-method integration (required)
+    - Method evolution (required)
+    - Prospective validation (optional validator)
+    """
+    branch, _, paths = load_branch(args.slug)
+    
+    maturity = branch.get("maturity_level", 0)
+    structure_type = branch.get("structure_type", "")
+    variants = branch.get("active_variants", [])
+    syntheses = branch.get("key_syntheses", [])
+    notes = branch.get("key_notes", [])
+    loop_runs = branch.get("loop_runs", [])
+    
+    print(f"=== L5 Readiness: {branch['title']} ===")
+    print(f"Current maturity: L{maturity} ({branch.get('maturity_note', '')})")
+    print(f"Structure type: {structure_type}")
+    print()
+    
+    # Check L4 prerequisites
+    print("## L4 Prerequisites")
+    l4_checks = [
+        ("At L4 maturity", maturity >= 4),
+        ("Has 2+ variants", len(variants) >= 2),
+        ("Has comparison synthesis", len(syntheses) >= 1),
+        ("Has loop-run record", len(loop_runs) >= 1),
+        ("Has discard record", len(branch.get("discard_records", [])) >= 1),
+    ]
+    
+    for check_name, check_result in l4_checks:
+        status = "✅" if check_result else "❌"
+        print(f"  {status} {check_name}")
+    
+    print()
+    print("## L5 Required Criteria")
+    
+    # Template reusability
+    has_template = maturity >= 4 and len(variants) >= 3 and len(syntheses) >= 2
+    template_status = "✅ Ready" if has_template else "⏳ Needs more variants/syntheses"
+    print(f"  {template_status} Template reusability (3+ variants, 2+ syntheses)")
+    
+    # Cross-method integration
+    is_non_climate = branch.get("domain", "").lower() not in ["climate volatility"]
+    has_cross_branch = len(syntheses) >= 3  # At least one should be cross-branch
+    integration_status = "✅ Ready" if is_non_climate and has_cross_branch else "⏳ Needs cross-method integration"
+    print(f"  {integration_status} Cross-method integration")
+    
+    # Method evolution
+    method_evolution = len(notes) >= 3 and maturity >= 4
+    evolution_status = "✅ Ready" if method_evolution else "⏳ Needs method influence"
+    print(f"  {evolution_status} Method evolution (branch changed method documents)")
+    
+    print()
+    print("## L5 Optional Validator")
+    
+    # Prospective validation (optional)
+    has_grounding = len(notes) >= 2
+    validation_status = "✅ Present" if has_grounding else "⏳ Needs more grounding"
+    print(f"  {validation_status} Prospective validation (grounding evidence)")
+    
+    print()
+    
+    # Overall assessment
+    required_ready = has_template and (is_non_climate and has_cross_branch) and method_evolution
+    if required_ready:
+        print("### Assessment: ✅ READY FOR L5")
+        print("All required criteria met. Branch is generalizable.")
+    else:
+        print("### Assessment: ⏳ NOT YET READY FOR L5")
+        print("Some required criteria not yet met. Continue grounding and comparison.")
+    
+    return 0
+
+
+# =============================================================================
+# Phase 9D: Scale Enablement
+# =============================================================================
+
+
+def command_branch_template(args: argparse.Namespace) -> int:
+    """
+    Generate a new branch from an existing structure type template.
+    
+    Usage:
+        branch template <structure-type> <new-slug> --title "Title" --domain "Domain"
+    
+    Structure types: sequence, correlation, design-rule, hybrid-2comp, hybrid-3comp
+    """
+    paths = repo_paths()
+    structure_type = args.structure_type
+    slug = args.slug
+    title = args.title
+    domain = args.domain
+    
+    # Define templates based on structure type
+    templates = {
+        "sequence": {
+            "structure_type": "sequence failure",
+            "variants": [],
+            "guidance": "Focus on temporal transitions between conditions. Look for chains where the transition itself carries risk.",
+        },
+        "correlation": {
+            "structure_type": "correlation/transmission failure",
+            "variants": [],
+            "guidance": "Focus on coupled systems where distributed nodes interact. Look for trade, transmission, or amplification pathways.",
+        },
+        "design-rule": {
+            "structure_type": "design/rule conflict under volatility",
+            "variants": [],
+            "guidance": "Focus on infrastructure or rules designed for one reality facing changed conditions. Look for adaptation lag.",
+        },
+        "hybrid-2comp": {
+            "structure_type": "hybrid: correlation/transmission + design/rule conflict",
+            "variants": [],
+            "guidance": "Two structure components operating simultaneously. Test both transmission and rule-conflict mechanisms.",
+        },
+        "hybrid-3comp": {
+            "structure_type": "hybrid: correlation/transmission + sequence failure + design/rule conflict",
+            "variants": [],
+            "guidance": "Three structure components operating simultaneously. Test correlation, sequence, and design/rule mechanisms.",
+        },
+    }
+    
+    if structure_type not in templates:
+        raise SystemExit(f"Unknown structure type: {structure_type}. Choose from: {', '.join(templates.keys())}")
+    
+    template = templates[structure_type]
+    
+    # Create branch manifest
+    manifest = {
+        "slug": slug,
+        "title": title,
+        "domain": domain,
+        "structure_type": template["structure_type"],
+        "maturity_level": 1,
+        "maturity_note": "exploratory - created from template",
+        "status": "active",
+        "parent_artifact": "",
+        "active_variants": template["variants"],
+        "key_notes": [],
+        "key_syntheses": [],
+        "loop_runs": [],
+        "discard_records": [],
+        "strongest_variant": "",
+        "most_generative_variant": "",
+        "weakest_variant": "",
+        "open_questions": [
+            f"What structure type does {domain} reveal?",
+            f"How does {domain} compare to existing {structure_type} branches?",
+            "What are the bounded named cases that ground this branch?",
+            "Does this branch validate or challenge the template structure?",
+        ],
+        "next_recommended_pass": "grounding",
+        "last_updated": date.today().isoformat(),
+    }
+    
+    # Write manifest
+    manifest_path = paths.branches / f"{slug}.json"
+    write_json(manifest_path, manifest)
+    
+    # Create parent scenario placeholder
+    parent_content = f"""# {title}
+
+## Metadata
+
+- title: {title}
+- date: {date.today().isoformat()}
+- author: OpenCode
+- status: draft
+- scenario type: parent scenario
+- domain slice: {domain}
+
+## Research question
+
+How might {domain.lower()} create preparedness failure through {template['structure_type']} mechanisms?
+
+## Why this scenario exists
+
+This branch was created from the {structure_type} template. It needs grounding in bounded named cases to become method-shaping.
+
+## Framing and assumptions
+
+- baseline assumptions:
+  - (to be filled during grounding)
+- assumptions that depart from default narratives:
+  - (to be filled during grounding)
+- boundaries of the scenario:
+  - (to be filled during grounding)
+
+## Scenario logic
+
+(to be developed during variant generation)
+
+## Grounding
+
+(to be filled during grounding pass)
+
+## Signals and evidence classes
+
+- signals already visible:
+  - (to be filled)
+- evidence classes consulted:
+  - (to be filled)
+- missing evidence:
+  - (to be filled)
+
+## Provisional evaluation
+
+- plausibility: (to be assessed)
+- internal coherence: (to be assessed)
+- relevance: (to be assessed)
+- preparedness value: (to be assessed)
+- novelty: (to be assessed)
+- status-quo challenge: (to be assessed)
+- imaginative power: (to be assessed)
+
+## Curation notes
+
+- current curation gate:
+  - keep (exploratory, needs grounding)
+- why keep this scenario:
+  - (to be filled)
+- what should be refined next:
+  - Ground in named cases
+  - Generate bounded variants
+  - Compare against existing {structure_type} branches
+- what might cause this scenario to be revised or merged:
+  - (to be filled)
+
+## Uncertainties and failure modes
+
+- key uncertainties:
+  - (to be filled)
+- where this could be misleading:
+  - (to be filled)
+- what would challenge the scenario most:
+  - (to be filled)
+
+## Links
+
+- related notes:
+  - (to be filled)
+- related scenarios:
+  - (to be filled)
+
+## Components used
+
+- (to be extracted as variants develop)
+"""
+    
+    parent_path = paths.root / "research" / "scenarios" / f"{date.today().isoformat()}-{slug}.md"
+    parent_path.parent.mkdir(parents=True, exist_ok=True)
+    parent_path.write_text(parent_content, encoding="utf-8", newline="\n")
+    
+    # Update manifest with parent artifact
+    manifest["parent_artifact"] = str(relpath(paths.root, parent_path))
+    write_json(manifest_path, manifest)
+    
+    print(f"Created new branch: {slug}")
+    print(f"  Manifest: {relpath(paths.root, manifest_path)}")
+    print(f"  Parent scenario: {relpath(paths.root, parent_path)}")
+    print(f"  Structure type: {template['structure_type']}")
+    print(f"  Domain: {domain}")
+    print()
+    print("Guidance:")
+    print(f"  {template['guidance']}")
+    print()
+    print("Next steps:")
+    print("  1. Write grounding note with named cases")
+    print("  2. Update parent scenario with evidence base")
+    print("  3. Generate bounded variants")
+    print("  4. Compare against existing branches with same structure type")
+    
+    return 0
+
+
+def command_branch_integrate(args: argparse.Namespace) -> int:
+    """
+    Generate cross-method integration synthesis for a branch.
+    
+    Usage:
+        branch integrate <slug> --method <external-method>
+    
+    Maps the branch's structure type to concepts from the external method.
+    """
+    branch, _, paths = load_branch(args.slug)
+    external_method = args.method
+    
+    # Define integration mappings for common external methods
+    integration_templates = {
+        "resilience-engineering": {
+            "sequence": "Normal Accident Theory (Perrow) — sequence failure as inevitable coupling in complex systems",
+            "correlation": "High-Reliability Organizations — correlation/transmission as organizational coupling",
+            "design-rule": "Safety-I vs Safety-II — design/rule conflict as mismatch between work-as-imagined and work-as-done",
+        },
+        "systems-thinking": {
+            "sequence": "Causal loop diagrams — sequence as reinforcing/balancing feedback chains",
+            "correlation": "System archetypes — correlation as 'tragedy of the commons' or 'fixes that fail'",
+            "design-rule": "Mental models — design/rule conflict as outdated mental models facing changed reality",
+        },
+        "complexity-science": {
+            "sequence": "Phase transitions — sequence failure as critical transition between system states",
+            "correlation": "Network cascades — correlation/transmission as percolation through coupled networks",
+            "design-rule": "Adaptive cycles — design/rule conflict as mismatch between fast and slow variables",
+        },
+        "institutional-analysis": {
+            "sequence": "Policy windows — sequence failure as missed adaptation opportunities",
+            "correlation": "Institutional interdependence — correlation as shared fate across jurisdictions",
+            "design-rule": "Institutional mismatch — design/rule conflict as rules lagging behind reality",
+        },
+        "pandemic-preparedness": {
+            "sequence": "Disease progression chains — sequence as transmission stages with intervention points",
+            "correlation": "One Health framework — correlation as human-animal-environment coupling",
+            "design-rule": "Surveillance gaps — design/rule conflict as monitoring designed for known pathogens facing novel threats",
+        },
+    }
+    
+    if external_method not in integration_templates:
+        available = ", ".join(integration_templates.keys())
+        print(f"Unknown external method: {external_method}")
+        print(f"Available methods: {available}")
+        return 1
+    
+    # Generate integration synthesis
+    structure_type = branch.get("structure_type", "").lower()
+    
+    # Find matching integration guidance
+    guidance = None
+    for key, value in integration_templates[external_method].items():
+        if key in structure_type:
+            guidance = value
+            break
+    
+    if not guidance:
+        guidance = integration_templates[external_method].get("sequence", "No direct mapping found")
+    
+    syn_content = f"""# {branch['title']}: Integration with {external_method.replace('-', ' ').title()}
+
+**Date:** {date.today().isoformat()}
+**Type:** Cross-method integration synthesis
+**Branch:** {args.slug}
+**Status:** draft
+
+---
+
+## Purpose
+
+This synthesis maps {branch['title']}'s structure type to concepts from {external_method.replace('-', ' ')}, testing whether the method's structure types integrate with established research frameworks.
+
+---
+
+## Structure Type Mapping
+
+| {branch['title']} Structure | {external_method.replace('-', ' ').title()} Concept | Integration Insight |
+|---------------------------|----------------------------------|--------------------|
+| {branch.get('structure_type', 'Unknown')} | {guidance.split('—')[0].strip() if '—' in guidance else guidance} | {guidance.split('—')[1].strip() if '—' in guidance else 'Integration pending'} |
+
+---
+
+## Integration Analysis
+
+### Shared Mechanisms
+
+Both {branch['title']} and {external_method.replace('-', ' ')} address:
+- (to be developed during integration analysis)
+
+### Key Differences
+
+{branch['title']} differs from {external_method.replace('-', ' ')} in:
+- (to be developed during integration analysis)
+
+### Novel Insights
+
+The integration reveals:
+- (to be developed during integration analysis)
+
+---
+
+## Method Impact
+
+This integration:
+- [ ] Changes how we understand {branch.get('structure_type', 'the structure type')}
+- [ ] Suggests new evaluation criteria
+- [ ] Reveals blind spots in existing framework
+- [ ] Enables new cross-method research questions
+
+---
+
+## Links
+
+- Related branch: `meta/branches/{args.slug}.json`
+- Related method: {external_method.replace('-', ' ')}
+- Related syntheses:
+  - (to be added)
+
+---
+
+*This synthesis is a draft. It should be reviewed and either kept, revised, or discarded based on its usefulness for cross-method integration.*
+"""
+    
+    syn_path = paths.root / "research" / "syntheses" / f"{date.today().isoformat()}-{args.slug}-{external_method}-integration.md"
+    syn_path.parent.mkdir(parents=True, exist_ok=True)
+    syn_path.write_text(syn_content, encoding="utf-8", newline="\n")
+    
+    # Update branch manifest
+    branch.setdefault("key_syntheses", []).append(str(relpath(paths.root, syn_path)))
+    branch["last_updated"] = date.today().isoformat()
+    write_json(paths.branches / f"{args.slug}.json", branch)
+    
+    print(f"Generated cross-method integration synthesis: {relpath(paths.root, syn_path)}")
+    print(f"Structure mapping: {guidance}")
+    print()
+    print("Next steps:")
+    print("  1. Fill in integration analysis sections")
+    print("  2. Check method impact boxes")
+    print("  3. Compare insights against branch findings")
+    
+    return 0
+
+
+def select_model_for_task(task_type: str, content_length: int = 0) -> tuple[str, dict, list, int]:
+    """
+    Select model based on task complexity.
+    
+    Simple tasks (short content, extract-claims, summarize) → small slot
+    Moderate tasks (comparison prep, drafting) → mid slot
+    Complex tasks (structure typing, synthesis, evaluation) → strong slot
+    """
+    config = get_model_config()
+    
+    # Determine complexity
+    is_simple = task_type in ["extract-claims", "summarize-note"] and content_length < 5000
+    is_complex = task_type in ["structure-typing", "cross-method-integration", "evaluation-matrix"]
+    
+    if is_complex:
+        slot = "strong"
+        model_id = config.get("strong", "qwen/qwen3.5-plus-02-15")
+        fallback_str = config.get("fallback_strong", "qwen/qwen3.5-flash-02-23,meta-llama/llama-3-70b-instruct")
+    elif is_simple:
+        slot = "small"
+        model_id = config.get("small", "xiaomi/mimo-v2-flash")
+        fallback_str = config.get("fallback_small", "qwen/qwen3.5-flash-02-23,google/gemini-2.5-flash-lite")
+    else:
+        slot = "mid"
+        model_id = config.get("mid", "mistralai/mistral-small-2603")
+        fallback_str = config.get("fallback_mid", "mistralai/mistral-7b-instruct,qwen/qwen3.5-flash-02-23")
+    
+    fallback_models = [m.strip() for m in fallback_str.split(",") if m.strip()] if fallback_str else []
+    timeout = int(config.get("timeout", "90"))
+    
+    return model_id, config, fallback_models, timeout
 
 
 def generate_dashboard(paths: RepoPaths) -> None:
@@ -2982,6 +4267,25 @@ def build_parser() -> argparse.ArgumentParser:
     branch_compare_prep = branch_sub.add_parser("compare-prep", help="Generate comparison prep material")
     branch_compare_prep.add_argument("slug")
     branch_compare_prep.set_defaults(func=command_branch_compare_prep)
+
+    # Phase 9C: L5 readiness tracking
+    branch_l5 = branch_sub.add_parser("l5-readiness", help="Assess L5 generalizability readiness")
+    branch_l5.add_argument("slug", help="Branch slug")
+    branch_l5.set_defaults(func=command_branch_l5_readiness)
+
+    # Phase 9D: Template generation
+    branch_template = branch_sub.add_parser("template", help="Create new branch from structure type template")
+    branch_template.add_argument("structure_type", choices=["sequence", "correlation", "design-rule", "hybrid-2comp", "hybrid-3comp"], help="Structure type template")
+    branch_template.add_argument("slug", help="New branch slug")
+    branch_template.add_argument("--title", required=True, help="Branch title")
+    branch_template.add_argument("--domain", required=True, help="Branch domain")
+    branch_template.set_defaults(func=command_branch_template)
+
+    # Phase 9D: Cross-method integration
+    branch_integrate = branch_sub.add_parser("integrate", help="Generate cross-method integration synthesis")
+    branch_integrate.add_argument("slug", help="Branch slug")
+    branch_integrate.add_argument("--method", required=True, choices=["resilience-engineering", "systems-thinking", "complexity-science", "institutional-analysis", "pandemic-preparedness"], help="External method to integrate with")
+    branch_integrate.set_defaults(func=command_branch_integrate)
 
     # Phase 7B: Component index
     component = subparsers.add_parser("component", help="Component index commands")

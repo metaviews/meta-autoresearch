@@ -1,0 +1,12 @@
+{
+  "name": "phase-9a-maturity-test",
+  "branch": "hydrologic",
+  "pass_type": "maturity",
+  "cycles": 1,
+  "autonomy_level": "low",
+  "question": "Test maturity pass type implementation.",
+  "expected_outputs": [
+    {"kind": "maturity_update", "description": "A branch maturity or structure judgment update"},
+    {"kind": "loop_update", "description": "A loop-run update or maturity assessment"}
+  ]
+}

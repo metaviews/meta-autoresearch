@@ -206,13 +206,28 @@ python -m meta_autoresearch_cli orchestrator status                # Show progre
 python -m meta_autoresearch_cli orchestrator benchmark             # Test model performance
 ```
 
+### L5 and Scale Commands (Phase 9)
+
+```bash
+python -m meta_autoresearch_cli branch l5-readiness <slug>         # Assess L5 readiness
+python -m meta_autoresearch_cli branch template <type> <slug> --title "T" --domain "D"
+                                                                   # Create branch from template
+python -m meta_autoresearch_cli branch integrate <slug> --method <method>
+                                                                   # Generate cross-method integration
+```
+
+**Template types:** sequence, correlation, design-rule, hybrid-2comp, hybrid-3comp
+
+**External methods:** resilience-engineering, systems-thinking, complexity-science, institutional-analysis, pandemic-preparedness
+
 Pass types: `grounding`, `variant`, `comparison`, `maturity`, `discard`, `capability-fit`
 
 **Current model configuration:**
-- Small slot: xiaomi/mimo-v2-flash (~2.54s benchmark, fastest available)
+- Small slot: xiaomi/mimo-v2-flash (~2.5s benchmark, fastest available)
 - Mid slot: mistralai/mistral-small-2603
 - Strong slot: qwen/qwen3.5-plus-02-15
-- Cost: ~$0.0032/cycle, ~25s per cycle
+- Cost: ~$0.0032/cycle, ~9s per cycle (parallel execution)
+- App attribution: "Meta Autoresearch" (visible in OpenRouter logs)
 
 See `docs/method-infrastructure.md` for the design intent and full command reference.
 See `docs/model-performance.md` for model configuration and benchmarking guide.
