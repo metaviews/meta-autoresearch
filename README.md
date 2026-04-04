@@ -78,34 +78,41 @@ Climate is therefore the first proving ground, not the permanent identity of the
 
 ## Current status
 
-The method, templates, evaluation rubric, and CLI infrastructure are now in place.
+The method, templates, evaluation rubric, CLI infrastructure, and L5 criteria are now in place.
 
 Current state:
 
 - foundation, method, glossary, roadmap, and contribution docs are established
 - the research workspace supports notes, scenarios, experiments, syntheses, loops, and discards
-- four research branches active: `whiplash` (L4), `breadbasket`, `hydrologic`, `wealth-concentration` (L3)
+- five research branches active: `whiplash` (L4), `breadbasket` (L4), `hydrologic` (L4), `wealth-concentration` (L4), `avian-flu-zoonotic` (L4)
 - **Iteration 1 complete**: branch/run state tracking, method hygiene checks
 - **Iteration 2 complete**: context compression (snapshot, index, stale detection, compare-prep)
 - **Iteration 3 complete**: bounded model delegation via OpenRouter (summarize-note, extract-claims)
+- **Phase 7B complete**: component index (83 components), CLI commands for search/list/suggest
+- **Phase 7C complete**: curation support (curate compare, curate matrix)
+- **Phase 7D partial**: orchestrator (benchmark, dashboard, cost tracking; pass types need expansion)
+- **L5 criteria defined**: template reusability, cross-method integration, method evolution (prospective validation optional)
 - model allocation is now operational: small/mid/strong slots with cost-aware routing
 - generated artifacts stay in `meta/generated/`, marked as draft, never auto-set curation
+- model optimization: xiaomi/mimo-v2-flash at ~25s/cycle, $0.0032/cycle
 
 ## Current research branches
 
 - `whiplash` - sequence failure, transition misreading, and category breakdown under non-stationarity
 - `breadbasket` - correlation, transmission, buffers, trade, and unequal downstream exposure
 - `hydrologic` - design/rule conflict under volatility in infrastructure, storage, and operating systems
-- `wealth-concentration` - first non-climate proving-ground branch; currently a comparative hybrid between transmission and rule-conflict structures
+- `wealth-concentration` - hybrid concentration (transmission + rule-conflict) across finance and compute
+- `avian-flu-zoonotic` - 3-component hybrid (correlation + sequence + design/rule) in biological volatility; first biological volatility branch
 
 These branches are not just topical clusters. They are being used to test whether the method can identify recurring epistemic structures that conventional inquiry tends to miss. Climate remains the current proving ground, but the methodological ambition is broader than climate.
 
-The current non-climate result matters: portability appears real, but it does not look instantaneous or clean. The first non-climate branch has become a `Level 3 comparative proving-ground run`, which suggests that cross-domain transfer may initially arrive as a hybrid branch that only later resolves toward a dominant structure type.
+The non-climate results matter: portability appears real, and it arrives as hybrid structures. Both non-climate branches (wealth-concentration with 2 components, avian-flu-zoonotic with 3 components) demonstrate that cross-domain transfer may initially arrive as multi-component hybrids rather than clean structure mapping.
 
 The current method-level read is therefore sharper than before:
 
-- `Level 3 non-climate portability` means the method can travel, ground itself, compare internally, and remain structurally useful outside climate
-- `Level 4 non-climate portability` would mean a non-climate branch changes the method itself rather than only validating it
+- `Level 4 non-climate portability` means the method can travel, ground itself, compare internally, and change method documents outside climate
+- `Level 5 generalizability` would mean the branch's structure type can be templated for independent use, integrated with other research methods, and trigger method evolution
+- Hybrid structures are stable, not intermediate — both non-climate branches remain hybrid after extensive grounding
 
 ## Start here
 
@@ -175,7 +182,23 @@ python -m meta_autoresearch_cli delegate run-prep <branch> --type <pass-type>
 python -m meta_autoresearch_cli delegate batch <task> <pattern>   # Batch process files
 ```
 
-### Orchestrator Commands (Phase 7 - Scaled-cycle automation)
+### Component Commands (Phase 7B)
+
+```bash
+python -m meta_autoresearch_cli component index              # Build component index from YAML files
+python -m meta_autoresearch_cli component search <query>     # Search components by query
+python -m meta_autoresearch_cli component list [--type <type>] # List components by type
+python -m meta_autoresearch_cli component suggest <slug>     # Suggest components for a branch
+```
+
+### Curation Commands (Phase 7C)
+
+```bash
+python -m meta_autoresearch_cli curate compare <variant1> <variant2> [...] # Generate comparison table
+python -m meta_autoresearch_cli curate matrix <branch>       # Generate evaluation matrix draft
+```
+
+### Orchestrator Commands (Phase 7D/9)
 
 ```bash
 python -m meta_autoresearch_cli orchestrator run <plan.json>       # Execute autonomous cycles
@@ -184,6 +207,12 @@ python -m meta_autoresearch_cli orchestrator benchmark             # Test model 
 ```
 
 Pass types: `grounding`, `variant`, `comparison`, `maturity`, `discard`, `capability-fit`
+
+**Current model configuration:**
+- Small slot: xiaomi/mimo-v2-flash (~2.54s benchmark, fastest available)
+- Mid slot: mistralai/mistral-small-2603
+- Strong slot: qwen/qwen3.5-plus-02-15
+- Cost: ~$0.0032/cycle, ~25s per cycle
 
 See `docs/method-infrastructure.md` for the design intent and full command reference.
 See `docs/model-performance.md` for model configuration and benchmarking guide.

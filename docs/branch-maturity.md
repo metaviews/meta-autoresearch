@@ -101,14 +101,29 @@ Typical signs:
 
 ### Level 5: generalizable
 
-The branch's structure type or subtype has been validated across multiple domains and can be reused as a template for new branches.
+The branch's structure type is genuinely generalizable — it can be templated for independent use, integrated with other research methods, triggers method evolution, and optionally receives prospective validation from real-world events.
+
+**L5 Criteria (All Required):**
+
+- **Template reusability** — Method guide is clear enough for external researcher to independently create a new branch using this branch as template; new branch reaches L3+
+- **Cross-method integration** — Structure type maps to and integrates with concepts from at least one other research method (resilience engineering, systems thinking, complexity science); integration produces insights neither method could produce alone
+- **Method evolution** — Branch triggers revision of method documents that goes beyond adding content (e.g., new structure type, new loop stage, new evaluation dimension, new maturity criterion)
+
+**L5 Criteria (Optional Validator):**
+
+- **Prospective validation** — Branch identifies specific risk pathway or structural vulnerability; real-world event validates the pathway; post-event analysis confirms the structure type predicted the failure mode
+
+**Why prospective validation is optional, not required:**
+The method's purpose is to identify emergent phenomena that conventional analysis tends to ignore. Requiring prospective validation would limit the method to phenomena that have already manifested, import confirmation bias from existing research culture, and penalize branches that identify genuinely novel risks. Prospective validation influences confidence but does not limit what qualifies as L5.
 
 Typical signs:
 
 - structure type validated across 2+ domains (e.g., climate + non-climate)
 - branch template reusable by another researcher
 - method documents explicitly reference this branch's structure
-- hybrid structure (if applicable) documented as stable form with both components tested
+- hybrid structure (if applicable) documented as stable form with all components tested
+- structure type integrated with at least one external research method
+- method has evolved (new stage, dimension, or criterion) triggered by this branch
 
 ## Hybrid structure criteria
 

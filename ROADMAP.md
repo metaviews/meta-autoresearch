@@ -2,11 +2,11 @@
 
 ## Current read
 
-The project has completed Phases 1-7C and is now in Phase 8 (method consolidation and new domain exploration).
+The project has completed Phases 1-7C and is now entering Phase 9 (L5 tooling iterations for scale and generalizability).
 
 **What's done:**
 - Iterations 1-3 complete: branch/run state, context compression, model delegation
-- 5 research branches active: 3 climate (whiplash L4, breadbasket L4, hydrologic L4) + 2 non-climate (wealth-concentration L4, avian-flu-zoonotic L2)
+- 5 research branches active: 3 climate (whiplash L4, breadbasket L4, hydrologic L4) + 2 non-climate (wealth-concentration L4, avian-flu-zoonotic L4)
 - Model delegation tested and working: summarize-note, extract-claims via OpenRouter
 - Cost profile established: ~$0.0032/cycle with orchestrator, ~25s per cycle (xiaomi/mimo-v2-flash)
 - Phase 7B (component index): 83 components extracted, CLI commands working
@@ -14,23 +14,23 @@ The project has completed Phases 1-7C and is now in Phase 8 (method consolidatio
 - Phase 7D (orchestrator): benchmark, dashboard, cost tracking (partial)
 - Method consolidation: what-we-learned.md, method-guide.md, artifact-taxonomy.md, foundation-questions.md
 - Model evaluation routine established with monthly benchmark
-- **New domain proving-ground: avian-flu-zoonotic** (biological volatility, 3-component hybrid structure identified at L2)
+- **L5 criteria defined:** template reusability, cross-method integration, method evolution (prospective validation optional)
+- **Cross-branch synthesis updated:** All 5 branches documented with subtype taxonomies
 
-**Current bottleneck:** Grounding pass execution for avian-flu-zoonotic; orchestrator grounding pass type needs fuller implementation.
+**Current bottleneck:** Orchestrator only supports `comparison` pass type (grounding/variant/maturity/discard are placeholders); sequential model calls limit speed; manual component extraction and manifest updates create coordination overhead.
 
 **Immediate priorities:**
-- Phase 7B: component index ✅ COMPLETE (83 components)
-- Phase 7C: curation support ✅ COMPLETE
-- Phase 7D: orchestrator enhancement ⏳ PARTIAL (grounding pass type needs expansion)
-- Method consolidation ✅ COMPLETE
-- Model evaluation routine ✅ ESTABLISHED
-- **New domain: avian-flu-zoonotic** ⏳ L2 (grounding in progress, 3-component hybrid identified)
+- Phase 9A: Fix orchestrator pass types (grounding, variant, maturity, discard)
+- Phase 9B: Parallel model calls within cycles (3-4x speedup)
+- Phase 9C: Automated component extraction and manifest updates
+- Phase 9D: L5 readiness tracking and template generation
+- Phase 9E: Cross-method integration support and dynamic model selection
 
 **Current state:**
-- 4 branches at L4 (whiplash, breadbasket, hydrologic, wealth-concentration)
-- 1 branch at L2 (avian-flu-zoonotic, biological volatility)
+- All 5 branches at L4 (method-shaping)
+- L5 criteria defined (generalizable: template reusability + cross-method integration + method evolution)
 - Non-climate portability demonstrated via wealth-concentration (hybrid, 2 domains) and avian-flu-zoonotic (hybrid, biological volatility)
-- Method lessons synthesis complete with explicit L3→L4 criteria
+- Method lessons synthesis complete with explicit L3→L4→L5 pathway
 - Phase 7 entry criteria: all 5 met
 - Phase 7B/7C complete; Phase 7D partial; Phase 7A/7E deferred
 
@@ -258,6 +258,70 @@ Only after the research workflow becomes legible and evaluable should the projec
 **If deferring:**
 - continue research cycles to further validate method
 - consider what unique value a prototype would add beyond the existing CLI
+
+## Phase 9: L5 tooling iterations (ENTERING)
+
+**Purpose:** Iterate tools to enable L5-scale efficiency — highly efficient, efficacious, thorough, and fast autoresearch.
+
+**Entry criteria (all required):**
+- [x] All 5 branches at L4
+- [x] L5 criteria defined (template reusability, cross-method integration, method evolution)
+- [x] Cross-branch synthesis updated with all 5 branches
+- [x] Subtype taxonomies documented for all structure types
+
+**Current status:** ✅ All entry criteria met as of 2026-04-03.
+
+### Phase 9A: Fix Orchestrator Pass Types
+
+**Goal:** Enable all pass types to produce real outputs, not placeholders.
+
+**Deliverables:**
+1. Implement `grounding` pass type — summarize sources, extract claims, generate grounding note drafts
+2. Implement `variant` pass type — extract components, generate variant drafts, compare against existing
+3. Implement `maturity` pass type — evaluate L3/L4/L5 criteria, generate maturity assessment draft
+4. Implement `discard` pass type — evaluate variants, generate discard record drafts
+
+**Effort:** 1-2 days
+
+### Phase 9B: Parallel Execution
+
+**Goal:** 3-4x speedup per cycle through parallel model calls.
+
+**Deliverables:**
+1. Parallel model calls within cycles (summarize notes concurrently, extract claims concurrently)
+2. Parallel cycle execution across branches (independent branches run simultaneously)
+3. Target: ~25s → ~8s per cycle; 3 branches in parallel = ~8s total vs ~75s sequential
+
+**Effort:** 1-2 days
+
+### Phase 9C: Automation
+
+**Goal:** Reduce coordination overhead, enable scale.
+
+**Deliverables:**
+1. Automated component extraction after each new scenario
+2. Automated branch manifest updates after cycle completion
+3. L5 readiness tracking CLI command (`branch l5-readiness <slug>`)
+
+**Effort:** 2-3 days
+
+### Phase 9D: Scale Enablement
+
+**Goal:** Enable L5-level generalizability work.
+
+**Deliverables:**
+1. Template generation for new branches (`branch template <structure-type>`)
+2. Cross-method integration support (`branch integrate <slug> --method <external-method>`)
+3. Dynamic model selection based on task complexity
+
+**Effort:** 3-4 days
+
+**Success criteria for Phase 9:**
+- All pass types produce real outputs (not placeholders)
+- Cycle time reduced to ~8s with parallel execution
+- Zero manual manifest updates
+- L5 progress measurable via `branch l5-readiness`
+- New branches creatable from templates
 
 ## Cross-phase priorities
 
